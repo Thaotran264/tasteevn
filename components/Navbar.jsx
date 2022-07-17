@@ -1,5 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch,BsBagCheck } from 'react-icons/bs'
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-white" >
@@ -10,32 +11,31 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div className="dropdown">
-                        <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
-                            Dropdown button
+                    <div className="dropdown me-2">
+                        <button className="btn btn-outline-light text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+                            TP.HCM
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
+                            <li><a className="dropdown-item" href="#">HN</a></li>
+                            <li><a className="dropdown-item" href="#">DN</a></li>
                         </ul>
                     </div>
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                    {/* <form className="d-flex" role="search">
+               
+                    <form className="d-flex flex-fill" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    </form> */}
-                    <div className='d-flex'>
-                    <button className="btn btn-outline-success mx-2" type="submit">
+                    <button className="btn btn-outline-primary d-flex align-items-center" type="submit">
                         <BsSearch />
                     </button>
-                    <button className="btn btn-outline-danger">Đăng nhập</button>
+                    </form>
+                    <div className='d-flex'>
+                    <button className="btn btn-outline-success mx-2 d-flex align-items-center " type="submit">
+                        <BsBagCheck />
+                        <span className='ms-1'>01</span>
+                    </button>
+                    <Link href='/login'>
+                    <a className="btn btn-outline-danger">Đăng nhập</a>
+
+                    </Link>
                     </div>
                 </div>
             </div>

@@ -4,21 +4,20 @@ import { MdAttachMoney } from 'react-icons/md'
 import Image from 'next/image'
 const Infor = () => {
     return (
-        <div className="container-fluid bg-white">
-        <div className="container">
-            <div className="row">
-                <div className="col-5">
+        <div className="container-fluid py-1">
+            <div className="container d-flex justify-content-between gap-3 border-bottom border-secondary pb-3">
+                <div className='border-end border-secondary pe-3'>
                     <Image src='https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' width={480} height={300} />
+
                 </div>
-                <div className="col-7">
-                    <h2>Bếp Bà Muối - Ăn Vặt Online</h2>
+                <div className='flex-fill'>
+                    <h2 className='fs-3'>Mì Ý siêu to khổng lồ</h2>
                     <p>606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</p>
-                    <span>Mở cửa</span> <BsClock />06:00 - 22:00 <br />
-                    <span><MdAttachMoney />44,000 - 85,000</span>
+                    <p><BsClock style={{ fontSize: 24 }} className='me-2' />06:00 - 22:00 </p>
                     <hr />
                 </div>
+
             </div>
-        </div>
         </div>
     )
 }
