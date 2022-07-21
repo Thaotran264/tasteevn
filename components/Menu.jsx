@@ -79,7 +79,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/6287495/pexels-photo-6287495.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -88,7 +88,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -97,7 +97,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
 
@@ -107,7 +107,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -134,7 +134,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/6287495/pexels-photo-6287495.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -143,7 +143,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -152,7 +152,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
 
@@ -162,7 +162,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -189,7 +189,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/6287495/pexels-photo-6287495.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -198,7 +198,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -207,7 +207,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
 
@@ -217,7 +217,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -244,7 +244,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/6287495/pexels-photo-6287495.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -253,7 +253,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -262,7 +262,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
 
@@ -272,7 +272,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>
@@ -281,7 +281,7 @@ const Menu = () => {
                             <Image height={480} width={800} src="https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?auto=compress&cs=tinysrgb&w=1600" className="card-img-top" alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">Card titleCard titleCard titleCard title</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</p>
                                 <span className="text-danger d-inline-block mb-1">85.000 đ</span><br />
                                 <button type="button" className="btn btn-danger w-100"><BsPlusLg /></button>
                             </div>

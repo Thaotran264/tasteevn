@@ -23,14 +23,14 @@ const UserInfo = () => {
                             <p><HiOutlineLocationMarker style={{ fontSize: 24 }} className='me-2' /><span>HCM city</span></p>
                         </div>
                         <div className='ms-auto'>
-                        <button type="button" class="btn btn-success"><BiEdit /></button>
+                        <button type="button" className="btn btn-success"><BiEdit /></button>
                         </div>
                     </div>
                 </div>
                 <div className='py-2'>
                     <h2>History</h2>
                     <hr />
-                    <table class="table">
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -54,7 +54,7 @@ const UserInfo = () => {
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
+                                <td >Larry the Bird</td>
                                 <td>@twitter</td>
                             </tr>
                         </tbody>
