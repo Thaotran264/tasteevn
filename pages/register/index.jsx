@@ -1,13 +1,10 @@
 import React from 'react'
+import NavbarSecond from '../../components/NavbarSecond'
 
 const Register = () => {
     return (
-        <div className=' vh-100 align-items-center d-flex bg-light'>
-            <nav class="navbar bg-dark mb-5 position-fixed top-0 start-0 end-0">
-                <div class="container text-center justify-content-center">
-                    <a class="navbar-brand text-light" href="/">Tastee.vn</a>
-                </div>
-            </nav>
+        <div className='vh-100 align-items-center d-flex bg-light'>
+            <NavbarSecond />
             <div className='container '>
                 <div className='mx-auto bg-white py-4 px-4 border rounded border-secondary' style={{ width: 400 }}>
                     <h2 className='text-center'>Register</h2>

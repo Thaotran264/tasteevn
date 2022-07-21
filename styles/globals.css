@@ -16,5 +16,6 @@ a {
 }
 
 @import url('./card');
+@import url('./menuPhoto.css');
 @import "~slick-carousel/slick/slick.css"; 
 @import "~slick-carousel/slick/slick-theme.css";
