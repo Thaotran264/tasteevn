@@ -45,7 +45,7 @@ const Login = () => {
                         <p className='text-center mb-0'>OR</p>
                         <button className="btn btn-primary w-100 mb-3">Continue with Facebook</button>
                         <button className="btn btn-outline-secondary text-dark w-100 mb-2">Continue with Google</button>
-                        <span>Dont't have a account??? <Link className='text-danger' href='/register' style={{cursor: 'pointer'}}>Resigter</Link></span>
+                        <span>Dont &apos;t have a account??? <Link className='text-danger' href='/register' style={{cursor: 'pointer'}}>Resigter</Link></span>
                     </form>
                 </div>
             </div>

@@ -18,24 +18,24 @@ const currentTime = new Date()
             <h4>Booking</h4>
             <hr />
             <form className='w-25' onSubmit={handleSubmit}>
-                <div class="mb-3">
-                    <label htmlFor="exampleInputEmail1" class="form-label">Số người</label>
-                    <input value={peoples} onChange={e => setPeoples(e.target.value)} type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                <div className="mb-3">
+                    <label htmlFor="exampleInputEmail1" className="form-label">Số người</label>
+                    <input value={peoples} onChange={e => setPeoples(e.target.value)} type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                 </div>
-                <div class="mb-3">
-                    <label htmlFor="exampleInputPassword1" class="form-label">Thời gian</label>
-                    <input value={times} onChange={e => setTimes(e.target.value)} type="time" class="form-control" id="exampleInputPassword1" />
+                <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Thời gian</label>
+                    <input value={times} onChange={e => setTimes(e.target.value)} type="time" className="form-control" id="exampleInputPassword1" />
                 </div>
-                <div class="mb-3">
-                    <label htmlFor="exampleInputPassword1" class="form-label">Ngày</label>
-                    <input value={dates} onChange={e => setDates(e.target.value)} type="date" class="form-control" id="exampleInputPassword1" />
+                <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Ngày</label>
+                    <input value={dates} onChange={e => setDates(e.target.value)} type="date" className="form-control" id="exampleInputPassword1" />
                 </div>
-                <div class="mb-3">
-                    <label htmlFor="exampleInputPassword1" class="form-label">Địa chỉ</label>
-                    <input value={address} onChange={e => setAdrees(e.target.value)} type="text" class="form-control" id="exampleInputPassword1" />
+                <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Địa chỉ</label>
+                    <input value={address} onChange={e => setAdrees(e.target.value)} type="text" className="form-control" id="exampleInputPassword1" />
                 </div>
 
-                <button type="submit" class="btn btn-primary">Đặt chỗ</button>
+                <button type="submit" className="btn btn-primary">Đặt chỗ</button>
             </form>
         </div>
     )
