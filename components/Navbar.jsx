@@ -28,10 +28,12 @@ const Navbar = () => {
                     </button>
                     </form>
                     <div className='d-flex'>
-                    <button className="btn btn-outline-success mx-2 d-flex align-items-center " type="submit">
-                        <BsBagCheck />
+                    <Link href='/cart'>
+                        <a className='text-decoration-none d-flex justify-content-center align-items-center mx-2'>
+                        <BsBagCheck style={{fontSize: 24}} />
                         <span className='ms-1'>01</span>
-                    </button>
+                            </a>
+                    </Link>
                     <Link href='/login'>
                     <a className="btn btn-outline-danger">Đăng nhập</a>
 
