@@ -14,7 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
-
+.toggleMenu {
+  right: -100%;
+  transition: all 1s ease;
+}
+.toggleMenu.show {
+  right: 0;
+}
 @import url('./card');
 @import url('./menuPhoto.css');
 @import "~slick-carousel/slick/slick.css"; 
