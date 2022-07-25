@@ -10,15 +10,16 @@ import Slide from "../components/Slider";
 
 export default function Home() {
   const [showBooking, setShowBooking] = useState(false);
+  const isDefault = false;
   return (
     <div className="bg-light position-relative">
       <Navbar />
       <Carousel />
-      <Infor setShowBooking={setShowBooking} />
-      <MenuPhoto />
-      <Slide />
+      <Infor setShowBooking={setShowBooking} isDefault={isDefault} />
+      <MenuPhoto isDefault={isDefault} />
+      <Slide isDefault={isDefault} />
       <Booking showBooking={showBooking} setShowBooking={setShowBooking} />
-      <Menu />
+      <Menu isDefault={isDefault} />
       <Footer />
     </div>
   );
