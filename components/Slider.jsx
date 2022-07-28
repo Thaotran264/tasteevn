@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 
 const settings = {
-  dots: true,
+  // dots: true,
   infinite: true,
 
   slidesToShow: 4,
@@ -89,8 +89,7 @@ const Slide = ({ isDefautl }) => {
   return (
     <>
       {!isDefautl && (
-        <div className="container py-5 ">
-          <h2> Single Item</h2>
+        <div className="container mb-2">
           <Slider {...settings}>
             {listImg.map((item, index) => (
               <div key={index} style={{ height: "80px" }}>

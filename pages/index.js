@@ -15,12 +15,12 @@ export default function Home() {
     <div className="bg-light position-relative">
       <Navbar />
       <Carousel />
-      {/*<Infor setShowBooking={setShowBooking} isDefault={isDefault} />
+      <Infor setShowBooking={setShowBooking} isDefault={isDefault} />
       <MenuPhoto isDefault={isDefault} />
       <Slide isDefault={isDefault} />
-      <Booking showBooking={showBooking} setShowBooking={setShowBooking} />
+      {/* <Booking showBooking={showBooking} setShowBooking={setShowBooking} /> */}
       <Menu isDefault={isDefault} />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }

@@ -1,19 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import { BsPlusLg } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
 const Menu = ({ isDefault }) => {
   return (
-    <div className="container py-2 position-relative" id="menu">
+    <>
       {!isDefault && (
-        <>
+        <div className="container py-2 " id="menu">
           {/* Menu 2 */}
-          <div
-            className="row gx-5 py-5 position-relative"
-            style={{ height: "800px", overflow: "scroll" }}
-          >
-            <div className="col-4">
+          <div className="row">
+            <div className="col-12 col-md-4 py-1">
               <span
-                className="d-inline-block fs-3 mb-2 pb-1 w-75"
+                className="d-inline-block fs-3 mb-2 pb-1 w-100"
                 style={{ borderBottom: "5px solid #000" }}
               >
                 Menu
@@ -51,167 +49,68 @@ const Menu = ({ isDefault }) => {
                 </li>
               </ul>
             </div>
-            <div className="col-8 py-2 bg-white gx-4">
+            <div className="col-12 col-md-8 bg-white py-1">
               <h4>Menu</h4>
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
                   <img
                     className="w-100 h-100 d-block img-thumbnail"
                     src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
                     alt=""
                   />
                 </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
                 </div>
               </div>
               <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
+              <div className="row">
+                <div
+                  className="col-4 col-md-4"
+                  style={{ aspectRatio: "1 / 1" }}
+                >
                   <img
                     className="w-100 h-100 d-block img-thumbnail"
                     src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
                     alt=""
                   />
                 </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
+                <div className="col-8 col-md-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
                 </div>
               </div>
               <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
                   <img
                     className="w-100 h-100 d-block img-thumbnail"
                     src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
                     alt=""
                   />
                 </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className="d-flex gap-2">
-                <div style={{ width: 200, height: 200 }}>
-                  <img
-                    className="w-100 h-100 d-block img-thumbnail"
-                    src="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-fill d-flex justify-content-between align-self-start align-items-center gap-3">
-                  <h4>Name of food</h4>
-                  <span className="ms-auto">$15</span>
-                  <div className="">
-                    <button className="btn btn-danger">+</button>
-                  </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
                 </div>
               </div>
               <hr />
             </div>
           </div>
-        </>
+        </div>
       )}
       {isDefault && (
-        <>
+        <div className="container py-2 position-relative" id="menu">
           {/* Menu 2 */}
           <div className="row gx-5">
             <div className="col-4">
@@ -825,9 +724,9 @@ const Menu = ({ isDefault }) => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ a {
 .toggleMenu.show {
   right: 0;
 }
-::placeholder {
+input::placeholder {
  /* Firefox */
  color: black;
 }

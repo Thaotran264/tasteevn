@@ -149,3 +149,20 @@
 .thumb-3 .box.img3 {
     grid-area: img3;
 }
+@media (max-width: 768px) {
+    .thumb-3 .box {
+    height: 200px;
+
+    }
+    .thumb-3 .box.img1 {
+    height: 400px;
+    }
+  }
+@media (max-width: 768px) {
+    .hideonmobile {
+        display: none;
+    }
+    .ul .slick-dots {
+display: none;
+    }
+  }
