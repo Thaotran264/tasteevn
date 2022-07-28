@@ -18,7 +18,7 @@ export default function Home() {
       <Infor setShowBooking={setShowBooking} isDefault={isDefault} />
       <MenuPhoto isDefault={isDefault} />
       <Slide isDefault={isDefault} />
-      <Booking showBooking={showBooking} setShowBooking={setShowBooking} />
+      {/* <Booking showBooking={showBooking} setShowBooking={setShowBooking} /> */}
       <Menu isDefault={isDefault} />
       <Footer />
     </div>

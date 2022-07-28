@@ -21,7 +21,22 @@ a {
 .toggleMenu.show {
   right: 0;
 }
+input::placeholder {
+ /* Firefox */
+ color: black;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #000;
+ }
+ 
+ ::-ms-input-placeholder { /* Microsoft Edge */
+  color: #000;
+ }
+ input:focus {
+box-shadow: none
+ }
 @import url('./card');
 @import url('./menuPhoto.css');
+@import url('./scrollItems.css');
 @import "~slick-carousel/slick/slick.css"; 
 @import "~slick-carousel/slick/slick-theme.css";
