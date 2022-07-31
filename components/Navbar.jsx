@@ -1,17 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import { BsSearch, BsBagCheck } from "react-icons/bs";
+import { BsSearch, BsCartCheck } from "react-icons/bs";
 const Navbar = () => {
   return (
-    <div className="container-fluid bg-danger mb-2">
+    <div className="container-fluid bg-danger mb-2" id="nav">
       <div className="container ">
         <div className="row py-2">
-          <div className="col-3 col-md-2 d-flex">
+          <div className="col-4 col-md-2 col-lg-1 d-flex">
             <a className="navbar-brand text-light align-self-center " href="#">
               Tastee.vn
             </a>
           </div>
-          <div className="col-7 col-md-7 px-0">
+          <div className="col-6 col-md-7 col-lg-8 offset-lg-1 px-0">
             <form className="d-flex border border-light rounded" role="search">
               <input
                 className="form-control text-dark"
@@ -21,7 +21,6 @@ const Navbar = () => {
                   border: "none",
                 }}
                 type="search"
-                placeholder="Search"
                 aria-label="Search"
               />
               <button className="btn d-flex align-items-center" type="submit">
@@ -29,10 +28,10 @@ const Navbar = () => {
               </button>
             </form>
           </div>
-          <div className="col-2 col-md-3 d-flex align-items-center">
+          <div className="col-2 col-md-3 col-lg-2 d-flex align-items-center">
             <Link href="/cart">
               <a className="text-decoration-none d-flex justify-content-center align-items-center mx-2">
-                <BsBagCheck style={{ fontSize: 24 }} />
+                <BsCartCheck style={{ fontSize: 24, color: "#fff" }} />
               </a>
             </Link>
             <Link href="/login">
