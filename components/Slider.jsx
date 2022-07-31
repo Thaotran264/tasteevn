@@ -1,9 +1,31 @@
 import Slider from "react-slick";
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
 
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none" }}
+      onClick={onClick}
+    />
+  );
+}
 const settings = {
   // dots: true,
   infinite: true,
-
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+  margin: 10,
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
@@ -92,11 +114,18 @@ const Slide = ({ isDefautl }) => {
         <div className="container mb-2">
           <Slider {...settings}>
             {listImg.map((item, index) => (
-              <div key={index} style={{ height: "80px" }}>
+              <div
+                key={index}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <img
                   src={item}
                   alt=""
-                  style={{ width: "100%", objectFit: "cover" }}
+                  style={{
+                    width: "90%",
+                    margin: "auto",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
             ))}
