@@ -6,7 +6,6 @@ import Infor from "../components/Infor";
 import Menu from "../components/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import Navbar from "../components/Navbar";
-import ScrollComponent from "../components/Scroll";
 import Slide from "../components/Slider";
 import {
   BsFacebook,
@@ -15,6 +14,7 @@ import {
   BsTwitter,
   BsMessenger,
 } from "react-icons/bs";
+import TabMenu from "../components/TabMenu";
 export default function Home() {
   const [showBooking, setShowBooking] = useState(false);
   const [pos, setPos] = useState("");
@@ -76,8 +76,8 @@ export default function Home() {
       {/* <Booking showBooking={showBooking} setShowBooking={setShowBooking} /> */}
       <div
         ref={menuRef}
-        // className={`${menuPos}`}
-        // style={menuPos ? { zIndex: "99px" } : {}}
+      // className={`${menuPos}`}
+      // style={menuPos ? { zIndex: "99px" } : {}}
       >
         <Menu isDefault={isDefault} menuPos={menuPos} />
       </div>
@@ -86,11 +86,11 @@ export default function Home() {
         style={
           showTopBtn
             ? {
-                display: "flex",
-                position: "fixed",
-                bottom: "200px",
-                right: "15px",
-              }
+              display: "flex",
+              position: "fixed",
+              bottom: "200px",
+              right: "15px",
+            }
             : { display: "none" }
         }
       >
@@ -131,17 +131,23 @@ export default function Home() {
         style={
           showTopBtn
             ? {
-                display: "flex",
-                position: "fixed",
-                bottom: "155px",
-                right: "15px",
-              }
+              display: "flex",
+              position: "fixed",
+              bottom: "155px",
+              right: "15px",
+            }
             : { display: "none" }
         }
       >
         Click
       </a>
       <Footer />
+      <TabMenu />
+      {/* <div
+        style={{ bottom: 0 }}
+        className="position-fixed start-0 bg-dark bg-opacity-10 text-light end-0 d-flex justify-content-center">
+        <a className="btn btn-danger w-25 mx-auto" href="/login">Login</a>
+      </div> */}
     </div>
   );
 }

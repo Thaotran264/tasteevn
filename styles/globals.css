@@ -14,29 +14,41 @@ a {
 * {
   box-sizing: border-box;
 }
+
 .toggleMenu {
   right: -100%;
   transition: all 1s ease;
 }
+
 .toggleMenu.show {
   right: 0;
 }
+
 input::placeholder {
- /* Firefox */
- color: black;
+  /* Firefox */
+  color: black;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: #000;
- }
- 
- ::-ms-input-placeholder { /* Microsoft Edge */
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: #000;
- }
- input:focus {
-box-shadow: none
- }
+}
+
+input:focus {
+  box-shadow: none
+}
+
+.list-group-item {
+  border: none !important
+}
+
 @import url('./card');
 @import url('./menuPhoto.css');
 @import url('./scrollItems.css');
-@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
