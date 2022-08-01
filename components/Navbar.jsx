@@ -42,13 +42,17 @@ const Navbar = () => {
                 <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
               </a>
             </Link>
-            <span className="text-light bg-secondary hideOnMB" style={{
-              width: 30, height: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid #fff', borderRadius: 50, textAlign: 'center', padding: 5
-            }}>{username && username.charAt(0)}</span>
+            {
+              username ?
+                <span className="text-light bg-secondary hideOnMB" style={{
+                  width: 30, height: '30px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #fff', borderRadius: 50, textAlign: 'center', padding: 5
+                }}>{username && username.charAt(0)}</span>
+                : <a className="btn btn-outline-danger" href="/login">Log in</a>
+            }
           </div>
         </div>
       </div>

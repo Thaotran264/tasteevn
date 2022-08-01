@@ -70,7 +70,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
-            <Toast onClose={() => setToast({ ...toast, state: true })}
+            <Toast onClose={() => setToast({ ...toast, state: false })}
                 bg={toast.bg == "success" ? 'success' : 'danger'}
                 show={toast.state} autohide className='position-fixed top-0 end-0'>
                 <Toast.Header>

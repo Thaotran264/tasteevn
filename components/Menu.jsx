@@ -26,22 +26,22 @@ const Menu = ({ isDefault, menuPos }) => {
               </span>
               <ul
                 ref={menuRef}
-                className="list-group d-flex flex-row bg-white gap-1 w-100" style={{ overflow: 'scroll', height: 40 }}
+                className="list-group d-flex flex-row bg-white gap-1 w-100" style={{ overflow: 'scroll', padding: '10px 0' }}
               >
                 <li
-                  className="list-group-item"
+                  className="list-group-item w-50"
                   style={{ backgroundColor: "transparent" }}
                 >
                   <a href="#menuRC01" >Coffee</a>
                 </li>
                 <li
-                  className="list-group-item border-danger border-start"
+                  className="list-group-item border-danger w-50 border-start"
                   style={{ backgroundColor: "transparent" }}
                 >
                   <a href="#menuRC02" >Cake</a>
                 </li>
                 <li
-                  className="list-group-item border-danger border-start"
+                  className="list-group-item border-danger w-50 border-start"
                   style={{ backgroundColor: "transparent" }}
                 >
                   <a href="#menuRC0" >Drink</a>
