@@ -6,7 +6,7 @@ const Register = () => {
         <div className='vh-100 align-items-center d-flex bg-light'>
             <NavbarSecond />
             <div className='container '>
-                <div className='mx-auto bg-white py-4 px-4 border rounded border-secondary' style={{ width: 400 }}>
+                <div className='mx-auto bg-white py-4 px-4 border rounded border-secondary' style={{ maxWidth: 400 }}>
                     <h2 className='text-center'>Register</h2>
                     <form >
                         <div class="mb-3">

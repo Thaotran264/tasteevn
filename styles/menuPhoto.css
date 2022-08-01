@@ -187,9 +187,9 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 959px) {
     .hideonmobile {
-        display: none;
+        display: block;
     }
 
     .ul .slick-dots {
@@ -197,9 +197,21 @@
     }
 }
 
+
+
+@media (min-width: 960px) {
+    .hideonmobile {
+        display: none;
+    }
+
+    .footer {
+        margin-bottom: 0 !important;
+    }
+}
+
 @media (max-width: 959px) {
     .menuRecipe.active {
-        position: relative !important
+        /* position: relative !important */
     }
 }
 
@@ -218,5 +230,11 @@
 @media (min-width: 1320px) {
     .menuRecipe.active {
         margin: 0 172.5px;
+    }
+}
+
+@media (max-width: 960px) {
+    .hideOnMB {
+        display: none !important;
     }
 }

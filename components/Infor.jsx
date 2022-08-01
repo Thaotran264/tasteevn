@@ -13,11 +13,12 @@ const Infor = ({ setShowBooking, isDefault }) => {
               className="col-12 col-md-6 d-flex justify-content-center "
               style={{ aspectRatio: "2 / 1" }}
             >
-              <img
-                src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="text-center mx-auto rounded"
-                style={{ width: "100%", objectFit: "cover" }}
-              />
+              <div style={{ width: '200px', height: '200px', borderRadius: '100%', border: '1px solid #000' }}>
+                <img
+                  src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  style={{ width: "100%", objectFit: "cover", borderRadius: '100%', height: '100%' }}
+                />
+              </div>
             </div>
             <div className="col-12 col-md-6 py-2">
               <div className="text-center">

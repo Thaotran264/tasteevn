@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = 'https://pro.tastee.vn'
+const BASE_URL = 'https://test.tastee.vn'
 
 const axiosClient = axios.create({
     baseURL: BASE_URL,
