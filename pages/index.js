@@ -15,6 +15,7 @@ import {
   BsMessenger,
 } from "react-icons/bs";
 import TabMenu from "../components/TabMenu";
+import Notify from "../components/Notify";
 export default function Home() {
   const [showBooking, setShowBooking] = useState(false);
   const [pos, setPos] = useState("");
@@ -76,8 +77,8 @@ export default function Home() {
       {/* <Booking showBooking={showBooking} setShowBooking={setShowBooking} /> */}
       <div
         ref={menuRef}
-      // className={`${menuPos}`}
-      // style={menuPos ? { zIndex: "99px" } : {}}
+        // className={`${menuPos}`}
+        // style={menuPos ? { zIndex: "99px" } : {}}
       >
         <Menu isDefault={isDefault} menuPos={menuPos} />
       </div>
@@ -86,11 +87,11 @@ export default function Home() {
         style={
           showTopBtn
             ? {
-              display: "flex",
-              position: "fixed",
-              bottom: "200px",
-              right: "15px",
-            }
+                display: "flex",
+                position: "fixed",
+                bottom: "200px",
+                right: "15px",
+              }
             : { display: "none" }
         }
       >
@@ -131,11 +132,11 @@ export default function Home() {
         style={
           showTopBtn
             ? {
-              display: "flex",
-              position: "fixed",
-              bottom: "155px",
-              right: "15px",
-            }
+                display: "flex",
+                position: "fixed",
+                bottom: "155px",
+                right: "15px",
+              }
             : { display: "none" }
         }
       >
