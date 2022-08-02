@@ -5,28 +5,37 @@ import { AiOutlinePlus } from "react-icons/ai";
 const Menu = ({ isDefault, menuPos }) => {
   const menuRef = useRef();
   const titleRef = useRef();
+  let widthW;
+  console.log(menuPos)
+  useEffect(() => {
+    // console.log(window.innerWidth)
+    window.addEventListener('resize', () => {
+
+      switch (window.innerWidth) {
+        case window.innerWidth >= 1400: return widthW == 1320
+        case window.innerWidth >= 1200: return widthW == 1140
+        case window.innerWidth >= 992: return widthW == 960
+        default: return widthW == 720
+      }
+    })
+  })
   return (
     <>
       {!isDefault && (
         <div className="container py-2 " id="menu">
           {/* Menu 2 */}
-          <div className="row">
-            <div
-              className={`menuRecipe bg-white col-12 col-md-4 py-1 ${menuPos == "position-fixed top-0 start-0 end-0"
-                ? menuPos + " gx-5 active"
-                : ""
-                }`}
+          {/* MObile menu */}
+          <div className=" hideonmobile row position-relative">
+            {/* Mobile menu */}
+            <div className={` menuRecipe bg-white col-12 col-md-4 py-1 ${menuPos == "position-fixed top-0 start-0 end-0"
+              ? menuPos + " gx-5 active"
+              : ""
+              }`}
               style={menuPos == "position-fixed top-0 start-0 end-0" ? { marginTop: 54, zIndex: 99 } : {}}
             >
-              <span
-                className="d-inline-block fs-3 mb-2 pb-1 w-75"
-                style={{ borderBottom: "5px solid #000" }}
-              >
-                Menu
-              </span>
               <ul
                 ref={menuRef}
-                className="list-group d-flex flex-row bg-white gap-1 w-100" style={{ overflow: 'scroll', padding: '10px 0' }}
+                className=" list-group d-flex flex-row bg-white gap-1 w-100" style={{ overflow: 'scroll', padding: '10px 0' }}
               >
                 <li
                   className="list-group-item w-50"
@@ -61,12 +70,233 @@ const Menu = ({ isDefault, menuPos }) => {
                 </li>
 
               </ul>
+              <hr />
             </div>
-            <div
-              className={`col-12 col-md-8 bg-white py-1 ${menuPos == "position-fixed top-0 start-0 end-0"
-                ? "offset-md-4"
-                : ""
-                }`}
+            {/*End Mobile menu */}
+            <div className={`col-12 col-md-8 bg-white py-1 ${menuPos == "position-fixed top-0 start-0 end-0"
+              ? "offset-md-4"
+              : ""
+              }`}
+            >
+              <h4 id="menuRC01" ref={titleRef}>
+                Menu
+              </h4>
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div
+                  className="col-4 col-md-4"
+                  style={{ aspectRatio: "1 / 1" }}
+                >
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8 col-md-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <h4 id="menuRC02" ref={titleRef}>
+                Menu
+              </h4>
+              <div className="row">
+                <div
+                  className="col-4 col-md-4"
+                  style={{ aspectRatio: "1 / 1" }}
+                >
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8 col-md-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div
+                  className="col-4 col-md-4"
+                  style={{ aspectRatio: "1 / 1" }}
+                >
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8 col-md-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <h4 id="menuRC03">Menu</h4>
+              <div className="row">
+                <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
+                  <img
+                    className="w-100 h-100 d-block img-thumbnail"
+                    src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                    alt=""
+                  />
+                </div>
+                <div className="col-8">
+                  <h3>Name of food</h3>
+                  <p className="text-danger">$15</p>
+                  <button className="btn btn-dark text-light w-100">
+                    <AiOutlinePlus style={{ fontSize: 24 }} />
+                  </button>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </div>
+
+          {/* Web menu */}
+          <div className="row hideOnMB ">
+            {/* Mobile menu */}
+            <div className={` bg-white ${menuPos == "position-fixed top-0 start-0 end-0" ? "position-fixed container" : "col-md-4"}`} style={menuPos == "position-fixed top-0 start-0 end-0" ? { top: 56, width: 1320 } : {}}
+            >
+              <ul
+                ref={menuRef}
+                className=" list-group d-flex flex-column bg-dark bg-opacity-50 gap-1"
+              >
+                <li
+                  className="list-group-item w-50"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <a href="#menuRC01" >Coffee</a>
+                </li>
+                <li
+                  className="list-group-item border-danger w-50 border-start"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <a href="#menuRC02" >Cake</a>
+                </li>
+                <li
+                  className="list-group-item border-danger w-50 border-start"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <a href="#menuRC0" >Drink</a>
+                </li>
+                <li
+                  className="list-group-item border-danger border-start"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <a href="#menuRC04" >Soup</a>
+                </li>
+                <li
+                  className="list-group-item border-danger border-start"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <a href="#menuRC04" >Beer</a>
+
+                </li>
+                <hr />
+
+              </ul>
+            </div>
+            {/*End Mobile menu */}
+            <div className={`${menuPos == "position-fixed top-0 start-0 end-0" &&
+              "offset-md-4"} col-md-8 bg-white py-1`}
             >
               <h4 id="menuRC01" ref={titleRef}>
                 Menu

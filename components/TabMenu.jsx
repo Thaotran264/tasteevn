@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiOutlineUser, AiOutlineHome, AiOutlineMenu, AiOutlineTags } from 'react-icons/ai'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
+import { DataContext } from '../store/globalState';
 
 const TabMenu = () => {
+    const { state, dispatch } = useContext(DataContext)
     const router = useRouter()
     const handleLogOut = () => {
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
+        dispatch({ type: 'NOTIFY', payload: { success: 'success' } })
         router.push('/login')
     }
     return (
