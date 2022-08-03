@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-02 16:19:25
- * @modify date 2022-08-02 16:43:14
+ * @modify date 2022-08-03 17:23:20
  * @desc [description]
  */
 /**
@@ -49,10 +49,18 @@ body {
   --primary-color:  rgb(255, 140, 0);
   --text-white: #fff;
   --text-dark: #000;
+  --text-danger: red;
+  --text-blue: rgb(18 41 244);
+  --bg-danger: red;
+  --bg-dark: grey;
 }
 a {
   color: inherit;
   text-decoration: none;
+}
+
+input{
+  outline: none !important;
 }
 
 * {
@@ -93,6 +101,10 @@ input:focus {
 
 .color-primary {
   color: var(--primary-color)
+}
+
+.color-blue{
+  color: var(--text-blue)
 }
 
 
