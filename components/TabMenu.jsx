@@ -44,7 +44,7 @@ const TabMenu = () => {
                     >
                         <Dropdown.Item eventKey="1">Cart</Dropdown.Item>
                         <Dropdown.Item eventKey="2">
-                            <button className='btn' onClick={handleLogOut}>Log Out</button>
+                            <button className='btn' onClick={handleLogOut}>Đăng xuất</button>
                         </Dropdown.Item>
                         <Dropdown.Item eventKey="3">Booking</Dropdown.Item>
                     </DropdownButton>
