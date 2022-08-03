@@ -1,0 +1,37 @@
+.color-primary-button {
+    background-color:  var(--primary-color) !important
+  }
+  
+  .btn-custom {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.8em;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    outline: none;
+  }
+  .btn-custom:hover, .btn-custom:focus {
+    color: var(--primary-color);
+  }
+  
+  .btn-custom:active { 
+    color: var(--primary-color);
+   }
+  
+  .button-custom-primary {
+    border: 1px solid  var(--primary-color);
+    border-radius: 0.6em;
+    color:  var(--primary-color);
+
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
+  .button-custom-primary:hover {
+    color: var(--text-white);
+    box-shadow: 0 0 40px 40px  var(--primary-color) inset;
+  }

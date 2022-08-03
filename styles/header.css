@@ -1,0 +1,4 @@
+.cart-user .dropdown .dropdown-toggle::after {
+    display: none !important;
+    
+}

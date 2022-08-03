@@ -1,12 +1,15 @@
 import Link from "next/link";
-import React, { useContext, useState } from "react";
-import axiosClient from "../../api-client/axios-client";
-import NavbarSecond from "../../components/NavbarSecond";
 import { useRouter } from "next/router";
-import { DataContext } from "../../store/globalState";
-import Notify from "../../components/Notify";
+import React, {  useContext, useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import axiosClient from "../api-client/axios-client";
+import { DataContext } from "../store/globalState";
 
-const Login = () => {
+function LoginModal() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const router = useRouter();
   const [data, setData] = useState({});
   const { state, dispatch } = useContext(DataContext);
@@ -35,13 +38,17 @@ const Login = () => {
     }
   };
   return (
-    <div className="vh-100 align-items-center d-flex bg-light">
-      <div className="container ">
-        <div
-          className="mx-auto bg-white py-4 px-4 border rounded border-secondary"
-          style={{ maxWidth: 400 }}
+    <>
+      <button  className='btn-custom button-custom-primary' onClick={handleShow}>
+        Đăng nhập/ Đăng ký
+      </button>
+
+      <Modal show={show} onHide={handleClose} animation={false} >
+        {/* <Modal.Header closeButton></Modal.Header> */}
+        <Modal.Body>
+        <div className="mx-auto bg-white py-5 rounded w-75"
         >
-          <h2 className="text-center">Login</h2>
+          <h2 className="text-center formTitle">Đăng nhập</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">
@@ -58,7 +65,7 @@ const Login = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">
-                Password
+                Mật khẩu
               </label>
               <input
                 value={data.password}
@@ -67,33 +74,23 @@ const Login = () => {
                 className="form-control"
                 id="exampleInputPassword1"
               />
-              <a>Forgot your password?</a>
+              <a>Quên mật khẩu?</a>
             </div>
 
             <button
               type="submit"
-              className="btn btn-dark bg-dark bg-opacity-75 w-100"
+              className="btn-custom button-custom-primary w-100 "
             >
-              Login
+              Đăng nhập
             </button>
-            {/* <p className='text-center mb-0'>OR</p>
-                        <button className="btn btn-primary w-100 mb-3">Continue with Facebook</button>
-                        <button className="btn btn-outline-secondary text-dark w-100 mb-2">Continue with Google</button> */}
-            <span>
-              Dont &apos;t have a account???{" "}
-              <Link
-                className="text-danger"
-                href="/register"
-                style={{ cursor: "pointer" }}
-              >
-                Resigter
-              </Link>
-            </span>
+            
           </form>
         </div>
-      </div>
-    </div>
+        </Modal.Body>
+        <button onClick={handleClose} className="btn btn-danger position-absolute" style={{top: 5, right: 5}}>x</button>
+      </Modal>
+    </>
   );
-};
+}
 
-export default Login;
+export default LoginModal;

@@ -1,8 +1,15 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsSearch, BsCartCheck } from "react-icons/bs";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { isMobile } from "react-device-detect";
 import Logo from '../public/image/logo.jpg'
+import { useRouter } from "next/router";
+import { DataContext } from "../store/globalState";
+import LoginModal from "./LoginModal";
 const Navbar = () => {
+  const { state, dispatch } = useContext(DataContext)
+  console.log('%cNavbar.jsx line:11 state.auth', 'color: #007acc;', state.auth);
   const [username, setusername] = useState()
   useEffect(() => {
     let name = JSON.parse(localStorage.getItem('userInfo'))
@@ -10,6 +17,19 @@ const Navbar = () => {
       setusername(name)
     }
   }, [])
+
+  const router = useRouter()
+  const handleLogOut = () => {
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('token')
+    dispatch({ type: 'NOTIFY', payload: { success: 'success' } })
+    router.push('/login')
+}
+
+  const [_isMobile, setMobile] = useState(false);
+  useEffect(() => {
+      setMobile(isMobile);
+  }, [_isMobile]);
   return (
     <div className="container-fluid mb-2 bg-white position-fixed top-0 start-0" style={{ zIndex: 99 }} id="nav">
       <div className="container ">
@@ -36,22 +56,40 @@ const Navbar = () => {
               </button>
             </form>
           </div>
-          <div className="col-2 col-md-3 col-lg-2 d-flex align-items-center justify-content-around">
+          <div className="col-2 col-md-3 col-lg-2 d-flex align-items-center justify-content-around cart-user">
             <Link href="/cart">
               <a className="text-decoration-none d-flex justify-content-center align-items-center mx-2">
                 <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
               </a>
             </Link>
-            {
-              username ?
-                <span className="text-light bg-secondary hideOnMB" style={{
-                  width: 30, height: '30px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px solid #fff', borderRadius: 50, textAlign: 'center', padding: 5
-                }}>{username && username.charAt(0)}</span>
-                : <a className="btn btn-outline-danger" href="/login">Log in</a>
+            {username &&  !_isMobile ?
+                
+
+                <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1">
+                    <span className="text-light bg-secondary hideOnMB" style={{
+                      width: 30, height: '30px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '1px solid #fff', borderRadius: 50, textAlign: 'center', padding: 5
+                    }}>{username && username.charAt(0)}</span>
+                </Dropdown.Toggle>
+          
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/profile">Thông tin tài khoản</Dropdown.Item>
+                  <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
+                  <Dropdown.Item href="#">Booking</Dropdown.Item>
+                  <Dropdown.Item  onClick={handleLogOut} >Đăng xuất</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+                : ''
+            }
+
+            {!username &&  !_isMobile ?
+                // <a className="btn btn-outline-danger" href="/login">Đăng nhập</a>
+                <LoginModal></LoginModal>
+                : ''
             }
           </div>
         </div>
