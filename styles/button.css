@@ -9,6 +9,7 @@
             appearance: none;
     background-color: transparent;
     cursor: pointer;
+    border: none;
     font-size: 0.875rem;
     padding: 0.5rem 0.8em;
     text-align: center;
@@ -34,4 +35,35 @@
   .button-custom-primary:hover {
     color: var(--text-white);
     box-shadow: 0 0 40px 40px  var(--primary-color) inset;
+  }
+
+  .button-custom-primary-form:hover {
+    color: var(--text-white);
+    box-shadow: 0 0 40px 40px  var(--primary-color) inset;
+  }
+
+  .button-custom-primary-form {
+    border: 1px solid  var(--primary-color);
+    color:  var(--primary-color);
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
+
+  .button-custom-danger-form {
+    color: var(--text-danger);
+    border: 1px solid  var(--text-danger);
+    border-radius: 15px;
+    opacity: .888888;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
+  .button-custom-danger-form:hover {
+    color: var(--text-white);
+    box-shadow: 0 0 40px 40px  var(--bg-danger) inset;
   }

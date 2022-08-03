@@ -64,7 +64,6 @@ const Navbar = () => {
             </Link>
             {username &&  !_isMobile ?
                 
-
                 <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1">
                     <span className="text-light bg-secondary hideOnMB" style={{
