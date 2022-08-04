@@ -9,12 +9,11 @@ import { DataContext } from "../store/globalState";
 import LoginModal from "./LoginModal";
 const Navbar = () => {
   const { state, dispatch } = useContext(DataContext)
-  console.log('%cNavbar.jsx line:11 state.auth', 'color: #007acc;', state.auth);
   const [username, setusername] = useState()
   useEffect(() => {
-    let name = JSON.parse(localStorage.getItem('userInfo'))
+    let name = JSON.parse(localStorage.getItem('userInfo')) || ''
     if (name) {
-      setusername(name)
+      setusername(name.fullName)
     }
   }, [])
 
@@ -23,7 +22,8 @@ const Navbar = () => {
     localStorage.removeItem('userInfo')
     localStorage.removeItem('token')
     dispatch({ type: 'NOTIFY', payload: { success: 'success' } })
-    router.push('/login')
+    router.push('/')
+    window.location.reload();
 }
 
   const [_isMobile, setMobile] = useState(false);

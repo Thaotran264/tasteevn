@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
-const axiosClient = axios.create({
+const axiosFormData = axios.create({
     baseURL: process.env.BASE_URL,
     headers: {
-        'Content-Type': 'application/json'
-    }
-})
+        'content-Type': 'multipart/form-data',
+    },
+});
 
 // Add a response interceptor
-axiosClient.interceptors.response.use(
+axiosFormData.interceptors.response.use(
     function (response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
@@ -20,4 +20,4 @@ axiosClient.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-export default axiosClient;
+export default axiosFormData;
