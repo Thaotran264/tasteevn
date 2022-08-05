@@ -115,14 +115,21 @@ function LoginModal() {
     }
   }
 
-  const reSendOTP =  () => {
-    setData({ 'OTP': '' })
+  const reSendOTP = async () => {
+    setData({ ...data ,verifyCode: '' })
     ip1.current.value = ''
     ip2.current.value = ''
     ip3.current.value = ''
     ip4.current.value = ''
     ip5.current.value = ''
     ip6.current.value = ''
+    try {
+      const res = await accountAPI.resendSmsCode(data?.authenId)
+      console.log('%cLoginModal.jsx line:128 data.authenId', 'color: #007acc;', data?.authenId);
+      console.log('%cLoginModal.jsx line:128 res', 'color: #007acc;', res);
+    } catch (error) {
+      
+    }
   }
 
   const checkOTP = async (OTP) => {
@@ -138,7 +145,6 @@ function LoginModal() {
     }
     try {
       const res = await accountAPI.verifySmsCode(params)
-      console.log('%cLoginModal.jsx line:132 res', 'color: #007acc;', res);
       if(res.successful && res.data) {
         setStatusInput({ ...statusInput, isShowMsgErrOTP: false })
         login(paramLogin)
@@ -186,8 +192,8 @@ function LoginModal() {
       setStatusInput({ showFormOTP: true, showSendOTP: true, showFormRegister: true, isEmptyPhone: false, isShowMsgErrOTP: false })
       try {
         const res = await accountAPI.register(formData)
+        console.log('%cLoginModal.jsx line:163 res', 'color: #007acc;', res);
         if(res.successful && res.data) {
-          console.log('%cLoginModal.jsx line:163 res', 'color: #007acc;', res);
           setStatusInput({ ...statusInput, showSendOTP: false, showFormOTP: true,})
           setData({ ...data, authenId: res.data.authenID })
         }
@@ -240,7 +246,8 @@ function LoginModal() {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
-                  Số điện thoại đăng nhập (0396296673)
+                  Số điện thoại đăng nhập
+                   {/* (0396296673) */}
                 </label>
                 <input
                   value={data.PhoneNumber || ""}
@@ -305,7 +312,7 @@ function LoginModal() {
                       Nhập lại mật khẩu<i className="text-danger">(*)</i>
                     </label>
                     <input
-                      disabled={isDisableRePass}
+                      // readOnly={isDisableRePass}
                       value={data.ConfirmPassword || ""}
                       onChange={(e) => setData({ ...data, ConfirmPassword: e.target.value })}
                       type="password"
@@ -313,7 +320,7 @@ function LoginModal() {
                       id="exampleInputPassword1"
                     />
                     { validatorForm.passwordMsg && <i className="text-center text-danger">Mật khẩu không được để trống</i>}
-                    {data.ConfirmPassword && data.ConfirmPassword != data.Password && <i className="text-center text-danger">Mật khẩu không chính xác</i>}
+                    { data.ConfirmPassword && data.ConfirmPassword != data.Password && <i className="text-center text-danger">Mật khẩu không chính xác</i>}
                   </div>
                 </>
               }
@@ -334,7 +341,7 @@ function LoginModal() {
                     {statusInput.isShowMsgErrOTP ? <i className="text-center text-danger me-2 mb-2">OTP không chính xác</i> : ''}
                     <span className="d-flex justify-content-center">
                       <a onClick={reSendOTP} className="text-dark me-2">{isShowCount ? "Gửi lại mã sau:" : 'Bạn không nhận được OTP?'}</a>
-                      <Countdown initialMinute={0} initialSeconds={60} setIsShowCount={setIsShowCount} />
+                      <Countdown initialMinute={0} initialSeconds={6} setIsShowCount={setIsShowCount} />
                       {!isShowCount && <a onClick={reSendOTP} className="text-primary ms-2 mb-2 text-decoration-underline">Gửi lại</a>}
                     </span>
                   </div>
@@ -345,7 +352,7 @@ function LoginModal() {
             </form>
 
             {statusInput.showSendOTP && 
-            <button disabled={data.ConfirmPassword && data.ConfirmPassword != data.Password} type="button" onClick={sendOTP} className="btn-custom button-custom-primary-form w-100 mb-2 "> Nhấn để lấy OTP {statusInput.showSendOTP && 'true'} </button>}
+            <button disabled={data.ConfirmPassword && data.ConfirmPassword != data.Password} type="button" onClick={sendOTP} className="btn-custom button-custom-primary-form w-100 mb-2 "> Nhấn để lấy OTP </button>}
             <button type="button" onClick={handleClose} className="btn-custom button-custom-danger-form w-100 mb-2"> Đóng </button>
             {!statusInput.showFormRegister ?
               <div className="d-flex justify-content-between" >
