@@ -152,3 +152,10 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getStaticProps(context) {
+  console.log('%c ENV', 'color: #007acc;', process.env.BASE_URL);
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}

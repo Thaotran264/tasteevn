@@ -10,13 +10,15 @@
      letter-spacing: 1px;
      font-weight: 300;
 }
+.form-custom {
+  padding: 0 10px
+}
 
 .inputFomCustom {
   padding: 5px 20px;
   border-radius: 15px;
-  font-size: 28px;
+  font-size: 20px;
 }
-
 
 
 /* Custom INPUT OTP  */

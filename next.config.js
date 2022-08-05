@@ -10,6 +10,9 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  env: {
+     BASE_URL: 'https://tmerchant.tastee.vn/api'
+  }
 }
 
 module.exports = nextConfig
