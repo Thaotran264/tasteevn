@@ -39,7 +39,7 @@ const Navbar = () => {
               <img src='/image/logo.jpg' alt="" style={{ width: '100%', objectFit: 'cover', height: '40%', display: 'block' }} />
             </a>
           </div>
-          <div className="col-7 col-md-7 col-lg-8 offset-lg-1 px-0">
+          <div className="col-3 col-md-7 col-lg-8 offset-lg-1 px-0">
             <form className="d-flex border border-dark rounded" role="search">
               <input
                 className="form-control text-dark"
@@ -56,14 +56,13 @@ const Navbar = () => {
               </button>
             </form>
           </div>
-          <div className="col-2 col-md-3 col-lg-2 d-flex align-items-center justify-content-around cart-user">
-            <Link href="/cart">
+          <div className="col-6 col-md-3 col-lg-2 d-flex align-items-center justify-content-around cart-user">
+            {/* <Link href="/cart">
               <a className="text-decoration-none d-flex justify-content-center align-items-center mx-2">
                 <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
               </a>
-            </Link>
+            </Link> */}
             {username &&  !_isMobile ?
-                
                 <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1">
                     <span className="text-light bg-secondary hideOnMB" style={{
@@ -85,10 +84,8 @@ const Navbar = () => {
                 : ''
             }
 
-            {!username &&  !_isMobile ?
-                // <a className="btn btn-outline-danger" href="/login">Đăng nhập</a>
+            {!username &&
                 <LoginModal></LoginModal>
-                : ''
             }
           </div>
         </div>
