@@ -1,4 +1,15 @@
+header {
+    min-height: 66px;
+    display: flex;
+    align-items: center;
+}
+
+.showOnDesktop {
+    display: none;
+}
+
+
 .cart-user .dropdown .dropdown-toggle::after {
     display: none !important;
-    
+
 }

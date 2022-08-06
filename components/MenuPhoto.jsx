@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MenuPhoto = ({ isDefault }) => {
+  const [show, setShow] = useState(false);
   return (
     <>
       {isDefault && (
         <div className="container d-flex gap-2">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center showOnDesktop">
             <iframe
               className=""
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
@@ -178,9 +179,9 @@ const MenuPhoto = ({ isDefault }) => {
         </div>
       )}
       {!isDefault && (
-        <div className="container mb-2">
+        <div className="mb-2">
           <div className="row">
-            <div className="col-12 col-md-6" style={{ aspectRatio: "2 / 1" }}>
+            <div className="col-12 col-md-6 showOnDesktop" style={{ aspectRatio: "2 / 1" }}>
               <iframe
                 className="w-100 h-100"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
@@ -189,8 +190,22 @@ const MenuPhoto = ({ isDefault }) => {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
+            <div className="col-12 col-md-6 hideOnDeskTop mb-2">
+              <button onClick={() => setShow(!show)}>Show</button>
+              <div>
+                {show && (
+                  <iframe
+                    className="w-100 h-100"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                )}
+              </div>
+            </div>
             <div className="col-12 col-md-6">
-              <div className="thumb-3">
+              <div className="thumb-3" style={{ aspectRatio: "1 / 1" }}>
                 <div className="box img1">
                   <img
                     src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600"

@@ -3,27 +3,38 @@ import { BsClock } from "react-icons/bs";
 import { MdAttachMoney, MdOutlineChair } from "react-icons/md";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
-const Infor = ({ setShowBooking, isDefault }) => {
+const Infor = ({ setShowBooking, isDefault, data }) => {
+  const { baner, info } = data;
+
   return (
     <>
       {!isDefault && (
-        <div className="container mb-2">
+        <div className="mb-2">
           <div className="row">
-            <div
-              className="col-12 col-md-6 d-flex justify-content-center "
-              style={{ aspectRatio: "2 / 1" }}
-            >
-              <div style={{ width: '200px', height: '200px', borderRadius: '100%', border: '1px solid #000' }}>
+            <div className="col-12 col-md-6 d-flex justify-content-center ">
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  borderRadius: "100%",
+                  border: "1px solid #000",
+                }}
+              >
                 <img
-                  src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  style={{ width: "100%", objectFit: "cover", borderRadius: '100%', height: '100%' }}
+                  src={info && info.logo}
+                  style={{
+                    width: "100%",
+                    objectFit: "cover",
+                    borderRadius: "100%",
+                    height: "100%",
+                  }}
                 />
               </div>
             </div>
             <div className="col-12 col-md-6 py-2">
               <div className="text-center">
-                <h2 className="fs-3">Mì Ý siêu to khổng lồ</h2>
-                <p>606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</p>
+                <h2 className="fs-3">{info.name}</h2>
+                <p>{info.address}</p>
                 <p>
                   <BsClock style={{ fontSize: 24 }} className="me-2" />
                   06:00 - 22:00{" "}
@@ -32,22 +43,13 @@ const Infor = ({ setShowBooking, isDefault }) => {
                 <div className="row">
                   <div className="col">
                     <a className="btn btn-dark w-100" href="#menu">
-                      <BsFillJournalBookmarkFill
-                        style={{ fontSize: 24 }}
-                        className="me-2"
-                      />
+                      <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="me-2" />
                       Menu
                     </a>
                   </div>
                   <div className="col">
-                    <button
-                      className="btn btn-danger w-100"
-                      onClick={() => setShowBooking(true)}
-                    >
-                      <MdOutlineChair
-                        style={{ fontSize: 24 }}
-                        className="me-2"
-                      />
+                    <button className="btn btn-danger w-100" onClick={() => setShowBooking(true)}>
+                      <MdOutlineChair style={{ fontSize: 24 }} className="me-2" />
                       Booking
                     </button>
                   </div>
@@ -76,16 +78,10 @@ const Infor = ({ setShowBooking, isDefault }) => {
             <hr />
             <div className="d-flex w-25 mx-auto flex-column gap-2 justify-content-between">
               <a className="btn btn-dark" href="#menu">
-                <BsFillJournalBookmarkFill
-                  style={{ fontSize: 24 }}
-                  className="me-2"
-                />
+                <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="me-2" />
                 Menu
               </a>
-              <button
-                className="btn btn-danger"
-                onClick={() => setShowBooking(true)}
-              >
+              <button className="btn btn-danger" onClick={() => setShowBooking(true)}>
                 <MdOutlineChair style={{ fontSize: 24 }} className="me-2" />
                 Booking
               </button>
@@ -112,16 +108,10 @@ const Infor = ({ setShowBooking, isDefault }) => {
             <hr />
             <div className="d-flex w-25 mx-auto flex-column gap-2 justify-content-between">
               <a className="btn btn-dark" href="#menu">
-                <BsFillJournalBookmarkFill
-                  style={{ fontSize: 24 }}
-                  className="me-2"
-                />
+                <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="me-2" />
                 Menu
               </a>
-              <button
-                className="btn btn-danger"
-                onClick={() => setShowBooking(true)}
-              >
+              <button className="btn btn-danger" onClick={() => setShowBooking(true)}>
                 <MdOutlineChair style={{ fontSize: 24 }} className="me-2" />
                 Booking
               </button>
