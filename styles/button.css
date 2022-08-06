@@ -1,69 +1,90 @@
 .color-primary-button {
-    background-color:  var(--primary-color) !important
-  }
-  
-  .btn-custom {
-    box-sizing: border-box;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    background-color: transparent;
-    cursor: pointer;
-    border: none;
-    font-size: 0.875rem;
-    padding: 0.5rem 0.8em;
-    text-align: center;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    outline: none;
-  }
-  .btn-custom:hover, .btn-custom:focus {
-    color: var(--primary-color);
-  }
-  
-  .btn-custom:active { 
-    color: var(--primary-color);
-   }
-  
-  .button-custom-primary {
-    border: 1px solid  var(--primary-color);
-    border-radius: 0.6em;
-    color:  var(--primary-color);
+  background-color: var(--primary-color) !important
+}
 
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  }
-  .button-custom-primary:hover {
-    color: var(--text-white);
-    box-shadow: 0 0 40px 40px  var(--primary-color) inset;
-  }
+.btn-custom {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.8em;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  outline: none;
+}
 
-  .button-custom-primary-form:hover {
-    color: var(--text-white);
-    box-shadow: 0 0 40px 40px  var(--primary-color) inset;
-  }
+.btn-custom:hover,
+.btn-custom:focus {
+  color: var(--primary-color);
+}
 
-  .button-custom-primary-form {
-    border: 1px solid  var(--primary-color);
-    color:  var(--primary-color);
-    border-radius: 15px;
-    padding: 10px 15px;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  }
+.btn-custom:active {
+  color: var(--primary-color);
+}
 
-  .button-custom-danger-form {
-    color: var(--text-danger);
-    border: 1px solid  var(--text-danger);
-    border-radius: 15px;
-    opacity: .888888;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 400;
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  }
-  .button-custom-danger-form:hover {
-    color: var(--text-white);
-    box-shadow: 0 0 40px 40px  var(--bg-danger) inset;
-  }
+.button-custom-primary {
+  border: 1px solid var(--primary-color);
+  border-radius: 0.6em;
+  color: var(--primary-color);
+
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.button-custom-primary:hover {
+  color: var(--text-white);
+  box-shadow: 0 0 40px 40px var(--primary-color) inset;
+}
+
+.button-custom-primary-form:hover {
+  color: var(--text-white);
+  box-shadow: 0 0 40px 40px var(--primary-color) inset;
+}
+
+.button-custom-primary-form {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 15px;
+  padding: 10px 15px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.button-custom-danger-form {
+  color: var(--text-danger);
+  border: 1px solid var(--text-danger);
+  border-radius: 15px;
+  opacity: .888888;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: 400;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.button-custom-danger-form:hover {
+  color: var(--text-white);
+  box-shadow: 0 0 40px 40px var(--bg-danger) inset;
+}
+
+.dropdown .dropdown-toggle {
+  background-color: transparent;
+  border: 1px solid #000;
+  color: #000;
+  text-align: left;
+}
+
+.dropdown .dropdown-toggle:focus {
+  outline: none;
+}
+
+.dropdown .dropdown-toggle::after {
+  content: '';
+  /* margin-left: 20px; */
+  /* display: none; */
+}

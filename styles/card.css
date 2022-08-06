@@ -1,3 +1,15 @@
+.card {
+    margin-bottom: 10px;
+    border-radius: 0;
+    border: none;
+    transition: all .25s ease;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .12);
+    transform: translate3d(1px, -5px, 5px);
+}
+
 .card-title {
     white-space: nowrap;
     overflow: hidden;
@@ -7,6 +19,6 @@
 .card-text {
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }

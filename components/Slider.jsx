@@ -12,13 +12,7 @@ function SampleNextArrow(props) {
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "none" }}
-      onClick={onClick}
-    />
-  );
+  return <div className={className} style={{ ...style, display: "none" }} onClick={onClick} />;
 }
 const settings = {
   // dots: true,
@@ -111,13 +105,10 @@ const Slide = ({ isDefautl }) => {
   return (
     <>
       {!isDefautl && (
-        <div className="container mb-2">
+        <div className="mb-2">
           <Slider {...settings}>
             {listImg.map((item, index) => (
-              <div
-                key={index}
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div key={index} style={{ display: "flex", alignItems: "center" }}>
                 <img
                   src={item}
                   alt=""
@@ -138,11 +129,7 @@ const Slide = ({ isDefautl }) => {
           <Slider {...settings2}>
             {listImg.map((item, index) => (
               <div key={index} style={{ height: "80px" }}>
-                <img
-                  src={item}
-                  alt=""
-                  style={{ width: "100%", objectFit: "cover" }}
-                />
+                <img src={item} alt="" style={{ width: "100%", objectFit: "cover" }} />
               </div>
             ))}
           </Slider>

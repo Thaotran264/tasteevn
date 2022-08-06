@@ -1,10 +1,24 @@
-@media (max-width: 768px) {
+@media (min-width: 576px) {
+    .card-item {
+        flex: 1 1 49%;
+    }
+}
+
+
+
+@media (min-width: 992px) {
+    .card-item {
+        flex: 1 1 30%;
+    }
+}
+
+@media (max-width: 767px) {
     .thumb-3 .box {
-        height: 200px;
+        height: 100%;
     }
 
     .thumb-3 .box.img1 {
-        height: 400px;
+        height: 100%;
     }
 }
 
@@ -18,21 +32,19 @@
     }
 }
 
+@media (min-width: 992px) {
+    .showOnDesktop {
+        display: block !important;
+    }
 
+    .hideOnDeskTop {
+        display: none;
+    }
+}
 
 @media (min-width: 960px) {
     .hideonmobile {
         display: none;
-    }
-
-    .footer {
-        margin-bottom: 0 !important;
-    }
-}
-
-@media (max-width: 959px) {
-    .menuRecipe.active {
-        /* position: relative !important */
     }
 }
 
@@ -63,5 +75,11 @@
 @media (min-width: 960px) {
     .hideOnMB {
         display: flex !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hideOnMobile {
+        display: none !important;
     }
 }
