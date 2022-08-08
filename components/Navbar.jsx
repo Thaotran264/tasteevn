@@ -1,15 +1,25 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { BsSearch, BsCartCheck } from "react-icons/bs";
 import Dropdown from "react-bootstrap/Dropdown";
 import { isMobile } from "react-device-detect";
-import Logo from "../public/image/logo.jpg";
-import { useRouter } from "next/router";
+import { BsCartCheck, BsSearch } from "react-icons/bs";
 import { DataContext } from "../store/globalState";
 import LoginModal from "./LoginModal";
+import Search from "./Search";
 const Navbar = () => {
   const { state, dispatch } = useContext(DataContext);
   const [username, setusername] = useState();
+  const [showSearch, setShowSearch] = useState(false);
+  const [_isMobile, setMobile] = useState(false);
+  useEffect(() => {
+    setMobile(isMobile);
+  }, [_isMobile]);
+
+  const handleSearch = () => {
+    console.log("first");
+    setShowSearch(!showSearch);
+  };
   useEffect(() => {
     let name = JSON.parse(localStorage.getItem("userInfo")) || "";
     if (name) {
@@ -26,16 +36,8 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const [_isMobile, setMobile] = useState(false);
-  useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
   return (
-    <header
-      className="container-fluid bg-white position-fixed top-0 start-0"
-      style={{ zIndex: 99 }}
-      id="nav"
-    >
+    <header className="bg-white position-fixed top-0 start-0 w-100" style={{ zIndex: 99 }} id="nav">
       <nav className="container">
         <div className="row align-items-center">
           <div className="col-2 col-sm-2 col-md-2 col-lg-2">
@@ -69,9 +71,9 @@ const Navbar = () => {
             </Dropdown>
           </div>
           <div className="col-2 col-sm-4 col-md-4 col-lg-6">
-            <form className="d-flex border border-dark rounded" role="search">
+            <form className=" d-flex border border-dark rounded hideOnMobile" role="search">
               <input
-                className="form-control text-dark hideOnMobile"
+                className="form-control text-dark"
                 style={{
                   backgroundColor: "transparent",
                   ouline: "none",
@@ -84,6 +86,12 @@ const Navbar = () => {
                 <BsSearch style={{ color: "#000" }} />
               </button>
             </form>
+            <button
+              className="btn btn-outline-dark align-items-center hideOnDeskTop"
+              onClick={handleSearch}
+            >
+              <BsSearch style={{ color: "#000" }} />
+            </button>
           </div>
           <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user">
             <div className="d-flex justify-content-between align-items-center">
@@ -92,11 +100,12 @@ const Navbar = () => {
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
                 </a>
               </Link>
-              {username && !_isMobile ? (
+              
+              {username ? 
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1">
+                  <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1" className="rounded">
                     <span
-                      className="text-light bg-secondary hideOnMB"
+                      className="text-light bg-secondary rounded"
                       style={{
                         width: 30,
                         height: "30px",
@@ -120,15 +129,13 @@ const Navbar = () => {
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-              ) : (
-                ""
-              )}
-
-              {!username && <LoginModal />}
+              : <LoginModal />
+              }
             </div>
           </div>
         </div>
       </nav>
+      {showSearch && <Search showSearch={showSearch} setShowSearch={setShowSearch} />}
     </header>
   );
 };
