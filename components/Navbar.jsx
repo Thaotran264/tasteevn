@@ -12,6 +12,9 @@ const Navbar = () => {
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
+  useEffect(() => {
+    setMobile(isMobile);
+  }, [_isMobile]);
 
   const handleSearch = () => {
     console.log("first");
@@ -33,9 +36,6 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
   return (
     <header className="bg-white position-fixed top-0 start-0 w-100" style={{ zIndex: 99 }} id="nav">
       <nav className="container">
@@ -100,11 +100,12 @@ const Navbar = () => {
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
                 </a>
               </Link>
-              {username && !_isMobile ? (
+              
+              {username ? 
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1">
+                  <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1" className="rounded">
                     <span
-                      className="text-light bg-secondary hideOnMB"
+                      className="text-light bg-secondary rounded"
                       style={{
                         width: 30,
                         height: "30px",
@@ -128,11 +129,8 @@ const Navbar = () => {
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-              ) : (
-                ""
-              )}
-
-              {!username && <LoginModal />}
+              : <LoginModal />
+              }
             </div>
           </div>
         </div>

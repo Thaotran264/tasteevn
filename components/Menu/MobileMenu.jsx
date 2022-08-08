@@ -8,8 +8,8 @@ const MobileMenu = ({ menuPos }) => {
   return (
     <div className="hideOnDeskTop">
       <ul
-        className={`d-flex bg-secondary bg-opacity-50 ps-0 overflow-scroll pb-2 ${
-          menuPos && "position-fixed bg-light bg-opacity-100 border border-bottom"
+        className={`d-flex bg-light ps-0 overflow-scroll pb-2 ${
+          menuPos && "position-fixed bg-light border border-bottom"
         }`}
         style={menuPos ? { top: 66, left: 0, width: "100%", zIndex: 99 } : {}}
       >

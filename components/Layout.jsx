@@ -5,7 +5,7 @@ import Notify from "./Notify";
 import Search from "./Search";
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="position-relative">
       {/* <Search /> */}
       <Navbar />
       <Notify />

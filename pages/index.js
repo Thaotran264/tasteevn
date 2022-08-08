@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRef, useState } from "react";
+import Layout from "../components/Layout";
 import Pages from "../components/Pages";
 export default function Home() {
   return (
@@ -12,6 +13,12 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+Home.getLayout = function getLayout(Page) {
+  return (
+      <Layout>{Page}</Layout>
+  )
 }
 
 export async function getStaticProps(context) {
