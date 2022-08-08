@@ -7,6 +7,7 @@ import { DataProvider } from "../store/globalState";
 import "../styles/globals.css";
 import axios from "axios";
 function MyApp({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page)
   return (
     // <SSRProvider>
     <DataProvider>
@@ -16,12 +17,16 @@ function MyApp({ Component, pageProps }) {
           dedupingInterval: 10000,
         }}
       >
-        <Layout>
+        {/* <Layout> */}
+        <>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
           </Head>
-          <Component {...pageProps} />
-        </Layout>
+          {
+            getLayout(<Component {...pageProps} />)
+          }
+        </>
+        {/* </Layout> */}
       </SWRConfig>
     </DataProvider>
     // </SSRProvider>

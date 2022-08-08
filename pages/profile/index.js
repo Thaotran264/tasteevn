@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { BsTrash } from "react-icons/bs";
+import Layout from "../../components/Layout";
 import LayoutProfile from "../../components/LayoutProfile";
 import NavbarSecond from "../../components/NavbarSecond";
 const Cart = () => {
@@ -10,7 +11,7 @@ const Cart = () => {
     setCount(value);
   };
   return (
-    <LayoutProfile className="container">
+    <div className="container">
       <div className="py-3" style={{ marginTop: 56 }}>
         <h4>Thông tin cá nhân</h4>
         <hr />
@@ -60,8 +61,17 @@ const Cart = () => {
           <h2>Total: $200</h2>
         </div>
       </div>
-    </LayoutProfile>
+    </div>
   );
 };
+
+
+
+
+Cart.getLayout = function getLayout(Page) {
+  return (
+      <LayoutProfile>{Page}</LayoutProfile>
+  )
+}
 
 export default Cart;

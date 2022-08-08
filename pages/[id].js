@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BsCartCheck } from "react-icons/bs";
 import Carousel from "../components/Carousel";
 import Infor from "../components/Infor";
+import Layout from "../components/Layout";
 import DesktopMenu from "../components/Menu/DesktopMenu";
 import MobileMenu from "../components/Menu/MobileMenu";
 import MenuPhoto from "../components/MenuPhoto";
@@ -69,5 +70,11 @@ const Detail = () => {
     </div>
   );
 };
+
+Detail.getLayout = function getLayout(Page) {
+  return (
+      <Layout>{Page}</Layout>
+  )
+}
 
 export default Detail;
