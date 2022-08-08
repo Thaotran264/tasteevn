@@ -17,6 +17,7 @@ body {
 .profile-sidebar {
     background: #fff;
 }
+
 .profile-userpic {
     text-align: center;
     align-items: center;
@@ -98,7 +99,7 @@ body {
 .profile-usermenu ul li a:hover {
     border-left: 2px solid #5b9bd1;
     color: #5b9bd1;
-    
+
 }
 
 /* .profile-usermenu ul li.active {
@@ -111,10 +112,7 @@ body {
 }
 
 /* Profile Content */
-.profile-content {
-    padding: 20px;
-    background: #fff;
-}
+
 
 
 

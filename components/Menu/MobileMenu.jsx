@@ -29,7 +29,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block"
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -46,7 +46,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4 col-md-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -63,7 +63,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -81,7 +81,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -98,7 +98,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4 col-md-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -115,7 +115,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -133,7 +133,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -150,7 +150,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4 col-md-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />
@@ -167,7 +167,7 @@ const MobileMenu = ({ menuPos }) => {
       <div className="row">
         <div className="col-4" style={{ aspectRatio: "1 / 1" }}>
           <img
-            className="w-100 h-100 d-block img-thumbnail"
+            className="w-100 h-100 d-block "
             src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
             alt=""
           />

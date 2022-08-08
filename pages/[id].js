@@ -66,15 +66,12 @@ const Detail = () => {
       >
         <BsCartCheck style={{ fontSize: 24 }} />
       </button>
-      <TabMenu />
     </div>
   );
 };
 
 Detail.getLayout = function getLayout(Page) {
-  return (
-      <Layout>{Page}</Layout>
-  )
-}
+  return <Layout>{Page}</Layout>;
+};
 
 export default Detail;

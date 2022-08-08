@@ -15,7 +15,7 @@ const DesktopMenu = ({ menuPos }) => {
         <div className="container">
           <div className="row">
             <div className="col-md-4 col-lg-4">
-              <ul className="ps-0 bg-secondary bg-opacity-10">
+              <ul className="ps-0 bg-light bg-opacity-10">
                 {menu.map((item, index) => (
                   <li
                     key={index}
@@ -32,7 +32,7 @@ const DesktopMenu = ({ menuPos }) => {
       </div>
       <div className="row">
         <div className={`col-md-4 col-lg-4 ${menuPos && "d-none"}`}>
-          <ul className="ps-0 bg-secondary bg-opacity-10">
+          <ul className="ps-0 bg-light bg-opacity-10">
             {menu.map((item, index) => (
               <li
                 key={index}
