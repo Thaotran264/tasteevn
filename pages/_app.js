@@ -9,7 +9,6 @@ import axios from "axios";
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
-    // <SSRProvider>
     <DataProvider>
       <SWRConfig
         value={{
@@ -29,7 +28,6 @@ function MyApp({ Component, pageProps }) {
         {/* </Layout> */}
       </SWRConfig>
     </DataProvider>
-    // </SSRProvider>
   );
 }
 

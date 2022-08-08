@@ -7,7 +7,6 @@ function getToken (){
         return JSON.parse(token ? token : '')
     }
 }
-console.log('%caxios-auth.js line:9 getToken()', 'color: #007acc;', getToken() )
 const axiosAuth = axios.create({
     baseURL: process.env.BASE_URL,
     headers: {

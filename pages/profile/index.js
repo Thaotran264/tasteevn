@@ -14,7 +14,9 @@ import { isMobile } from "react-device-detect";
 
 const Cart = () => {
   const [count, setCount] = useState(1);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    fullName: ''
+  });
   const [fieldEdit, setFieldEdit] = useState({
     editFullName: false,
   });
@@ -59,7 +61,7 @@ const Cart = () => {
             </div>
             <div className="profile-usertitle text-center">
               <div style={{ display: 'flex', gap: 10, justifyContent: "center" }}>
-                {!fieldEdit.editFullName && <h2 className="profile-usertitle-name">  {user.fullName || ''} </h2>}
+                {!fieldEdit.editFullName && <h2 className="profile-usertitle-name">  {user?.fullName || ''} </h2>}
                 {!fieldEdit.editFullName ?
                   <a onClick={() => setFieldEdit({ ...fieldEdit, editFullName: !fieldEdit.editFullName })}> <AiFillEdit /></a>
                   : <a onClick={() => setFieldEdit({ ...fieldEdit, editFullName: !fieldEdit.editFullName })}> <AiFillSave /></a>}
