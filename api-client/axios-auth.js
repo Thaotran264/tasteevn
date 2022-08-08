@@ -3,10 +3,11 @@ const ISSERVER = typeof window === "undefined";
 
 function getToken (){
     if(!ISSERVER) {
-        return localStorage.getItem('token') ? localStorage.getItem('token') : false
+        let token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
+        return JSON.parse(token ? token : '')
     }
 }
-
+console.log('%caxios-auth.js line:9 getToken()', 'color: #007acc;', getToken() )
 const axiosAuth = axios.create({
     baseURL: process.env.BASE_URL,
     headers: {
@@ -16,7 +17,7 @@ const axiosAuth = axios.create({
 }); 
 axiosAuth.interceptors.response.use(
     function (response) {
-        return response.data;
+        return response;
     },
     function (error) {
         return Promise.reject(error);
