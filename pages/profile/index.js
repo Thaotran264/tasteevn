@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsTrash } from "react-icons/bs";
 import Layout from "../../components/Layout";
 import LayoutProfile from "../../components/LayoutProfile";
@@ -19,6 +19,8 @@ import { FcAddImage } from "react-icons/fc"
 
 import Form from 'react-bootstrap/Form';
 import TabInfor from "./components/TabInfor";
+import { DataContext } from "../../store/globalState";
+import { useRouter } from "next/router";
 
 const Cart = () => {
   const [count, setCount] = useState(1);
@@ -27,6 +29,8 @@ const Cart = () => {
   const [open, setOpen] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   const [isShowContent, setIsShowContent] = useState({});
+  const { state, dispatch } = useContext(DataContext);
+  const router = useRouter();
 
   useEffect(() => {
     setMobile(isMobile);
@@ -36,12 +40,14 @@ const Cart = () => {
     const getDetailUser = async () => {
       try {
         const res = await userApi.getDetail();
-        console.log("%cindex.js line:21 res", "color: #007acc;", res.status);
         if (res.status && res.data.successful) {
           setUser(res.data.data);
         }
       } catch (error) {
-        console.log(error);
+        dispatch({ type: "NOTIFY", payload: { error: 'Đã xảy ra lỗi vui lòng đăng nhập lại' } });
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
+        window.location.replace('/');
       }
     };
     getDetailUser();
