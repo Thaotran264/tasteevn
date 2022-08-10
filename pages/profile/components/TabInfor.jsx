@@ -7,11 +7,16 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { DataContext } from "../../../store/globalState";
 
 
-const TabInfor = ({ user }) => {
+const TabInfor = ({ userDetail }) => {
   const [show, setShow] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    setUser(userDetail)
+  }, [userDetail])
+  console.log(user)
   const handleChangePass = () => {
     console.log('%cTabInfor.jsx line:15 Lưu', 'color: #007acc;', );
     dispatch({ type: "NOTIFY", payload: { success: 'Bạn đã đổi mật khẩu thành công' } });
@@ -88,19 +93,19 @@ const TabInfor = ({ user }) => {
                   Số điện thoại
                   <br></br>
                   <span className="w-100" style={{ opacity: 0.8 }}>
-                    {!fieldEdit['editPhone'] ? (user['phoneNumber']) :
+                    {/* {!fieldEdit['editPhone'] && user['phoneNumber'] ? (user['phoneNumber']) :
                       <input
                         type="text"
                         className="border-dark border-bottom w-100"
                         placeholder="Tên"
-                        value={user['phoneNumber']}
+                        value={user && user.phoneNumber ? user.phoneNumber :  ''}
                         style={{
                           width: "80%",
                           border: "none",
                           outline: "none",
                           paddingBottom: "5px",
                         }} />
-                    }
+                    } */}
                   </span>
                 </span>
                 <button onClick={() => setFieldEdit({ ...fieldEdit, editPhone: !fieldEdit[''] })} className="btn btn-outline-primary rounded px-3 ms-auto" style={{ fontSize: 13 }} >
@@ -116,7 +121,7 @@ const TabInfor = ({ user }) => {
                 }} >
                   Địa chỉ email
                   <br />
-                  {!fieldEdit['editEmail'] ?
+                  {/* {!fieldEdit['editEmail'] ?
                     <span className="w-100" style={{ opacity: 0.8 }}> {user['email']} </span> :
                     <input
                       type="email"
@@ -128,7 +133,7 @@ const TabInfor = ({ user }) => {
                         border: "none",
                         outline: "none",
                         paddingBottom: "5px",
-                      }} />}
+                      }} />} */}
                 </span>
                 <button
                   onClick={() => setFieldEdit({ ...fieldEdit, editEmail: !fieldEdit['editEmail'] })}

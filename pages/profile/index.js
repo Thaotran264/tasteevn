@@ -248,7 +248,7 @@ const Cart = () => {
               <Col sm={9}>
                 <Tab.Content>
                   <Tab.Pane eventKey="infor">
-                    <TabInfor user={user} />
+                    <TabInfor userDetail={user} />
                   </Tab.Pane>
 
                   <Tab.Pane eventKey="wishlist">
