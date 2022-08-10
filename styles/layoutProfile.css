@@ -17,6 +17,7 @@ body {
 .profile-sidebar {
     background: #fff;
 }
+
 .profile-userpic {
     text-align: center;
     align-items: center;
@@ -98,7 +99,7 @@ body {
 .profile-usermenu ul li a:hover {
     border-left: 2px solid #5b9bd1;
     color: #5b9bd1;
-    
+
 }
 
 /* .profile-usermenu ul li.active {
@@ -111,10 +112,7 @@ body {
 }
 
 /* Profile Content */
-.profile-content {
-    padding: 20px;
-    background: #fff;
-}
+
 
 
 
@@ -247,4 +245,25 @@ ul {
     font-size: 19px;
     color: #abb6c4;
     margin-right: 5px;
+}
+
+.title-section {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+.box-infor {
+    padding: 10px 0;
+}
+
+.input-form-profile {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+.input-form-profile input {
+    border: 1px solid #d8d8d8;
+    font-size: 16px;
+    /* margin: 0 10px; */
 }

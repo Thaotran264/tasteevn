@@ -12,7 +12,7 @@
  :root {
    --primary-color: rgb(255, 140, 0);
    --text-white: #fff;
-   --text-dark: #000;
+   --text-dark: rgb(100, 100, 109);;
    --text-danger: red;
    --text-danger-hover: rgb(206, 4, 4);
    --text-blue: rgb(18 41 244);
