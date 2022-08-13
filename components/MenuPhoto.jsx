@@ -1,22 +1,12 @@
 import React, { useState } from "react";
+import parse from "html-react-parser";
 
-const MenuPhoto = ({ isDefault }) => {
-  const [show, setShow] = useState(false);
+const MenuPhoto = ({ isDefault, map }) => {
   return (
     <>
       {isDefault && (
         <div className="container d-flex gap-2">
-          <div className="d-flex align-items-center showOnDesktop">
-            <iframe
-              className=""
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
-              width="600"
-              height="738"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+          <div className="d-flex align-items-center showOnDesktop">{map.webMap}</div>
           <div className="thumb-9 py-4">
             <div className="box img1">
               <img
@@ -181,25 +171,15 @@ const MenuPhoto = ({ isDefault }) => {
       {!isDefault && (
         <div className="mb-2">
           <div className="row">
-            <div className="col-12 col-md-6 showOnDesktop" style={{ aspectRatio: "2 / 1" }}>
-              <iframe
-                className="w-100 h-100"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+            <div
+              className="col-12 col-md-6 showOnDesktop align-items-center"
+              style={{ aspectRatio: "1 / 1" }}
+            >
+              {parse(map.webMap)}
             </div>
             <div className="col-12 col-md-6 hideOnDeskTop mb-2">
-              {/* <button onClick={() => setShow(!show)}>Show</button> */}
-              <div style={{ aspectRatio: 1 / 1 }}>
-                <iframe
-                  className="w-100 h-100"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1603122219894!2d106.67697931503875!3d10.799030992306182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1658630365906!5m2!1sen!2s"
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+              <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
+                {parse(map.webMap)}
               </div>
             </div>
             <div className="col-12 col-md-6">
@@ -218,10 +198,19 @@ const MenuPhoto = ({ isDefault }) => {
                 </div>
                 <div className="box img3 position-relative">
                   <img
+                    className="w-100 h-100"
                     src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
                   />
-                  <div className="w-100 h-100 position-absolute top-0 start-0 bg-secondary bg-opacity-50 align-items-center d-flex justify-content-center">
+                  <div
+                    className="position-absolute bg-dark bg-opacity-50"
+                    style={{
+                      width: `calc(100% - 10px)`,
+                      height: "calc(100% - 10px)",
+                      top: 5,
+                      zIndex: 1,
+                    }}
+                  >
                     <h2 className="text-center text-light">+9</h2>
                   </div>
                 </div>

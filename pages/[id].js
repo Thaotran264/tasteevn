@@ -16,6 +16,8 @@ const Detail = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, isError, isLoading, mutate } = getDetail(id);
+  // const [datas, setDatas] = useState(data);
+  const { info, widgets } = (data && data) || {};
   const [menuPos, setMenuPos] = useState(false);
   const [menuDeskPos, setMenuDeskPos] = useState(false);
   let mbref = useRef();
@@ -25,12 +27,12 @@ const Detail = () => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
     const handleScroll = () => {
-      if (window.scrollY >= mbT - 60) {
+      if (window.scrollY >= mbT) {
         setMenuPos(true);
       } else {
         setMenuPos(false);
       }
-      if (window.scrollY >= mbDT - 80) {
+      if (window.scrollY >= mbDT) {
         setMenuDeskPos(true);
       } else {
         setMenuDeskPos(false);
@@ -41,6 +43,7 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
   if (isError) return <h2 className="text-center">{error}</h2>;
   if (isLoading) return <h2 className="text-center">Loading</h2>;
   const handleCartBtn = () => {
@@ -50,14 +53,14 @@ const Detail = () => {
     <div className="container">
       <Carousel banner={data?.banner} />
       <Infor setShowBooking={setShowBooking} isDefault={false} data={data} />
-      <MenuPhoto isDefault={false} />
+      <MenuPhoto isDefault={false} map={info} />
       <Slide isDefault={false} />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
       <div ref={mbref}>
-        <MobileMenu menuPos={menuPos} />
+        <MobileMenu menuPos={menuPos} menus={widgets[2]} />
       </div>
       <div ref={mbDref}>
-        <DesktopMenu menuPos={menuDeskPos} />
+        <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />
       </div>
       <button
         className="btn btn-light position-fixed hideOnDeskTop"
