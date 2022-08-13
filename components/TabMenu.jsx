@@ -12,8 +12,8 @@ const TabMenu = () => {
   const handleLogOut = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
-    dispatch({ type: "NOTIFY", payload: { success: "success" } });
-    router.push("/login");
+    dispatch({ type: "NOTIFY", payload: { success: "Đăng xuất thành công" } });
+    router.push("/");
   };
   return (
     <div className="position-fixed bottom-0 start-0 w-100 bg-danger py-2 hideonmobile mx-auto">

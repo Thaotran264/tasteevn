@@ -1,4 +1,18 @@
+import { useContext, useEffect } from "react";
+import { DataContext } from "../store/globalState";
+
 const Toast = ({ msg, handleShow, bgColor }) => {
+  const { state, dispatch } = useContext(DataContext);
+  useEffect(() => {
+    let idTime = setTimeout(() => {
+      dispatch({ type: "NOTIFY", payload: {} })
+    }, 2500)
+
+    return () => {
+      clearTimeout(idTime)
+    }
+  }, [])
+  
   return (
     <div
       className={`toast show position-fixed text-light ${bgColor}`}

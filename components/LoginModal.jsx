@@ -250,7 +250,7 @@ function LoginModal() {
         Đăng nhập
       </button>
 
-      <Modal show={show} onHide={handleClose} animation={false} centered size="small">
+      <Modal show={show} onHide={handleClose} animation={false} centered size="small" backdrop="static">
         {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <div className="mx-auto bg-white rounded w-100">
