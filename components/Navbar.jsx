@@ -88,10 +88,10 @@ const Navbar = () => {
               <button className="btn d-flex align-items-center" type="submit">
                 <BsSearch style={{ color: "#000" }} />
               </button>
-              <div
+              {/* <div
                 className="position-absolute w-100 top-100 bg-danger "
                 style={{ minHeight: 500 }}
-              ></div>
+              ></div> */}
             </form>
             <button
               className="btn btn-outline-dark align-items-center hideOnDeskTop"
@@ -134,7 +134,7 @@ const Navbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">Thông tin tài khoản</Dropdown.Item>
+                    <Dropdown.Item href={ _isMobile ? "/profile" : "/profileD"  }>Thông tin tài khoản</Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
                     <Dropdown.Item href="#">Booking</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>

@@ -1,8 +1,21 @@
+/**
+ * @author [daoNguyen]
+ * @email [daonds@vinorsoft.com ]
+ * @create date 2022-08-15 16:48:49
+ * @modify date 2022-08-16 10:48:59
+ * @desc [description]
+ */
 /***
+
+
+
+
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: https://j.mp/metronictheme
 Licensed under MIT
 ***/
+
+@import url('../pages/profile/index-profile.style.css');
 
 body {
     background: #F1F3FA;
@@ -139,7 +152,6 @@ body {
 a,
 button,
 code,
-div,
 img,
 input,
 label,
@@ -262,8 +274,13 @@ ul {
     margin-bottom: 20px;
     gap: 20px;
 }
+
 .input-form-profile input {
     border: 1px solid #d8d8d8;
     font-size: 16px;
     /* margin: 0 10px; */
+}
+
+.profile-content-mobile .input-form-profile span {
+    width: 20%;
 }
