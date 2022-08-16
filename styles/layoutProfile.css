@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-15 16:48:49
- * @modify date 2022-08-16 10:48:59
+ * @modify date 2022-08-16 15:22:17
  * @desc [description]
  */
 /***
@@ -149,27 +149,6 @@ body {
 
 
 
-a,
-button,
-code,
-img,
-input,
-label,
-li,
-p,
-pre,
-select,
-span,
-svg,
-table,
-td,
-textarea,
-th,
-ul {
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
-}
 
 .dashboard-stat,
 .portlet {
@@ -264,12 +243,13 @@ ul {
     font-weight: 400;
     color: var(--text-dark);
 }
+
 .box-infor {
     padding: 10px 0;
 }
 
 .input-form-profile {
-    display: flex; 
+    display: flex;
     align-items: center;
     margin-bottom: 20px;
     gap: 20px;

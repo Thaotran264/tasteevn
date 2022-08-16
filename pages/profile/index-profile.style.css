@@ -6,10 +6,12 @@
     font-weight: 300;
     font-size: 14px;
 }
+.modal-bottom-to-top {
+    bottom: 0;
+    position: fixed;
+    z-index: 1040;
+}
 .modal-detail-custom {
-  position: fixed;
-  z-index: 1040;
-  bottom: 0;
   border: 1px solid #e5e5e5;
   background-color: white;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -31,3 +33,8 @@
     overflow: scroll;
     height: 33vh;
  }
+
+ .profile-mobile .card:hover {
+    box-shadow: none;
+    transform: none;
+}

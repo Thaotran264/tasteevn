@@ -15,7 +15,7 @@ function ModalDetail() {
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-detail-custom"
+                dialogClassName="modal-detail-custom modal-bottom-to-top"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <div className='text-center p-2 border-bottom'>
@@ -185,7 +185,7 @@ function ModalDetail() {
                             <span className='fw-lighter'>30.000đ</span>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <h3 className="float-end fs-5 m-3"> Thành tiền: 201.000đ </h3>
