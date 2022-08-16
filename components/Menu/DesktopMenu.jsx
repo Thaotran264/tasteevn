@@ -1,8 +1,8 @@
 import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const DesktopMenu = ({ menuPos }) => {
-  const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
+const DesktopMenu = ({ menuPos, menus }) => {
+  const menuList = JSON.parse(menus.data).Menus;
   const handleClick = () => {
     console.log("object");
   };
@@ -16,13 +16,13 @@ const DesktopMenu = ({ menuPos }) => {
           <div className="row">
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-light bg-opacity-10">
-                {menu.map((item, index) => (
+                {menuList.map((item) => (
                   <li
-                    key={index}
-                    className="border border-danger w-100 py-2 mb-1 text-center rounded"
+                    key={item.Id}
+                    className="border-bottom border-dark w-100 py-2 mb-1 text-center"
                     style={{ listStyle: "none" }}
                   >
-                    <a onClick={handleClick}>Menu 1</a>
+                    <a onClick={handleClick}>{item.Name}</a>
                   </li>
                 ))}
               </ul>
@@ -33,13 +33,15 @@ const DesktopMenu = ({ menuPos }) => {
       <div className="row">
         <div className={`col-md-4 col-lg-4 ${menuPos && "d-none"}`}>
           <ul className="ps-0 bg-light bg-opacity-10">
-            {menu.map((item, index) => (
+            {menuList.map((item) => (
               <li
-                key={index}
-                className="border border-danger w-100 py-2 mb-1 text-center rounded"
+                key={item.Id}
+                className="border-bottom border-dark w-100 py-2 mb-1 text-center"
                 style={{ listStyle: "none" }}
               >
-                <a onClick={handleClick}>{item}</a>
+                <a onClick={handleClick} style={{ cursor: "pointer" }}>
+                  {item.Name}
+                </a>
               </li>
             ))}
           </ul>
@@ -48,213 +50,34 @@ const DesktopMenu = ({ menuPos }) => {
           className={`col-md-8 col-lg-8 ${menuPos && "offset-4"}`}
           style={menuPos ? { zIndex: 2 } : {}}
         >
-          <h4 id="menuRC01">Menu</h4>
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
+          {menuList.map((it) => (
+            <div key={it.Id}>
+              <h4 id="menuRC01" className="border-bottom border-dark">
+                {it.Name}
+              </h4>
+              {it.Items.map((its) => (
+                <div key={its.Id}>
+                  <div className="row">
+                    <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
+                      <img
+                        className="w-100 h-100 d-block "
+                        src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
+                        alt=""
+                      />
+                    </div>
+                    <div className="col-10 d-flex align-items-start">
+                      <div className="d-flex w-100 align-items-center">
+                        <h4 className="m-0">{its.Name}</h4>
+                        <p className="text-danger mx-auto">{its.Price}</p>
+                        <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              ))}
             </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h4 id="menuRC01">Menu</h4>
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h4 id="menuRC01">Menu</h4>
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-              <img
-                className="w-100 h-100 d-block "
-                src="https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&h=566.525&fit=crop&w=633.175&dpr=2"
-                alt=""
-              />
-            </div>
-            <div className="col-10 d-flex align-items-start">
-              <div className="d-flex w-100 align-items-center">
-                <h3 className="m-0">Name of food</h3>
-                <p className="text-danger mx-auto">$15</p>
-                <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
-              </div>
-            </div>
-          </div>
-          <hr />
+          ))}
         </div>
       </div>
     </div>

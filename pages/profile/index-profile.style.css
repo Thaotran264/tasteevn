@@ -1,0 +1,33 @@
+@import url('./edit/edit-profile.style.css');
+
+
+.profile-mobile .date-order {
+    color: var(--bs-gray-500);
+    font-weight: 300;
+    font-size: 14px;
+}
+.modal-detail-custom {
+  position: fixed;
+  z-index: 1040;
+  bottom: 0;
+  border: 1px solid #e5e5e5;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+.modal-detail-custom .modal-content {
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+ .name-product-detail {
+    font-size: 0.9rem;
+    font-weight: 500;
+ }
+
+ .product-modal {
+    overflow: scroll;
+    height: 33vh;
+ }

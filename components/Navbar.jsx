@@ -71,12 +71,15 @@ const Navbar = () => {
             </Dropdown>
           </div>
           <div className="col-2 col-sm-4 col-md-4 col-lg-6">
-            <form className=" d-flex border border-dark rounded hideOnMobile" role="search">
+            <form
+              className=" d-flex border border-dark rounded hideOnMobile position-relative"
+              role="search"
+            >
               <input
                 className="form-control text-dark"
                 style={{
                   backgroundColor: "transparent",
-                  ouline: "none",
+                  outline: "none",
                   border: "none",
                 }}
                 type="search"
@@ -85,6 +88,10 @@ const Navbar = () => {
               <button className="btn d-flex align-items-center" type="submit">
                 <BsSearch style={{ color: "#000" }} />
               </button>
+              {/* <div
+                className="position-absolute w-100 top-100 bg-danger "
+                style={{ minHeight: 500 }}
+              ></div> */}
             </form>
             <button
               className="btn btn-outline-dark align-items-center hideOnDeskTop"
@@ -100,10 +107,14 @@ const Navbar = () => {
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
                 </a>
               </Link>
-              
-              {username ? 
+
+              {username ? (
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-menu-align-responsive-1" className="rounded">
+                  <Dropdown.Toggle
+                    variant="success"
+                    id="dropdown-menu-align-responsive-1"
+                    className="rounded"
+                  >
                     <span
                       className="text-light bg-secondary rounded"
                       style={{
@@ -123,14 +134,15 @@ const Navbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">Thông tin tài khoản</Dropdown.Item>
+                    <Dropdown.Item href={ _isMobile ? "/profile" : "/profileD"  }>Thông tin tài khoản</Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
                     <Dropdown.Item href="#">Booking</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-              : <LoginModal />
-              }
+              ) : (
+                <LoginModal />
+              )}
             </div>
           </div>
         </div>

@@ -5,10 +5,10 @@ import { FcAddImage } from "react-icons/fc"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { DataContext } from "../../../store/globalState";
-import { userApi } from "../../../api-client/user";
+import { DataContext } from "../../../../store/globalState";
+import { userApi } from "../../../../api-client/user";
 import Moment from 'moment';
-import { accountAPI } from "../../../api-client/account";
+import { accountAPI } from "../../../../api-client/account";
 
 const TabInfor = ({ userDetail }) => {
   const [show, setShow] = useState(false);
@@ -133,7 +133,7 @@ const TabInfor = ({ userDetail }) => {
                   </div>
                   <div className="input-form-profile">
                     Ngày sinh
-                    <div class="d-flex gap-3">
+                    <div className="d-flex gap-3">
                       <select value={birthday.d} name="day" id="dayBirthday" className="rounded p-1" onChange={changeDay}>
                         <option value="0">Ngày</option>
                         <option value="01">01</option>
