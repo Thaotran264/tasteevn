@@ -9,12 +9,12 @@ function OrderDetail() {
             <Navbar key={false} expand={false} className="m-0 p-0 nav-custom-drawer">
                 <Container fluid>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} >
-                        <button
+                        <a
                             className="btn btn-outline-primary rounded mx-1"
                             style={{ fontSize: 13 }}
                         >
                             Xem chi tiết
-                        </button>
+                        </a>
                     </Navbar.Toggle>
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar-expand-false`}
@@ -25,7 +25,7 @@ function OrderDetail() {
                             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-false`}>
                                 <div className='d-flex gap-2' >
                                     <p>Đơn hàng:</p>
-                                    <p class="color-primary"> #123123456</p>
+                                    <p className="color-primary"> #123123456</p>
                                 </div>
                             </Offcanvas.Title>
                         </Offcanvas.Header>

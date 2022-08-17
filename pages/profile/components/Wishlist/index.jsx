@@ -5,7 +5,7 @@ const HistoryOrder = ({ }) => {
   return (
     <>
       <div className="profile-content">
-        <h6>Sản phẩm yêu thích</h6>
+        <h6>Quán yêu thích</h6>
         <ul
           className="d-flex ps-0 justify-content-around"
           style={{ listStyle: "none", backgroundColor: "#fff" }}

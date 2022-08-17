@@ -114,7 +114,7 @@ const ProfileMobile = () => {
                       <BsHeartFill />
                   </div>
 
-                  <span className="w-100"> Sản phẩm yêu thích </span>
+                  <span className="w-100"> Quán yêu thích </span>
 
                   <div>
                     <BsChevronRight />

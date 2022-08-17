@@ -21,15 +21,17 @@ import TabInfor from "./components/Infor";
 import HistoryOrder from "./components/HistoryOrder"
 import { DataContext } from "../../store/globalState";
 import { useRouter } from "next/router";
+import WishlistShop from "./components/wishlistShop";
 
 const Cart = () => {
   const [count, setCount] = useState(1);
   const [user, setUser] = useState({});
   const [open, setOpen] = useState(false);
-  const [_isMobile, setMobile] = useState(false);
   const [isShowContent, setIsShowContent] = useState({});
   const { state, dispatch } = useContext(DataContext);
   const router = useRouter();
+  
+  const [_isMobile, setMobile] = useState(false);
 
   useEffect(() => {
     setMobile(isMobile);
@@ -95,7 +97,7 @@ const Cart = () => {
                         <Nav.Link eventKey="infor" onClick={() => { router.push('/profile-desktop?slug=chinh-sua-thong-tin') }}>Thông tin chung</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="wishlist" onClick={() => { router.push('/profile-desktop?slug=danh-sach-yeu-thich')} }>Danh sách yêu thích</Nav.Link>
+                        <Nav.Link eventKey="wishlist" onClick={() => { router.push('/profile-desktop?slug=danh-sach-yeu-thich')} }>Quán yêu thích</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="historyOrder"  onClick={() => {router.push('/profile-desktop?slug=lich-su-don-hang')}  }>Lịch sử đơn hàng</Nav.Link>
@@ -151,7 +153,7 @@ const Cart = () => {
                   </Tab.Pane>
 
                   <Tab.Pane eventKey="wishlist" >
-                    Danh sách yêu thích 
+                    <WishlistShop />
                   </Tab.Pane>
                   
                   <Tab.Pane eventKey="historyOrder">
