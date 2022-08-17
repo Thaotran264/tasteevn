@@ -25,6 +25,7 @@ function ModalDetail() {
                     </a>
                 </div>
                 <Modal.Body>
+                    
                 <div className="d-flex gap-1 justify-content-between">
                     <div className="w-75">
                         <p className="fw-lighter">13/08/2022 11:34</p>

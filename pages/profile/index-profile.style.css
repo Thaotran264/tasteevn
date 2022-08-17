@@ -38,3 +38,9 @@
     box-shadow: none;
     transform: none;
 }
+
+.nav-custom-drawer .navbar-toggler {
+    background-color: transparent;
+    border: none;
+    padding: 0
+}

@@ -134,7 +134,7 @@ const Navbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href={ _isMobile ? "/profile" : "/profileD"  }>Thông tin tài khoản</Dropdown.Item>
+                    <Dropdown.Item href={ _isMobile ? "/profile" : "/profile-desktop"  }>Thông tin tài khoản</Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
                     <Dropdown.Item href="#">Booking</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>
