@@ -25,7 +25,6 @@ import { useRouter } from "next/router";
 const Cart = () => {
   const [count, setCount] = useState(1);
   const [user, setUser] = useState({});
-
   const [open, setOpen] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   const [isShowContent, setIsShowContent] = useState({});
@@ -34,8 +33,8 @@ const Cart = () => {
 
   useEffect(() => {
     setMobile(isMobile);
+      isMobile ? router.push("/profile")  : router.push("/profile-desktop?slug=chinh-sua-thong-tin")
   }, [_isMobile]);
-
   useEffect(() => {
     const getDetailUser = async () => {
       try {
@@ -93,16 +92,16 @@ const Cart = () => {
                 <div className="profile-usermenu">
                     <Nav variant="pills" className="flex-column">
                       <Nav.Item>
-                        <Nav.Link eventKey="infor">Thông tin chung</Nav.Link>
+                        <Nav.Link eventKey="infor" onClick={() => { router.push('/profile-desktop?slug=chinh-sua-thong-tin') }}>Thông tin chung</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="wishlist">Danh sách yêu thích</Nav.Link>
+                        <Nav.Link eventKey="wishlist" onClick={() => { router.push('/profile-desktop?slug=danh-sach-yeu-thich')} }>Danh sách yêu thích</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="historyOrder">Lịch sử đơn hàng</Nav.Link>
+                        <Nav.Link eventKey="historyOrder"  onClick={() => {router.push('/profile-desktop?slug=lich-su-don-hang')}  }>Lịch sử đơn hàng</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="historyBooking">Lịch sử đặt bàn</Nav.Link>
+                        <Nav.Link eventKey="historyBooking" onClick={() => { router.push('/profile-desktop?slug=lich-su-dat-ban') } }>Lịch sử đặt bàn</Nav.Link>
                       </Nav.Item>
                     </Nav>
                 </div>
@@ -147,18 +146,18 @@ const Cart = () => {
 
               <Col sm={9}>
                 <Tab.Content>
-                  <Tab.Pane eventKey="infor">
-                    <TabInfor userDetail={user} />
+                  <Tab.Pane eventKey="infor" >
+                    <TabInfor userDetail={  user } />
                   </Tab.Pane>
 
-                  <Tab.Pane eventKey="wishlist">
-                    Danh sách yêu thích
+                  <Tab.Pane eventKey="wishlist" >
+                    Danh sách yêu thích 
                   </Tab.Pane>
                   
                   <Tab.Pane eventKey="historyOrder">
                     <HistoryOrder />
                   </Tab.Pane>
-                  <Tab.Pane eventKey="historyBooking">
+                  <Tab.Pane eventKey="historyBooking" >
                     Lịch sử Đặt bàn
                   </Tab.Pane>
                 </Tab.Content>

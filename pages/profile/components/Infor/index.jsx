@@ -11,7 +11,6 @@ import Moment from 'moment';
 import { accountAPI } from "../../../../api-client/account";
 
 const Infor = ({ userDetail }) => {
-  console.log('djídjịdíid')
   const [show, setShow] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const handleClose = () => setShow(false);

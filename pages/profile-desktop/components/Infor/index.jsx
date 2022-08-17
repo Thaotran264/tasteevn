@@ -8,9 +8,17 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { DataContext } from "../../../../store/globalState";
 import { userApi } from "../../../../api-client/user";
 import Moment from 'moment';
+import { isMobile } from "react-device-detect";
+import { useRouter } from "next/router";
 import { accountAPI } from "../../../../api-client/account";
 
 const TabInfor = ({ userDetail }) => {
+  const [_isMobile, setMobile] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    setMobile(isMobile);
+  }, [_isMobile]);
+
   const [show, setShow] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const handleClose = () => setShow(false);
@@ -116,8 +124,8 @@ const TabInfor = ({ userDetail }) => {
                     {user && user['avatar'] ?
                       <img
                         className="w-100 h-100"
-                        src={user && user['avatar']}
-                        alt={user && user['fullName']}
+                        src={user && user['avatar'] || ''}
+                        alt={user && user['fullName'] || ''}
                         style={{ border: "1px solid #fff", borderRadius: "50%" }}
                       />
                       :
@@ -129,7 +137,7 @@ const TabInfor = ({ userDetail }) => {
                 <div className="col-9">
                   <div className="input-form-profile">
                     Họ và tên
-                    <input required className="inputFomCustom w-75 rounded" onChange={(e) => setUser({ ...user, fullName: e.target.value })} value={user['fullName']} type="text" placeholder="Họ và tên" />
+                    <input required className="inputFomCustom w-75 rounded" onChange={(e) => setUser({ ...user, fullName: e.target.value })} value={user['fullName'] || ''} type="text" placeholder="Họ và tên" />
                   </div>
                   <div className="input-form-profile">
                     Ngày sinh
@@ -324,7 +332,7 @@ const TabInfor = ({ userDetail }) => {
                   </div>
                   <div className="input-form-profile">
                     Địa chỉ
-                    <input required className="inputFomCustom w-75 rounded" onChange={(e) => setUser({ ...user, address: e.target.value })} value={user['address']} type="text" placeholder="Địa chỉ" />
+                    <input required className="inputFomCustom w-75 rounded" onChange={(e) => setUser({ ...user, address: e.target.value })} value={user['address'] || ''} type="text" placeholder="Địa chỉ" />
                   </div>
                 </div>
 
@@ -378,7 +386,7 @@ const TabInfor = ({ userDetail }) => {
                       type="email"
                       className="border-dark border-bottom w-100"
                       placeholder="Tên"
-                      value={user['email']}
+                      value={user['email'] || ''}
                       required
                       onChange={(e) => setUser({ ...user, email: e.target.value })}
                       style={{

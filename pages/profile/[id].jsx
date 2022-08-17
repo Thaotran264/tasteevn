@@ -1,13 +1,19 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Layout from '../../components/Layout';
 import  HistoryOrder  from './components/HistoryOrder';
 import Wishlist from './components/Wishlist'
+import { isMobile } from "react-device-detect";
 
 const ListProfilePage = () => {
     const router = useRouter();
     const { id } = router.query;
-    console.log('%c[id].jsx line:6 id', 'color: #007acc;', id);
+    const [_isMobile, setMobile] = useState(false);
+    useEffect(() => {
+      setMobile(isMobile);
+      !isMobile ? router.push("/profile-desktop?slug=chinh-sua-thong-tin") : router.push("/profile") 
+    }, [_isMobile]);
+    
   return (
     <div>
         {/* Profile:/ { id } */}

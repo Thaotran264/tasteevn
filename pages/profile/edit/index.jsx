@@ -28,6 +28,7 @@ const editProfile = () => {
 
     useEffect(() => {
         setMobile(isMobile);
+        isMobile ? '' : router.push("/profile-desktop?slug=chinh-sua-thong-tin") 
     }, [_isMobile]);
 
     useEffect(() => {
