@@ -73,12 +73,7 @@ const HistoryOrder = ({ }) => {
                 Huỷ đơn
               </button>
 
-              {/* <button
-                className="btn btn-outline-primary rounded mx-1"
-                style={{ fontSize: 13 }}
-              > */}
                 <OrderDetail />
-              {/* </button> */}
             </div>
           </div>
           <hr />
@@ -102,12 +97,7 @@ const HistoryOrder = ({ }) => {
               >
                 Huỷ đơn
               </button>
-              <button
-                className="btn btn-outline-primary rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Xem chi tiết
-              </button>
+              <OrderDetail />
             </div>
           </div>
           <hr />
@@ -131,12 +121,7 @@ const HistoryOrder = ({ }) => {
               >
                 Huỷ đơn
               </button>
-              <button
-                className="btn btn-outline-primary rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Xem chi tiết
-              </button>
+              <OrderDetail />
             </div>
           </div>
           <hr />
@@ -160,12 +145,7 @@ const HistoryOrder = ({ }) => {
               >
                 Huỷ đơn
               </button>
-              <button
-                className="btn btn-outline-primary rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Xem chi tiết
-              </button>
+              <OrderDetail />
             </div>
           </div>
           <hr />
@@ -203,7 +183,7 @@ const HistoryOrder = ({ }) => {
             className="btn btn-outline-dark rounded mb-3"
             style={{ fontSize: 14, opacity: 0.8 }}
           >
-            Xem thêm x đơn hàng
+            Xem thêm 5 đơn hàng
           </button>
 
 
