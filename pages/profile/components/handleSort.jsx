@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import { BsFillFunnelFill } from "react-icons/bs";
 import Collapse from 'react-bootstrap/Collapse';
 import { DateRange } from 'react-date-range';
-import { DefinedRange } from 'react-date-range';
-import { addDays } from 'date-fns';
-import vi from 'moment/locale/vi';
 import * as rdrLocales from 'react-date-range/dist/locale';
 
 function HandleSort({ isOpen, setOpen }) {
