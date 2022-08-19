@@ -10,7 +10,7 @@ const DesktopMenu = ({ menuPos, menus }) => {
     <div className="showOnDesktop">
       <div
         className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
-        style={menuPos ? { marginTop: 88, zIndex: 1 } : {}}
+        style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
       >
         <div className="container">
           <div className="row">

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const MobileMenu = ({ menuPos, menus }) => {
-  const menuList = JSON.parse(menus.data).Menus;
+  const menuList = JSON.parse(menus?.data).Menus || {};
   const [active, setActive] = useState(false);
 
   return (
     <div className="hideOnDeskTop">
       <ul
         className={`d-flex ps-0 overflow-scroll pb-2 ${menuPos && "position-fixed bg-light "}`}
-        style={menuPos ? { top: 66, width: "calc(100% - 24px)", zIndex: 99 } : {}}
+        style={menuPos ? { top: 0, width: "calc(100% - 24px)", zIndex: 99 } : {}}
       >
         {menuList.map((item, index) => (
           <li key={item.Id} className="py-2" style={{ listStyle: "none", minWidth: "35%" }}>

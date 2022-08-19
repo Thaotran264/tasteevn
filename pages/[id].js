@@ -31,15 +31,14 @@ export async function getStaticProps({ params }) {
 }
 const Detail = ({ data }) => {
   const [showBooking, setShowBooking] = useState(false);
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = useRouter();
+  // const { id } = router.query;
   // const { data, isError, isLoading, mutate } = getDetail(id);
-  const { info, widgets } = (data && data) || {};
+  const { info, widgets, banner } = (data && data) || {};
   const [menuPos, setMenuPos] = useState(false);
   const [menuDeskPos, setMenuDeskPos] = useState(false);
   let mbref = useRef();
   let mbDref = useRef();
-
   useEffect(() => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
@@ -68,21 +67,17 @@ const Detail = ({ data }) => {
   };
   return (
     <div className="container">
-      <Carousel banner={data?.banner} />
-      <Infor setShowBooking={setShowBooking} isDefault={false} data={data} />
+      <Carousel banner={banner} />
+      <Infor setShowBooking={setShowBooking} isDefault={false} data={info} />
       <MenuPhoto isDefault={false} map={info} />
       <Slide isDefault={false} />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
-      <div ref={mbref}>
-        <MobileMenu menuPos={menuPos} menus={widgets[2]} />
-      </div>
-      <div ref={mbDref}>
-        <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />
-      </div>
+      {/* <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div> */}
+      {/* <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div> */}
       <button
         className="btn btn-light position-fixed hideOnDeskTop"
         onClick={handleCartBtn}
-        style={{ bottom: "100px", right: "15px" }}
+        style={{ bottom: "50px", right: "15px" }}
       >
         <BsCartCheck style={{ fontSize: 24 }} />
       </button>
