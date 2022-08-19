@@ -1,18 +1,22 @@
 import React from "react";
-
-const Carousel = ({ banner }) => {
+import { Carousel } from "react-bootstrap";
+const CarouselComponent = ({ data }) => {
+  console.log(data);
   return (
-    <div className="mb-2" id="hero">
-      <div className="rounded" style={{ aspectRatio: "2/1" }}>
-        <img
-          src={banner && banner}
-          alt=""
-          className="rounded w-100 h-100"
-          style={{ objectFit: "cover", display: "block" }}
-        />
-      </div>
-    </div>
+    <Carousel className="mb-2 rounded">
+      {data &&
+        data.map((item) => (
+          <Carousel.Item key={item.id}>
+            <img
+              className="d-block w-25"
+              src={item?.image}
+              style={{ objectFit: "contain" }}
+              alt="First slide"
+            />
+          </Carousel.Item>
+        ))}
+    </Carousel>
   );
 };
 
-export default Carousel;
+export default CarouselComponent;

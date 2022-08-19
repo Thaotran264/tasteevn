@@ -2,13 +2,14 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { BsCartCheck } from "react-icons/bs";
+import Banner from "../components/Banner";
 import Carousel from "../components/Carousel";
 import Infor from "../components/Info/Infor";
 import DesktopMenu from "../components/Menu/DesktopMenu";
 import MobileMenu from "../components/Menu/MobileMenu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
-import Slide from "../components/Slider";
+import Slide from "../components/Slider/Slider";
 import getDetail from "../hooks/useQuery";
 export async function getStaticPaths() {
   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -67,7 +68,7 @@ const Detail = ({ data }) => {
   };
   return (
     <div className="container">
-      <Carousel banner={banner} />
+      <Banner banner={banner} />
       <Infor setShowBooking={setShowBooking} isDefault={false} data={info} />
       <MenuPhoto isDefault={false} map={info} />
       <Slide isDefault={false} />

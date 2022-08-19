@@ -37,17 +37,22 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white position-fixed top-0 start-0 w-100" style={{ zIndex: 99 }} id="nav">
+    <header
+      className="bg-white position-fixed top-0 start-0 w-100 border border-bottom"
+      style={{ zIndex: 99 }}
+      id="nav"
+    >
       <nav className="container">
         <div className="row align-items-center">
+          {/* Logo */}
           <div className="col-2 col-sm-2 col-md-2 col-lg-2">
             <div>
-              <div className="showOnDesktop p-1">
+              <div className="d-none showOnDesktop p-1">
                 <Link href="/">
                   <img src="/image/logo.jpg" className=" w-75 h-75" style={{ cursor: "pointer" }} />
                 </Link>
               </div>
-              <div className="hideOnDeskTop" style={{ aspectRatio: "1/1", padding: 5 }}>
+              <div className="hideOnDesktop" style={{ aspectRatio: "1/1", padding: 5 }}>
                 <Link href="/">
                   <img
                     src="/image/mobileLogo.jpg"
@@ -58,6 +63,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          {/* Dropdown */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -70,9 +76,10 @@ const Navbar = () => {
               </Dropdown.Menu>
             </Dropdown>
           </div>
+          {/* Search Form */}
           <div className="col-2 col-sm-4 col-md-4 col-lg-6">
             <form
-              className=" d-flex border border-dark rounded hideOnMobile position-relative"
+              className=" d-none border border-dark showOnDesktop rounded position-relative"
               role="search"
             >
               <input
@@ -94,12 +101,14 @@ const Navbar = () => {
               ></div> */}
             </form>
             <button
-              className="btn btn-outline-dark align-items-center hideOnDeskTop"
+              className="btn btn-outline-dark align-items-center hideOnDesktop"
               onClick={handleSearch}
             >
               <BsSearch style={{ color: "#000" }} />
             </button>
           </div>
+
+          {/* CTA */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user">
             <div className="d-flex justify-content-between align-items-center">
               <Link href="/cart">
@@ -134,7 +143,9 @@ const Navbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href={ _isMobile ? "/profile" : "/profile-desktop"  }>Thông tin tài khoản</Dropdown.Item>
+                    <Dropdown.Item href={_isMobile ? "/profile" : "/profile-desktop"}>
+                      Thông tin tài khoản
+                    </Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
                     <Dropdown.Item href="#">Booking</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogOut}>Đăng xuất</Dropdown.Item>

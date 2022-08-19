@@ -1,14 +1,21 @@
 @media (min-width: 576px) {
     .card-item {
-        flex: 1 1 49%;
+        /* flex: 1 1 100%; */
+        /* width: 100%; */
     }
 }
 
-
+@media (min-width: 768px) {
+    .card-item {
+        /* flex: 1 1 49%; */
+        width: 49%;
+    }
+}
 
 @media (min-width: 992px) {
     .card-item {
-        flex: 1 1 30%;
+        width: 20%;
+        /* flex: 1 1 20%; */
     }
 }
 
@@ -22,7 +29,7 @@
     }
 }
 
-@media (max-width: 959px) {
+@media (max-width: 991px) {
     .hideonmobile {
         display: block;
     }
@@ -33,22 +40,17 @@
 }
 
 @media (min-width: 992px) {
+    .hideOnDesktop {
+        display: none !important;
+    }
+
     .showOnDesktop {
         display: flex !important;
     }
-
-    .hideOnDeskTop {
-        display: none !important;
-    }
 }
 
-@media (min-width: 960px) {
-    .hideonmobile {
-        display: none;
-    }
-}
 
-@media (min-width: 960px) {
+@media (min-width: 992px) {
     .menuRecipe.active {
         margin: 0 72px;
     }
@@ -63,23 +65,5 @@
 @media (min-width: 1320px) {
     .menuRecipe.active {
         margin: 0 172.5px;
-    }
-}
-
-@media (max-width: 959px) {
-    .hideOnMB {
-        display: none !important;
-    }
-}
-
-@media (min-width: 960px) {
-    .hideOnMB {
-        display: flex !important;
-    }
-}
-
-@media (max-width: 767px) {
-    .hideOnMobile {
-        display: none !important;
     }
 }
