@@ -2,6 +2,7 @@
 
  @import url('../node_modules/react-date-range/dist/styles.css');
  @import url('../node_modules/react-date-range/dist/theme/default.css');
+
  * {
    padding: 0;
    margin: 0;
@@ -14,7 +15,8 @@
  :root {
    --primary-color: rgb(255, 140, 0);
    --text-white: #fff;
-   --text-dark: rgb(100, 100, 109);;
+   --text-dark: rgb(100, 100, 109);
+   ;
    --text-danger: red;
    --text-danger-hover: rgb(206, 4, 4);
    --text-blue: rgb(18 41 244);
@@ -73,10 +75,11 @@
  .color-primary {
    color: var(--primary-color)
  }
+
  .color-success {
    color: var(--text-success)
  }
- 
+
  .color-blue {
    color: var(--text-blue)
  }
@@ -100,6 +103,25 @@
 
  .active {
    border-bottom: 1px solid #000;
+ }
+
+ .slick-list {
+   margin: 0 -5px;
+ }
+
+ .slick-slide>div>div {
+   padding: 0 5px;
+ }
+
+ .carouselconfig {
+   height: 25vh;
+   aspect-ratio: "16/9";
+ }
+
+ @media (min-width: 992px) {
+   .carouselconfig {
+     height: 50vh;
+   }
  }
 
  @import url('./card');

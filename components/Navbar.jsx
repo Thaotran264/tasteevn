@@ -43,7 +43,7 @@ const Navbar = () => {
       id="nav"
     >
       <nav className="container">
-        <div className="row align-items-center">
+        <div className="row align-items-center justify-content-between">
           {/* Logo */}
           <div className="col-2 col-sm-2 col-md-2 col-lg-2">
             <div>
@@ -66,7 +66,10 @@ const Navbar = () => {
           {/* Dropdown */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2">
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              <Dropdown.Toggle
+                className="border-0 rounded-0 border-warning border-bottom"
+                id="dropdown-basic"
+              >
                 TP HCM
               </Dropdown.Toggle>
 
@@ -100,16 +103,12 @@ const Navbar = () => {
                 style={{ minHeight: 500 }}
               ></div> */}
             </form>
-            <button
-              className="btn btn-outline-dark align-items-center hideOnDesktop"
-              onClick={handleSearch}
-            >
-              <BsSearch style={{ color: "#000" }} />
+            <button className="btn align-items-center hideOnDesktop" onClick={handleSearch}>
+              <BsSearch style={{ color: "#000", fontSize: 18 }} />
             </button>
           </div>
-
           {/* CTA */}
-          <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user">
+          <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user d-none showOnDesktop">
             <div className="d-flex justify-content-between align-items-center">
               <Link href="/cart">
                 <a className="text-decoration-none d-flex align-items-center me-3 ms-auto hideOnMobile">

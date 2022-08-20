@@ -6,11 +6,11 @@ const CarouselComponent = ({ data }) => {
     <Carousel className="mb-2 rounded">
       {data &&
         data.map((item) => (
-          <Carousel.Item key={item.id}>
+          <Carousel.Item className="carouselconfig" key={item.id}>
             <img
-              className="d-block w-25"
+              className="d-block w-100 h-100 rounded"
               src={item?.image}
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: "cover" }}
               alt="First slide"
             />
           </Carousel.Item>

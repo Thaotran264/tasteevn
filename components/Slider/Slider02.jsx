@@ -20,16 +20,11 @@ const Slider02 = ({ item }) => {
   return (
     <div className="py-4">
       <h2>Cửa hàng yêu thích</h2>
-      <Slider {...settings}>
+      <Slider {...settings} style={{ overflow: "hidden" }}>
         {item &&
           item.map((item) => (
-            <div key={item.id} className="rounded px-1" style={{ height: 80 }}>
-              <img
-                className="rounded"
-                src={item.image}
-                alt={item.image}
-                style={{ width: "100%", height: "50%" }}
-              />
+            <div key={item.id} className="rounded">
+              <img className="rounded w-100" src={item.image} alt={item.image} />
             </div>
           ))}
       </Slider>

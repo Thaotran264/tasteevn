@@ -8,13 +8,17 @@ const CardItems = ({ item }) => {
     router.push(`/${id}`);
   };
   return (
-    <Card className="card-item">
-      <Card.Img variant="top" src={item.image} onClick={() => handleViewBtn(item.brandId)} />
+    <Card className="card-item card-config rounded">
+      <Card.Img
+        variant="top"
+        src={item.image}
+        className="h-50"
+        onClick={() => handleViewBtn(item.brandId)}
+      />
       <Card.Body>
         <Card.Title onClick={() => handleViewBtn(item.brandId)}>{item.brandName}</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the bulk of the card&aposs
-          content.
+        <Card.Text className="" style={{ fontSize: 13, color: "#848484" }}>
+          123 Hai Ba Trung, quan 1, tp HCM
         </Card.Text>
       </Card.Body>
     </Card>

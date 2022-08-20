@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       {/* <Search /> */}
       <Navbar />
       <Notify />
-      <main style={{ marginTop: 85 }}>{children}</main>
+      <main style={{ marginTop: 75 }}>{children}</main>
       <Footer />
       <TabMenu />
     </div>
