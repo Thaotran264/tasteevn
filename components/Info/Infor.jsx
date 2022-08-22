@@ -13,20 +13,12 @@ const datar = ({ setShowBooking, isDefault, data }) => {
       {!isDefault && (
         <div className="rounded bg-white bg-opacity-75">
           <div className="row mx-0">
-            <div className="col-4 px-0 col-md-4 d-flex justify-content-center align-items-center">
-              <div className="w-75 h-75">
-                <img
-                  src={data && data.logo}
-                  className="rounded-circle"
-                  style={{
-                    width: "100%",
-                    objectFit: "cover",
-                    height: "100%",
-                  }}
-                />
+            <div className="col-3 col-md-2 d-flex justify-content-center align-items-center">
+              <div className="" style={{ width: 120, height: 120 }}>
+                <img src={data && data.logo} className="rounded-circle d-block w-100 " />
               </div>
             </div>
-            <div className="col-8 col-md-8 py-2 px-0">
+            <div className="col-9 col-md-10 py-2 px-0">
               <div className="">
                 <h2 style={{ fontSize: 16 }}>{data.name}</h2>
                 <p className="" style={{ fontSize: 14 }}>

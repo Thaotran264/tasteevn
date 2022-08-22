@@ -109,9 +109,9 @@ const Navbar = () => {
           </div>
           {/* CTA */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user d-none showOnDesktop">
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-around align-items-center w-100">
               <Link href="/cart">
-                <a className="text-decoration-none d-flex align-items-center me-3 ms-auto hideOnMobile">
+                <a className="text-decoration-none d-flex align-items-center hideOnMobile">
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
                 </a>
               </Link>

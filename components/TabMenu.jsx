@@ -45,7 +45,7 @@ const TabMenu = () => {
               variant="outline-light"
               title={<AiOutlineUser style={{ fontSize: 24 }} />}
             >
-              <Dropdown.Item eventKey="1">Cart</Dropdown.Item>
+              <Dropdown.Item eventKey="1">Thông tin</Dropdown.Item>
               <Dropdown.Item eventKey="2">
                 <button className="btn" onClick={handleLogOut}>
                   Đăng xuất

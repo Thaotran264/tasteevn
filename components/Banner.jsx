@@ -2,12 +2,12 @@ import React from "react";
 
 const Banner = ({ banner }) => {
   return (
-    <div className="rounded mb-2" style={{ aspectRatio: "2/1" }}>
+    <div className="rounded mb-2 banner">
       <img
         src={banner && banner}
         alt=""
-        className="rounded w-100 h-100"
-        style={{ objectFit: "cover", display: "block" }}
+        className="w-100 h-100 d-block"
+        style={{ objectFit: "cover" }}
       />
     </div>
   );

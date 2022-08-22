@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsCartCheck } from "react-icons/bs";
 import Banner from "../components/Banner";
 import Carousel from "../components/Carousel";
-import Infor from "../components/Info/Infor";
+import InfoDefault from "../components/Info/InfoDefault";
 import DesktopMenu from "../components/Menu/DesktopMenu";
 import MobileMenu from "../components/Menu/MobileMenu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
 import Slide from "../components/Slider/Slider";
 import getDetail from "../hooks/useQuery";
+import TabMenu from "../components/TabMenu";
+import { DataContext } from "../store/globalState";
 export async function getStaticPaths() {
   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
   const paths = res.data.data.map((item) => ({
@@ -32,6 +34,8 @@ export async function getStaticProps({ params }) {
 }
 const Detail = ({ data }) => {
   const [showBooking, setShowBooking] = useState(false);
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
   // const router = useRouter();
   // const { id } = router.query;
   // const { data, isError, isLoading, mutate } = getDetail(id);
@@ -69,7 +73,7 @@ const Detail = ({ data }) => {
   return (
     <div className="container">
       <Banner banner={banner} />
-      <Infor setShowBooking={setShowBooking} isDefault={false} data={info} />
+      <InfoDefault setShowBooking={setShowBooking} isDefault={false} data={info} />
       <MenuPhoto isDefault={false} map={info} />
       <Slide isDefault={false} />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
@@ -78,10 +82,14 @@ const Detail = ({ data }) => {
       <button
         className="btn btn-light position-fixed hideOnDeskTop"
         onClick={handleCartBtn}
-        style={{ bottom: "50px", right: "15px" }}
+        style={{ bottom: "80px", right: "15px", zIndex: 99 }}
       >
-        <BsCartCheck style={{ fontSize: 24 }} />
+        <span>
+          <BsCartCheck style={{ fontSize: 24 }} />
+          {cart?.length}
+        </span>
       </button>
+      <TabMenu />
     </div>
   );
 };

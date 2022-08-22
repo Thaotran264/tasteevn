@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import { DataContext } from "../../store/globalState";
+import { addToCart } from "../../store/actions/actionsType";
+import { formatter } from "../../utils";
 const MobileMenu = ({ menuPos, menus }) => {
   const menuList = JSON.parse(menus?.data).Menus || {};
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
   const [active, setActive] = useState(false);
 
   return (
-    <div className="hideOnDeskTop">
+    <div className="hideOnDesktop">
       <ul
         className={`d-flex ps-0 overflow-scroll pb-2 ${menuPos && "position-fixed bg-light "}`}
         style={menuPos ? { top: 0, width: "calc(100% - 24px)", zIndex: 99 } : {}}
@@ -37,9 +42,12 @@ const MobileMenu = ({ menuPos, menus }) => {
                     <div>
                       <h5>{it.Name}</h5>
                       <p>{it.Description}</p>
-                      <p className="text-danger">{it.Price} đ</p>
+                      <p className="text-danger">{formatter.format(it.Price)} đ</p>
                     </div>
-                    <button className="btn btn-outline-danger ms-auto ">
+                    <button
+                      className="btn btn-outline-danger ms-auto "
+                      onClick={() => dispatch(addToCart(it, cart))}
+                    >
                       <AiOutlinePlus style={{ fontSize: 22 }} />
                     </button>
                   </div>

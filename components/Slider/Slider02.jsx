@@ -24,7 +24,12 @@ const Slider02 = ({ item }) => {
         {item &&
           item.map((item) => (
             <div key={item.id} className="rounded">
-              <img className="rounded w-100" src={item.image} alt={item.image} />
+              <img
+                className="rounded"
+                src={item.image}
+                alt={item.image}
+                style={{ height: 250, width: "100%" }}
+              />
             </div>
           ))}
       </Slider>
