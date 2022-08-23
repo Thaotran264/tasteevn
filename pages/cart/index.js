@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { BsTrash } from "react-icons/bs";
-import NavbarSecond from "../../components/NavbarSecond";
 import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
 
