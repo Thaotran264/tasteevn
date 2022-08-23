@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Collapse from "react-bootstrap/Collapse";
-import { DateRange } from "react-date-range";
-import * as rdrLocales from "react-date-range/dist/locale";
+import React, { useState } from 'react';
+import Collapse from 'react-bootstrap/Collapse';
+import { DateRange } from 'react-date-range';
+import * as rdrLocales from 'react-date-range/dist/locale';
 
 function HandleSort({ isOpen, setOpen }) {
   const [isShowRangeDate, setIsShowRangeDate] = useState(false);

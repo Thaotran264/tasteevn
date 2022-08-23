@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@popperjs/core": "^2.11.5",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0-beta1",
+    "date-fns": "^2.29.1",
     "firebase": "^9.9.0",
     "html-react-parser": "^3.0.1",
     "moment": "^2.29.4",
