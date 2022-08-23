@@ -11,11 +11,11 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import axiosClient from "../api-client/axios-client";
 import { DataContext } from "../store/globalState";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineLogin, AiOutlineUser } from "react-icons/ai";
 import Countdown from "./Countdown";
 import { accountAPI } from "../api-client/account";
 
-function LoginModal() {
+function LoginModal({ btnStyle }) {
   const [show, setShow] = useState(false);
   const ip1 = useRef();
   const ip2 = useRef();
@@ -124,7 +124,7 @@ function LoginModal() {
       const res = await accountAPI.resendSmsCode(data?.authenId);
       console.log("%cLoginModal.jsx line:128 data.authenId", "color: #007acc;", data?.authenId);
       console.log("%cLoginModal.jsx line:128 res", "color: #007acc;", res);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const checkOTP = async (OTP) => {
@@ -246,9 +246,16 @@ function LoginModal() {
 
   return (
     <>
-      <button className="btn-custom button-custom-primary" onClick={handleShow}>
-        Đăng nhập
-      </button>
+      {btnStyle == 'ICON' ?
+        <button className="btn-custom" onClick={handleShow} style={{ border: '1px solid white', borderRadius: '0.6em' }}>
+          {btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24, color: 'white' }} /> : 'Đăng nhập'}
+        </button>
+        :
+        <button className="btn-custom button-custom-primary" onClick={handleShow} >
+          Đăng nhập
+        </button>
+      }
+
 
       <Modal show={show} onHide={handleClose} animation={false} centered size="small" backdrop="static">
         {/* <Modal.Header closeButton></Modal.Header> */}
