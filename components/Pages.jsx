@@ -12,7 +12,7 @@ const Pages = ({ data }) => {
       <CarouselComponent data={data} />
       <MultiRowSlide item={data} />
       <Slider02 item={data} />
-
+      <h2>Menu</h2>
       <div className="d-flex mb-2 flex-wrap justify-content-between">
         {data && data?.map((item) => <CardItems item={item} key={item.id} />)}
       </div>

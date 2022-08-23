@@ -4,21 +4,19 @@ import { BsTrash } from "react-icons/bs";
 import Layout from "../../components/Layout";
 import LayoutProfile from "../../components/LayoutProfile";
 import DesktopMenu from "../../components/Menu/DesktopMenu";
-import NavbarSecond from "../../components/NavbarSecond";
 import { userApi } from "../../api-client/user";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { isMobile } from "react-device-detect";
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
-import { FcAddImage } from "react-icons/fc"
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Tab from "react-bootstrap/Tab";
+import { FcAddImage } from "react-icons/fc";
 
-
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import TabInfor from "./components/Infor";
-import HistoryOrder from "./components/HistoryOrder"
+import HistoryOrder from "./components/HistoryOrder";
 import { DataContext } from "../../store/globalState";
 import { useRouter } from "next/router";
 import WishlistShop from "./components/wishlistShop";
@@ -30,12 +28,12 @@ const Cart = () => {
   const [isShowContent, setIsShowContent] = useState({});
   const { state, dispatch } = useContext(DataContext);
   const router = useRouter();
-  
+
   const [_isMobile, setMobile] = useState(false);
 
   useEffect(() => {
     setMobile(isMobile);
-      isMobile ? router.push("/profile")  : router.push("/profile-desktop?slug=chinh-sua-thong-tin")
+    isMobile ? router.push("/profile") : router.push("/profile-desktop?slug=chinh-sua-thong-tin");
   }, [_isMobile]);
   useEffect(() => {
     const getDetailUser = async () => {
@@ -45,10 +43,10 @@ const Cart = () => {
           setUser(res.data.data);
         }
       } catch (error) {
-        dispatch({ type: "NOTIFY", payload: { error: 'Đã xảy ra lỗi vui lòng đăng nhập lại' } });
+        dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
         localStorage.removeItem("userInfo");
         localStorage.removeItem("token");
-        window.location.replace('/');
+        window.location.replace("/");
       }
     };
     getDetailUser();
@@ -68,44 +66,74 @@ const Cart = () => {
       <div className="container">
         <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
           <Row>
-
-            <Col sm={ 3 }>
+            <Col sm={3}>
               <div className="profile-sidebar pt-2">
                 <div className="profile-userpic">
                   <div className="">
-                    {user && user['avatar'] ?
+                    {user && user["avatar"] ? (
                       <img
                         className="w-100 h-100"
-                        src={user['avatar']}
-                        alt={user['fullName']}
+                        src={user["avatar"]}
+                        alt={user["fullName"]}
                         style={{ border: "1px solid #fff", borderRadius: "50%" }}
                       />
-                      :
-                      <FcAddImage className="w-75 h-75 rounded-circle border" style={{ border: "1px solid #fff", borderRadius: "50%" }} />
-                    }
+                    ) : (
+                      <FcAddImage
+                        className="w-75 h-75 rounded-circle border"
+                        style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="profile-usertitle text-center">
                   <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-                    <h2 className="profile-usertitle-name"> {user['fullName'] || ""} </h2>
+                    <h2 className="profile-usertitle-name"> {user["fullName"] || ""} </h2>
                   </div>
                   <p className="profile-usertitle-job">Kim cương</p>
                 </div>
                 <div className="profile-usermenu">
-                    <Nav variant="pills" className="flex-column">
-                      <Nav.Item>
-                        <Nav.Link eventKey="infor" onClick={() => { router.push('/profile-desktop?slug=chinh-sua-thong-tin') }}>Thông tin chung</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="wishlist" onClick={() => { router.push('/profile-desktop?slug=danh-sach-yeu-thich')} }>Quán yêu thích</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="historyOrder"  onClick={() => {router.push('/profile-desktop?slug=lich-su-don-hang')}  }>Lịch sử đơn hàng</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="historyBooking" onClick={() => { router.push('/profile-desktop?slug=lich-su-dat-ban') } }>Lịch sử đặt bàn</Nav.Link>
-                      </Nav.Item>
-                    </Nav>
+                  <Nav variant="pills" className="flex-column">
+                    <Nav.Item>
+                      <Nav.Link
+                        eventKey="infor"
+                        onClick={() => {
+                          router.push("/profile-desktop?slug=chinh-sua-thong-tin");
+                        }}
+                      >
+                        Thông tin chung
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link
+                        eventKey="wishlist"
+                        onClick={() => {
+                          router.push("/profile-desktop?slug=danh-sach-yeu-thich");
+                        }}
+                      >
+                        Quán yêu thích
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link
+                        eventKey="historyOrder"
+                        onClick={() => {
+                          router.push("/profile-desktop?slug=lich-su-don-hang");
+                        }}
+                      >
+                        Lịch sử đơn hàng
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link
+                        eventKey="historyBooking"
+                        onClick={() => {
+                          router.push("/profile-desktop?slug=lich-su-dat-ban");
+                        }}
+                      >
+                        Lịch sử đặt bàn
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
                 </div>
 
                 <div className="portlet light bordered">
@@ -146,25 +174,22 @@ const Cart = () => {
               </div>
             </Col>
 
-              <Col sm={9}>
-                <Tab.Content>
-                  <Tab.Pane eventKey="infor" >
-                    <TabInfor userDetail={  user } />
-                  </Tab.Pane>
+            <Col sm={9}>
+              <Tab.Content>
+                <Tab.Pane eventKey="infor">
+                  <TabInfor userDetail={user} />
+                </Tab.Pane>
 
-                  <Tab.Pane eventKey="wishlist" >
-                    <WishlistShop />
-                  </Tab.Pane>
-                  
-                  <Tab.Pane eventKey="historyOrder">
-                    <HistoryOrder />
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="historyBooking" >
-                    Lịch sử Đặt bàn
-                  </Tab.Pane>
-                </Tab.Content>
-              </Col>
+                <Tab.Pane eventKey="wishlist">
+                  <WishlistShop />
+                </Tab.Pane>
 
+                <Tab.Pane eventKey="historyOrder">
+                  <HistoryOrder />
+                </Tab.Pane>
+                <Tab.Pane eventKey="historyBooking">Lịch sử Đặt bàn</Tab.Pane>
+              </Tab.Content>
+            </Col>
           </Row>
         </Tab.Container>
       </div>
