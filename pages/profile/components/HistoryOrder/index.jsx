@@ -14,7 +14,8 @@ const HistoryOrder = ({}) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div className="profile-mobile" style={{ height: "auto" }}>
+      <div className="profile-mobile custom-card-hover" style={{ height: "auto" }}>
+
         <Card className="">
           <Card.Body>
             <div className="d-flex gap-3 text-center ">

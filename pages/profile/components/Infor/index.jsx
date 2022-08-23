@@ -79,7 +79,6 @@ const Infor = ({ userDetail }) => {
       birthdays = birthday.d + "/" + birthday.m + "/" + birthday.y;
     }
     user.birthday = birthdays;
-    console.log("%cInfor.jsx line:61 birthdays", "color: #007acc;", birthdays);
     formData.append("PhoneNumber", user.phoneNumber);
     formData.append("Address", user.address);
     formData.append("Email", user.email);
@@ -87,6 +86,8 @@ const Infor = ({ userDetail }) => {
     formData.append("Gender", user.gender);
     formData.append("Avatar", user.avatar);
     formData.append("Birthday", user.birthday);
+    console.log("%cInfor.jsx line:61 birthdays", "color: red;", user);
+
     try {
       const res = await userApi.updateUser(formData);
       if (res && res.status == 200) {

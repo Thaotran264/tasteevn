@@ -248,7 +248,7 @@ function LoginModal({ btnStyle }) {
     <>
       {btnStyle == 'ICON' ?
         <button className="btn-custom" onClick={handleShow} style={{ border: '1px solid white', borderRadius: '0.6em' }}>
-          {btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24, color: 'white' }} /> : 'Đăng nhập'}
+          {btnStyle && btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24, color: 'white' }} /> : 'Đăng nhập'}
         </button>
         :
         <button className="btn-custom button-custom-primary" onClick={handleShow} >

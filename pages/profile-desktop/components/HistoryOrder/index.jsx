@@ -1,45 +1,15 @@
-/**
- * @author [daoNguyen]
- * @email [daonds@vinorsoft.com ]
- * @create date 2022-08-17 12:01:44
- * @modify date 2022-08-17 12:01:44
- * @desc [description]
- */
-/**
- * @author [daoNguyen]
- * @email [daonds@vinorsoft.com ]
- * @create date 2022-08-17 12:01:37
- * @modify date 2022-08-17 12:01:37
- * @desc [description]
- */
-/**
- * @author [daoNguyen]
- * @email [daonds@vinorsoft.com ]
- * @create date 2022-08-17 12:01:31
- * @modify date 2022-08-17 12:01:31
- * @desc [description]
- */
-/**
- * @author [daoNguyen]
- * @email [daonds@vinorsoft.com ]
- * @create date 2022-08-17 12:01:27
- * @modify date 2022-08-17 12:01:27
- * @desc [description]
- */
-/**
- * @author [daoNguyen]
- * @email [daonds@vinorsoft.com ]
- * @create date 2022-08-17 12:01:27
- * @modify date 2022-08-17 12:01:27
- * @desc [description]
- */
+
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import OrderDetail from '../detailOrder'
+import { BsFillFunnelFill, BsChevronLeft } from 'react-icons/bs'
+import HandleSort from "../../../profile/components/handleSort";
+import { Card } from "react-bootstrap";
 
 const HistoryOrder = ({ }) => {
   const [_isMobile, setMobile] = useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   useEffect(() => {
     setMobile(isMobile);
@@ -48,8 +18,25 @@ const HistoryOrder = ({ }) => {
 
   return (
     <>
-      <div className="profile-content">
-        <h6>Thông tin đơn hàng</h6>
+      <div className="profile-content custom-card-hover">
+      <Card className="">
+          <Card.Body>
+            <div className="d-flex gap-3 text-center ">
+              {/* <a href="/profile">
+                <div>
+                  <BsChevronLeft />
+                </div>
+              </a> */}
+              <span className="w-100">Quản lý đơn hàng</span>
+
+              <a onClick={() => setOpen(!open)}>
+                <BsFillFunnelFill />
+              </a>
+            </div>
+          </Card.Body>
+        </Card>
+
+        <HandleSort isOpen={open} setOpen={setOpen} />
         <div className="rounded w-100 bg-white p-2">
           <hr className="my-1" />
 
@@ -73,7 +60,7 @@ const HistoryOrder = ({ }) => {
                 Huỷ đơn
               </button>
 
-                <OrderDetail />
+              <OrderDetail />
             </div>
           </div>
           <hr />

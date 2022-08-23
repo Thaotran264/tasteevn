@@ -1,6 +1,6 @@
 import { AiFillEdit } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineCloudUpload } from "react-icons/ai";
 import { FcAddImage } from "react-icons/fc"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -40,18 +40,18 @@ const TabInfor = ({ userDetail }) => {
   const handleChangePass = async () => {
     try {
       const res = await userApi.changePassword(changePass)
-      if(res.status == 200 && res.data.successful) {
+      if (res.status == 200 && res.data.successful) {
         dispatch({ type: "NOTIFY", payload: { success: 'Bạn đã đổi mật khẩu thành công' } });
         setchangePass({})
         handleClose()
       }
-      else{
+      else {
         dispatch({ type: "NOTIFY", payload: { error: 'Đã có lỗi xảy ra' } });
         setchangePass({})
       }
     } catch (error) {
-      console.log('ERROR Change pass',error)
-    } 
+      console.log('ERROR Change pass', error)
+    }
   }
   const onchangeGender = () => {
     var groundGendernames = document.getElementsByName("groundGender");
@@ -107,6 +107,19 @@ const TabInfor = ({ userDetail }) => {
     console.log('%cTabInfor.jsx line:54 user', 'color: #007acc;', user);
 
   }
+
+  const upload = (e) => {
+    setUser({ ...user, avatar: e.target.files[0] })
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function () {
+      var output = document.getElementById('prevew-img');
+      output.src = reader.result;
+
+    };
+    console.log(reader)
+    
+  }
   return (
     <div className="profile-content">
       <h5 className="title-section">Thông tin tài khoản</h5>
@@ -121,16 +134,37 @@ const TabInfor = ({ userDetail }) => {
               <div className="row">
                 <div className="col-3 d-flex align-items-center">
                   <div className="w-100 h-50">
-                    {user && user['avatar'] ?
+
+                    <div className="wrapper">
+                      <div className="file-upload avata-input">
+                        <input type="file" onChange={(e) => upload(e)} />
+                        {user && user['avatar'] ?
+                          <img
+                          id="prevew-img"
+                            className="w-100 h-100"
+                            src={user && user['avatar'] || ''}
+                            alt={user && user['fullName'] || ''}
+                            style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                          /> :
+                          <AiOutlineCloudUpload />
+                        }
+                      </div>
+                    </div>
+                    {/* <img id="prevew-img" /> */}
+
+
+                    {/* {user && user['avatar'] ?
                       <img
                         className="w-100 h-100"
                         src={user && user['avatar'] || ''}
                         alt={user && user['fullName'] || ''}
                         style={{ border: "1px solid #fff", borderRadius: "50%" }}
                       />
+
+                      <input type="file" id="img" name="img" accept="image/*"></input>
                       :
                       <FcAddImage className="w-100 h-100" style={{ border: "1px solid #fff", borderRadius: "50%" }} />
-                    }
+                    } */}
                   </div>
                 </div>
 
@@ -369,7 +403,7 @@ const TabInfor = ({ userDetail }) => {
                           outline: "none",
                           paddingBottom: "5px",
                         }} />
-                      
+
                     </span>
                   </span>
 
@@ -429,12 +463,12 @@ const TabInfor = ({ userDetail }) => {
                           <input
                             value={changePass.password || ""}
                             onChange={(e) => setchangePass({ ...changePass, password: e.target.value })}
-                            type={ showPass ? 'text' : "password" }
+                            type={showPass ? 'text' : "password"}
                             className="form-control inputFomCustom rounded"
                             id="exampleInputPassword1"
                           />
-                          <button className="btn btn-dark" onClick={() => setShowPass(!showPass)}> { showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />  }</button>
-                          </div>
+                          <button className="btn btn-dark" onClick={() => setShowPass(!showPass)}> {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</button>
+                        </div>
                       </div>
 
                       <div className="mb-3">
@@ -445,12 +479,12 @@ const TabInfor = ({ userDetail }) => {
                           <input
                             value={changePass.newPassword || ""}
                             onChange={(e) => setchangePass({ ...changePass, newPassword: e.target.value })}
-                            type={ showNewPass ? 'text' : "password" }
+                            type={showNewPass ? 'text' : "password"}
                             className="form-control inputFomCustom rounded"
                             id="exampleInputPassword1"
                           />
-                          <button className="btn btn-dark" onClick={() => setShowNewPass(!showNewPass)}> { showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible/>  }</button>
-                         </div>
+                          <button className="btn btn-dark" onClick={() => setShowNewPass(!showNewPass)}> {showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</button>
+                        </div>
                       </div>
                     </Modal.Body>
                     <Modal.Footer>
