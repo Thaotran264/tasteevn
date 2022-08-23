@@ -16,7 +16,7 @@ const TabMenu = () => {
     router.push("/");
   };
   return (
-    <div className="position-fixed bottom-0 start-0 w-100 bg-danger py-2 hideonmobile mx-auto">
+    <div className="position-fixed bottom-0 start-0 w-100 bg-danger py-2 hideOnDesktop mx-auto">
       <div className="container">
         <div className="row">
           <div className="col-3 d-flex justify-content-center">
@@ -45,7 +45,7 @@ const TabMenu = () => {
               variant="outline-light"
               title={<AiOutlineUser style={{ fontSize: 24 }} />}
             >
-              <Dropdown.Item eventKey="1">Cart</Dropdown.Item>
+              <Dropdown.Item eventKey="1">Thông tin</Dropdown.Item>
               <Dropdown.Item eventKey="2">
                 <button className="btn" onClick={handleLogOut}>
                   Đăng xuất

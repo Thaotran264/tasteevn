@@ -177,11 +177,11 @@ const MenuPhoto = ({ isDefault, map }) => {
             >
               {parse(map.webMap)}
             </div>
-            <div className="col-12 col-md-6 hideOnDeskTop mb-2">
+            {/* <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
                 {parse(map.webMap)}
               </div>
-            </div>
+            </div> */}
             <div className="col-12 col-md-6">
               <div className="thumb-3" style={{ aspectRatio: "1 / 1" }}>
                 <div className="box img1">
