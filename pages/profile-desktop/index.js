@@ -72,8 +72,8 @@ const Cart = () => {
                   <div className="">
                     {user && user["avatar"] ? (
                       <img
-                        className="w-100 h-100"
-                        src={user["avatar"]}
+                        // className="w-100 h-100"
+                        src={user["avatar"] || ''}
                         alt={user["fullName"]}
                         style={{ border: "1px solid #fff", borderRadius: "50%" }}
                       />
@@ -89,7 +89,7 @@ const Cart = () => {
                   <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
                     <h2 className="profile-usertitle-name"> {user["fullName"] || ""} </h2>
                   </div>
-                  <p className="profile-usertitle-job">Kim cương</p>
+                  <p className="profile-usertitle-job">{user["phoneNumber"] || ""}</p>
                 </div>
                 <div className="profile-usermenu">
                   <Nav variant="pills" className="flex-column">

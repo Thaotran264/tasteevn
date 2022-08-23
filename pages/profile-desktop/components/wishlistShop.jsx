@@ -12,7 +12,7 @@ function WishlistShop() {
     setMobile(isMobile);
   }, [_isMobile]);
     return (
-        <div className="profile-mobile">
+        <div className="profile-mobile custom-card-hover">
         { _isMobile && 
             <Card className="">
                 <Card.Body>

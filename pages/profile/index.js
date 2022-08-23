@@ -55,7 +55,7 @@ const ProfileMobile = () => {
   };
   return (
     <>
-      <div className="profile-mobile" style={{ height: "100vh" }}>
+      <div className="profile-mobile custom-card-hover" style={{ height: "100vh" }}>
         <Card>
           <a href="/profile/edit">
             <Card.Body className="p-3">
@@ -66,7 +66,7 @@ const ProfileMobile = () => {
                       className=""
                       src={user["avatar"]}
                       alt={user["fullName"]}
-                      style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                      style={{ border: "1px solid #fff", borderRadius: "50%", height: 80, width: 80 }}
                     />
                   ) : (
                     <FcAddImage

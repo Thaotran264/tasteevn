@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-15 16:48:49
- * @modify date 2022-08-16 15:22:17
+ * @modify date 2022-08-23 16:21:22
  * @desc [description]
  */
 /***
@@ -40,11 +40,11 @@ body {
 .profile-userpic img {
     float: none;
     margin: 0 auto;
-    width: 50%;
-    height: 50%;
-    -webkit-border-radius: 50% !important;
-    -moz-border-radius: 50% !important;
+    /* width: 65.5%; */
+    width: 200px;
+    height: 200px;
     border-radius: 50% !important;
+    object-fit: cover;
 }
 
 
@@ -125,6 +125,16 @@ body {
 }
 
 /* Profile Content */
+
+
+.avata-input {
+    margin: 0 auto;
+    width: 100%;
+    height: 135px;
+    border-radius: 50% !important;
+    object-fit: cover;
+    border: 1px solid #d8d8d8;
+}
 
 
 
@@ -264,3 +274,43 @@ body {
 .profile-content-mobile .input-form-profile span {
     width: 20%;
 }
+
+  
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapper .file-upload {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 100px;
+  }
+
+  .wrapper .file-upload input[type=file] {
+    /* height: 200px;
+    width: 200px; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #2590EB;
+    border: 1px solid #dee2e6;
+  }

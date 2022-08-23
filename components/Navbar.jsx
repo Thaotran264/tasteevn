@@ -23,6 +23,7 @@ const Navbar = () => {
   
   useEffect(() => {
     let name = JSON.parse(localStorage.getItem("userInfo")) || "";
+    console.log('%cNavbar.jsx line:26 name', 'color: #007acc;', name);
     if (name) {
       setusername(name.fullName);
     }

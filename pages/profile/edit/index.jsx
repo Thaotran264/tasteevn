@@ -6,7 +6,8 @@ import Tab from 'react-bootstrap/Tab';
 import { isMobile } from "react-device-detect";
 import { FcAddImage } from "react-icons/fc";
 import { BsChevronLeft } from "react-icons/bs";
-import  Infor  from "../components/Infor"
+import { AiOutlineCloudUpload } from "react-icons/ai";
+import Infor from "../components/Infor"
 import Card from 'react-bootstrap/Card';
 
 
@@ -19,6 +20,7 @@ import Layout from "../../../components/Layout";
 const editProfile = () => {
     const [count, setCount] = useState(1);
     const [user, setUser] = useState({});
+    const [isUpload, setIsUpload] = useState(false);
 
     const [open, setOpen] = useState(false);
     const [_isMobile, setMobile] = useState(false);
@@ -28,8 +30,24 @@ const editProfile = () => {
 
     useEffect(() => {
         setMobile(isMobile);
-        isMobile ? '' : router.push("/profile-desktop?slug=chinh-sua-thong-tin") 
+        isMobile ? '' : router.push("/profile-desktop?slug=chinh-sua-thong-tin")
     }, [_isMobile]);
+
+    const upload = (e) => {
+        setIsUpload(true)
+        setUser({ ...user, avatar: e.target.files[0] })
+        console.log('%cindex.jsx fghjkl', 'color: #007acc;', user.avatar);
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        console.log('%cindex.jsx line:41 reader', 'color: #007acc;', reader.result);
+        reader.onload = function () {
+            var output = document.getElementById('prevew-img');
+            console.log('first output', output)
+            output.src = reader.result ? reader.result : '';
+        };
+        console.log(reader)
+
+    }
 
     useEffect(() => {
         const getDetailUser = async () => {
@@ -59,17 +77,17 @@ const editProfile = () => {
     };
     return (
         <>
-            <div className="">
+            <div className="custom-card-hover">
                 <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
                     <Card className="">
                         <Card.Body>
                             <div className="d-flex gap-3 text-center">
                                 <a href="/profile">
-                                <div>
-                                    <BsChevronLeft />
-                                </div>
+                                    <div>
+                                        <BsChevronLeft />
+                                    </div>
                                 </a>
-                                <span className="w-100">Thông tin tài khoản</span>  
+                                <span className="w-100">Thông tin tài khoản</span>
                             </div>
                         </Card.Body>
                     </Card>
@@ -77,16 +95,34 @@ const editProfile = () => {
                     <div className="profile-sidebar p-2">
                         <div className="profile-userpic">
                             <div className="">
-                                {user && user['avatar'] ?
-                                    <img
-                                        className="w-100 h-100"
-                                        src={user['avatar']}
-                                        alt={user['fullName']}
-                                        style={{ border: "1px solid #fff", borderRadius: "50%" }}
-                                    />
-                                    :
-                                    <FcAddImage className="w-75 h-75 rounded-circle border" style={{ border: "1px solid #fff", borderRadius: "50%" }} />
-                                }
+                                <div className="wrapper">
+                                    <div className="file-upload avata-input">
+                                        <input type="file" onChange={(e) => upload(e)} />
+
+                                       { isUpload && <img
+                                            id="prevew-img"
+                                            className="w-100 h-100"
+                                            src={''}
+                                            alt={user && user['fullName'] || ''}
+                                            style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                                        />
+                                        }
+
+                                        {user && user['avatar'] && !isUpload ?
+                                            <>
+                                                <img
+                                                    className="w-100 h-100"
+                                                    src={user && user['avatar'] || ''}
+                                                    alt={user && user['fullName'] || ''}
+                                                    style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                                                />
+                                            </>
+                                            :
+                                            <AiOutlineCloudUpload />
+                                        }
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
