@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
+import LoginModal from "./LoginModal";
 import Navbar from "./Navbar";
 import Notify from "./Notify";
 import Search from "./Search";
@@ -10,7 +11,8 @@ const Layout = ({ children }) => {
       {/* <Search /> */}
       <Navbar />
       <Notify />
-      <main style={{ marginTop: 75}}>{children}</main>
+      <main style={{ marginTop: 75 }}>{children}</main>
+      {/* <LoginModal /> */}
       <Footer />
       <TabMenu />
     </div>

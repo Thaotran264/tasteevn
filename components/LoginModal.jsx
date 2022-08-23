@@ -24,7 +24,9 @@ function LoginModal() {
   const ip5 = useRef();
   const ip6 = useRef();
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
   const router = useRouter();
   const [data, setData] = useState({});
@@ -38,8 +40,9 @@ function LoginModal() {
   const { state, dispatch } = useContext(DataContext);
   const [textButton, setTextButton] = useState({ btnSubmit: "Tiếp tục" });
   // const [toastmsg, settoastmsg] = useState('')
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("test");
     console.log("Data Form ", data);
     if (statusInput.isEmptyPhone) {
       let params = {
@@ -250,7 +253,14 @@ function LoginModal() {
         Đăng nhập
       </button>
 
-      <Modal show={show} onHide={handleClose} animation={false} centered size="small" backdrop="static">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        animation={false}
+        centered
+        size="small"
+        backdrop="static"
+      >
         {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <div className="mx-auto bg-white rounded w-100">
@@ -391,10 +401,20 @@ function LoginModal() {
               )}
 
               {!statusInput.showSendOTP && (
-                <button type="submit" className="btn-custom button-custom-primary-form w-100 mb-2 ">
-                  {" "}
-                  {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
-                </button>
+                <>
+                  {/* <button
+                    htmlType="submit"
+                    className="btn-custom button-custom-primary-form w-100 mb-2 "
+                  >
+                    {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
+                  </button> */}
+                  <button
+                    htmlType="submit"
+                    className="btn-custom button-custom-primary-form w-100 mb-2 "
+                  >
+                    {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
+                  </button>
+                </>
               )}
             </form>
 
@@ -414,8 +434,7 @@ function LoginModal() {
               onClick={handleClose}
               className="btn-custom button-custom-danger-form w-100 mb-2"
             >
-              {" "}
-              Đóng{" "}
+              Đóng
             </button>
             {!statusInput.showFormRegister ? (
               <div className="d-flex justify-content-between">
