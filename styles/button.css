@@ -31,7 +31,6 @@
   border: 1px solid var(--primary-color);
   border-radius: 0.6em;
   color: var(--primary-color);
-
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 

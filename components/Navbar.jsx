@@ -20,6 +20,7 @@ const Navbar = () => {
     console.log("first");
     setShowSearch(!showSearch);
   };
+  
   useEffect(() => {
     let name = JSON.parse(localStorage.getItem("userInfo")) || "";
     if (name) {
