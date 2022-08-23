@@ -22,3 +22,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.card-config {
+    width: 49%;
+}
+
+@media (min-width: 992px) {
+    .card-config {
+        width: 19%;
+    }
+}

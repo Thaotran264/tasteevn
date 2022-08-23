@@ -109,15 +109,7 @@ const Slide = ({ isDefautl }) => {
           <Slider {...settings}>
             {listImg.map((item, index) => (
               <div key={index} style={{ display: "flex", alignItems: "center" }}>
-                <img
-                  src={item}
-                  alt=""
-                  style={{
-                    width: "90%",
-                    margin: "auto",
-                    objectFit: "cover",
-                  }}
-                />
+                <img className="w-100" src={item} alt="" />
               </div>
             ))}
           </Slider>

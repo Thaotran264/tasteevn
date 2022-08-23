@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import { DataContext } from "../../store/globalState";
+import { addToCart } from "../../store/actions/actionsType";
+import { formatter } from "../../utils";
 const DesktopMenu = ({ menuPos, menus }) => {
   const menuList = JSON.parse(menus.data).Menus;
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+
   const handleClick = () => {
     console.log("object");
   };
@@ -10,7 +15,7 @@ const DesktopMenu = ({ menuPos, menus }) => {
     <div className="showOnDesktop">
       <div
         className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
-        style={menuPos ? { marginTop: 88, zIndex: 1 } : {}}
+        style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
       >
         <div className="container">
           <div className="row">
@@ -67,9 +72,14 @@ const DesktopMenu = ({ menuPos, menus }) => {
                     </div>
                     <div className="col-10 d-flex align-items-start">
                       <div className="d-flex w-100 align-items-center">
-                        <h4 className="m-0">{its.Name}</h4>
-                        <p className="text-danger mx-auto">{its.Price}</p>
-                        <button className="btn btn-outline-danger ms-auto w-25 h-25 ">Mua</button>
+                        <h4 className="m-0 me-auto">{its.Name}</h4>
+                        <p className="text-danger mb-0 me-2">{formatter.format(its.Price)}</p>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => dispatch(addToCart(its, cart))}
+                        >
+                          Mua
+                        </button>
                       </div>
                     </div>
                   </div>
