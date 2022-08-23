@@ -3,7 +3,7 @@ import Notify from "./Notify";
 
 const MerchantLayout = ({ children }) => {
   return (
-    <div className="bg-dark bg-opacity-10">
+    <div className="bg-dark bg-opacity-10 " style={{ marginBottom: 55 }}>
       {children}
       <Notify />
     </div>

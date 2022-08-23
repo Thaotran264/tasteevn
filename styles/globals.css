@@ -12,6 +12,12 @@
      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
  }
 
+ img {
+   width: 100%;
+   object-fit: cover;
+   display: block;
+ }
+
  :root {
    --primary-color: rgb(255, 140, 0);
    --text-white: #fff;
@@ -101,21 +107,18 @@
  }
 
 
- .active {
-   border-bottom: 1px solid #000;
- }
-
- .slick-list {
-   margin: 0 -5px;
- }
-
- .slick-slide>div>div {
-   padding: 0 5px;
- }
-
  .carouselconfig {
-   height: 25vh;
+   /* height: 40vh; */
    aspect-ratio: "16/9";
+ }
+
+ .carouselconfig.active {
+   border: none !important
+ }
+
+ .carousel-inner::after {
+   content: "" !important;
+   display: none !important;
  }
 
  .banner {
@@ -131,6 +134,9 @@
  @media (min-width: 992px) {
    .carouselconfig {
      height: 50vh;
+     margin-bottom: 10px;
+     aspect-ratio: "16/9";
+
    }
  }
 
@@ -144,3 +150,4 @@
  @import "~slick-carousel/slick/slick-theme.css";
  @import url('./header.css');
  @import url('./layoutProfile.css');
+ @import url('./slider.css');

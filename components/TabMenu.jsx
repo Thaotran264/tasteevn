@@ -5,6 +5,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { DataContext } from "../store/globalState";
+import { useState } from "react";
+import LoginModal from "./LoginModal";
 
 const TabMenu = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -20,9 +22,11 @@ const TabMenu = () => {
       <div className="container">
         <div className="row">
           <div className="col-3 d-flex justify-content-center">
-            <a className="btn btn-outline-light text-light" href="#hero">
-              <AiOutlineHome style={{ fontSize: 24 }} />
-            </a>
+            <Link href="/">
+              <a className="btn btn-outline-light text-light">
+                <AiOutlineHome style={{ fontSize: 24 }} />
+              </a>
+            </Link>
           </div>
           <div className="col-3 d-flex justify-content-center">
             <a className="btn btn-outline-light text-light" href="#menu">
@@ -45,12 +49,11 @@ const TabMenu = () => {
               variant="outline-light"
               title={<AiOutlineUser style={{ fontSize: 24 }} />}
             >
-              <Dropdown.Item eventKey="1">Thông tin</Dropdown.Item>
-              <Dropdown.Item eventKey="2">
-                <button className="btn" onClick={handleLogOut}>
-                  Đăng xuất
-                </button>
+              <Dropdown.Item eventKey="4">
+                <LoginModal />
               </Dropdown.Item>
+              <Dropdown.Item eventKey="1">Thông tin</Dropdown.Item>
+              <Dropdown.Item eventKey="2">Đăng xuất</Dropdown.Item>
               <Dropdown.Item eventKey="3">Booking</Dropdown.Item>
             </DropdownButton>
           </div>

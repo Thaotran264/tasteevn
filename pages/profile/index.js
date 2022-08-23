@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 import { isMobile } from "react-device-detect";
 import { BsChevronRight, BsHeartFill } from "react-icons/bs";
 import { FaAddressCard, FaClipboardList } from "react-icons/fa";
@@ -7,7 +7,6 @@ import { FcAddImage } from "react-icons/fc";
 import { GoChecklist } from "react-icons/go";
 import { userApi } from "../../api-client/user";
 import Layout from "../../components/Layout";
-
 
 import { useRouter } from "next/router";
 import { Button, ListGroup } from "react-bootstrap";
@@ -38,10 +37,10 @@ const ProfileMobile = () => {
         setUser(res.data.data);
       }
     } catch (error) {
-      dispatch({ type: "NOTIFY", payload: { error: 'Đã xảy ra lỗi vui lòng đăng nhập lại' } });
+      dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
       localStorage.removeItem("userInfo");
       localStorage.removeItem("token");
-      window.location.replace('/');
+      window.location.replace("/");
     }
   };
 
@@ -56,27 +55,30 @@ const ProfileMobile = () => {
   };
   return (
     <>
-      <div className="profile-mobile" style={{ height: '100vh' }}>
+      <div className="profile-mobile" style={{ height: "100vh" }}>
         <Card>
           <a href="/profile/edit">
             <Card.Body className="p-3">
               <div className="d-flex gap-1">
                 <div className="w-25">
-                  {user && user['avatar'] ?
-                      <img
-                        className=""
-                        src={user['avatar']}
-                        alt={user['fullName']}
-                        style={{ border: "1px solid #fff", borderRadius: "50%" }}
-                      />
-                      :
-                      <FcAddImage className="w-75 h-100 rounded-circle border" style={{ border: "1px solid #fff", borderRadius: "50%" }} />
-                    }
+                  {user && user["avatar"] ? (
+                    <img
+                      className=""
+                      src={user["avatar"]}
+                      alt={user["fullName"]}
+                      style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                    />
+                  ) : (
+                    <FcAddImage
+                      className="w-75 h-100 rounded-circle border"
+                      style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                    />
+                  )}
                 </div>
 
                 <div className="w-75 pt-2 pb-2">
-                    <h3 className="profile-usertitle-name m-0"> {user['fullName'] || ""} </h3>
-                    <span className="profile-stat-text"> {user['email'] || ""} </span>
+                  <h3 className="profile-usertitle-name m-0"> {user["fullName"] || ""} </h3>
+                  <span className="profile-stat-text"> {user["email"] || ""} </span>
                 </div>
 
                 <div>
@@ -90,18 +92,17 @@ const ProfileMobile = () => {
         <Card className="m-1">
           <a href="/profile/order?slug=lich-su-don-hang">
             <Card.Body>
-                <div className="d-flex gap-3">
-                    <div>
-                        <FaClipboardList />
-                    </div>
-
-                    <span className="w-100">Quản lý đơn hàng</span>
-                    
-                    <div>
-                      <BsChevronRight />
-                    </div>
-
+              <div className="d-flex gap-3">
+                <div>
+                  <FaClipboardList />
                 </div>
+
+                <span className="w-100">Quản lý đơn hàng</span>
+
+                <div>
+                  <BsChevronRight />
+                </div>
+              </div>
             </Card.Body>
           </a>
         </Card>
@@ -110,15 +111,15 @@ const ProfileMobile = () => {
           <a href="/profile/wishlist?slug=san-pham-yeu-thich">
             <Card.Body>
               <div className="d-flex gap-3">
-                  <div>
-                      <BsHeartFill />
-                  </div>
+                <div>
+                  <BsHeartFill />
+                </div>
 
-                  <span className="w-100"> Quán yêu thích </span>
+                <span className="w-100"> Quán yêu thích </span>
 
-                  <div>
-                    <BsChevronRight />
-                  </div>
+                <div>
+                  <BsChevronRight />
+                </div>
               </div>
             </Card.Body>
           </a>
@@ -128,15 +129,15 @@ const ProfileMobile = () => {
           <a href="/profile/edit">
             <Card.Body>
               <div className="d-flex gap-3">
-                  <div>
-                      <GoChecklist />
-                  </div>
+                <div>
+                  <GoChecklist />
+                </div>
 
-                  <span className="w-100"> Quản lý đặt chỗ</span>
+                <span className="w-100"> Quản lý đặt chỗ</span>
 
-                  <div>
-                    <BsChevronRight />
-                  </div>
+                <div>
+                  <BsChevronRight />
+                </div>
               </div>
             </Card.Body>
           </a>
@@ -146,25 +147,25 @@ const ProfileMobile = () => {
           <a href="/profile/edit">
             <Card.Body>
               <div className="d-flex gap-3">
-                  <div>
-                      <FaAddressCard />
-                  </div>
+                <div>
+                  <FaAddressCard />
+                </div>
 
-                  <span className="w-100">Sổ địa chỉ</span>
+                <span className="w-100">Sổ địa chỉ</span>
 
-                  <div>
-                    <BsChevronRight />
-                  </div>
+                <div>
+                  <BsChevronRight />
+                </div>
               </div>
-              
             </Card.Body>
           </a>
         </Card>
 
-      <div className="m-3">
-        <Button variant="outline-danger" className="w-100 rounded">Đăng xuất</Button>
-      </div>
-
+        <div className="m-3">
+          <Button variant="outline-danger" className="w-100 rounded">
+            Đăng xuất
+          </Button>
+        </div>
       </div>
     </>
   );
