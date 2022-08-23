@@ -1,5 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
+import React from "react";
 import { useRef, useState } from "react";
 import Layout from "../components/Layout";
 import Pages from "../components/Pages";
