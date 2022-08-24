@@ -22,7 +22,7 @@
     position: absolute !important;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 99 !important;
+    z-index: 1 !important;
     transition: all ease .25s;
     background-color: #ebebee5e;
     /* box-shadow: rgb(35 35 35 / 50%) 0px 0px 20px 5px; */
@@ -42,4 +42,16 @@
     box-shadow: rgb(35 35 35 / 50%) 0px 0px 5px 5px;
     background-color: #ebebeedd;
 
+}
+
+.multiRowImg {
+    width: 160px;
+    height: 160px;
+}
+
+@media (min-width: 992px) {
+    .multiRowImg {
+        width: 180px;
+        height: 180px;
+    }
 }

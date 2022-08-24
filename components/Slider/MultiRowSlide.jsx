@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { listBrand } from "../../db";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return <div className={className} style={{ ...style }} onClick={onClick} />;
@@ -26,29 +27,26 @@ const settings = {
         slidesPerRow: 2,
         rows: 1,
         infinite: true,
-        // nextArrow: <SampleNextArrow />,
-        // prevArrow: <SamplePrevArrow />,
       },
     },
   ],
 };
-const MultiRowSlide = ({ item }) => {
+const MultiRowSlide = ({ item, text }) => {
   return (
     <div className="py-4">
-      <h2>Cửa hàng yêu thích</h2>
-      <Slider {...settings}>
-        {item &&
+      <h2>{text}</h2>
+      <Slider {...settings} className="">
+        {listBrand.map((it, index) => (
+          <div key={index}>
+            <img src={it} alt={it} className="rounded-circle mx-auto multiRowImg" />
+          </div>
+        ))}
+        {/* {item &&
           item.map((it) => (
             <div key={it.id} className="">
               <img src={it.image} alt={it.image} className="w-100 rounded h-100 " />
             </div>
-          ))}
-        {item &&
-          item.map((it) => (
-            <div key={it.id} className="">
-              <img src={it.image} alt={it.image} className="w-100 rounded h-100 " />
-            </div>
-          ))}
+          ))} */}
       </Slider>
     </div>
   );

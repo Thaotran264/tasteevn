@@ -13,6 +13,7 @@ import Slide from "../components/Slider/Slider";
 import getDetail from "../hooks/useQuery";
 import TabMenu from "../components/TabMenu";
 import { DataContext } from "../store/globalState";
+import Slider02 from "../components/Slider/Slider02";
 export async function getStaticPaths() {
   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
   const paths = res.data.data.map((item) => ({
@@ -75,7 +76,8 @@ const Detail = ({ data }) => {
       <Banner banner={banner} />
       <InfoDefault setShowBooking={setShowBooking} isDefault={false} data={info} />
       <MenuPhoto isDefault={false} map={info} />
-      <Slide isDefault={false} />
+      {/* <Slide isDefault={false} /> */}
+      <Slider02 text="Món ăn đang giảm giá" />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
       {/* <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div> */}
       {/* <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div> */}

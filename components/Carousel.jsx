@@ -1,17 +1,14 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import { listImg } from "../db";
+import { listImg, listRes } from "../db";
 const CarouselComponent = ({ data }) => {
   return (
     <Carousel className="mb-2">
-      <Carousel.Item className="carouselconfig">
-        <img className="" src={listImg[0]} alt="First slide" />
-      </Carousel.Item>
-      {/* {listImg.map((item, index) => (
+      {listRes.map((item, index) => (
         <Carousel.Item className="carouselconfig" key={index}>
           <img className="" src={item} alt="First slide" />
         </Carousel.Item>
-      ))} */}
+      ))}
     </Carousel>
   );
 };

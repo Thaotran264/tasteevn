@@ -10,10 +10,11 @@ const CardItems = ({ item }) => {
   return (
     <Card className="card-item card-config rounded">
       <Card.Img
+        className="w-100"
         variant="top"
         src={item.image}
-        className="h-50"
         onClick={() => handleViewBtn(item.brandId)}
+        style={{ height: 100 }}
       />
       <Card.Body>
         <Card.Title onClick={() => handleViewBtn(item.brandId)}>{item.brandName}</Card.Title>

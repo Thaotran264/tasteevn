@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { listRes } from "../../db";
 const settings = {
   infinite: true,
   speed: 500,
@@ -16,11 +17,11 @@ const settings = {
     },
   ],
 };
-const Slider02 = ({ item }) => {
+const Slider02 = ({ item, text }) => {
   return (
     <div className="py-4">
-      <h2>Cửa hàng yêu thích</h2>
-      <Slider {...settings}>
+      <h2>{text}</h2>
+      {/* <Slider {...settings}>
         {item &&
           item.map((item) => (
             <div key={item.id}>
@@ -31,6 +32,13 @@ const Slider02 = ({ item }) => {
               />
             </div>
           ))}
+      </Slider> */}
+      <Slider {...settings}>
+        {listRes.map((item, index) => (
+          <div key={index}>
+            <img src={item} alt={item} style={{ height: 200, width: "100%" }} />
+          </div>
+        ))}
       </Slider>
     </div>
   );
