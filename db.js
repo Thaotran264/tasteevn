@@ -36,4 +36,3 @@ export const listBrand = [
   "https://images.pexels.com/photos/1070945/pexels-photo-1070945.jpeg?auto=compress&cs=tinysrgb&w=1600",
   "https://images.pexels.com/photos/2530586/pexels-photo-2530586.jpeg?auto=compress&cs=tinysrgb&w=1600",
 ];
-// côment
