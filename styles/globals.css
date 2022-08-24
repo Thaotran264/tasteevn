@@ -139,6 +139,39 @@
    }
  }
 
+ .cart-container {
+   width: 90vw;
+ }
+
+ .cart-title {
+   text-transform: uppercase;
+   text-decoration: underline;
+   font-size: 24px;
+   letter-spacing: 1px;
+   margin-bottom: 20px;
+ }
+
+ .cart-item-title {
+   font-size: 18px;
+ }
+
+ .cart-item-price {
+   font-size: 13px;
+   display: inline-block;
+   margin-bottom: 10px;
+ }
+
+ @media (min-width: 992px) {
+   .cart-container {
+     width: 70vw
+   }
+
+   .cart-title {
+     font-size: 24px;
+   }
+
+ }
+
  @import url('./card');
  @import url('./menuPhoto.css');
  @import url('./button.css');
