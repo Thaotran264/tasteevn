@@ -5,8 +5,6 @@ import MultiRowSlide from "./Slider/MultiRowSlide";
 import Slider02 from "./Slider/Slider02";
 
 const Pages = ({ data }) => {
-  console.log(data);
-
   return (
     <div className="mt-2">
       <CarouselComponent data={data} />
