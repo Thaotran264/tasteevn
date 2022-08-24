@@ -15,3 +15,4 @@ export const listImg = [
   "https://images.pexels.com/photos/235534/pexels-photo-235534.jpeg?auto=compress&cs=tinysrgb&w=1600",
   "https://images.pexels.com/photos/1196338/pexels-photo-1196338.jpeg?auto=compress&cs=tinysrgb&w=1600",
 ];
+//comment
