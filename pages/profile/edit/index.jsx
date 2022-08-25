@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { DataContext } from "../../../store/globalState";
 import { userApi } from "../../../api-client/user";
 import Layout from "../../../components/Layout";
+import Image from "next/image";
 
 const editProfile = () => {
     const [count, setCount] = useState(1);
@@ -99,13 +100,14 @@ const editProfile = () => {
                                     <div className="file-upload avata-input">
                                         <input type="file" onChange={(e) => upload(e)} />
 
-                                       { isUpload && <img
-                                            id="prevew-img"
-                                            className="w-100 h-100"
-                                            src={''}
-                                            alt={user && user['fullName'] || ''}
-                                            style={{ border: "1px solid #fff", borderRadius: "50%" }}
-                                        />
+                                       { isUpload && 
+                                        <img
+                                                id="prevew-img"
+                                                className="w-100 h-100"
+                                                src={''}
+                                                alt={user && user['fullName'] || ''}
+                                                style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                                            />
                                         }
 
                                         {user && user['avatar'] && !isUpload ?
@@ -130,7 +132,7 @@ const editProfile = () => {
                             <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
                                 <h2 className="profile-usertitle-name"> {user['fullName'] || ""} </h2>
                             </div>
-                            <p className="profile-usertitle-job">Mobile</p>
+                            <p className="profile-usertitle-job">{user["phoneNumber"] || ""}</p>
                         </div>
 
                         <div className="profile-usermenu">

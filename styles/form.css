@@ -21,6 +21,9 @@
   border-radius: 15px;
   font-size: 20px;
 }
+.inputFomCustom:focus {
+  outline: none !important;
+}
 
 
 /* Custom INPUT OTP  */

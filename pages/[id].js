@@ -83,8 +83,8 @@ const Detail = ({ data }) => {
       {/* <Slide isDefault={false} /> */}
       <Slider02 text="Món ăn đang giảm giá" />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
-      <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div>
-      <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div>
+      {/* <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div>
+      <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div> */}
 
       <TabMenu />
       {show && <CartModal setShow={setShow} />}
