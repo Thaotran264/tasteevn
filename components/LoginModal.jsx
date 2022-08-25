@@ -53,8 +53,10 @@ function LoginModal({ btnStyle }) {
   };
 
   const login = async (params) => {
+    console.log('%cLoginModal.jsx line:56 params', 'color: #007acc;', params);
     try {
       const res = await accountAPI.login(params);
+      console.log(res)
       if (res.successful && res.data) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("userInfo", JSON.stringify(res.data));
@@ -87,14 +89,18 @@ function LoginModal({ btnStyle }) {
       setStatusInput(status);
     }
   };
-  const checkEmtyPhone = (phone) => {
-    let data = "0396296673";
-    if (phone == data) {
-      setStatusInput({ isEmptyPhone: true });
-      setTextButton({ btnSubmit: "Đăng nhập" });
-    } else {
-      setStatusInput({ isEmptyPhone: false, showFormRegister: true, showSendOTP: true });
-      setTextButton({ btnSubmit: "Đăng ký" });
+  const checkEmtyPhone = async (phone) => {
+    try {
+      const res = await accountAPI.checkPhoneExist(phone)
+      if (res && res.successful && res.data.isExist) {
+        setStatusInput({ isEmptyPhone: true });
+        setTextButton({ btnSubmit: "Đăng nhập" });
+      } else {
+        setStatusInput({ isEmptyPhone: false, showFormRegister: true, showSendOTP: true });
+        setTextButton({ btnSubmit: "Đăng ký" });
+      }
+    } catch (error) {
+
     }
   };
 

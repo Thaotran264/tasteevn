@@ -11,6 +11,8 @@ import Moment from 'moment';
 import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import { accountAPI } from "../../../../api-client/account";
+import { BiEdit } from "react-icons/bi";
+
 
 const TabInfor = ({ userDetail }) => {
   const [_isMobile, setMobile] = useState(false);
@@ -61,6 +63,8 @@ const TabInfor = ({ userDetail }) => {
         console.log(`Choise: ${ground.value}`);
       }
     })
+
+    console.log('%cindex.jsx line:67 user.gender', 'color: #007acc;', user.gender);
   }
   const changeDay = (e) => {
     var dayBirthday = document.getElementById('dayBirthday').value;
@@ -381,7 +385,6 @@ const TabInfor = ({ userDetail }) => {
                 <h5 className="title-section"> Số điện thoại và email </h5>
                 <div className="d-flex align-items-end justify-content-between  mb-3">
                   <span className="" style={{
-                    fontSize: '14px',
                     width: '80%',
                     overflow: 'hidden'
                   }} >
@@ -438,13 +441,13 @@ const TabInfor = ({ userDetail }) => {
                 <h5 className="title-section"> Bảo mật </h5>
 
                 <div className="d-flex align-items-center justify-content-between mb-3">
-                  <span className="" style={{ fontSize: 14, color: '#7f90a4' }}>
-                    <RiLockPasswordFill />  Đổi mật khẩu
+                  <span className="text-primary" onClick={handleShow}>
+                    <RiLockPasswordFill  />  Đổi mật khẩu
                     <br></br>
                   </span>
-                  <button type="button" className="btn btn-outline-primary rounded px-3" style={{ fontSize: 13 }} onClick={handleShow}>
-                    Cập nhật
-                  </button>
+                  {/* <button type="button" className="btn btn-outline-primary rounded px-3" style={{ fontSize: 13 }} onClick={handleShow}> */}
+                    <BiEdit className="text-primary" onClick={handleShow}/>
+                  {/* </button> */}
                   <Modal
                     show={show}
                     onHide={handleClose}

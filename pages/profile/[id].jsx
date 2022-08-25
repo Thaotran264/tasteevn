@@ -5,6 +5,7 @@ import  HistoryOrder  from './components/HistoryOrder';
 import Wishlist from './components/Wishlist'
 import { isMobile } from "react-device-detect";
 import WishlistShop from '../profile-desktop/components/wishlistShop';
+import ShippingAddress from '../profile-desktop/components/ShippingAddress';
 
 const ListProfilePage = () => {
     const router = useRouter();
@@ -20,6 +21,7 @@ const ListProfilePage = () => {
         {/* Profile:/ { id } */}
         { id == 'order' && <HistoryOrder /> }
         { id == 'wishlist' && <WishlistShop /> }
+        { id == 'adress' && <ShippingAddress /> }
      </div>
   )
 }

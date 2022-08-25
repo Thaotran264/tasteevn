@@ -20,6 +20,7 @@ import HistoryOrder from "./components/HistoryOrder";
 import { DataContext } from "../../store/globalState";
 import { useRouter } from "next/router";
 import WishlistShop from "./components/wishlistShop";
+import ShippingAddress from "./components/ShippingAddress";
 
 const Cart = () => {
   const [count, setCount] = useState(1);
@@ -133,6 +134,16 @@ const Cart = () => {
                         Lịch sử đặt bàn
                       </Nav.Link>
                     </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link
+                        eventKey="shippingAddress"
+                        onClick={() => {
+                          router.push("/profile-desktop?slug=so-dia-chi");
+                        }}
+                      >
+                        Sổ địa chỉ
+                      </Nav.Link>
+                    </Nav.Item>
                   </Nav>
                 </div>
 
@@ -187,7 +198,10 @@ const Cart = () => {
                 <Tab.Pane eventKey="historyOrder">
                   <HistoryOrder />
                 </Tab.Pane>
-                <Tab.Pane eventKey="historyBooking">Lịch sử Đặt bàn</Tab.Pane>
+                <Tab.Pane eventKey="historyBooking">Lịch sử Đặt bàn body</Tab.Pane>
+                <Tab.Pane eventKey="shippingAddress">
+                  <ShippingAddress />
+                </Tab.Pane>
               </Tab.Content>
             </Col>
           </Row>

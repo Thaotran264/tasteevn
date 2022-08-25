@@ -1,5 +1,6 @@
 import { AiFillEdit } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { BiEdit } from "react-icons/bi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FcAddImage } from "react-icons/fc";
 import Button from "react-bootstrap/Button";
@@ -46,12 +47,14 @@ const Infor = ({ userDetail }) => {
   };
   const onchangeGender = () => {
     var groundGendernames = document.getElementsByName("groundGender");
+
     groundGendernames.forEach((ground) => {
       if (ground.checked) {
         setUser({ ...user, gender: ground.value });
         console.log(`Choise: ${ground.value}`);
       }
     });
+    console.log(groundGendernames)
   };
   const changeDay = (e) => {
     var dayBirthday = document.getElementById("dayBirthday").value;
@@ -318,6 +321,7 @@ const Infor = ({ userDetail }) => {
                 <span>Giới tính</span>
                 <div className="d-flex gap-3 ps-3">
                   <input
+                    defaultChecked={ user.gender == "1" ? true : false}
                     value="1"
                     type="radio"
                     name="groundGender"
@@ -326,6 +330,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nữ
                   <input
+                     defaultChecked={ user.gender == "2" ? true : false}
                     value="2"
                     type="radio"
                     name="groundGender"
@@ -334,6 +339,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nam
                   <input
+                     defaultChecked={ user.gender == "3" ? true : false}
                     value="3"
                     type="radio"
                     name="groundGender"
@@ -361,7 +367,7 @@ const Infor = ({ userDetail }) => {
             <div className="box-infor">
               <h5 className="title-section"> Số điện thoại và email </h5>
               <div className="d-flex align-items-end justify-content-between  mb-3">
-                <span className=" w-100" style={{ fontSize: "14px", overflow: "hidden" }}>
+                <span className=" w-100" style={{  overflow: "hidden" }}>
                   Số điện thoại
                   <input
                     type="number"
@@ -405,18 +411,18 @@ const Infor = ({ userDetail }) => {
               <h5 className="title-section"> Bảo mật </h5>
 
               <div className="d-flex align-items-center justify-content-between mb-3">
-                <span className="" style={{ fontSize: 14, color: "#7f90a4" }}>
+                <span className="text-primary" onClick={handleShow}>
                   <RiLockPasswordFill /> Đổi mật khẩu
                   <br></br>
                 </span>
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-outline-primary rounded px-3"
                   style={{ fontSize: 13 }}
                   onClick={handleShow}
-                >
-                  Cập nhật
-                </button>
+                > */}
+                  <BiEdit className="text-primary" onClick={handleShow} />
+                {/* </button> */}
                 <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                   <Modal.Header closeButton>
                     <Modal.Title>Đổi mật khẩu</Modal.Title>
@@ -426,17 +432,17 @@ const Infor = ({ userDetail }) => {
                       <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
                         Mật khẩu cũ.
                       </label>
-                      <div className="d-flex">
+                      <div className="d-flex rounded border">
                         <input
                           value={changePass.password || ""}
                           onChange={(e) =>
                             setchangePass({ ...changePass, password: e.target.value })
                           }
                           type={showPass ? "text" : "password"}
-                          className="form-control inputFomCustom rounded w-75"
+                          className="form-control inputFomCustom border-end w-100 border-0"
                           id="exampleInputPassword1"
                         />
-                        <button className="btn btn-dark" onClick={() => setShowPass(!showPass)}>
+                        <button className="btn border-0" onClick={() => setShowPass(!showPass)}>
                           {" "}
                           {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                         </button>
@@ -447,18 +453,18 @@ const Infor = ({ userDetail }) => {
                       <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
                         Mật khẩu mới.
                       </label>
-                      <div className="d-flex">
+                      <div className="d-flex rounded border">
                         <input
                           value={changePass.newPassword || ""}
                           onChange={(e) =>
                             setchangePass({ ...changePass, newPassword: e.target.value })
                           }
                           type={showNewPass ? "text" : "password"}
-                          className="form-control inputFomCustom rounded w-75"
+                          className="form-control inputFomCustom border-end w-100 border-0"
                           id="exampleInputPassword1"
                         />
                         <button
-                          className="btn btn-dark"
+                          className="btn border-0"
                           onClick={() => setShowNewPass(!showNewPass)}
                         >
                           {" "}

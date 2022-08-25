@@ -144,14 +144,14 @@ const ProfileMobile = () => {
         </Card>
 
         <Card className="m-1">
-          <a href="/profile/edit">
+          <a href="/profile/adress?slug=so-dia-chi">
             <Card.Body>
               <div className="d-flex gap-3">
                 <div>
                   <FaAddressCard />
                 </div>
 
-                <span className="w-100">Sổ địa chỉ</span>
+                <span className="w-100">Sổ địa chỉ </span>
 
                 <div>
                   <BsChevronRight />

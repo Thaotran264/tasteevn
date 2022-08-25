@@ -18,5 +18,9 @@ export const accountAPI = {
     resendSmsCode(params) {
         const url = `/Users/resend-sms-code?AuthenId=${params}`;
         return axiosClient.post(url)
+    },
+    checkPhoneExist(params) {
+        const url = `/Users/check-phone-exist?phone=${params}`;
+        return axiosClient.post(url)
     }
 }
