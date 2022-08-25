@@ -2,9 +2,11 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { BsTrash } from "react-icons/bs";
+import Navbar from "../../components/Navbar";
 import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
-
+import Table from "react-bootstrap/Table";
+import Layout from "../../components/Layout";
 const Cart = () => {
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
@@ -14,14 +16,19 @@ const Cart = () => {
   const handleClick = (value) => {
     setCount(value);
   };
-  if (cart.length == 0) return <h2>Empty</h2>;
+  // if (cart.length == 0) return <h2>Empty</h2>;
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>Cart</title>
       </Head>
-      <div className="row py-3">
+      <div className="container py-3">
         <h4>Cart</h4>
+
+        <div className="d-flex justify-content-between align-items-center">
+          <p className="mb-0">Tổng tiền</p>
+          <span>20.000.000 đ</span>
+        </div>
         <hr />
         {cart &&
           cart.map((item) => (
@@ -67,5 +74,7 @@ const Cart = () => {
     </div>
   );
 };
-
+Cart.getLayout = function getLayout(Page) {
+  return <Layout>{Page}</Layout>;
+};
 export default Cart;

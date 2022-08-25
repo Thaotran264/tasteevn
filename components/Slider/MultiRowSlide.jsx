@@ -38,7 +38,7 @@ const MultiRowSlide = ({ item, text }) => {
       <Slider {...settings} className="">
         {listBrand.map((it, index) => (
           <div key={index}>
-            <img src={it} alt={it} className="rounded-circle mx-auto multiRowImg" />
+            <img src={it} alt={it} className="rounded mx-auto multiRowImg" />
           </div>
         ))}
         {/* {item &&

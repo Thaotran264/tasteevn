@@ -55,3 +55,13 @@
         height: 180px;
     }
 }
+
+.carousel-indicators {
+    margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+    .carousel-indicators {
+        margin-bottom: 30px;
+    }
+}

@@ -14,7 +14,7 @@ const CardItems = ({ item }) => {
         variant="top"
         src={item.image}
         onClick={() => handleViewBtn(item.brandId)}
-        style={{ height: 100 }}
+      // style={{ height: 100, objectFit: "contain" }}
       />
       <Card.Body>
         <Card.Title onClick={() => handleViewBtn(item.brandId)}>{item.brandName}</Card.Title>

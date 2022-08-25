@@ -4,14 +4,14 @@ import { listRes } from "../../db";
 const settings = {
   infinite: true,
   speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToShow: 5,
+  slidesToScroll: 5,
   responsive: [
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 1.5,
-        slidesToScroll: 1.5,
+        slidesToShow: 2.5,
+        slidesToScroll: 2.5,
         infinite: true,
       },
     },
@@ -19,7 +19,7 @@ const settings = {
 };
 const Slider02 = ({ item, text }) => {
   return (
-    <div className="py-4">
+    <div className="py-2">
       <h2>{text}</h2>
       {/* <Slider {...settings}>
         {item &&
@@ -36,7 +36,10 @@ const Slider02 = ({ item, text }) => {
       <Slider {...settings}>
         {listRes.map((item, index) => (
           <div key={index}>
-            <img src={item} alt={item} style={{ height: 200, width: "100%" }} />
+            <div>
+              <img className="rounded-4" src={item} alt={item} style={{ height: 140, width: "140px" }} />
+            </div>
+            <span>tẽt</span>
           </div>
         ))}
       </Slider>
