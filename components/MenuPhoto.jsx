@@ -172,8 +172,7 @@ const MenuPhoto = ({ isDefault, map }) => {
         <div className="mb-2">
           <div className="row">
             <div
-              className="col-12 col-md-6 showOnDesktop align-items-center"
-              style={{ aspectRatio: "1 / 1" }}
+              className="w-50 showOnDesktop align-items-center"
             >
               {parse(map.webMap)}
             </div>
@@ -182,8 +181,8 @@ const MenuPhoto = ({ isDefault, map }) => {
                 {parse(map.webMap)}
               </div>
             </div> */}
-            <div className="col-12 col-md-6">
-              <div className="thumb-3" style={{ aspectRatio: "1 / 1" }}>
+            <div className="w-50">
+              <div className="thumb-3">
                 <div className="box img1">
                   <img
                     src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600"
