@@ -14,10 +14,10 @@ const MobileMenu = ({ menuPos, menus }) => {
     <div className="hideOnDesktop">
       <ul
         className={`d-flex ps-0 overflow-scroll pb-2 ${menuPos && "position-fixed bg-light "}`}
-        style={menuPos ? { top: 0, width: "calc(100% - 24px)", zIndex: 99 } : {}}
+        style={menuPos ? { top: 0, left: 0, width: "100%", zIndex: 99 } : {}}
       >
         {menuList.map((item, index) => (
-          <li key={item.Id} className="py-2" style={{ listStyle: "none", minWidth: "35%" }}>
+          <li key={item.Id} className="p-2" style={{ listStyle: "none", minWidth: "35%", fontWeight: 600 }}>
             <a href={`#menuRC${index}`}>{item.Name}</a>
           </li>
         ))}
