@@ -181,21 +181,21 @@ const MenuPhoto = ({ isDefault, map }) => {
                 {parse(map.webMap)}
               </div>
             </div> */}
-            <div className="w-50">
-              <div className="thumb-3">
+            <div className="w-100">
+              <div className="thumb-3 h-100">
                 <div className="box img1">
                   <img
                     src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
                   />
                 </div>
-                <div className="box img2">
+                <div className="box img2" style={{ aspectRatio: '1/1' }}>
                   <img
                     src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
                   />
                 </div>
-                <div className="box img3 position-relative">
+                <div className="box img3 position-relative" style={{ aspectRatio: '1/1' }}>
                   <img
                     className="w-100 h-100"
                     src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
