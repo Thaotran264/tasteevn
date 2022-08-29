@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-15 16:48:49
- * @modify date 2022-08-23 16:21:22
+ * @modify date 2022-08-26 16:21:02
  * @desc [description]
  */
 /***
@@ -249,7 +249,7 @@ body {
 }
 
 .title-section {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--text-dark);
 }

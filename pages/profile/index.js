@@ -26,17 +26,18 @@ const ProfileMobile = () => {
     setMobile(isMobile);
   }, [_isMobile]);
 
-  useEffect(() => {
-    getDetailUser();
-  }, []);
+  // useEffect(() => {
+  //   getDetailUser();
+  // }, []);
 
   const getDetailUser = async () => {
     try {
-      const res = await userApi.getDetail();
-      if (res.status && res.data.successful) {
-        setUser(res.data.data);
+      const res = await userApi.getUserInfor();
+      if (res['successful']) {
+        setUser(res['userInfo']);
       }
     } catch (error) {
+      console.log(error)
       dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
       localStorage.removeItem("userInfo");
       localStorage.removeItem("token");
@@ -44,7 +45,15 @@ const ProfileMobile = () => {
     }
   };
 
-  console.log("%cindex.js line:14 user", "color: #007acc;", user);
+  const [username, setusername] = useState();
+  useEffect(() => {
+    let userInfor = JSON.parse(localStorage.getItem("userInfo")) || null;
+    console.log('%cindex.js line:50 userInfor', 'color: #007acc;', userInfor);
+    if (userInfor) {
+      setusername(userInfor);
+    }
+  }, []);
+
 
   const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
   const handleClick = (value) => {
@@ -61,11 +70,11 @@ const ProfileMobile = () => {
             <Card.Body className="p-3">
               <div className="d-flex gap-1">
                 <div className="w-25">
-                  {user && user["avatar"] ? (
+                  {username && username["avatar"] ? (
                     <img
                       className=""
-                      src={user["avatar"]}
-                      alt={user["fullName"]}
+                      src={username["avatar"]}
+                      alt={username["fullName"]}
                       style={{ border: "1px solid #fff", borderRadius: "50%", height: 80, width: 80 }}
                     />
                   ) : (
@@ -77,8 +86,8 @@ const ProfileMobile = () => {
                 </div>
 
                 <div className="w-75 pt-2 pb-2">
-                  <h3 className="profile-usertitle-name m-0"> {user["fullName"] || ""} </h3>
-                  <span className="profile-stat-text"> {user["email"] || ""} </span>
+                  <h3 className="profile-usertitle-name m-0"> {username && username["fullName"] || ""} </h3>
+                  <span className="profile-stat-text"> {username && username["status"] ? 'Đã kích hoạt' : "Chưa kích hoạt"} </span>
                 </div>
 
                 <div>

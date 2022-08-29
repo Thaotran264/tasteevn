@@ -6,15 +6,30 @@ import { BsPlusLg, BsChevronLeft } from 'react-icons/bs'
 import HandleSort from "../../../profile/components/handleSort";
 import { Card } from "react-bootstrap";
 import ModalAddresCRU from "../modalAddresCRU";
+import { adressApi } from "../../../../api-client/adressApi";
 
 
 const ShippingAddress = () => {
     const [_isMobile, setMobile] = useState(false);
     const [open, setOpen] = useState(false);
     const router = useRouter();
+    const [dataAddres, setDataAddres] = useState([]);
     useEffect(() => {
         setMobile(isMobile);
     }, [_isMobile]);
+
+    useEffect(() => {
+        getData()
+    }, []);
+
+    const getData = async () => {
+        try {
+            const res = await adressApi.getAddress()
+            setDataAddres(res)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className="profile-content custom-card-hover">
@@ -35,56 +50,25 @@ const ShippingAddress = () => {
 
             <div className="rounded w-100 bg-white p-2">
                 <hr className="my-1" />
-                <div className="p-2">
-                    <div className="d-flex gap-1 justify-content-between">
-                        <div className="">
-                            <p className="date-order">TRẦN VĂN THẠO <i className="color-success">Địa chỉ mặc định </i> </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Địa chỉ: <i className="text-dark">160/127 nguyễn văn quỳ, Phường Phú Thuận, Quận 7, Hồ Chí Minh</i> </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Điện thoại: <i className="text-dark">0343703379</i> </p>
+                {dataAddres && dataAddres.map((item =>
+                    <div key={item.id}>
+                        <div className="p-2" >
+                            <div className="d-flex gap-1 justify-content-between">
+                                <div className="">
+                                    <p className="date-order">{item.name}
+                                        {/* <i className="color-success">Địa chỉ mặc định</i> */}
+                                    </p>
+                                    <p style={{ color: 'var(--bs-gray-600)' }}> Địa chỉ: <i className="text-dark">{item.address}, {item.area}, {item.city}</i> </p>
+                                    <p style={{ color: 'var(--bs-gray-600)' }}> Điện thoại: <i className="text-dark">{item.phone}</i> </p>
+                                </div>
+                                <div className="w-25">
+                                    <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={item} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="w-25">
-                            <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={''} />
-                        </div>
+                        <hr />
                     </div>
-                </div>
-                <hr />
-
-                <div className="p-2">
-                    <div className="d-flex gap-1 justify-content-between">
-                        <div className="">
-                            <p className="date-order">NGUYỄN DIÊN SỸ ĐẠO </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Địa chỉ: <i className="text-dark">104/A10 đường số 2, phường 13, Quận 6, Hồ Chí Minh</i> </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Điện thoại: <i className="text-dark">0961547511</i> </p>
-                        </div>
-                        <div className="w-25">
-                            <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={''} />
-                        </div>
-                    </div>
-                </div>
-                <hr />
-
-                <div className="p-2">
-                    <div className="d-flex gap-1 justify-content-between">
-                        <div className="">
-                            <p className="date-order">NGUYỄN DIÊN SỸ ĐẠO </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Địa chỉ: <i className="text-dark">104/A10 đường số 2, phường 13, Quận 6, Hồ Chí Minh</i> </p>
-                            <p style={{ color: 'var(--bs-gray-600)' }}> Điện thoại: <i className="text-dark">0961547511</i> </p>
-                        </div>
-                        <div className="w-25">
-                            <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={''} />
-                        </div>
-                    </div>
-                </div>
-                <hr />
-
-
-
-                {/* <button
-                    className="btn btn-outline-dark rounded mb-3"
-                    style={{ fontSize: 14, opacity: 0.8 }}
-                >
-                    Xem thêm 
-                </button> */}
+                ))}
 
 
             </div>

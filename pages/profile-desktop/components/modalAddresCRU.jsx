@@ -1,24 +1,46 @@
-import React, { useEffect, useState } from 'react';
+/**
+ * @author [daoNguyen]
+ * @email [daonds@vinorsoft.com ]
+ * @create date 2022-08-26 17:01:35
+ * @modify date 2022-08-26 17:01:35
+ * @desc [description]
+ */
+ import React, { useContext, useEffect, useState } from "react";
+ import { DataContext } from "../../../store/globalState";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { adressApi } from '../../../api-client/adressApi';
 
 function ModalAddresCRU({ text, clasNameCustom, item }) {
-    const [addressData, setAddressData] = useState({})
+    const [addressData, setAddressData] = useState(item ? item : {})
+    const { state, dispatch } = useContext(DataContext);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [cities, setCities] = useState([])
     const [areas, setAreas] = useState([])
+    
+
     useEffect(() => {
         if (show) {
             cities?.length <= 0 ? getCities() : ''
         }
     }, [show])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        console.log('%cmodalAddresCRU.jsx line:20 onSubmit', 'color: #007acc;', addressData);
+        try {
+            const res = await adressApi.setAddress(addressData)
+            if(res && res.successful) {
+                dispatch({ type: "NOTIFY", payload: { success: res.message ? res.message : "Đã tạo thành công" } });
+                handleClose()
+            }
+            else{
+                dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại" } });
+            }
+        } catch (error) {
+            dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng kiểm tra lại" } });
+        }
 
     }
 
@@ -26,7 +48,7 @@ function ModalAddresCRU({ text, clasNameCustom, item }) {
         try {
             const res = await adressApi.getCities()
             console.log(res)
-            setCities(res?.data)
+            setCities(res)
         } catch (error) {
             console.log('%cmodalAddresCRU.jsx line:15 error', 'color: #007acc;', error);
         }
@@ -36,7 +58,7 @@ function ModalAddresCRU({ text, clasNameCustom, item }) {
         try {
             const res = await adressApi.getAreasByCity(id)
             console.log(res)
-            setAreas(res?.data)
+            setAreas(res)
         } catch (error) {
             console.log('%cmodalAddresCRU.jsx line:15 error', 'color: #007acc;', error);
         }
@@ -48,8 +70,8 @@ function ModalAddresCRU({ text, clasNameCustom, item }) {
         let option = select.options[select.selectedIndex];
         setAddressData({
             ...addressData,
-            citieID: option.value,
-            city: option.text
+            city: option.value,
+            cityName: option.text
         })
         getAreas(option.value)
     }
@@ -58,8 +80,8 @@ function ModalAddresCRU({ text, clasNameCustom, item }) {
         let option = select.options[select.selectedIndex];
         setAddressData({
             ...addressData,
-            areaID: option.value,
-            area: option.text
+            area: option.value,
+            areaName: option.text
         })
     }
 
@@ -99,7 +121,7 @@ function ModalAddresCRU({ text, clasNameCustom, item }) {
                                 <label htmlFor="Tỉnh/ Thành phố">Tỉnh/ Thành phố</label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <select name="day" id="cities-select" className="w-100 rounded p-1" onChange={changeCities}>
+                                <select  name="day" id="cities-select" className="w-100 rounded p-1" onChange={changeCities}>
                                     <option value="0">Tỉnh/ Thành phố</option>
                                     {cities?.map((item, index) =>
                                         <option key={item.id} value={item.id}>{item.name}</option>

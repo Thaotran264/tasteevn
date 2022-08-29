@@ -29,7 +29,6 @@ function HandleSort({ isOpen, setOpen }) {
       setIsShowRangeDate(false);
     }
   };
-  console.log("%chandleSort.jsx line:16 stateDateRange", "color: #007acc;", stateDateRange);
   return (
     <>
       <Collapse in={isOpen}>

@@ -56,17 +56,18 @@ function LoginModal({ btnStyle }) {
     console.log('%cLoginModal.jsx line:56 params', 'color: #007acc;', params);
     try {
       const res = await accountAPI.login(params);
-      console.log(res)
-      if (res.successful && res.data) {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("userInfo", JSON.stringify(res.data));
+      // if (res.successful && res.data) {
+        console.log('huahduhauhđâsd',res)
+        localStorage.setItem("token", JSON.stringify(res.token));
+        localStorage.setItem("userInfo", JSON.stringify(res));
         dispatch({ type: "NOTIFY", payload: { success: res.successful } });
+
         handleClose();
         router.push("/");
         window.location.reload();
-      } else {
-        dispatch({ type: "NOTIFY", payload: { error: res.error } });
-      }
+      // } else {
+      //   dispatch({ type: "NOTIFY", payload: { error: res.error } });
+      // }
     } catch (error) {
       console.log(error);
     }

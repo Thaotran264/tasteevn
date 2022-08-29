@@ -39,9 +39,10 @@ const Cart = () => {
   useEffect(() => {
     const getDetailUser = async () => {
       try {
-        const res = await userApi.getDetail();
-        if (res.status && res.data.successful) {
-          setUser(res.data.data);
+        const res = await userApi.getUserInfor();
+        if (res['successful']) {
+          console.log('%cindex.js line:43 getDetail', 'color: #007acc;', res['successful']);
+          setUser(res['userInfo']);
         }
       } catch (error) {
         dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
@@ -52,9 +53,6 @@ const Cart = () => {
     };
     getDetailUser();
   }, []);
-
-  console.log("%cindex.js line:14 user", "color: #007acc;", user);
-
   const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
   const handleClick = (value) => {
     setCount(value);
