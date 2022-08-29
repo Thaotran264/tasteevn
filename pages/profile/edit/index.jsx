@@ -37,13 +37,10 @@ const editProfile = () => {
     const upload = (e) => {
         setIsUpload(true)
         setUser({ ...user, avatar: e.target.files[0] })
-        console.log('%cindex.jsx fghjkl', 'color: #007acc;', user.avatar);
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
-        console.log('%cindex.jsx line:41 reader', 'color: #007acc;', reader.result);
         reader.onload = function () {
             var output = document.getElementById('prevew-img');
-            console.log('first output', output)
             output.src = reader.result ? reader.result : '';
         };
         console.log(reader)
@@ -52,22 +49,22 @@ const editProfile = () => {
 
     useEffect(() => {
         const getDetailUser = async () => {
-            try {
-                const res = await userApi.getDetail();
-                if (res.status && res.data.successful) {
-                    setUser(res.data.data);
-                }
-            } catch (error) {
-                dispatch({ type: "NOTIFY", payload: { error: 'Đã xảy ra lỗi vui lòng đăng nhập lại' } });
-                localStorage.removeItem("userInfo");
-                localStorage.removeItem("token");
-                window.location.replace('/');
+          try {
+            const res = await userApi.getUserInfor();
+            if (res['successful']) {
+              setUser(res['userInfo']);
             }
+          } catch (error) {
+            console.log(error)
+            dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
+            localStorage.removeItem("userInfo");
+            localStorage.removeItem("token");
+            window.location.replace("/");
+          }
         };
         getDetailUser();
-    }, []);
+      }, []);
 
-    console.log("%cindex.js line:14 user", "color: #007acc;", user);
 
     const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
     const handleClick = (value) => {
@@ -136,7 +133,7 @@ const editProfile = () => {
                         </div>
 
                         <div className="profile-usermenu">
-                            <Infor userDetail={user} />
+                            <Infor userDetail={user } />
                         </div>
                     </div>
                 </Tab.Container>

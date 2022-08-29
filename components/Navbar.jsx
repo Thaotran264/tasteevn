@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { isMobile } from "react-device-detect";
 import { BsCartCheck, BsSearch } from "react-icons/bs";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../store/globalState";
 import LoginModal from "./LoginModal";
 import Search from "./Search";
@@ -20,11 +20,10 @@ const Navbar = () => {
     console.log("first");
     setShowSearch(!showSearch);
   };
-
   useEffect(() => {
     let name = JSON.parse(localStorage.getItem("userInfo")) || "";
     if (name) {
-      setusername(name.fullName);
+      setusername(name);
     }
   }, []);
 
@@ -110,7 +109,7 @@ const Navbar = () => {
           </div>
           {/* CTA */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user d-none showOnDesktop">
-            <div className="d-flex justify-content-around align-items-center w-100">
+            <div className="d-flex justify-content-around align-items-center w-100 align-items-center">
               <Link href="/cart">
                 <a className="text-decoration-none d-flex align-items-center hideOnMobile">
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
@@ -120,26 +119,27 @@ const Navbar = () => {
               {username ? (
                 <Dropdown>
                   <Dropdown.Toggle
-                    variant="success"
                     id="dropdown-menu-align-responsive-1"
-                    className="rounded"
+                    className="border-0"
                   >
-                    <span
-                      className="text-light bg-secondary rounded"
+                    <div
+                    className="d-flex gap-1"
                       style={{
-                        width: 30,
-                        height: "30px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "1px solid #fff",
-                        borderRadius: 50,
-                        textAlign: "center",
-                        padding: 5,
+                        width: 44,
+                        height: 44,
+                        borderRadius: '20px',
                       }}
                     >
-                      {username && username.charAt(0)}
-                    </span>
+                    <span className="d-flex align-items-center"> {username && username.fullName} </span>  
+                      <img
+                      className="m-0 p-0"
+                        style={{
+                          borderRadius: '20px',
+                        }} 
+                        src={username.avatar}>
+                        </img>
+                    </div>
+
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

@@ -11,8 +11,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   env: {
-     BASE_URL: 'https://tmerchant.tastee.vn/api',
-     API_TEST: 'http://test.tastee.vn/api'
+    //  BASE_URL: 'https://tmerchant.tastee.vn/api',
+     BASE_URL: 'https://test.tastee.vn',
+     API_TEST: 'https://test.tastee.vn'
   }
 }
 

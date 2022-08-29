@@ -30,6 +30,7 @@ const Infor = ({ userDetail }) => {
     let [d, m, y] = birthdayFormat.split("-");
     setBirthday({ d: d, m: m, y: y });
   }, [userDetail]);
+
   const handleChangePass = async () => {
     try {
       const res = await userApi.changePassword(changePass);
@@ -114,7 +115,7 @@ const Infor = ({ userDetail }) => {
                   required
                   className="inputFomCustom rounded w-75"
                   onChange={(e) => setUser({ ...user, fullName: e.target.value })}
-                  value={user["fullName"]}
+                  value={user["fullName"] || ''}
                   type="text"
                   placeholder="Họ và tên"
                 />
@@ -123,7 +124,7 @@ const Infor = ({ userDetail }) => {
                 <span>Ngày sinh </span>
                 <div className="d-flex gap-3">
                   <select
-                    value={birthday.d}
+                    value={birthday.d || ''}
                     name="day"
                     id="dayBirthday"
                     className="rounded p-1"
@@ -163,7 +164,7 @@ const Infor = ({ userDetail }) => {
                     <option value="31">31</option>
                   </select>
                   <select
-                    value={birthday.m}
+                    value={birthday.m || ''}
                     name="month"
                     id="monthBirthday"
                     className="rounded p-1"
@@ -184,7 +185,7 @@ const Infor = ({ userDetail }) => {
                     <option value="12">12</option>
                   </select>
                   <select
-                    value={birthday.y}
+                    value={birthday.y || ''}
                     name="year"
                     id="yearBirthday"
                     className="rounded p-1"
@@ -355,7 +356,7 @@ const Infor = ({ userDetail }) => {
                   required
                   className="inputFomCustom rounded w-75"
                   onChange={(e) => setUser({ ...user, address: e.target.value })}
-                  value={user["address"]}
+                  value={user["address"] || ''}
                   type="text"
                   placeholder="Địa chỉ"
                 />
@@ -394,7 +395,7 @@ const Infor = ({ userDetail }) => {
                     type="email"
                     className="border-dark border-bottom w-100"
                     placeholder="Tên"
-                    value={user["email"]}
+                    value={user["email"]  || ''}
                     required
                     onChange={(e) => setUser({ ...user, email: e.target.value })}
                     style={{

@@ -64,7 +64,6 @@ const TabInfor = ({ userDetail }) => {
       }
     })
 
-    console.log('%cindex.jsx line:67 user.gender', 'color: #007acc;', user.gender);
   }
   const changeDay = (e) => {
     var dayBirthday = document.getElementById('dayBirthday').value;
@@ -108,7 +107,6 @@ const TabInfor = ({ userDetail }) => {
     } catch (error) {
       console.log('error', error);
     }
-    console.log('%cTabInfor.jsx line:54 user', 'color: #007acc;', user);
 
   }
 
@@ -121,8 +119,6 @@ const TabInfor = ({ userDetail }) => {
       output.src = reader.result;
 
     };
-    console.log(reader)
-    
   }
   return (
     <div className="profile-content">
@@ -144,7 +140,7 @@ const TabInfor = ({ userDetail }) => {
                         <input type="file" onChange={(e) => upload(e)} />
                         {user && user['avatar'] ?
                           <img
-                          id="prevew-img"
+                            id="prevew-img"
                             className="w-100 h-100"
                             src={user && user['avatar'] || ''}
                             alt={user && user['fullName'] || ''}
@@ -362,9 +358,30 @@ const TabInfor = ({ userDetail }) => {
                       Giới tính
                     </span>
                     <div className="d-flex gap-3 ps-3">
-                      <input value="1" type="radio" name="groundGender" placeholder="Giới tính" onChange={() => onchangeGender()} /> Nữ
-                      <input value="2" type="radio" name="groundGender" placeholder="Giới tính" onChange={() => onchangeGender()} /> Nam
-                      <input value="3" type="radio" name="groundGender" placeholder="Giới tính" onChange={() => onchangeGender()} /> Khác
+                      <input
+                        defaultChecked={user.gender == "1" ? true : false}
+                        value="1"
+                        type="radio"
+                        name="groundGender"
+                        placeholder="Giới tính"
+                        onChange={() => onchangeGender()}
+                      /> Nữ
+                      <input
+                        defaultChecked={user.gender == "2" ? true : false}
+                        value="2"
+                        type="radio"
+                        name="groundGender"
+                        placeholder="Giới tính"
+                        onChange={() => onchangeGender()}
+                      /> Nam
+                      <input
+                        defaultChecked={user.gender == "3" ? true : false}
+                        value="3"
+                        type="radio"
+                        name="groundGender"
+                        placeholder="Giới tính"
+                        onChange={() => onchangeGender()}
+                      /> Khác
                     </div>
 
                   </div>
@@ -442,11 +459,11 @@ const TabInfor = ({ userDetail }) => {
 
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <span className="text-primary" onClick={handleShow}>
-                    <RiLockPasswordFill  />  Đổi mật khẩu
+                    <RiLockPasswordFill />  Đổi mật khẩu
                     <br></br>
                   </span>
                   {/* <button type="button" className="btn btn-outline-primary rounded px-3" style={{ fontSize: 13 }} onClick={handleShow}> */}
-                    <BiEdit className="text-primary" onClick={handleShow}/>
+                  <BiEdit className="text-primary" onClick={handleShow} />
                   {/* </button> */}
                   <Modal
                     show={show}
