@@ -41,7 +41,6 @@ const Cart = () => {
       try {
         const res = await userApi.getUserInfor();
         if (res['successful']) {
-          console.log('%cindex.js line:43 getDetail', 'color: #007acc;', res['successful']);
           setUser(res['userInfo']);
         }
       } catch (error) {

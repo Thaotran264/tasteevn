@@ -20,5 +20,17 @@ export const adressApi = {
         return axiosAPI2.get(`/api/Areas/by-city/${id}`);
     },
 
+    setDefault(id) {
+        const url = `/Users/shipping_address/set_default?Id=${id}`;
+        return axiosAuth.post(url)
+    },
+
+    deleteAddress(id) {
+        const url = `/Users/shipping_address/delete?Id=${id}`;
+        return axiosAuth.post(url)
+    },
+
+    
+
     
 }
