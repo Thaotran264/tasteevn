@@ -170,7 +170,7 @@ const MenuPhoto = ({ isDefault, map }) => {
       )}
       {!isDefault && (
         <div className="mb-2">
-          <div className="row">
+          <section className="d-flex gap-1">
             <div
               className="w-50 showOnDesktop align-items-center"
             >
@@ -181,27 +181,33 @@ const MenuPhoto = ({ isDefault, map }) => {
                 {parse(map.webMap)}
               </div>
             </div> */}
-            <div className="w-100">
-              <div className="thumb-3 h-100">
+            <div className="w-50 ">
+              <div className="thumb-3 rounded">
                 <div className="box img1">
                   <img
+                    className="border border-light"
                     src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
                   />
                 </div>
                 <div className="box img2" style={{ aspectRatio: '1/1' }}>
                   <img
+                    className="border border-light"
                     src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
+                    style={{ borderTopRightRadius: 6 }}
+
                   />
                 </div>
                 <div className="box img3 position-relative" style={{ aspectRatio: '1/1' }}>
                   <img
-                    className="w-100 h-100"
+                    className="border border-light"
                     src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
+                    style={{ borderBottomRightRadius: 6 }}
+
                   />
-                  <div
+                  {/* <div
                     className="position-absolute bg-dark bg-opacity-50"
                     style={{
                       width: `calc(100% - 10px)`,
@@ -211,11 +217,11 @@ const MenuPhoto = ({ isDefault, map }) => {
                     }}
                   >
                     <h2 className="text-center text-light">+9</h2>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       )}
     </>

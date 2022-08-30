@@ -9,9 +9,9 @@ const CartModal = ({ setShow }) => {
       justify-content-center"
       style={{ zIndex: 100 }}
     >
-      <div className="rounded px-2 py-4 d-flex flex-column align-items-center bg-light bg-opacity-75 cart-container position-relative">
+      <div className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative">
         <h2 className="cart-title">Thông tin giỏ hàng</h2>
-        <div className="w-100">
+        <div className="w-100 overflow-auto mb-2 py-2 bg-white rounded" style={{ height: 300 }}>
           <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative">
             <div className="me-2">
               <img
@@ -38,47 +38,58 @@ const CartModal = ({ setShow }) => {
             </div>
             <button className="btn position-absolute top-0 p-0" style={{ right: 5 }}><AiOutlineClose className="text-danger" /></button>
           </div>
-          <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2">
+          <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative">
             <div className="me-2">
               <img
                 className="rounded"
                 src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 alt=""
-                style={{ width: 100, height: 80 }}
+                style={{ width: 80, height: 80 }}
               />
             </div>
-            <div className="px-2">
-              <h4 className="cart-item-title">Mì Kim chi Bò Úc</h4>
-              <span className="cart-item-price">55.000 đ</span>
-              <div>
-                <button className="btn btn-outline-success rounded-circle">-</button>
-                <span className="mx-2">0</span>
-                <button className="btn btn-outline-success rounded-circle">+</button>
+            <div className="px-2 w-100">
+              <h4 className="cart-item-title">Mì Tomyum Bò Úc</h4>
+              <div className="d-flex w-100 justify-content-between align-items-end">
+                <div>
+                  <span className="cart-item-price text-danger mb-0">52.000 đ</span>
+                  <br />
+                  <span className="cart-item-price  mb-0" style={{ textDecoration: ' line-through' }}>55.000 đ</span>
+                </div>
+                <div>
+                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlineMinus style={{ fontSize: 16, color: 'orange' }} /></button>
+                  <span className="mx-2">0</span>
+                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlinePlus style={{ fontSize: 16, color: 'orange' }} /></button>
+                </div>
               </div>
             </div>
-            <button className="btn btn-outline-danger ms-auto">Xoá</button>
+            <button className="btn position-absolute top-0 p-0" style={{ right: 5 }}><AiOutlineClose className="text-danger" /></button>
           </div>
-          <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2">
+          <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative">
             <div className="me-2">
               <img
                 className="rounded"
                 src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 alt=""
-                style={{ width: 100, height: 80 }}
+                style={{ width: 80, height: 80 }}
               />
             </div>
-            <div className="px-2">
-              <h4 className="cart-item-title">Mì Kim chi Bò Úc</h4>
-              <span className="cart-item-price">55.000 đ</span>
-              <div>
-                <button className="btn btn-outline-success rounded-circle">-</button>
-                <span className="mx-2">0</span>
-                <button className="btn btn-outline-success rounded-circle">+</button>
+            <div className="px-2 w-100">
+              <h4 className="cart-item-title">Mì Tomyum Bò Úc</h4>
+              <div className="d-flex w-100 justify-content-between align-items-end">
+                <div>
+                  <span className="cart-item-price text-danger mb-0">52.000 đ</span>
+                  <br />
+                  <span className="cart-item-price  mb-0" style={{ textDecoration: ' line-through' }}>55.000 đ</span>
+                </div>
+                <div>
+                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlineMinus style={{ fontSize: 16, color: 'orange' }} /></button>
+                  <span className="mx-2">0</span>
+                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlinePlus style={{ fontSize: 16, color: 'orange' }} /></button>
+                </div>
               </div>
             </div>
-            <button className="btn btn-outline-danger ms-auto">Xoá</button>
+            <button className="btn position-absolute top-0 p-0" style={{ right: 5 }}><AiOutlineClose className="text-danger" /></button>
           </div>
-          <hr className="mt-0" />
         </div>
 
         <div className=" justify-content-between w-100 rounded bg-white p-2 mb-4">

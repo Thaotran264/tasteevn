@@ -15,6 +15,7 @@ import { DataContext } from "../store/globalState";
 import Slider02 from "../components/Slider/Slider02";
 import { BsCartCheck } from "react-icons/bs";
 import CartModal from "../components/Modal/CartModal";
+import Default from "../components/KhongGianPic/Default";
 
 export async function getStaticPaths() {
   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -76,21 +77,22 @@ const Detail = ({ data }) => {
     router.push("/cart");
   };
   return (
-    <div className={`container ${show && "vh-100 overflow-hidden"}`}>
+    <div className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
       <Banner banner={banner} />
       <InfoDefault setShowBooking={setShowBooking} isDefault={false} data={info} />
-      <MenuPhoto isDefault={false} map={info} />
+      {/* <MenuPhoto isDefault={false} map={info} /> */}
+      <Default map={info} />
       {/* <Slide isDefault={false} /> */}
       <Slider02 text="Món ăn đang giảm giá" />
       {/* <Menu isDefault={false} menuPos={menuPos} /> */}
-      {/* <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div>
-      <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div> */}
+      {/* <div ref={mbref}>{widgets && <MobileMenu menuPos={menuPos} menus={widgets[2]} />}</div> */}
+      {/* <div ref={mbDref}>{widgets && <DesktopMenu menuPos={menuDeskPos} menus={widgets[2]} />}</div> */}
 
       <TabMenu />
       {show && <CartModal setShow={setShow} />}
       <button
-        className="btn btn-light position-fixed hideOnDeskTop"
-        style={{ bottom: "80px", right: "15px", zIndex: 99 }}
+        className="btn position-fixed hideOnDeskTop"
+        style={{ bottom: "80px", right: "15px", zIndex: 99, backgroundColor: 'royalblue', color: 'white' }}
         onClick={handleShow}
       >
         <span>

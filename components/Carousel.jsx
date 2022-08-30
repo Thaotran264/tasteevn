@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import { listImg, listRes } from "../db";
+import { listRes, listBrand } from "../db";
 const CarouselComponent = ({ data }) => {
   return (
     <Carousel className="mb-2 rounded">
