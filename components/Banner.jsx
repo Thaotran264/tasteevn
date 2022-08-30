@@ -6,7 +6,7 @@ const Banner = ({ banner }) => {
       <img
         src={banner && banner}
         alt=""
-        className="w-100 h-100 d-block"
+        className="w-100 h-100 d-block rounded"
         style={{ objectFit: "cover" }}
       />
     </div>

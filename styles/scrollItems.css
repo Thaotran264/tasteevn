@@ -1,11 +1,16 @@
 .group .list {
-    width: 100%;
-    overflow: scroll;
-    /* IE scroll 숨김 */
-    -ms-overflow-style: none;
-  }
-  
-  .list::-webkit-scrollbar { 
-    width: 0 !important;
-    display: none; 
-  }
+  width: 100%;
+  overflow: scroll;
+  /* IE scroll 숨김 */
+  -ms-overflow-style: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}

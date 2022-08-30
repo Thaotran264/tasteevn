@@ -28,11 +28,27 @@ export const listRes = [
 ];
 
 export const listBrand = [
-  "https://images.pexels.com/photos/683039/pexels-photo-683039.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/143642/pexels-photo-143642.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/175711/pexels-photo-175711.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/799869/pexels-photo-799869.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/702251/pexels-photo-702251.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/1070945/pexels-photo-1070945.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  "https://images.pexels.com/photos/2530586/pexels-photo-2530586.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  'https://i.pinimg.com/236x/37/da/46/37da4665c432c2a236deea82d7c6e46f.jpg',
+  'https://i.pinimg.com/236x/d0/e9/e4/d0e9e4e4c0e2d973613c8f47618f0be6.jpg',
+  'https://i.pinimg.com/236x/cd/2a/c5/cd2ac5ca01a88725e465740c8c4754b1.jpg',
+  'https://i.pinimg.com/236x/b4/45/b1/b445b19341bc9bbed41cf5fd5538152d.jpg',
+  'https://i.pinimg.com/236x/f5/f7/2c/f5f72c3c240f18c5238615a92adcedc3.jpg',
+  'https://i.pinimg.com/236x/9b/df/1b/9bdf1bd6797aa6c29ce738d84ea89201.jpg',
+  'https://i.pinimg.com/236x/a1/04/14/a104143ad4034de47d29bcbae7a7e993.jpg',
+  'https://i.pinimg.com/236x/be/e7/fb/bee7fbbabafd68d61f518ba14c38541f.jpg',
+  'https://i.pinimg.com/236x/66/f6/79/66f6799a43cd4bca5c3136976e9fc274.jpg',
+  'https://i.pinimg.com/236x/f5/9a/c7/f59ac7f93016380f14dc7f6cb4b9eaa8.jpg',
+  'https://i.pinimg.com/236x/ae/ea/22/aeea226ece74b24735ca37a20154889d.jpg',
+  'https://i.pinimg.com/236x/3b/c9/16/3bc916f20283b9850c69b057e69816b6.jpg'
 ];
+
+
+export const listBanner = [
+  'https://i.pinimg.com/236x/d6/65/61/d665610b76b375525a7c2e2610610bfb.jpg',
+  'https://i.pinimg.com/236x/f3/3f/64/f33f64fc81502d60e4ef960ee3aa7d63.jpg',
+  'https://i.pinimg.com/236x/60/20/85/602085815961302bd71d06d8136c1651.jpg',
+  'https://i.pinimg.com/236x/aa/25/e4/aa25e4f9a431708406bc642b235ba216.jpg',
+  'https://i.pinimg.com/236x/63/cb/e9/63cbe930d70f83fcd34520ba1a5f4ed6.jpg',
+  'https://i.pinimg.com/236x/26/81/b1/2681b1b69634981fb2bfd657048017a4.jpg'
+]
+

@@ -45,9 +45,9 @@ const ProfileMobile = () => {
     }
   };
 
-  const [username, setusername] = useState();
+  const [username, setusername] = useState('');
   useEffect(() => {
-    let userInfor = JSON.parse(localStorage.getItem("userInfo")) || null;
+    let userInfor = JSON.parse(localStorage.getItem("userInfo") || '' );
     console.log('%cindex.js line:50 userInfor', 'color: #007acc;', userInfor);
     if (userInfor) {
       setusername(userInfor);

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { DataContext } from "../store/globalState";
-
+import { AiOutlineClose } from 'react-icons/ai'
 const Toast = ({ msg, handleShow, bgColor }) => {
   const { state, dispatch } = useContext(DataContext);
   useEffect(() => {
@@ -12,13 +12,17 @@ const Toast = ({ msg, handleShow, bgColor }) => {
       clearTimeout(idTime)
     }
   }, [])
-  
+
   return (
-    <div
-      className={`toast show position-fixed text-light ${bgColor}`}
-      style={{ top: "55px", right: "5px", zIndex: 9, minWidth: "280px" }}
+    <article
+      className={`toast show position-fixed text-light rounded p-2`}
+      style={{ bottom: "68px", right: 12, zIndex: 9, minWidth: "280px", backgroundColor: `${bgColor}` }}
     >
-      <div
+      <div className='d-flex align-items-center justify-content-between '>
+        <p className="mb-0 text-light pl-2">{msg.msg}</p>
+        <button className="border rounded p-2" style={{ backgroundColor: 'transparent' }}><AiOutlineClose style={{ color: '#fff' }} /></button>
+      </div>
+      {/* <div
         className={`toast-header ${bgColor} text-light d-flex justify-content-between`}
       >
         <strong className="mr-auto text-light">{msg.title}</strong>
@@ -32,10 +36,10 @@ const Toast = ({ msg, handleShow, bgColor }) => {
         >
           x
         </button>
-      </div>
+      </div> */}
 
-      <div className="toast-body">{msg.msg}</div>
-    </div>
+      {/* <div className="toast-body">{msg.msg}</div> */}
+    </article>
   );
 };
 
