@@ -60,7 +60,7 @@ function LoginModal({ btnStyle }) {
       if (res.successful && res.data) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("userInfo", JSON.stringify(res.data));
-        dispatch({ type: "NOTIFY", payload: { success: "Đăng nhập thành công" } });
+        dispatch({ type: "NOTIFY", payload: { success: res.successful } });
         handleClose();
         router.push("/");
         window.location.reload();
