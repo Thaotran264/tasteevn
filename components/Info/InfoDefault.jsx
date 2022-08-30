@@ -10,15 +10,15 @@ const InfoDefault = ({ setShowBooking, isDefault, data }) => {
   return (
     <div className="rounded bg-white bg-opacity-75">
       <div className="row mx-0">
-        <div className="col-3 col-md-2 d-flex py-2 justify-content-center align-items-center">
+        <div className="col-5 col-md-5 d-flex py-2 justify-content-center align-items-center">
           <div className="w-100">
-            <img src={data && data.logo} className="rounded-circle d-block w-100 " />
+            <img src='https://i.pinimg.com/236x/aa/25/e4/aa25e4f9a431708406bc642b235ba216.jpg' className="mx-auto border border-dark rounded-circle d-block" style={{ width: 130, height: 130 }} />
           </div>
         </div>
-        <div className="col-9 col-md-10 py-2 px-0">
+        <div className="col-7 col-md-7 py-2 px-0">
           <div className="">
-            <h2 style={{ fontSize: 16 }}>{data.name}</h2>
-            <p className="" style={{ fontSize: 14 }}>
+            <h2 style={{ fontSize: 24 }}>{data.name}</h2>
+            <p className="mb-1" style={{ fontSize: 14 }}>
               {data.address}
             </p>
             <div className="d-flex gap-1 align-items-center">
@@ -27,10 +27,10 @@ const InfoDefault = ({ setShowBooking, isDefault, data }) => {
                 06:00 - 22:00{" "}
               </p>
               <div className="d-flex gap-1  ">
-                <button className="btn btn-outline-dark" href="#menu">
+                <button className="btn " href="#menu">
                   <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="" />
                 </button>
-                <button className="btn btn-outline-danger" onClick={() => setShowBooking(true)}>
+                <button className="btn " onClick={() => setShowBooking(true)}>
                   <MdOutlineChair style={{ fontSize: 24 }} className="" />
                 </button>
               </div>

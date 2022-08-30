@@ -1,5 +1,5 @@
 .slick-list {
-    margin: 0 -30px;
+    margin: 0 -5px;
 }
 
 .slick-slide>div>div {
@@ -45,8 +45,8 @@
 }
 
 .multiRowImg {
-    width: 160px;
-    height: 160px;
+    width: 100px;
+    height: 100px;
 }
 
 @media (min-width: 992px) {

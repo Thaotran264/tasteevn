@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import { listRes } from "../../db";
+import { listBrand } from "../../db";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -30,9 +30,9 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 2.5,
-        slidesToScroll: 1,
         infinite: false,
+        slidesToShow: 1.5,
+        slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
       },
@@ -42,26 +42,14 @@ const settings = {
 
 const Slider02 = ({ item, text }) => {
   return (
-    <div className="py-2">
-      <h2>{text}</h2>
-      {/* <Slider {...settings}>
-        {item &&
-          item.map((item) => (
-            <div key={item.id}>
-              <img
-                className="rounded"
-                src="https://images.pexels.com/photos/1648023/pexels-photo-1648023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt={item.image}
-              />
-            </div>
-          ))}
-      </Slider> */}
-      <div className="mx-auto" style={{ width: '85%' }}>
+    <div className="p-2 bg-white rounded mb-2">
+      <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
+      <div className="mx-auto" style={{ width: '100%' }}>
         <Slider {...settings}>
-          {listRes.map((item, index) => (
+          {listBrand.map((item, index) => (
             <div key={index} className=''>
               <div className="d-flex justify-content-center w-100">
-                <img className="rounded-circle" src={item} alt={item} style={{ height: 130, width: 130 }} />
+                <img className="rounded border border-dark" src={item} alt={item} style={{ height: 130, width: '100%' }} />
               </div>
               <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
             </div>
