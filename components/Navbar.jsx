@@ -31,7 +31,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
-    dispatch({ type: "NOTIFY", payload: { success: "success" } });
+    dispatch({ type: "NOTIFY", payload: { success: "Đăng xuất thành công" } });
     router.push("/");
     window.location.reload();
   };

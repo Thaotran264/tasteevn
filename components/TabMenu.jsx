@@ -31,7 +31,7 @@ const TabMenu = () => {
     window.location.reload();
   };
   return (
-    <div className="position-fixed bottom-0 start-0 w-100 bg-danger py-2 hideOnDesktop mx-auto">
+    <div className="position-fixed bottom-0 start-0 w-100 py-2 hideOnDesktop mx-auto" style={{ backgroundColor: "#FF9551" }}>
       <div className="container">
         <div className="row">
           <div className="col-3 d-flex justify-content-center">
@@ -58,7 +58,7 @@ const TabMenu = () => {
             {username ?
               <DropdownButton
                 style={{ border: 'none!important', borderRadius: '0.6em' }}
-                title={<AiOutlineUser style={{ fontSize: 24,  color: 'white' }} />}
+                title={<AiOutlineUser style={{ fontSize: 24, color: 'white' }} />}
               >
                 <Dropdown.Item eventKey="1" href={"/profile"}>Thông tin tài khoản</Dropdown.Item>
                 <Dropdown.Item eventKey="2" onClick={handleLogOut} >Đăng xuất</Dropdown.Item>

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 const CartModal = ({ setShow }) => {
+  const [count, setCount] = useState(0)
+
   return (
     <div
       className="vh-100 vw-100 position-fixed top-0 start-0 bg-dark bg-opacity-75 d-flex align-items-center
@@ -11,7 +13,7 @@ const CartModal = ({ setShow }) => {
     >
       <div className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative">
         <h2 className="cart-title">Thông tin giỏ hàng</h2>
-        <div className="w-100 overflow-auto mb-2 py-2 bg-white rounded" style={{ height: 300 }}>
+        <div className="w-100 overflow-auto mb-2 py-2 rounded" style={{ height: 300 }}>
           <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative">
             <div className="me-2">
               <img
@@ -29,10 +31,22 @@ const CartModal = ({ setShow }) => {
                   <br />
                   <span className="cart-item-price  mb-0" style={{ textDecoration: ' line-through' }}>55.000 đ</span>
                 </div>
-                <div>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlineMinus style={{ fontSize: 16, color: 'orange' }} /></button>
-                  <span className="mx-2">0</span>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlinePlus style={{ fontSize: 16, color: 'orange' }} /></button>
+                <div className="d-flex align-items-center">
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => setCount(prev => prev - 1)}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{count}</span>
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => dispatch(addToCart(it, cart))}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
@@ -55,10 +69,22 @@ const CartModal = ({ setShow }) => {
                   <br />
                   <span className="cart-item-price  mb-0" style={{ textDecoration: ' line-through' }}>55.000 đ</span>
                 </div>
-                <div>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlineMinus style={{ fontSize: 16, color: 'orange' }} /></button>
-                  <span className="mx-2">0</span>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlinePlus style={{ fontSize: 16, color: 'orange' }} /></button>
+                <div className="d-flex align-items-center">
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => setCount(prev => prev - 1)}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{count}</span>
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => dispatch(addToCart(it, cart))}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
@@ -81,15 +107,28 @@ const CartModal = ({ setShow }) => {
                   <br />
                   <span className="cart-item-price  mb-0" style={{ textDecoration: ' line-through' }}>55.000 đ</span>
                 </div>
-                <div>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlineMinus style={{ fontSize: 16, color: 'orange' }} /></button>
-                  <span className="mx-2">0</span>
-                  <button className="btn rounded px-2 py-1" style={{ borderColor: 'orange' }}><AiOutlinePlus style={{ fontSize: 16, color: 'orange' }} /></button>
+                <div className="d-flex align-items-center">
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => setCount(prev => prev - 1)}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{count}</span>
+                  <button
+                    className="border-0 rounded d-flex align-items-center justify-content-center"
+                    onClick={() => dispatch(addToCart(it, cart))}
+                    style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
             <button className="btn position-absolute top-0 p-0" style={{ right: 5 }}><AiOutlineClose className="text-danger" /></button>
           </div>
+
         </div>
 
         <div className=" justify-content-between w-100 rounded bg-white p-2 mb-4">
