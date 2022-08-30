@@ -1,8 +1,7 @@
-import React from "react";
 import useSWR from "swr";
 
-const useGetBanner = () => {
-  const url = "https://test.tastee.vn/api/Home/get_banner";
+export const getBrandDetail = (id) => {
+  const url = `https://test.tastee.vn/Merchant/${id}`
   const { data, error, mutate } = useSWR(url);
   return {
     data: data?.data,
@@ -11,5 +10,3 @@ const useGetBanner = () => {
     mutate,
   };
 };
-
-export default useGetBanner;
