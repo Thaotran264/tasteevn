@@ -44,9 +44,10 @@ const Detail = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = getBrandDetail(id)
-  console.log('data', data)
   const { banner, info, isDefault, productList } = data || {}
   const { menus } = productList || {}
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -107,7 +108,7 @@ const Detail = () => {
         >
           <span>
             <BsCartCheck style={{ fontSize: 18 }} />
-            0
+            {cart.length || 0}
           </span>
         </button>
       </div>
