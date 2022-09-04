@@ -14,7 +14,6 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     const localCart = JSON.parse(localStorage.getItem("localCart")) || "";
-
     if (localCart !== "") dispatch({ type: "ADD_CART", payload: localCart });
   }, []);
 

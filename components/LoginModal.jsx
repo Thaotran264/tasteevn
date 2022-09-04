@@ -61,7 +61,7 @@ function LoginModal({ btnStyle }) {
         localStorage.setItem("token", JSON.stringify(res.token));
         localStorage.setItem("userInfo", JSON.stringify(res));
         dispatch({ type: "NOTIFY", payload: { success: res.successful } });
-
+dispatch({type: 'AUTH', payload: res})
         handleClose();
         router.push("/");
         window.location.reload();

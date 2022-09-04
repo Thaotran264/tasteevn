@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
@@ -18,7 +19,6 @@ const CartModal = ({ setShow }) => {
     >
       <div className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative">
         <h2 className="cart-title">Thông tin giỏ hàng</h2>
-
         {
           cart.length >= 1 ? <>
             <div className="w-100 overflow-auto mb-2 py-2 rounded" style={{ height: 300 }}>
@@ -26,11 +26,13 @@ const CartModal = ({ setShow }) => {
                 cart?.map(item =>
                   <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative" key={item.id}>
                     <div className="me-2">
-                      <img
+                      <Image
                         className="rounded"
                         src={item.image}
                         alt=""
-                        style={{ width: 80, height: 80 }}
+                        width={80}
+                        height={80}
+                        // style={{ width: 80, height: 80 }}
                       />
                     </div>
                     <div className="w-100">
@@ -46,7 +48,7 @@ const CartModal = ({ setShow }) => {
                             <>
                               <button
                                 className="border-0 rounded d-flex align-items-center justify-content-center"
-                                onClick={() => dispatch(decrease(cart, item))}
+                                onClick={() => dispatch(decrease(cart, item.id))}
                                 style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
                               >
                                 -

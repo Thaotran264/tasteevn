@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
       <Navbar />
       <Notify />
       <main style={{ marginTop: 75 }}>{children}</main>
-      <Footer />
       <TabMenu />
     </div>
   );
