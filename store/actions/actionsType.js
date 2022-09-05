@@ -20,14 +20,22 @@ export const addToCart = (product, cart) => {
   }
 };
 export const decrease = (data, id) => {
-  console.log(data, id)
   const newData = [...data]
+  
 
-  newData.forEach(item => {
-    if (item.id === id && item.quantity >= 1) {
-      item.quantity -= 1
+  data.forEach((item, i ) => {
+    if (item.id === id ) {
+      if ( item.quantity == 1 ){
+        item.quantity -= 1 
+        newData.splice(i ,1)
+      }
+      else if ( item.quantity > 1 ) {
+        return  item.quantity -= 1 
+      } 
     } 
   })
+
+
   return ({ type: 'ADD_CART', payload: newData })
 }
 
