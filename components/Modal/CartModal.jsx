@@ -12,7 +12,7 @@ const CartModal = ({ setShow }) => {
   const { cart } = state
 
   return (
-    <div
+    <section
       className="vh-100 vw-100 position-fixed top-0 start-0 bg-dark bg-opacity-75 d-flex align-items-center
       justify-content-center"
       style={{ zIndex: 100 }}
@@ -28,7 +28,7 @@ const CartModal = ({ setShow }) => {
                     <div className="me-2">
                       <Image
                         className="rounded"
-                        src={item.image}
+                        src={item.image || 'https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'}
                         alt=""
                         width={80}
                         height={80}
@@ -112,7 +112,7 @@ const CartModal = ({ setShow }) => {
           <AiOutlineClose style={{ fontSize: 14 }} />
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 

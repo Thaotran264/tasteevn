@@ -89,9 +89,9 @@ const Detail = () => {
         <meta name="description" content={info?.metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta charset="UTF-8"></meta>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></meta>
+        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
-      <div className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
+      <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
         <Banner banner={banner} />
         <InfoDefault info={info} />
         {/* <MenuPhoto isDefault={false} map={info} /> */}
@@ -111,7 +111,7 @@ const Detail = () => {
             {cart.length || 0}
           </span>
         </button>
-      </div>
+      </section>
     </>
 
   );
