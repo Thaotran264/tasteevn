@@ -8,6 +8,7 @@ import { DataContext } from "../store/globalState";
 import { useState, useEffect } from "react";
 import LoginModal from "./LoginModal";
 import { isMobile } from "react-device-detect";
+import { BsCartCheck } from "react-icons/bs";
 
 const TabMenu = () => {
   const [_isMobile, setMobile] = useState(false);
@@ -48,7 +49,7 @@ const TabMenu = () => {
           </div>
           <div className="col-3 d-flex justify-content-center">
             <a className="btn btn-outline-light text-light">
-              <AiOutlineTags style={{ fontSize: 24 }} />
+              <BsCartCheck style={{ fontSize: 24 }} />
             </a>
           </div>
           <div

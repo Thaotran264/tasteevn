@@ -24,7 +24,7 @@
   background: #FFAE6D;
 }
 
-* {
+*, *::after, *::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -181,8 +181,6 @@ footer,
   }
 }
 
-.configMenuMobile {}
-
 .cart-container {
   width: 90vw;
 }
@@ -215,7 +213,158 @@ footer,
   }
 
 }
+/* Info */
+.info__article {
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: white;
+}
+.info__section {
+  display: flex;
+  padding: 6px;
+  position: relative;
+}
+.info__image {
+  width: 30%;
+}
+.info__image img {
+  margin: auto;
+}
+.info__content {
+  width: 60%;
 
+  margin-left: 5px;
+}
+.info__content h5 {
+  font-weight: 400;
+}
+.info__content p {
+  font-size: 13px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Menu */
+.menu__article {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.menuItem__article {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+.menuItem__article:last-child{
+  border-bottom: none;
+  margin-bottom: 10px;
+
+}
+.menuItem__image {
+  width: 30%;
+}
+@media (min-width: 992px) {
+  .info__image {
+    width: 10%;
+    /* padding-left: 15px; */
+  }
+  .info__image {
+    margin: 0 60px;
+  }
+}
+.menuItem__content {
+  width: 70%;
+}
+
+/* Cart */
+.cartItem__article {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  /* padding: 5px 0; */
+}
+
+.cartItem__image {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+}
+@media (min-width: 992px) {
+  .cartItem__image {
+    width: 20%;
+  }
+}
+.cartButtonGroup {
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cartItem__image img {
+  border-radius: 10px;
+}
+.cartItem__content {
+  width: 60%;
+  padding: 5px 0;
+}
+.cartItem__content h6 {
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: .5px;
+}
+.cartItem__content p {
+  margin-bottom: 10px;
+}
+.button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all ease .25s;
+}
+.button:hover {
+  opacity: 0.9;
+}
+.button--delete {
+  background-color: #EB1D36;
+  color: #fff;
+  padding: 6px 15px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.button--orange {
+  background-color: #f7a76c;
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 10px;
+}
+
+.checktout__article {
+  width: 90vw;
+  /* height: 100px; */
+  margin: 0 auto;
+  position: fixed;
+  top: 76px;
+  /* left: (calc(100vw - 90vw) / 2); */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid red;
+}
+@media (min-width: 992px) {
+  .checktout__article {
+    width: 40vw;  
+  margin: 0 calc(100vw - 40vw);
+}
+}
 @import url('./card');
 @import url('./menuPhoto.css');
 @import url('./button.css');
