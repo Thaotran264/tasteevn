@@ -32,6 +32,7 @@ const TabInfor = ({ userDetail }) => {
   const refNewPass = useRef();
   const [showPass, setShowPass] = useState(false)
   const [showNewPass, setShowNewPass] = useState(false)
+  const [showConfPassword, setShowConfPassword] = useState(false)
 
   useEffect(() => {
     setUser(userDetail)
@@ -79,6 +80,11 @@ const TabInfor = ({ userDetail }) => {
     var yearBirthday = document.getElementById('yearBirthday').value;
     console.log('change yearBirthday', yearBirthday);
     setBirthday({ ...birthday, y: yearBirthday })
+  }
+  const changeNewPass = (e) => {
+    setchangePass({ ...changePass, newPassword: e.target.value })
+    console.log('change changePass.newPassword', changePass.newPassword);
+
   }
   const [fieldEdit, setFieldEdit] = useState({
     editFullName: false,
@@ -458,64 +464,107 @@ const TabInfor = ({ userDetail }) => {
                 <h5 className="title-section"> Bảo mật </h5>
 
                 <div className="d-flex align-items-center justify-content-between mb-3">
-                  <span className="text-primary" onClick={handleShow}>
-                    <RiLockPasswordFill />  Đổi mật khẩu
-                    <br></br>
-                  </span>
-                  {/* <button type="button" className="btn btn-outline-primary rounded px-3" style={{ fontSize: 13 }} onClick={handleShow}> */}
+                <span className="text-primary" onClick={handleShow}>
+                  <RiLockPasswordFill /> Đổi mật khẩu
+                  <br></br>
+                </span>
+                {/* <button
+                  type="button"
+                  className="btn btn-outline-primary rounded px-3"
+                  style={{ fontSize: 13 }}
+                  onClick={handleShow}
+                > */}
                   <BiEdit className="text-primary" onClick={handleShow} />
-                  {/* </button> */}
-                  <Modal
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title>Đổi mật khẩu</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                          Mật khẩu cũ.
-                        </label>
-                        <div className="d-flex">
-                          <input
-                            value={changePass.password || ""}
-                            onChange={(e) => setchangePass({ ...changePass, password: e.target.value })}
-                            type={showPass ? 'text' : "password"}
-                            className="form-control inputFomCustom rounded"
-                            id="exampleInputPassword1"
-                          />
-                          <button className="btn btn-dark" onClick={() => setShowPass(!showPass)}> {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</button>
-                        </div>
+                {/* </button> */}
+                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Đổi mật khẩu</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <div className="mb-3">
+                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
+                        Mật khẩu cũ.
+                      </label>
+                      <div className="d-flex rounded border">
+                        <input
+                          value={changePass.password || ""}
+                          onChange={(e) =>
+                            setchangePass({ ...changePass, password: e.target.value })
+                          }
+                          type={showPass ? "text" : "password"}
+                          className="form-control inputFomCustom border-end w-100 border-0"
+                          id="exampleInputPassword1"
+                        />
+                        <button className="btn border-0" onClick={() => setShowPass(!showPass)}>
+                          {" "}
+                          {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        </button>
                       </div>
+                    </div>
 
-                      <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                          Mật khẩu mới.
-                        </label>
-                        <div className="d-flex">
-                          <input
-                            value={changePass.newPassword || ""}
-                            onChange={(e) => setchangePass({ ...changePass, newPassword: e.target.value })}
-                            type={showNewPass ? 'text' : "password"}
-                            className="form-control inputFomCustom rounded"
-                            id="exampleInputPassword1"
-                          />
-                          <button className="btn btn-dark" onClick={() => setShowNewPass(!showNewPass)}> {showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</button>
-                        </div>
+                    <div className="mb-3">
+                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
+                        Mật khẩu mới.
+                      </label>
+                      <div className="d-flex rounded border">
+                        <input
+                          value={changePass.newPassword || ""}
+                          onChange={(e) => setchangePass({ ...changePass, newPassword: e.target.value })}
+                          type={showNewPass ? "text" : "password"}
+                          className="form-control inputFomCustom border-end w-100 border-0"
+                          id="exampleInputPassword1"
+                        />
+                        <button
+                          className="btn border-0"
+                          onClick={() => setShowNewPass(!showNewPass)}
+                        >
+                          {" "}
+                          {showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        </button>
                       </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Đóng
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
+                        Xác nhận mật khẩu mới.
+                      </label>
+                      <div className="d-flex rounded border">
+                        <input
+                          value={changePass.confPassword ||  '' }
+                          onChange={(e) => setchangePass({ ...changePass, confPassword: e.target.value })}
+                          type={showConfPassword ? "text" : "password"}
+                          className="form-control inputFomCustom border-end w-100 border-0"
+                          id="exampleInputPassword1"
+                        />
+                        <button
+                          className="btn border-0"
+                          onClick={() => setShowConfPassword(!showConfPassword)}
+                        >
+                          {" "}
+                          {showConfPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        </button>
+                      </div>
+                      { !changePass.confPassword?.length > 0 || changePass.confPassword ===  changePass.newPassword ?  '' : <p className="text-danger">Xác nhận mật khẩu phải trùng với mật khẩu mới </p> }
+                    </div>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Đóng
+                    </Button>
+
+                    { changePass.confPassword?.length > 0 && changePass.confPassword ===  changePass.newPassword ?
+                    <div>
+                      <Button variant="primary" onClick={handleChangePass}>
+                         Lưu
                       </Button>
-                      <Button variant="primary" onClick={handleChangePass}>Lưu</Button>
-                    </Modal.Footer>
-                  </Modal>
-
-                </div>
+                    </div>
+                     : 
+                     ''
+                  }
+                   
+                  </Modal.Footer>
+                </Modal>
+              </div>
               </div>
             </div>
 

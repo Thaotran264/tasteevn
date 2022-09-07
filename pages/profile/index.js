@@ -87,7 +87,7 @@ const ProfileMobile = () => {
 
                 <div className="w-75 pt-2 pb-2">
                   <h3 className="profile-usertitle-name m-0"> {username && username["fullName"] || ""} </h3>
-                  <span className="profile-stat-text"> {username && username["status"] ? 'Đã kích hoạt' : "Chưa kích hoạt"} </span>
+                  {/* <span className="profile-stat-text"> {username && username["status"] ? 'Đã kích hoạt' : "Chưa kích hoạt"} </span> */}
                 </div>
 
                 <div>
