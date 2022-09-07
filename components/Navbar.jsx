@@ -21,9 +21,10 @@ const Navbar = () => {
     setShowSearch(!showSearch);
   };
   useEffect(() => {
-    let name = JSON.parse(localStorage.getItem("userInfo")) || "";
-    if (name) {
-      setusername(name);
+    let data = JSON.parse(localStorage.getItem("userInfo")) || "";
+    const { fullName } = data.data
+    if (fullName) {
+      setusername(fullName);
     }
   }, []);
 
@@ -123,21 +124,17 @@ const Navbar = () => {
                     className="border-0"
                   >
                     <div
-                    className="d-flex gap-1"
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: '20px',
-                      }}
+                    className="d-flex gap-1 align-items-center"
                     >
-                    <span className="d-flex align-items-center"> {username && username.fullName} </span>  
+                    <span className="d-flex align-items-center"> {username} </span>  
                       <img
                       className="m-0 p-0"
                         style={{
                           borderRadius: '20px',
+                          width: 40, height: 40
                         }} 
-                        src={username.avatar}>
-                        </img>
+                        src={username.avatar ||'https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} />
+                        
                     </div>
 
                   </Dropdown.Toggle>

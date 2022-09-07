@@ -4,6 +4,7 @@ import { DataContext } from "../../store/globalState";
 import { addToCart } from "../../store/actions/actionsType";
 import { formatter } from "../../utils";
 import Link from "next/link";
+import MenuItem from "./MenuItem";
 const DesktopMenu = ({ menuPos, menus }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
@@ -12,7 +13,7 @@ const DesktopMenu = ({ menuPos, menus }) => {
     console.log("object");
   };
   return (
-    <div className="showOnDesktop w-100 mx-auto py-2">
+    <section className="showOnDesktop w-100 mx-auto py-2">
       <div
         className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
         style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
@@ -55,7 +56,7 @@ const DesktopMenu = ({ menuPos, menus }) => {
             </ul>
           </div>
           <div
-            className={`col-md-8 col-lg-8 ${menuPos && "offset-4"}`}
+            className={`col-md-8 col-lg-8 bg-light rounded ${menuPos && "offset-4"}`}
             style={menuPos ? { zIndex: 2 } : {}}
           >
             {menus?.map((it, index) => (
@@ -64,37 +65,38 @@ const DesktopMenu = ({ menuPos, menus }) => {
                   {it.name}
                 </h4>
                 {it.items.map((its) => (
-                  <div key={its.id}>
-                    <div className="row">
-                      <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
-                        <img
-                          className="w-100 h-100 d-block "
-                          src={its.image}
-                          alt=""
-                        />
-                      </div>
-                      <div className="col-10 d-flex align-items-start">
-                        <div className="d-flex w-100 align-items-center">
-                          <h5 className="m-0 me-auto">{its.name}</h5>
-                          <p className="text-danger mb-0 me-2">{formatter.format(its.price)}</p>
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => dispatch(addToCart(its, cart))}
-                          >
-                            Mua
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                  </div>
+                  <MenuItem data={its} key={its.id}/>
+                  // <div key={its.id}>
+                  //   <div className="row">
+                  //     <div className="col-2" style={{ aspectRatio: "1 / 1" }}>
+                  //       <img
+                  //         className="w-100 h-100 d-block "
+                  //         src={its.image}
+                  //         alt=""
+                  //       />
+                  //     </div>
+                  //     <div className="col-10 d-flex align-items-start">
+                  //       <div className="d-flex w-100 align-items-center">
+                  //         <h5 className="m-0 me-auto">{its.name}</h5>
+                  //         <p className="text-danger mb-0 me-2">{formatter.format(its.price)}</p>
+                  //         <button
+                  //           className="btn btn-danger"
+                  //           onClick={() => dispatch(addToCart(its, cart))}
+                  //         >
+                  //           Mua
+                  //         </button>
+                  //       </div>
+                  //     </div>
+                  //   </div>
+                  //   <hr />
+                  // </div>
                 ))}
               </div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { formatter } from "../utils";
 import { decrease, deleteItem, increase } from '../store/actions/actionsType'
 import { DataContext } from "../store/globalState";
-
+import {BsTrash} from 'react-icons/bs'
 const CartItem = ({ item }) => {
     const { state, dispatch } = useContext(DataContext);
     const { cart, auth } = state;
@@ -21,27 +21,27 @@ const CartItem = ({ item }) => {
         />
       </div>
       <div className="cartItem__content">
-        <h5>{item.name}</h5>
+        <h6>{item.name}</h6>
         <p className="text-danger">{formatter.format(item.price)}</p>
         <div className="d-flex align-items-center">
           <button
-            className="btn btn-outline-dark"
+            className="button button--orange"
             onClick={() => dispatch(decrease(cart, item.id))}
             disabled={item?.quantity == 1}
           >
             -
           </button>
           <span className="mx-2 text-danger">{item.quantity}</span>
-          <button className="btn btn-outline-dark" onClick={() => dispatch(increase(cart, item))}>
+          <button className="button button--orange" onClick={() => dispatch(increase(cart, item))}>
             +
           </button>
         </div>
       </div>
       <button
-        className="btn btn-danger ms-auto"
+        className="button button--delete btn-danger ms-auto"
         onClick={() => dispatch(deleteItem(cart, item.id))}
       >
-        x
+        <BsTrash />
       </button>
     </article>
   );

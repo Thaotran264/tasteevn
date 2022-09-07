@@ -1,12 +1,14 @@
 import Head from "next/head";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axiosAuth3 from "../../api-client/axios-auth3";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
+import Checkout from "../../components/Modal/Checkout";
 import { DataContext } from "../../store/globalState";
 const Cart = () => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
+  const [check, setCheck] = useState(false)
   const handleDatHangButton = async () => {
     const user = localStorage.getItem("userInfo");
     if (!user) {
@@ -25,10 +27,22 @@ const Cart = () => {
       }),
     };
     const res = await axiosAuth3.post("/api/Orders", params);
+    if(res.data) {
+      setCheck(true)
+      dispatch({type: "ADD_CART", payload: []})
+    }
     console.log(res);
+
   };
 
-  if (cart.length == 0) return <h2 className="text-center">Empty</h2>;
+  if (cart.length == 0) return (
+    <>
+    <h2 className="text-center">Empty</h2>
+    {
+        check && <Checkout setCheck={setCheck}/>
+      }
+    </>
+  )
 
   return (
     <section className="container">
@@ -45,10 +59,11 @@ const Cart = () => {
           <span className="mb-0">Tổng tiền</span>
           <p>0</p>
         </div>
-        <button className="btn btn-success w-100" onClick={handleDatHangButton}>
+        <button className="btn btn-success w-25 mx-auto" onClick={handleDatHangButton}>
           Đặt hàng
         </button>
       </article>
+    
     </section>
   );
 };

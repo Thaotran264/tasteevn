@@ -58,7 +58,7 @@ function LoginModal({ btnStyle }) {
       const res = await accountAPI.login(params);
       // if (res.successful && res.data) {
         console.log('huahduhauhđâsd',res)
-        localStorage.setItem("token", JSON.stringify(res.token));
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("userInfo", JSON.stringify(res));
         dispatch({ type: "NOTIFY", payload: { success: res.successful } });
 dispatch({type: 'AUTH', payload: res})
