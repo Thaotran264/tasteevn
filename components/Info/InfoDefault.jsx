@@ -13,8 +13,7 @@ const InfoDefault = ({ info }) => {
     <article className="info__article">
       <section className="info__section">
         <div className="info__image">
-            <Image src={info?.logo || 
-            'https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="mx-auto border border-dark rounded-circle d-block"  width={100} height={100} />
+            <Image src={info?.logo || 'https://images.pexels.com/photos/8064098/pexels-photo-8064098.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="border border-dark rounded-circle" width="70" height="70"/>
         </div>
         <div className="info__content ">
             <h5>{info?.name}</h5>
