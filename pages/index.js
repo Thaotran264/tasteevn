@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Pages from "../components/Pages";
 export default function Home({ data }) {
@@ -11,6 +12,8 @@ export default function Home({ data }) {
       <div className="container">
         <Pages />
       </div>
+      <Footer />
+
     </>
   );
 }

@@ -31,7 +31,7 @@ const settings = {
       breakpoint: 600,
       settings: {
         infinite: false,
-        slidesToShow: 1.5,
+        slidesToShow: 2.5,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
@@ -49,7 +49,7 @@ const Slider02 = ({ item, text }) => {
           {listBrand.map((item, index) => (
             <div key={index} className=''>
               <div className="d-flex justify-content-center w-100">
-                <img className="rounded border border-dark" src={item} alt={item} style={{ height: 130, width: '100%' }} />
+                <img className="rounded border border-dark" src={item} alt={item} style={{ height: 130, width: 130 }} />
               </div>
               <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
             </div>

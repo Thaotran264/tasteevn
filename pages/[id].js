@@ -44,9 +44,10 @@ const Detail = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = getBrandDetail(id)
-  console.log('data', data)
   const { banner, info, isDefault, productList } = data || {}
   const { menus } = productList || {}
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -88,9 +89,9 @@ const Detail = () => {
         <meta name="description" content={info?.metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta charset="UTF-8"></meta>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></meta>
+        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
-      <div className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
+      <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
         <Banner banner={banner} />
         <InfoDefault info={info} />
         {/* <MenuPhoto isDefault={false} map={info} /> */}
@@ -107,10 +108,10 @@ const Detail = () => {
         >
           <span>
             <BsCartCheck style={{ fontSize: 18 }} />
-            0
+            {cart.length || 0}
           </span>
         </button>
-      </div>
+      </section>
     </>
 
   );

@@ -15,12 +15,12 @@ const Toast = ({ msg, handleShow, bgColor }) => {
 
   return (
     <article
-      className={`toast show position-fixed text-light rounded p-2`}
-      style={{ bottom: "68px", right: 12, zIndex: 9, minWidth: "280px", backgroundColor: `${bgColor}` }}
+      className={`toast show position-fixed text-light rounded p-2 rounded-0`}
+      style={{ bottom: "68px", right: 12, zIndex: 9, minWidth: "280px", borderColor: `${bgColor}` }}
     >
-      <div className='d-flex align-items-center justify-content-between '>
-        <p className="mb-0 text-light pl-2">{msg.msg}</p>
-        <button className="border rounded p-2" style={{ backgroundColor: 'transparent' }}><AiOutlineClose style={{ color: '#fff' }} /></button>
+      <div className='d-flex align-items-center justify-content-between'>
+        <p className="mb-0 text-dark pl-2">{msg.msg}</p>
+        <button className="border rounded p-2 border-danger" style={{ backgroundColor: 'transparent' }}><AiOutlineClose  /></button>
       </div>
       {/* <div
         className={`toast-header ${bgColor} text-light d-flex justify-content-between`}

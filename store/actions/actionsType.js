@@ -5,13 +5,60 @@ export const ACTIONS = {
 };
 
 export const addToCart = (product, cart) => {
-  const check = cart.every((item) => {
-    return item.id !== product.id;
+  const check = cart.find((item) => {
+    return item.id == product.id;
   });
 
-  if (!check) return { type: "NOTIFY", payload: { error: "The product has been added to cart." } };
-  return {
-    type: "ADD_CART",
-    payload: [...cart, { ...product, quantity: 1 }],
-  };
+  if (check) return {
+    type: "ADD_CART", payload: [...cart, { ...product, quantity: product.quantity++ }]
+  }
+  else {
+    return {
+      type: "ADD_CART",
+      payload: [...cart, { ...product, quantity: 1 }],
+    };
+  }
 };
+export const decrease = (data, id) => {
+  const newData = [...data]
+  
+
+  data.forEach((item, i ) => {
+    if (item.id === id ) {
+      if ( item.quantity == 1 ){
+        item.quantity -= 1 
+        newData.splice(i ,1)
+      }
+      else if ( item.quantity > 1 ) {
+        return  item.quantity -= 1 
+      } 
+    } 
+  })
+
+
+  return ({ type: 'ADD_CART', payload: newData })
+}
+
+export const increase = (data, it) => {
+  const newData = [...data]
+
+  const check = newData.find((item) => {
+    return item.id == it.id;
+  });
+  if (!check) {
+    return {
+      type: "ADD_CART",
+      payload: [...data, { ...it, quantity: 1 }],
+    };
+  }
+  else {
+    newData.forEach(item => {
+      if (item.id === it.id) item.quantity += 1
+    })
+    return ({ type: 'ADD_CART', payload: newData })
+  }
+}
+export const deleteItem = (data, id) => {
+  const newData = data.filter(item => item.id !== id)
+  return ({ type: 'ADD_CART', payload: newData })
+}
