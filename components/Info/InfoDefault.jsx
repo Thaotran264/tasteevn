@@ -13,7 +13,7 @@ const InfoDefault = ({ info }) => {
     <article className="info__article">
       <section className="info__section">
         <div className="info__image">
-            <Image src={info?.logo || 'https://images.pexels.com/photos/8064098/pexels-photo-8064098.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="border border-dark rounded-circle" width="70" height="70"/>
+            <Image src={info?.logo || 'https://images.pexels.com/photos/8064098/pexels-photo-8064098.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="border border-dark rounded-circle" width="140" height="140"/>
         </div>
         <div className="info__content ">
             <h5>{info?.name}</h5>
@@ -44,7 +44,7 @@ const InfoDefault = ({ info }) => {
           className="btn border w-100 border-end-0 border-start-0 rounded-0 text-dark mb-2 hideOnDesktop"
           onClick={() => setShow(!show)}
         >
-          Xem thông tin
+          Xem bản đồ
         </button>
         {show && (
           <div className="col-12 col-md-6 hideOnDeskTop mb-2">
