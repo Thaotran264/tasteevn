@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = ({ banner }) => {
   return (
-    <div className="rounded mb-2 banner">
+    <div className="rounded mb-3 banner">
       <img
         src={banner && banner}
         alt=""

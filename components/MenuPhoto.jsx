@@ -174,14 +174,14 @@ const MenuPhoto = ({ isDefault, map }) => {
             <div
               className="w-50 showOnDesktop align-items-center"
             >
-              {parse(map.webMap)}
+              {/* {parse(map.webMap)} */}
             </div>
             {/* <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
                 {parse(map.webMap)}
               </div>
             </div> */}
-            <div className="w-50 ">
+            <div className="w-100">
               <div className="thumb-3 rounded">
                 <div className="box img1">
                   <img
@@ -190,7 +190,7 @@ const MenuPhoto = ({ isDefault, map }) => {
                     alt=""
                   />
                 </div>
-                <div className="box img2" style={{ aspectRatio: '1/1' }}>
+                <div className="box img2" style={{aspectRatio: '1/1'}}>
                   <img
                     className="border border-light"
                     src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -199,13 +199,12 @@ const MenuPhoto = ({ isDefault, map }) => {
 
                   />
                 </div>
-                <div className="box img3 position-relative" style={{ aspectRatio: '1/1' }}>
+                <div className="box img3 position-relative" style={{aspectRatio: '1/1'}}>
                   <img
                     className="border border-light"
                     src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
                     style={{ borderBottomRightRadius: 6 }}
-
                   />
                   {/* <div
                     className="position-absolute bg-dark bg-opacity-50"

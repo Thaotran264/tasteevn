@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import { useRouter } from "next/router";
 import OrderDetail from '../detailOrder'
 import { BsPlusLg, BsChevronLeft } from 'react-icons/bs'
@@ -13,7 +15,7 @@ import { DataContext } from "../../../../store/globalState";
 const ShippingAddress = () => {
     const [_isMobile, setMobile] = useState(false);
     const { state, dispatch } = useContext(DataContext);
-    const [open, setOpen] = useState(false);
+    const [idDelete, setIdDelete] = useState(false);
     const router = useRouter();
     const [dataAddres, setDataAddres] = useState([]);
     useEffect(() => {
@@ -47,12 +49,20 @@ const ShippingAddress = () => {
             console.log('%cindex.jsx line:39 error', 'color: #007acc;', error);
         }
     }
-    const handleDelete = async (id) => {
+    const handleDelete = (id) => {
+        setIdDelete(id)
+    }
+    const handleCloseModalConfim = (id) => {
+        setIdDelete(false)
+    }
+
+    const deleteAddressF = async (id) => {
         try {
-            const res = await adressApi.deleteAddress(id)
+            const res = await adressApi.deleteAddress(idDelete)
             if(res?.successful ){
                 dispatch({ type: "NOTIFY", payload: { success: res.message ? res.message : "Đã tạo thành công" } });
                 getData()
+                setIdDelete(false)
             }
             else{
                 dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại" } });
@@ -111,9 +121,18 @@ const ShippingAddress = () => {
                         <hr />
                     </div>
                 ))}
-
-
             </div>
+            <Modal show={idDelete ? true : false}  onHide={handleCloseModalConfim}>
+                <Modal.Body>Bạn có muốn xoá địa chỉ</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseModalConfim}>
+                    Đóng
+                </Button>
+                <Button variant="danger" onClick={deleteAddressF}>
+                    Xoá
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

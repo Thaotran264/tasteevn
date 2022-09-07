@@ -94,7 +94,7 @@ const Detail = () => {
       <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
         <Banner banner={banner} />
         <InfoDefault info={info} />
-        {/* <MenuPhoto isDefault={false} map={info} /> */}
+        <MenuPhoto isDefault={false} map={info} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}><MobileMenu menuPos={menuPos} menus={menus} /></div>
         <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos} menus={menus} />}</div>

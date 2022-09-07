@@ -80,10 +80,15 @@
 
 .dropdown .dropdown-toggle:focus {
   outline: none;
+  box-shadow: none;
 }
 
 .dropdown .dropdown-toggle::after {
   content: '';
   /* margin-left: 20px; */
   /* display: none; */
+}
+
+.form-control:focus {
+  box-shadow: none !important
 }

@@ -18,6 +18,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
     const handleClose = () => { 
         setShow(false) 
         setStatus()
+        setAddressData({})
     }
     const handleShow = () => setShow(true);
     const [cities, setCities] = useState([])
