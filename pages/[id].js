@@ -91,7 +91,7 @@ const Detail = () => {
         <meta charset="UTF-8"></meta>
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
-      <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
+      <section className={`${show && "vh-100 overflow-hidden"}`}>
         <Banner banner={banner} />
         <InfoDefault info={info} />
         <MenuPhoto isDefault={false} map={info} />
@@ -101,16 +101,21 @@ const Detail = () => {
 
         <TabMenu />
         {show && <CartModal setShow={setShow} />}
-        <button
-          className="btn position-fixed hideOnDeskTop"
-          style={{ bottom: "80px", right: "15px", zIndex: 99, backgroundColor: '#F7A76C', color: 'white' }}
-          onClick={handleShow}
-        >
-          <span>
-            <BsCartCheck style={{ fontSize: 18 }} />
-            {cart.length || 0}
-          </span>
-        </button>
+        {
+          cart?.length &&
+          <div className="position-fixed hideOnDeskTop bottom-0">
+            <button
+              className="button"
+              style={{ bottom: "80px", right: "15px", zIndex: 99, backgroundColor: '#F7A76C', color: 'white' }}
+              onClick={handleShow}
+            >
+              <span>
+                <BsCartCheck style={{ fontSize: 18 }} />
+                {cart.length || 0}
+              </span>
+            </button>
+          </div>
+        }
       </section>
     </>
 

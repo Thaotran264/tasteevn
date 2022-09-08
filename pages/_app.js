@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
       <SWRConfig
         value={{
           fetcher: (resource) => axios.get(resource).then((res) => res.data),
-          dedupingInterval: 10000,
+          dedupingInterval: 60000,
         }}
       >
         {/* <Layout> */}

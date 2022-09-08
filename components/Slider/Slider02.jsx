@@ -42,7 +42,7 @@ const settings = {
 
 const Slider02 = ({ item, text }) => {
   return (
-    <div className="p-2 bg-white rounded mb-2">
+    <div className="container bg-white rounded mb-2">
       <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
       <div className="mx-auto" style={{ width: '100%' }}>
         <Slider {...settings}>

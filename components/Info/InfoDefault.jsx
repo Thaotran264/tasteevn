@@ -10,22 +10,22 @@ const InfoDefault = ({ info }) => {
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (
-    <article className="info__article">
+    <article className="info__article container px-0">
       <section className="info__section">
         <div className="info__image">
-            <Image src={info?.logo || 'https://images.pexels.com/photos/8064098/pexels-photo-8064098.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="border border-dark rounded-circle" width="140" height="140"/>
+          <Image src={info?.logo || 'https://images.pexels.com/photos/8064098/pexels-photo-8064098.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} alt={info?.logo} className="border border-dark rounded-circle" width="140" height="140" />
         </div>
         <div className="info__content ">
-            <h5>{info?.name}</h5>
-            <p>
-              {info?.address}
-            </p>
-            <p>Hotline: {info?.hotline}</p>
-              <p >
-                <BsClock style={{ fontSize: 24 }} className="me-2" />
-                {info?.openTimeA}-{info?.closeTimeA}
-              </p>
-            {/* <div className="d-flex gap-1">
+          <h5>{info?.name}</h5>
+          <p>
+            {info?.address}
+          </p>
+          <p>Hotline: {info?.hotline}</p>
+          <p className="mb-0">
+            <BsClock style={{ fontSize: 24 }} className="me-2" />
+            {info?.openTimeA}-{info?.closeTimeA}
+          </p>
+          {/* <div className="d-flex gap-1">
               <button className="border-0" href="#menu">
                 <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="" />
               </button>
@@ -34,10 +34,10 @@ const InfoDefault = ({ info }) => {
               </button>
           </div> */}
         </div>
-            {!isLike ?
-              <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', backgroundColor: 'transparent' }}><AiOutlineHeart style={{ fontSize: 24, color: '#F7A76C', backgroundColor: 'transparent' }} /></button>
-              : <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', color: '#F7A76C', backgroundColor: 'transparent' }}><AiFillHeart style={{ fontSize: 24 }} /></button>
-            }
+        {!isLike ?
+          <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', backgroundColor: 'transparent' }}><AiOutlineHeart style={{ fontSize: 24, color: '#F7A76C', backgroundColor: 'transparent' }} /></button>
+          : <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', color: '#F7A76C', backgroundColor: 'transparent' }}><AiFillHeart style={{ fontSize: 24 }} /></button>
+        }
       </section>
       <section className="info__section__map d-flex flex-column mb-1">
         <button

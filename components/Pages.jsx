@@ -6,22 +6,22 @@ import CarouselComponent from "./Carousel";
 import MultiRowSlide from "./Slider/MultiRowSlide";
 import Slider02 from "./Slider/Slider02";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 const Pages = () => {
-  const { data,
-    isLoading,
-    isError
-  } = useGetBanner()
-  if (isLoading) return <p>Loading....</p>
-  if (isError) return <p>{isError}</p>
+  const url = "https://test.tastee.vn/api/Home/get_banner";
+  const { data, error, mutate } = useSWR(url);
 
+  if (!error && !data) return <p>Loading....</p>
+  if (error) return <p>{error}</p>
+  console.log('reload')
   const router = useRouter();
   const handleViewBtn = (id) => {
     router.push(`/8d3932d9-c541-4699-ac49-9f7edbbe05f7`);
   };
   return (
     <div className="mt-2">
-      <CarouselComponent data={data} />
+      <CarouselComponent data={data.data} />
       <MultiRowSlide item={data} text="Quán nổi bật" />
       {/* <Slider02 item={data} text="Quán nổi bật" /> */}
       <Slider02 item={data} text="Cửa hàng được yêu thích" />

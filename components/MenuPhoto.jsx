@@ -169,7 +169,7 @@ const MenuPhoto = ({ isDefault, map }) => {
         </div>
       )}
       {!isDefault && (
-        <div className="mb-2">
+        <div className="container px-0 mb-2">
           <section className="d-flex gap-1">
             <div
               className="w-50 showOnDesktop align-items-center"
@@ -190,21 +190,21 @@ const MenuPhoto = ({ isDefault, map }) => {
                     alt=""
                   />
                 </div>
-                <div className="box img2" style={{aspectRatio: '1/1'}}>
+                <div className="box img2" style={{ aspectRatio: '1/1' }}>
                   <img
                     className="border border-light"
                     src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
-                    style={{ borderTopRightRadius: 6 }}
+
 
                   />
                 </div>
-                <div className="box img3 position-relative" style={{aspectRatio: '1/1'}}>
+                <div className="box img3 position-relative" style={{ aspectRatio: '1/1' }}>
                   <img
                     className="border border-light"
                     src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     alt=""
-                    style={{ borderBottomRightRadius: 6 }}
+
                   />
                   {/* <div
                     className="position-absolute bg-dark bg-opacity-50"
