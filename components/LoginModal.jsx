@@ -24,7 +24,7 @@ function LoginModal({ btnStyle }) {
   const ip5 = useRef();
   const ip6 = useRef();
 
-  const handleClose = () => setShow(false);
+
   const handleShow = () => setShow(true);
   const router = useRouter();
   const [data, setData] = useState({});
@@ -38,6 +38,12 @@ function LoginModal({ btnStyle }) {
   const { state, dispatch } = useContext(DataContext);
   const [textButton, setTextButton] = useState({ btnSubmit: "Tiếp tục" });
   // const [toastmsg, settoastmsg] = useState('')
+  const handleClose = () =>{
+    setStatusInput({});
+    setData({ ...data, verifyCode: "" });
+    setShow(false);
+
+  } 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Data Form ", data);
@@ -61,7 +67,7 @@ function LoginModal({ btnStyle }) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("userInfo", JSON.stringify(res));
         dispatch({ type: "NOTIFY", payload: { success: res.successful } });
-dispatch({type: 'AUTH', payload: res})
+        dispatch({type: 'AUTH', payload: res})
         handleClose();
         router.push("/");
         window.location.reload();
@@ -127,14 +133,24 @@ dispatch({type: 'AUTH', payload: res})
     ip4.current.value = "";
     ip5.current.value = "";
     ip6.current.value = "";
+    setIsShowCount(true)
+    setStatusInput({ ...statusInput, isShowMsgErrOTP: false });
     try {
       const res = await accountAPI.resendSmsCode(data?.authenId);
-      console.log("%cLoginModal.jsx line:128 data.authenId", "color: #007acc;", data?.authenId);
-      console.log("%cLoginModal.jsx line:128 res", "color: #007acc;", res);
-    } catch (error) { }
+      if (res.successful) { 
+        dispatch({ type: "NOTIFY", payload: { success: 'OTP đã được gửi vui lòng kiểm tra' } });
+      }
+      else {
+        setIsShowCount(false)
+        dispatch({ type: "NOTIFY", payload: { error: res.message } });
+      }
+    } catch (error) { 
+      dispatch({ type: "NOTIFY", payload: { error: 'Đã xảy ra lỗi' } });
+    }
   };
 
   const checkOTP = async (OTP) => {
+
     let params = {
       authenId: data.authenId,
       verifyCode: data.verifyCode || OTP,
@@ -155,6 +171,8 @@ dispatch({type: 'AUTH', payload: res})
     } catch (error) {
       console.log("%cLoginModal.jsx line:133 error", "color: #007acc;", error);
     }
+
+    console.log('%cLoginModal.jsx line:159 data', 'color: #007acc;', data);
 
     if (OTP == data) {
       setStatusInput({
@@ -209,12 +227,15 @@ dispatch({type: 'AUTH', payload: res})
         isEmptyPhone: false,
         isShowMsgErrOTP: false,
       });
+      const res = await accountAPI.register(formData);
       try {
-        const res = await accountAPI.register(formData);
         console.log("%cLoginModal.jsx line:163 res", "color: #007acc;", res);
         if (res.successful && res.data) {
           setStatusInput({ ...statusInput, showSendOTP: false, showFormOTP: true });
           setData({ ...data, authenId: res.data.authenID });
+        }
+        else{ 
+          dispatch({ type: "NOTIFY", payload: { error: res.message } });
         }
       } catch (error) {
         console.log("%cLoginModal.jsx line:164 error", "color: #007acc;", error);
@@ -377,20 +398,21 @@ dispatch({type: 'AUTH', payload: res})
                       <input type="number" ref={ip6} onChange={(e) => setOTP(e, ip6)} />
                     </div>
                     <input type="hidden" id="verificationCode" />
-                    {statusInput.isShowMsgErrOTP ? (
-                      <i className="text-center text-danger me-2 mb-2">OTP không chính xác</i>
-                    ) : (
-                      ""
-                    )}
+                    {statusInput.isShowMsgErrOTP ? ( <i className="text-center text-danger me-2 mb-2">OTP không chính xác</i> ) : ( "" )}
                     <span className="d-flex justify-content-center">
-                      <a onClick={reSendOTP} className="text-dark me-2">
-                        {isShowCount ? "Gửi lại mã sau:" : "Bạn không nhận được OTP?"}
-                      </a>
-                      <Countdown
-                        initialMinute={0}
-                        initialSeconds={6}
-                        setIsShowCount={setIsShowCount}
-                      />
+                    {isShowCount ? 
+                      <div className="d-flex">
+                        <a  className="text-dark me-2">
+                          Gửi lại mã sau:
+                        </a>
+                        <Countdown
+                          initialMinute={0}
+                          initialSeconds={60}
+                          setIsShowCount={setIsShowCount}
+                        />
+                      </div>
+                      : "Bạn không nhận được OTP?"
+                    }
                       {!isShowCount && (
                         <a
                           onClick={reSendOTP}
@@ -406,7 +428,6 @@ dispatch({type: 'AUTH', payload: res})
 
               {!statusInput.showSendOTP && (
                 <button type="submit" className="btn-custom button-custom-primary-form w-100 mb-2 ">
-                  {" "}
                   {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
                 </button>
               )}
@@ -428,8 +449,7 @@ dispatch({type: 'AUTH', payload: res})
               onClick={handleClose}
               className="btn-custom button-custom-danger-form w-100 mb-2"
             >
-              {" "}
-              Đóng{" "}
+              Đóng
             </button>
             {!statusInput.showFormRegister ? (
               <div className="d-flex justify-content-between">
