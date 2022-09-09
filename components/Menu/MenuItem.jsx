@@ -9,13 +9,18 @@ import Topping from "../Cart/Topping";
 const MenuItem = ({ data: it }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState({
+    show: false,
+    data: {}
+  })
   const handleMinus = (cart, id) => {
     dispatch(decrease(cart, id))
   }
   const handlePlus = (cart, item) => {
-    dispatch(increase(cart, it))
-    setShow(!show)
+    setShow({
+      show: true,
+      data: item
+    })
   }
   return (
     <>
@@ -24,7 +29,7 @@ const MenuItem = ({ data: it }) => {
           <Image
             src={
               it?.image ||
-              "https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+              '/image/logo512.png'
             }
             width={60}
             height={60}
@@ -62,15 +67,9 @@ const MenuItem = ({ data: it }) => {
                 }
               })}
               <button
-                className="ms-auto border-0 rounded d-flex align-items-center justify-content-center"
+                className="ms-auto button button--orange"
                 onClick={() => handlePlus(cart, it)}
-                style={{
-                  backgroundColor: "#f7a76c",
-                  color: "#fff",
-                  fontSize: 22,
-                  height: 30,
-                  width: 30,
-                }}
+
               >
                 +
               </button>
@@ -78,7 +77,7 @@ const MenuItem = ({ data: it }) => {
           </div>
         </div>
       </article>
-      {show && <Topping setShow={setShow} />}
+      {show.show && <Topping setShow={setShow} show={show} />}
     </>
 
   );

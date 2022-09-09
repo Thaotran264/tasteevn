@@ -46,7 +46,8 @@ img {
   --primary-color: rgb(247, 167, 108);
   --BG-WHITE: #FFF;
   --text-white: #fff;
-  --text-dark: rgb(100, 100, 109);
+  --text-dark: #64646d;
+  --text-gray: rgb(148, 148, 148);
   ;
   --text-danger: red;
   --text-danger-hover: rgb(206, 4, 4);
@@ -346,18 +347,36 @@ footer,
   margin-bottom: 10px;
 }
 
+/* button */
 .button {
   outline: none;
   border: none;
   cursor: pointer;
-  padding: 6px 0 6px;
+  padding: 3px 0;
   background-color: transparent;
   transition: all ease .25s;
   border-radius: 6px;
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.button.disabled {
+  cursor: default;
+  border-color: var(--text-gray);
+  color: var(--text-gray);
 }
 
 .button:hover {
   opacity: 0.9;
+}
+
+.button__link {}
+
+.button__link:hover,
+.button__link:active {
+  border-bottom: 1px solid red;
+  text-decoration: underline;
+  color: blue;
 }
 
 .button--delete {
@@ -369,10 +388,16 @@ footer,
 }
 
 .button--orange {
-  background-color: #f7a76c;
+  background-color: var(--primary-color);
   color: #fff;
-  padding: 6px 15px;
-  border-radius: 10px;
+  /* padding: 6px 15px; */
+}
+
+.button--orange-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  /* padding: 6px 15px; */
+  border: 1px solid var(--primary-color);
 }
 
 .checktout__article {
@@ -407,17 +432,13 @@ footer,
   border-radius: 6px;
 }
 
-.topping__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5px;
-  margin-bottom: 10px;
-}
 
 .topping__title h6 {
-  margin-bottom: 0;
   font-weight: bold;
+}
+
+.topping__content {
+  flex: 1;
 }
 
 .topping__menu {
@@ -432,6 +453,30 @@ footer,
   background-color: var(--primary-color);
   color: var(--text-white);
   font-size: 13px
+}
+
+.topping__info {
+  display: flex;
+}
+
+/* price */
+.text-price {}
+
+.text-price-line-through {
+  text-decoration: line-through;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+}
+
+.text-discount {
+  color: rgb(206, 4, 4);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.note {
+  color: var(--text-gray);
 }
 
 @import url('./card');

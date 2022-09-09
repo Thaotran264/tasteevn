@@ -19,6 +19,9 @@ import Default from "../components/KhongGianPic/Default";
 import { getBrandDetail } from "../hooks/useBrandDetail";
 import useSWR from "swr";
 import Head from "next/head";
+import { toppingApi } from "../api-client/topping";
+import { menuApi } from "../api-client";
+import { accountAPI } from "../api-client/account";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -41,15 +44,18 @@ import Head from "next/head";
 // }
 
 const Detail = () => {
+
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = getBrandDetail(id)
   const { banner, info, isDefault, productList } = data || {}
-  const { menus } = productList || {}
+  const { menus } = productList
+  console.log(menus)
   const { state, dispatch } = useContext(DataContext)
   const { cart } = state
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
+  // const [menus, setMenu] = useState()
   const handleShow = () => {
     setShow(!show);
   };
@@ -77,19 +83,14 @@ const Detail = () => {
     };
   });
 
-  if (isError) return <h2 className="text-center">{error}</h2>;
+  if (isError) return <h2 className="text-center">{isError}</h2>;
   if (isLoading) return <h2 className="text-center">Loading</h2>;
-  const handleCartBtn = () => {
-    router.push("/cart");
-  };
+
   return (
     <>
       <Head>
         <title>Brand Detail</title>
         <meta name="description" content={info?.metaDescription} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta charset="UTF-8"></meta>
-        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
       <section className={`${show && "vh-100 overflow-hidden"}`}>
         <Banner banner={banner} />
@@ -97,7 +98,7 @@ const Detail = () => {
         <MenuPhoto isDefault={false} map={info} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}><MobileMenu menuPos={menuPos} menus={menus} /></div>
-        <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos} menus={menus} />}</div>
+        {/* <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos} menus={menus} />}</div> */}
 
         <TabMenu />
         {show && <CartModal setShow={setShow} />}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import useGetBanner from "../hooks/useGetBanner";
 import CardItems from "./Card";
@@ -7,6 +7,7 @@ import MultiRowSlide from "./Slider/MultiRowSlide";
 import Slider02 from "./Slider/Slider02";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { brandApi } from "../api-client/brand";
 
 const Pages = () => {
   const url = "https://test.tastee.vn/api/Home/get_banner";
