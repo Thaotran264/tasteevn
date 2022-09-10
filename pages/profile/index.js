@@ -47,12 +47,28 @@ const ProfileMobile = () => {
 
   const [username, setusername] = useState('');
   useEffect(() => {
-    let userInfor = JSON.parse(localStorage.getItem("userInfo") || '' );
+    let user = localStorage.getItem("userInfo") ?  JSON.parse(localStorage.getItem("userInfo") || '' ) : null
+    console.log('%cindex.js line:51 user', 'color: #007acc;', user);
+    let userInfor = user
     console.log('%cindex.js line:50 userInfor', 'color: #007acc;', userInfor);
     if (userInfor) {
       setusername(userInfor);
     }
+    else{
+      router.push('/')
+      handleLogOut('Đã xảy ra lỗi vui lòng đăng nhập')
+    }
   }, []);
+
+
+  const handleLogOut = (mess) => {
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("token");
+    dispatch({ type: "NOTIFY", payload: { success: mess } });
+    window.location.replace("/");
+  };
+  
+
 
 
   const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
@@ -171,7 +187,7 @@ const ProfileMobile = () => {
         </Card>
 
         <div className="m-3">
-          <Button variant="outline-danger" className="w-100 rounded">
+          <Button variant="outline-danger" className="w-100 rounded" onClick={() => handleLogOut('Đăng xuất thành công')}>
             Đăng xuất
           </Button>
         </div>

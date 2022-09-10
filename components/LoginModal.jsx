@@ -40,40 +40,82 @@ function LoginModal({ btnStyle }) {
   // const [toastmsg, settoastmsg] = useState('')
   const handleClose = () =>{
     setStatusInput({});
-    setData({ ...data, verifyCode: "" });
-    setShow(false);
+    setData({});
+    setTextButton({ btnSubmit: "Đăng nhập" });
 
+    setShow(false);
   } 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Data Form ", data);
+    if(statusInput.forgotPassword && !statusInput.showFormFogotPass) {
+      console.log('first vô 1', statusInput)
+      forgotPassword(data)
+      return
+    }
+    if(statusInput.forgotPassword && statusInput.showFormFogotPass) {
+      let param = {
+        password: data.Password
+      }
+      setPassword(param)
+      return
+    }
     if (statusInput.isEmptyPhone) {
       let params = {
-        Email: data.PhoneNumber,
+        email: data.PhoneNumber,
         password: data.Password,
       };
       dispatch({ type: "NOTIFY", payload: { loading: true } });
       login(params);
-    } else {
-    }
+      return
+    } 
   };
 
+  const setPassword = async (params) => {
+    try {
+      const res = await accountAPI.setPassword(params)
+      if (res.successful) {
+        dispatch({ type: "NOTIFY", payload: { success: "Đổi mật khẩu thành công quý khách vui lòng đăng nhập lại." } });
+        handleClose()
+       }
+       else{
+        dispatch({ type: "NOTIFY", payload: { error: res.message } });
+       }
+    } catch (error) {
+      dispatch({ type: "NOTIFY", payload: { success: "Đã xảy ra lỗi vui lòng kiểm tra lại thông tin" } });
+    }
+  }
+
+  const forgotPassword = async (params) => {
+  try {
+      const res = await accountAPI.forgotPassword(params.PhoneNumber)
+      if (res.successful) {
+        setData({ ...data, authenId: res.data.authenID });
+        dispatch({ type: "NOTIFY", payload: { success: res.message } });
+        setStatusInput({ ...statusInput, showSendOTP: false, showFormOTP: true });
+       }
+       else{
+        dispatch({ type: "NOTIFY", payload: { error: res.message } });
+       }
+    } catch (error) {
+      dispatch({ type: "NOTIFY", payload: { error: res.message } });
+    }
+  }
+
+
   const login = async (params) => {
-    console.log('%cLoginModal.jsx line:56 params', 'color: #007acc;', params);
     try {
       const res = await accountAPI.login(params);
-      // if (res.successful && res.data) {
-        console.log('huahduhauhđâsd',res)
+      if (res.successful && res.data) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("userInfo", JSON.stringify(res));
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
         dispatch({ type: "NOTIFY", payload: { success: res.successful } });
         dispatch({type: 'AUTH', payload: res})
         handleClose();
         router.push("/");
         window.location.reload();
-      // } else {
-      //   dispatch({ type: "NOTIFY", payload: { error: res.error } });
-      // }
+      } else {
+        dispatch({ type: "NOTIFY", payload: { error: res.message } });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -83,12 +125,8 @@ function LoginModal({ btnStyle }) {
     let value = e.target.value.replace(/\D/g, "");
     setData({ PhoneNumber: value });
     if (value.length == 10) {
-      // Nhập đủ số điện thoại
-      setTimeout(() => {
         checkEmtyPhone(value);
-      }, 500);
     } else {
-      // Niếu ko đủ thì setStatus
       let status = {
         isEmptyPhone: false,
         statusOTP: false,
@@ -119,7 +157,7 @@ function LoginModal({ btnStyle }) {
     key.current.focus();
     if (arrTemp.length == 6) {
       let OTP = arrTemp.join("");
-      setData({ verifyCode: OTP });
+      setData({ ...data, verifyCode: OTP });
       arr = [];
       checkOTP(OTP);
     }
@@ -150,58 +188,68 @@ function LoginModal({ btnStyle }) {
   };
 
   const checkOTP = async (OTP) => {
-
+    localStorage.removeItem("token");
     let params = {
       authenId: data.authenId,
       verifyCode: data.verifyCode || OTP,
     };
 
     let paramLogin = {
-      Email: data.PhoneNumber,
+      email: data.PhoneNumber,
       password: data.Password,
     };
+
     try {
       const res = await accountAPI.verifySmsCode(params);
       if (res.successful && res.data) {
         setStatusInput({ ...statusInput, isShowMsgErrOTP: false });
-        login(paramLogin);
+        
+        if(statusInput.forgotPassword) {
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          setStatusInput({ ...statusInput, showFormRegister: false, showFormFogotPass: true, showSendOTP: false, showFormOTP: false });
+        }
+        else{
+          login(paramLogin);
+        }
       } else {
         setStatusInput({ ...statusInput, isShowMsgErrOTP: true });
       }
     } catch (error) {
       console.log("%cLoginModal.jsx line:133 error", "color: #007acc;", error);
     }
-
     console.log('%cLoginModal.jsx line:159 data', 'color: #007acc;', data);
-
-    if (OTP == data) {
-      setStatusInput({
-        isEmptyPhone: false,
-        showFormRegister: true,
-        showSendOTP: false,
-        showFormOTP: true,
-        isTrueOTP: true,
-        isShowMsgErrOTP: false,
-      });
-    } else {
-      setStatusInput({
-        isEmptyPhone: false,
-        showFormRegister: true,
-        showSendOTP: true,
-        showFormOTP: true,
-        isTrueOTP: false,
-        isShowMsgErrOTP: true,
-      });
-    }
   };
 
   const handleRegister = (key) => {
     setTextButton({ btnSubmit: "Đăng ký" });
-    if (key == "haveAccount") {
-      setStatusInput({});
-      setData({ PhoneNumber: "" });
-      console.log("%cLoginModal.jsx line:128 data", "color: #007acc;", data);
+
+    switch(key){
+      case "haveAccount":
+        setStatusInput({});
+        setData({ PhoneNumber: "" });
+        break;
+      case "forgotPassword": 
+        setStatusInput({ forgotPassword: true });
+        setTextButton({ btnSubmit: "Quên mật khẩu" });
+        break;
+      default:
+        console.log("%c Không có j ", "color: #007acc;", key);
+        return ""
     }
+
+
+    // console.log('%cLoginModal.jsx line:204 key', 'color: #007acc;', key);
+    // if (key == "forgotPassword") {
+    //   setStatusInput({});
+    //   setData({ PhoneNumber: "" });
+    //   console.log("%cLoginModal.jsx line:128 data", "color: #007acc;", data);
+    // }
+
+    // if (key == "haveAccount") {
+    //   setStatusInput({});
+    //   setData({ PhoneNumber: "" });
+    //   console.log("%cLoginModal.jsx line:128 data", "color: #007acc;", data);
+    // }
   };
 
   const sendOTP = async () => {
@@ -219,7 +267,6 @@ function LoginModal({ btnStyle }) {
       validatorOBJ.passwordMsg = true;
     }
     if (!validatorOBJ.nameMsg && !validatorOBJ.passwordMsg) {
-      console.log("%cLoginModal.jsx line:152 hiện OTP form", "color: #007acc;", formData);
       setStatusInput({
         showFormOTP: true,
         showSendOTP: true,
@@ -229,7 +276,6 @@ function LoginModal({ btnStyle }) {
       });
       const res = await accountAPI.register(formData);
       try {
-        console.log("%cLoginModal.jsx line:163 res", "color: #007acc;", res);
         if (res.successful && res.data) {
           setStatusInput({ ...statusInput, showSendOTP: false, showFormOTP: true });
           setData({ ...data, authenId: res.data.authenID });
@@ -272,6 +318,20 @@ function LoginModal({ btnStyle }) {
     }
   };
 
+  //  1. call (/Users/forgot-password?phoneNumber=0396296673') => authenID
+
+  //  2. call (/Users/verify-sms-code)  - truyền vào 
+  //       {
+  //           "authenId": "38362311-accd-47bf-a34f-a5a667f21691",
+  //           "verifyCode": "888888"
+  //        } 
+  //     => lấy được token login -> xác thực token(set token login )
+
+  //   3. (/Users/set-password) - truyền password kiểm tra trạng thái và bắn thông báo ( "successful": true )
+    
+
+
+
   return (
     <>
       {btnStyle == 'ICON' ?
@@ -295,7 +355,7 @@ function LoginModal({ btnStyle }) {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
-                  Số điện thoại đăng nhập
+                  Số điện thoại đăng nhập  {data.verifyCode || "ư"}
                   {/* (0396296673) */}
                 </label>
                 <input
@@ -314,7 +374,7 @@ function LoginModal({ btnStyle }) {
               {statusInput.isEmptyPhone && (
                 <div className="mb-3">
                   <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                    Mật khẩu
+                    Mật khẩu ư
                   </label>
                   <input
                     value={data.Password || ""}
@@ -325,6 +385,46 @@ function LoginModal({ btnStyle }) {
                   />
                 </div>
               )}
+
+              {statusInput.showFormFogotPass && (
+                <>
+                  <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label  lable-custom">
+                      Mật khẩu<i className="text-danger">(*)</i>
+                    </label>
+                    <input
+                      value={data.Password || ""}
+                      onChange={handlePassWord}
+                      type="password"
+                      className="form-control inputFomCustom"
+                      id="exampleInputPassword1"
+                    />
+                    {validatorForm.passwordMsg && (
+                      <i className="text-center text-danger">Mật khẩu không được để trống</i>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label  lable-custom">
+                      Nhập lại mật khẩu<i className="text-danger">(*)</i>
+                    </label>
+                    <input
+                      // readOnly={isDisableRePass}
+                      value={data.ConfirmPassword || ""}
+                      onChange={(e) => setData({ ...data, ConfirmPassword: e.target.value })}
+                      type="password"
+                      className="form-control inputFomCustom"
+                      id="exampleInputPassword1"
+                    />
+                    {validatorForm.passwordMsg && (
+                      <i className="text-center text-danger">Mật khẩu không được để trống</i>
+                    )}
+                    {data.ConfirmPassword && data.ConfirmPassword != data.Password && (
+                      <i className="text-center text-danger">Mật khẩu không chính xác</i>
+                    )}
+                  </div>
+                </>
+              )}
+
 
               {statusInput.showFormRegister && (
                 <>
@@ -382,6 +482,8 @@ function LoginModal({ btnStyle }) {
                 </>
               )}
 
+
+
               {statusInput.showFormOTP && (
                 <div className="mb-2">
                   <div className="verification-code">
@@ -428,7 +530,7 @@ function LoginModal({ btnStyle }) {
 
               {!statusInput.showSendOTP && (
                 <button type="submit" className="btn-custom button-custom-primary-form w-100 mb-2 ">
-                  {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
+                  {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit == "Quên mật khẩu" ? "Lấy lại mật khẩu" :  textButton.btnSubmit}
                 </button>
               )}
             </form>
@@ -453,27 +555,28 @@ function LoginModal({ btnStyle }) {
             </button>
             {!statusInput.showFormRegister ? (
               <div className="d-flex justify-content-between">
-                <a
-                  className="lable-custom text-primary  custom-link-hover"
+                <button 
+                  onClick={() => handleRegister("forgotPassword")}
+                  className="button__link"
                   style={{ cursor: "pointer" }}
                 >
                   Quên mật khẩu?
-                </a>
-                <a
-                  onClick={handleRegister}
-                  className="lable-custom text-primary text-end custom-link-hover"
+                </button>
+                <button
+                  onClick={() => handleRegister('')} 
+                  className="button__link"
                   style={{ cursor: "pointer" }}
                 >
                   Đăng ký
-                </a>
+                </button>
               </div>
             ) : (
-              <a
+              <button
                 onClick={() => handleRegister("haveAccount")}
-                className="lable-custom text-primary text-end"
+                className="button__link"
               >
                 Bạn đã có tài khoản?
-              </a>
+              </button>
             )}
           </div>
         </Modal.Body>

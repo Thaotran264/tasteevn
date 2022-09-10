@@ -50,12 +50,11 @@ const editProfile = () => {
     useEffect(() => {
         const getDetailUser = async () => {
           try {
-            const res = await userApi.getUserInfor();
+            const res = await userApi.getDetail();
             if (res['successful']) {
-              setUser(res['userInfo']);
+              setUser(res['data']);
             }
           } catch (error) {
-            console.log(error)
             dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
             localStorage.removeItem("userInfo");
             localStorage.removeItem("token");

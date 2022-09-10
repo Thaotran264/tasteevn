@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import LoginModal from "./LoginModal";
 import { isMobile } from "react-device-detect";
 import { BsCartCheck } from "react-icons/bs";
+import { stringify } from "querystring";
 
 const TabMenu = () => {
   const [_isMobile, setMobile] = useState(false);
@@ -18,12 +19,20 @@ const TabMenu = () => {
   const { state, dispatch } = useContext(DataContext);
   const router = useRouter();
   const [username, setusername] = useState();
+
+  let userInfo = {}
   useEffect(() => {
-    let name = JSON.parse(localStorage.getItem("userInfo")) || "";
-    if (name) {
-      setusername(name.fullName);
+    userInfo = localStorage.getItem("userInfo") ? localStorage.getItem("userInfo") : {}
+    if(!userInfo && userInfo === 'undefined'){
+      handleLogOut();
     }
-  }, []);
+    else{
+      let name = JSON.parse(localStorage.getItem("userInfo")) || "";
+      setusername(name.fullName);
+      console.log('%cTabMenu.jsx line:32 name', 'color: #007acc;', name);
+    }
+  }, [userInfo]);
+
   const handleLogOut = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
