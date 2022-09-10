@@ -355,7 +355,7 @@ function LoginModal({ btnStyle }) {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
-                  Số điện thoại đăng nhập  {data.verifyCode || "ư"}
+                  Số điện thoại đăng nhập 
                   {/* (0396296673) */}
                 </label>
                 <input
@@ -374,7 +374,7 @@ function LoginModal({ btnStyle }) {
               {statusInput.isEmptyPhone && (
                 <div className="mb-3">
                   <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                    Mật khẩu ư
+                    Mật khẩu
                   </label>
                   <input
                     value={data.Password || ""}
