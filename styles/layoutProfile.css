@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-15 16:48:49
- * @modify date 2022-08-26 16:21:02
+ * @modify date 2022-09-09 16:14:24
  * @desc [description]
  */
 /***
@@ -29,6 +29,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
     background: #fff;
+    height: 100vh;
 }
 
 .profile-userpic {

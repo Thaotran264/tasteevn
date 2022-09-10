@@ -94,7 +94,7 @@ const Infor = ({ userDetail }) => {
 
     try {
       const res = await userApi.updateUser(formData);
-      if (res && res.status == 200) {
+      if (res && res.successful) {
         dispatch({ type: "NOTIFY", payload: { success: "Bạn đã thay đổi thông tin thành công" } });
       }
     } catch (error) {

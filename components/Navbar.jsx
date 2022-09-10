@@ -12,6 +12,19 @@ const Navbar = () => {
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
+  let userInfo = {}
+  
+  useEffect(() => {
+    userInfo = localStorage.getItem("userInfo") ? localStorage.getItem("userInfo") : null
+    if(!userInfo && userInfo === 'undefined'){
+      handleLogOut();
+    }
+    else{
+      let name = JSON.parse(localStorage.getItem("userInfo")) || "";
+      setusername(name.fullName);
+    }
+  }, [userInfo]);
+
   useEffect(() => {
     setMobile(isMobile);
   }, [_isMobile]);
@@ -19,14 +32,8 @@ const Navbar = () => {
   const handleSearch = () => {
     console.log("first");
     setShowSearch(!showSearch);
+
   };
-  useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("userInfo")) || "";
-    const { fullName } = data.data || ""
-    if (fullName) {
-      setusername(fullName);
-    }
-  }, []);
 
   const router = useRouter();
   const handleLogOut = () => {
