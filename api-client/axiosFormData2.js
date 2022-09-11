@@ -7,14 +7,14 @@ function getToken (){
         return eval(token || '')
     }
 }
-const axiosAuth3 = axios.create({
-    baseURL: process.env.MERCHANT_URL,
+const axiosFormData2 = axios.create({
+    baseURL: process.env.BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${getToken()}`
     },
 }); 
-axiosAuth3.interceptors.response.use(
+axiosFormData2.interceptors.response.use(
     function (response) {
         return response.data;
     },
@@ -23,4 +23,4 @@ axiosAuth3.interceptors.response.use(
     }
 );
 
-export default axiosAuth3;
+export default axiosFormData2;

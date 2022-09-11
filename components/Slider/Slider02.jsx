@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Slider from "react-slick";
 import { listBrand } from "../../db";
@@ -40,7 +41,7 @@ const settings = {
   ],
 };
 
-const Slider02 = ({ item, text }) => {
+const Slider02 = ({ text }) => {
   return (
     <div className="p-2 bg-white rounded mb-2">
       <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
@@ -49,7 +50,7 @@ const Slider02 = ({ item, text }) => {
           {listBrand.map((item, index) => (
             <div key={index} className=''>
               <div className="d-flex justify-content-center w-100">
-                <img className="rounded border border-dark" src={item} alt={item} style={{ height: 130, width: 130 }} />
+                <img className="rounded border border-dark" src={item} alt={item} style={{width: 130, height: 130}} />
               </div>
               <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
             </div>

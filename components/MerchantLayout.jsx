@@ -8,7 +8,7 @@ const MerchantLayout = ({ children }) => {
   const { cart } = state;
 
   return (
-    <div className="bg-dark bg-opacity-10">
+    <div className="">
       {children}
       <Notify />
     </div>

@@ -6,14 +6,10 @@ import CarouselComponent from "./Carousel";
 import MultiRowSlide from "./Slider/MultiRowSlide";
 import Slider02 from "./Slider/Slider02";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import TabMenu from "./TabMenu";
 
 const Pages = () => {
-  const { data,
-    isLoading,
-    isError
-  } = useGetBanner()
-  if (isLoading) return <p>Loading....</p>
-  if (isError) return <p>{isError}</p>
 
   const router = useRouter();
   const handleViewBtn = (id) => {
@@ -21,13 +17,11 @@ const Pages = () => {
   };
   return (
     <div className="mt-2">
-      <CarouselComponent data={data} />
-      <MultiRowSlide item={data} text="Quán nổi bật" />
-      {/* <Slider02 item={data} text="Quán nổi bật" /> */}
-      <Slider02 item={data} text="Cửa hàng được yêu thích" />
+      <CarouselComponent />
+      <MultiRowSlide text="Quán nổi bật" />
+      <Slider02 text="Cửa hàng được yêu thích" />
       <h2>Quán mới nhất</h2>
       <div className="d-flex mb-2 flex-wrap justify-content-between">
-        {/* {data && data?.map((item) => <CardItems item={item} key={item.id} />)} */}
         <Card className="card-item card-config rounded">
           <Card.Img
             className="w-100"
@@ -43,6 +37,7 @@ const Pages = () => {
           </Card.Body>
         </Card>
       </div>
+      <TabMenu />
     </div>
   );
 };
