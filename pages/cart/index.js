@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { useContext, useState } from "react";
-import axiosAuth3 from "../../api-client/axios-auth3";
+import { orderApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
 import Checkout from "../../components/Modal/Checkout";
@@ -26,7 +26,7 @@ const Cart = () => {
         return { itemId: item.id, quantity: item.quantity, price: item.price };
       }),
     };
-    const res = await axiosAuth3.post("/api/Orders", params);
+    const res = await orderApi.orders(params)
     if(res.data) {
       setCheck(true)
       dispatch({type: "ADD_CART", payload: []})

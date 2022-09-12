@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['images.pexels.com', 'images.pexels.com','tastee-test.s3.ap-southeast-1.amazonaws.com'],
+    domains: ['images.pexels.com', 'images.pexels.com','tastee-test.s3.ap-southeast-1.amazonaws.com','i.pinimg.com'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

@@ -1,12 +1,13 @@
+import Image from "next/image";
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import { listRes, listBrand } from "../db";
-const CarouselComponent = ({ data }) => {
+import { listRes } from "../db";
+const CarouselComponent = ({ }) => {
   return (
     <Carousel className="mb-2 rounded">
-      {data.map((item, index) => (
+      {listRes.map((item, index) => (
         <Carousel.Item className="carouselconfig rounded" key={index}>
-          <img className="rounded" src={item.uri} alt="First slide" />
+          <Image className="rounded" src={item} alt="First slide" width={2000} height={1000}/>
         </Carousel.Item>
       ))}
     </Carousel>

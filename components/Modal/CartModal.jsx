@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
-import {BsTrash} from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 import { decrease, deleteItem, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
 const CartModal = ({ setShow }) => {
@@ -18,11 +18,11 @@ const CartModal = ({ setShow }) => {
       justify-content-center"
       style={{ zIndex: 100 }}
     >
-      <article className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative " style={{height: '70vh'}}>
+      <article className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative " style={{ height: '70vh' }}>
         <h2 className="cart-title">Thông tin giỏ hàng</h2>
         {
           cart.length >= 1 ? <>
-            <div className="w-100 overflow-auto mb-2 py-2 rounded" style={{ maxHeight:  400}}>
+            <div className="w-100 overflow-auto mb-2 py-2 rounded" style={{ maxHeight: 400 }}>
               {
                 cart?.map(item =>
                   <div className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative" key={item.id}>
@@ -33,7 +33,7 @@ const CartModal = ({ setShow }) => {
                         alt=""
                         width={110}
                         height={110}
-                        // style={{ width: 80, height: 80 }}
+                      // style={{ width: 80, height: 80 }}
                       />
                     </div>
                     <article className="w-100">
@@ -42,7 +42,7 @@ const CartModal = ({ setShow }) => {
                         <div>
                           <span className="cart-item-price text-danger fs-5">{item.saleNumber || 0}</span>
                           <br />
-                          <span className="cart-item-price fs-6" style={{ textDecoration: ' line-through' }}>{ item.price}</span>
+                          <span className="cart-item-price fs-6" style={{ textDecoration: ' line-through' }}>{item.price}</span>
                         </div>
                         <div className="d-flex align-items-center">
                           {
@@ -74,7 +74,7 @@ const CartModal = ({ setShow }) => {
                 )
               }
             </div>
-                <p className="border-bottom border-dark">Tổng thanh toán: <span className="cart-item-price">129.000 đ</span></p>
+            <p className="border-bottom border-dark">Tổng thanh toán: <span className="cart-item-price">129.000 đ</span></p>
             <div className="cartButtonGroup">
               <Link href="/cart">
                 <a className="btn mx-auto btn-success w-100 text-light justify-content-center d-flex align-items-center gap-1">
@@ -82,13 +82,13 @@ const CartModal = ({ setShow }) => {
                   Trang thanh toán
                 </a>
               </Link>
-              <button className="btn btn-danger w-100"   onClick={() => setShow(false)}><AiOutlineClose/> Đóng</button>
+              <button className="btn btn-danger w-100" onClick={() => setShow(false)}><AiOutlineClose /> Đóng</button>
             </div>
           </>
-            : 
+            :
             <>
-            <h2>Giỏ hàng trống</h2>
-            <button className="btn btn-danger"   onClick={() => setShow(false)}><AiOutlineClose/> Đóng</button>
+              <h2>Giỏ hàng trống</h2>
+              <button className="btn btn-danger" onClick={() => setShow(false)}><AiOutlineClose /> Đóng</button>
             </>
         }
         {/* <button

@@ -13,13 +13,13 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   let userInfo = {}
-  
+
   useEffect(() => {
     userInfo = localStorage.getItem("userInfo") ? localStorage.getItem("userInfo") : null
-    if(!userInfo && userInfo === 'undefined'){
+    if (!userInfo && userInfo === 'undefined') {
       handleLogOut();
     }
-    else{
+    else {
       let name = JSON.parse(localStorage.getItem("userInfo")) || "";
       setusername(name.fullName);
     }
@@ -131,23 +131,23 @@ const Navbar = () => {
                     className="border-0"
                   >
                     <div
-                    className="d-flex gap-1 align-items-center"
+                      className="d-flex gap-1 align-items-center"
                     >
-                    <span className="d-flex align-items-center"> {username} </span>  
+                      <span className="d-flex align-items-center"> {username} </span>
                       <img
-                      className="m-0 p-0"
+                        className="m-0 p-0"
                         style={{
                           borderRadius: '20px',
                           width: 40, height: 40
-                        }} 
-                        src={username.avatar ||'https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} />
-                        
+                        }}
+                        src={username.avatar || 'https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} />
+
                     </div>
 
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href={_isMobile ? "/profile" : "/profile-desktop"}>
+                    <Dropdown.Item href="/profile">
                       Thông tin tài khoản
                     </Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>

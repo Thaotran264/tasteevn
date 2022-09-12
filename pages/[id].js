@@ -19,6 +19,8 @@ import Default from "../components/KhongGianPic/Default";
 import { getBrandDetail } from "../hooks/useBrandDetail";
 import useSWR from "swr";
 import Head from "next/head";
+import { brandApi } from "../api-client/brand";
+import { menuApi } from "../api-client/menu";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -41,11 +43,13 @@ import Head from "next/head";
 // }
 
 const Detail = () => {
+  let firstLoggin = true
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = getBrandDetail(id)
-  const { banner, info, isDefault, productList } = data || {}
-  const { menus } = productList || {}
+  // const { banner, info, isDefault, productList } = data || {}
+  // const { menus } = productList || {}
+  
   const { state, dispatch } = useContext(DataContext)
   const { cart } = state
   const [menuPos, setMenuPos] = useState(false);
@@ -54,8 +58,11 @@ const Detail = () => {
     setShow(!show);
   };
   const [menuDeskPos, setMenuDeskPos] = useState(false);
+  const [menu, setMenu] = useState()
+  const [menuItems, setMenuItems] = useState([])
   let mbref = useRef();
   let mbDref = useRef();
+
   useEffect(() => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
@@ -76,41 +83,68 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+  let arr = []
+  useEffect(()=>{
+    const getData = async ()=> {
+      const formData = new FormData()
+      formData.append('BrandId', id) 
+      try {
+        const res = await menuApi.loadData(formData)
+        if(res.successful && res.data) {
+          setMenu(res.data.data)
+          res.data.data.forEach(item => {
+            const formData = new FormData()
+            formData.append('MenuID',item.id)
+            formData.append('BrandId',item.brandId)
 
-  if (isError) return <h2 className="text-center">{error}</h2>;
-  if (isLoading) return <h2 className="text-center">Loading</h2>;
-  const handleCartBtn = () => {
-    router.push("/cart");
-  };
+            const getData =  async () => {
+              const res = await menuApi.itemLoadData(formData)
+             return arr.push(res.data.data)
+            }
+            getData()
+            console.log('arr', arr);
+          })
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getData()
+  },[])
   return (
     <>
       <Head>
         <title>Brand Detail</title>
-        <meta name="description" content={info?.metaDescription} />
+        {/* <meta name="description" content={info?.metaDescription} /> */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta charset="UTF-8"></meta>
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
       <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
-        <Banner banner={banner} />
-        <InfoDefault info={info} />
-        <MenuPhoto isDefault={false} map={info} />
+        <Banner/>
+        {/* <InfoDefault info={info} /> */}
+        {/* <MenuPhoto isDefault={false} map={info} /> */}
         <Slider02 text="Món ăn đang giảm giá" />
-        <div ref={mbref}><MobileMenu menuPos={menuPos} menus={menus} /></div>
-        <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos} menus={menus} />}</div>
+        <div ref={mbref}><MobileMenu menuPos={menuPos} menu={menu} items={arr}/></div>
+        {/* <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos}/>}</div> */}
 
-        <TabMenu />
         {show && <CartModal setShow={setShow} />}
+        <div className="position-fixed bottom-0 end-0 start-0">
+          <div className="container w-100">
+        <div className="container d-flex bg-light justify-content-between">
         <button
-          className="btn position-fixed hideOnDeskTop"
-          style={{ bottom: "80px", right: "15px", zIndex: 99, backgroundColor: '#F7A76C', color: 'white' }}
+          className="button bg-light d-flex align-items-center text-danger" style={{height: 48, minWidth: 80}}
           onClick={handleShow}
         >
-          <span>
-            <BsCartCheck style={{ fontSize: 18 }} />
+            <BsCartCheck style={{ fontSize: 22}} />
+          <span style={{fontSize: 20}}>
             {cart.length || 0}
           </span>
         </button>
+        <button className="button bg-light">Tổng tiền: 50.000 đ</button>
+        </div>
+        </div>
+        </div>
       </section>
     </>
 

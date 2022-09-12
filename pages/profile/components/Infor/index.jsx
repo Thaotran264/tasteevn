@@ -322,7 +322,7 @@ const Infor = ({ userDetail }) => {
                 <span>Giới tính</span>
                 <div className="d-flex gap-3 ps-3">
                   <input
-                    defaultChecked={ user.gender == "1" ? true : false}
+                    defaultChecked={user.gender == "1" ? true : false}
                     value="1"
                     type="radio"
                     name="groundGender"
@@ -331,7 +331,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nữ
                   <input
-                     defaultChecked={ user.gender == "2" ? true : false}
+                    defaultChecked={user.gender == "2" ? true : false}
                     value="2"
                     type="radio"
                     name="groundGender"
@@ -340,7 +340,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nam
                   <input
-                     defaultChecked={ user.gender == "3" ? true : false}
+                    defaultChecked={user.gender == "3" ? true : false}
                     value="3"
                     type="radio"
                     name="groundGender"
@@ -368,7 +368,7 @@ const Infor = ({ userDetail }) => {
             <div className="box-infor">
               <h5 className="title-section"> Số điện thoại và email </h5>
               <div className="d-flex align-items-end justify-content-between  mb-3">
-                <span className=" w-100" style={{  overflow: "hidden" }}>
+                <span className=" w-100" style={{ overflow: "hidden" }}>
                   Số điện thoại
                   <input
                     type="number"
@@ -395,7 +395,7 @@ const Infor = ({ userDetail }) => {
                     type="email"
                     className="border-dark border-bottom w-100"
                     placeholder="Tên"
-                    value={user["email"]  || ''}
+                    value={user["email"] || ''}
                     required
                     onChange={(e) => setUser({ ...user, email: e.target.value })}
                     style={{
@@ -422,7 +422,7 @@ const Infor = ({ userDetail }) => {
                   style={{ fontSize: 13 }}
                   onClick={handleShow}
                 > */}
-                  <BiEdit className="text-primary" onClick={handleShow} />
+                <BiEdit className="text-primary" onClick={handleShow} />
                 {/* </button> */}
                 <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                   <Modal.Header closeButton>
