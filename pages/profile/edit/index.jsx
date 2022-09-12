@@ -29,10 +29,10 @@ const editProfile = () => {
     const { state, dispatch } = useContext(DataContext);
     const router = useRouter();
 
-    useEffect(() => {
-        setMobile(isMobile);
-        isMobile ? '' : router.push("/profile-desktop?slug=chinh-sua-thong-tin")
-    }, [_isMobile]);
+    // useEffect(() => {
+    //     setMobile(isMobile);
+    //     isMobile ? '' : router.push("/profile-desktop?slug=chinh-sua-thong-tin")
+    // }, [_isMobile]);
 
     const upload = (e) => {
         setIsUpload(true)
@@ -49,20 +49,20 @@ const editProfile = () => {
 
     useEffect(() => {
         const getDetailUser = async () => {
-          try {
-            const res = await userApi.getDetail();
-            if (res['successful']) {
-              setUser(res['data']);
+            try {
+                const res = await userApi.getDetail();
+                if (res['successful']) {
+                    setUser(res['data']);
+                }
+            } catch (error) {
+                dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
+                localStorage.removeItem("userInfo");
+                localStorage.removeItem("token");
+                window.location.replace("/");
             }
-          } catch (error) {
-            dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
-            localStorage.removeItem("userInfo");
-            localStorage.removeItem("token");
-            window.location.replace("/");
-          }
         };
         getDetailUser();
-      }, []);
+    }, []);
 
 
     const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
@@ -96,8 +96,8 @@ const editProfile = () => {
                                     <div className="file-upload avata-input">
                                         <input type="file" onChange={(e) => upload(e)} />
 
-                                       { isUpload && 
-                                        <img
+                                        {isUpload &&
+                                            <img
                                                 id="prevew-img"
                                                 className="w-100 h-100"
                                                 src={''}
@@ -132,7 +132,7 @@ const editProfile = () => {
                         </div>
 
                         <div className="profile-usermenu">
-                            <Infor userDetail={user } />
+                            <Infor userDetail={user} />
                         </div>
                     </div>
                 </Tab.Container>

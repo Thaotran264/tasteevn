@@ -1,11 +1,7 @@
-import axiosClient from './axios-client'
-import axiosFormData from './axiosFormData';
 import axiosAuth from './axios-auth';
-import axiosAPI2 from './axios-client-2';
+import axiosClient from './axios-client';
 
-
-export const userApi = { 
-    
+export const userApi = {
     getDetail() {
         return axiosAuth.get(`/Users/Detail`);
     },
@@ -21,4 +17,8 @@ export const userApi = {
         const url = "/Users/change-password";
         return axiosAuth.post(url, params)
     },
+    login(params) {
+        const url = `/Users/Login`
+        return axiosClient.post(url, params)
+    }
 }

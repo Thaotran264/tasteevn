@@ -10,7 +10,22 @@
   display: none;
 }
 
-.hideScrollbar::-webkit-scrollbar {
-  width: 0 !important;
+ul::-webkit-scrollbar {
+  width: 3px !important;
   display: none;
+}
+
+/* Track */
+ul::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+ul::-webkit-scrollbar-thumb {
+  background: #FECD70;
+}
+
+/* Handle on hover */
+ul::-webkit-scrollbar-thumb:hover {
+  background: #FFAE6D;
 }
