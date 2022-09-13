@@ -10,7 +10,6 @@ import { Card } from "react-bootstrap";
 import ModalAddresCRU from "../modalAddresCRU";
 import { adressApi } from "../../../../api-client/adressApi";
 import { DataContext } from "../../../../store/globalState";
-import Nodata from "../../../../components/Nodata";
 
 
 const ShippingAddress = () => {
@@ -23,9 +22,9 @@ const ShippingAddress = () => {
         setMobile(isMobile);
     }, [_isMobile]);
 
-    // useEffect(() => {
-    //     getData()
-    // }, []);
+    useEffect(() => {
+        getData()
+    }, []);
 
     const getData = async () => {
         try {
@@ -96,8 +95,7 @@ const ShippingAddress = () => {
 
             <div className="rounded w-100 bg-white p-2">
                 <hr className="my-1" />
-                {dataAddres.length <= 0 && <Nodata></Nodata> }
-                { dataAddres && dataAddres.map((item =>
+                {dataAddres && dataAddres.map((item =>
                     <div key={item.id}>
                         <div className="p-2" >
                             <div className="d-flex gap-1 justify-content-between">
@@ -122,9 +120,8 @@ const ShippingAddress = () => {
                         </div>
                         <hr />
                     </div>
-                ))} 
+                ))}
             </div>
-
             <Modal show={idDelete ? true : false}  onHide={handleCloseModalConfim}>
                 <Modal.Body>Bạn có muốn xoá địa chỉ</Modal.Body>
                 <Modal.Footer>

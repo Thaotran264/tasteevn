@@ -70,7 +70,7 @@ const TabMenu = () => {
                 style={{ border: 'none!important', borderRadius: '0.6em' }}
                 title={<AiOutlineUser style={{ fontSize: 24, color: 'white' }} />}
               >
-                <Dropdown.Item eventKey="1" href={"/profile"}>Thông tin tài khoản</Dropdown.Item>
+                <Dropdown.Item eventKey="1" href={_isMobile ? "/profile" : "/profile-desktop"}>Thông tin tài khoản</Dropdown.Item>
                 <Dropdown.Item eventKey="2" onClick={handleLogOut} >Đăng xuất</Dropdown.Item>
               </DropdownButton>
               :

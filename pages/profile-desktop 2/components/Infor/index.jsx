@@ -564,7 +564,6 @@ const TabInfor = ({ userDetail }) => {
                    
                   </Modal.Footer>
                 </Modal>
-                
               </div>
               </div>
             </div>

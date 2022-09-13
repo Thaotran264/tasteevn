@@ -27,6 +27,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setMobile(isMobile);
+    console.log('%cNavbar.jsx line:30 _isMobile', 'color: #007acc;', _isMobile);
   }, [_isMobile]);
 
   const handleSearch = () => {
@@ -147,8 +148,8 @@ const Navbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">
-                      Thông tin tài khoản
+                    <Dropdown.Item href={_isMobile ? "/profile" : "/profile-desktop"}>
+                      Thông tin tài khoản 
                     </Dropdown.Item>
                     <Dropdown.Item href="#">Đơn hàng</Dropdown.Item>
                     <Dropdown.Item href="#">Booking</Dropdown.Item>
