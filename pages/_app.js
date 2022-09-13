@@ -1,15 +1,16 @@
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
-import { useEffect } from "react";
 import { SWRConfig } from "swr";
-import Layout from "../components/Layout";
 import { DataProvider } from "../store/globalState";
 import "../styles/globals.css";
-import axios from "axios";
+import { store } from '../store/store'
+import { Provider } from 'react-redux'
+
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
-    // <SSRProvider>
+    <Provider store={store}>
     <DataProvider>
       <SWRConfig
         value={{
@@ -17,7 +18,6 @@ function MyApp({ Component, pageProps }) {
           dedupingInterval: 10000,
         }}
       >
-        {/* <Layout> */}
         <>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,10 +26,9 @@ function MyApp({ Component, pageProps }) {
             getLayout(<Component {...pageProps} />)
           }
         </>
-        {/* </Layout> */}
       </SWRConfig>
     </DataProvider>
-    // </SSRProvider>
+    </Provider>
   );
 }
 

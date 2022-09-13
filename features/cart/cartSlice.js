@@ -1,0 +1,49 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+
+export const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    itemList: [],
+    totalQuantity: 0,
+    showCart: false,
+  },
+  reducers: {
+    addToCart(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.itemList.find((item) => item.id === newItem.id);
+      if (existingItem) {
+        existingItem.quantity++;
+        existingItem.totalPrice += newItem.price;
+      } else {
+        state.itemList.push({
+          id: newItem.id,
+          price: newItem.price,
+          quantity: 1,
+          totalPrice: newItem.price,
+          name: newItem.name,
+        });
+        state.totalQuantity++;
+      }
+    },
+    removeFromCart(state, action) {
+      const id = action.payload;
+      const existingItem = state.itemList.find((item) => item.id === id);
+      if (existingItem.quantity == 1) {
+        state.itemList = state.itemList.filter((item) => item.id !== id);
+        state.totalQuantity--;
+      } else {
+        existingItem.quantity--;
+        existingItem.totalPrice -= existingItem.price;
+      }
+    },
+    setShowCart(state) {
+      state.showCart = true;
+    },
+  },
+});
+export const selectCart = (state) => state.cart.itemList;
+export const totalCart = (state) => state.cart.totalQuantity;
+export const { addToCart, removeFromCart, setShowCart } = cartSlice.actions;
+
+export default cartSlice.reducer;

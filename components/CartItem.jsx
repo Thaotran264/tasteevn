@@ -4,9 +4,10 @@ import { formatter } from "../utils";
 import { decrease, deleteItem, increase } from '../store/actions/actionsType'
 import { DataContext } from "../store/globalState";
 import {BsTrash} from 'react-icons/bs'
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart, selectCart } from "../features/cart/cartSlice";
 const CartItem = ({ item }) => {
-    const { state, dispatch } = useContext(DataContext);
-    const { cart, auth } = state;
+  const dispatch = useDispatch()
   return (
     <article className="cartItem__article hideOnDeskTop">
       <div className="cartItem__image">
@@ -26,23 +27,23 @@ const CartItem = ({ item }) => {
         <div className="d-flex align-items-center">
           <button
             className="button button--orange"
-            onClick={() => dispatch(decrease(cart, item.id))}
+            onClick={() => dispatch(removeFromCart(item.id))}
             disabled={item?.quantity == 1}
           >
             -
           </button>
           <span className="mx-2 text-danger">{item.quantity}</span>
-          <button className="button button--orange" onClick={() => dispatch(increase(cart, item))}>
+          <button className="button button--orange" onClick={() => dispatch(addToCart(item))}>
             +
           </button>
         </div>
       </div>
-      <button
+      {/* <button
         className="button button--delete btn-danger ms-auto"
         onClick={() => dispatch(deleteItem(cart, item.id))}
       >
         <BsTrash />
-      </button>
+      </button> */}
     </article>
   );
 };
