@@ -23,7 +23,6 @@ const Infor = ({ userDetail }) => {
   const refNewPass = useRef();
   const [showPass, setShowPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
-  const [showConfPassword, setShowConfPassword] = useState(false)
 
   useEffect(() => {
     setUser(userDetail);
@@ -323,7 +322,7 @@ const Infor = ({ userDetail }) => {
                 <span>Giới tính</span>
                 <div className="d-flex gap-3 ps-3">
                   <input
-                    defaultChecked={ user.gender == "1" ? true : false}
+                    defaultChecked={user.gender == "1" ? true : false}
                     value="1"
                     type="radio"
                     name="groundGender"
@@ -332,7 +331,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nữ
                   <input
-                     defaultChecked={ user.gender == "2" ? true : false}
+                    defaultChecked={user.gender == "2" ? true : false}
                     value="2"
                     type="radio"
                     name="groundGender"
@@ -341,7 +340,7 @@ const Infor = ({ userDetail }) => {
                   />{" "}
                   Nam
                   <input
-                     defaultChecked={ user.gender == "3" ? true : false}
+                    defaultChecked={user.gender == "3" ? true : false}
                     value="3"
                     type="radio"
                     name="groundGender"
@@ -369,7 +368,7 @@ const Infor = ({ userDetail }) => {
             <div className="box-infor">
               <h5 className="title-section"> Số điện thoại và email </h5>
               <div className="d-flex align-items-end justify-content-between  mb-3">
-                <span className=" w-100" style={{  overflow: "hidden" }}>
+                <span className=" w-100" style={{ overflow: "hidden" }}>
                   Số điện thoại
                   <input
                     type="number"
@@ -396,7 +395,7 @@ const Infor = ({ userDetail }) => {
                     type="email"
                     className="border-dark border-bottom w-100"
                     placeholder="Tên"
-                    value={user["email"]  || ''}
+                    value={user["email"] || ''}
                     required
                     onChange={(e) => setUser({ ...user, email: e.target.value })}
                     style={{
@@ -423,9 +422,9 @@ const Infor = ({ userDetail }) => {
                   style={{ fontSize: 13 }}
                   onClick={handleShow}
                 > */}
-                  <BiEdit className="text-primary" onClick={handleShow} />
+                <BiEdit className="text-primary" onClick={handleShow} />
                 {/* </button> */}
-                {/* <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                   <Modal.Header closeButton>
                     <Modal.Title>Đổi mật khẩu</Modal.Title>
                   </Modal.Header>
@@ -483,100 +482,11 @@ const Infor = ({ userDetail }) => {
                       Lưu
                     </Button>
                   </Modal.Footer>
-                </Modal> */}
-
-                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Đổi mật khẩu</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <div className="mb-3">
-                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                        Mật khẩu cũ.
-                      </label>
-                      <div className="d-flex rounded border">
-                        <input
-                          value={changePass.password || ""}
-                          onChange={(e) =>
-                            setchangePass({ ...changePass, password: e.target.value })
-                          }
-                          type={showPass ? "text" : "password"}
-                          className="form-control inputFomCustom border-end w-100 border-0"
-                          id="exampleInputPassword1"
-                        />
-                        <button className="btn border-0" onClick={() => setShowPass(!showPass)}>
-                          {" "}
-                          {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                        Mật khẩu mới.
-                      </label>
-                      <div className="d-flex rounded border">
-                        <input
-                          value={changePass.newPassword || ""}
-                          onChange={(e) => setchangePass({ ...changePass, newPassword: e.target.value })}
-                          type={showNewPass ? "text" : "password"}
-                          className="form-control inputFomCustom border-end w-100 border-0"
-                          id="exampleInputPassword1"
-                        />
-                        <button
-                          className="btn border-0"
-                          onClick={() => setShowNewPass(!showNewPass)}
-                        >
-                          {" "}
-                          {showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                        Xác nhận mật khẩu mới.
-                      </label>
-                      <div className="d-flex rounded border">
-                        <input
-                          value={changePass.confPassword ||  '' }
-                          onChange={(e) => setchangePass({ ...changePass, confPassword: e.target.value })}
-                          type={showConfPassword ? "text" : "password"}
-                          className="form-control inputFomCustom border-end w-100 border-0"
-                          id="exampleInputPassword1"
-                        />
-                        <button
-                          className="btn border-0"
-                          onClick={() => setShowConfPassword(!showConfPassword)}
-                        >
-                          {" "}
-                          {showConfPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                        </button>
-                      </div>
-                      { !changePass.confPassword?.length > 0 || changePass.confPassword ===  changePass.newPassword ?  '' : <p className="text-danger">Xác nhận mật khẩu phải trùng với mật khẩu mới </p> }
-                    </div>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Đóng
-                    </Button>
-
-                    { changePass.confPassword?.length > 0 && changePass.confPassword ===  changePass.newPassword ?
-                    <div>
-                      <Button variant="primary" onClick={handleChangePass}>
-                         Lưu
-                      </Button>
-                    </div>
-                     : 
-                     ''
-                  }
-                   
-                  </Modal.Footer>
                 </Modal>
               </div>
             </div>
           </div>
-          <div className="mb-5">
+          <div className="">
             <Button type="submit" variant="outline-primary" className="w-100 rounded">
               Lưu thay đổi
             </Button>{" "}

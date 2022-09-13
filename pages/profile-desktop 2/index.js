@@ -36,20 +36,18 @@ const Cart = () => {
     setMobile(isMobile);
     isMobile ? router.push("/profile") : router.push("/profile-desktop?slug=chinh-sua-thong-tin");
   }, [_isMobile]);
-
   useEffect(() => {
     const getDetailUser = async () => {
       try {
-        const res = await userApi.getDetail();
+        const res = await userApi.getUserInfor();
         if (res['successful']) {
-          setUser(res['data']);
+          setUser(res['userInfo']);
         }
       } catch (error) {
         dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
-        // localStorage.removeItem("userInfo");
-        // localStorage.removeItem("token");
-        console.log('first res:', error)
-        // window.location.replace("/");
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
+        window.location.replace("/");
       }
     };
     getDetailUser();
