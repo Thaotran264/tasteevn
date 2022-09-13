@@ -7,10 +7,17 @@ import { BsCart } from "react-icons/bs";
 import { BsTrash } from 'react-icons/bs';
 import { decrease, deleteItem, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart, selectCart } from "../../features/cart/cartSlice";
+import { formatter } from "../../utils";
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0)
-  const { state, dispatch } = useContext(DataContext)
-  const { cart } = state
+const cart = useSelector(selectCart)
+const dispatch = useDispatch()
+const total = 0
+cart.forEach(item => {
+  total += item.totalPrice
+})
 
   return (
     <section
@@ -49,7 +56,7 @@ const CartModal = ({ setShow }) => {
                             <>
                               <button
                                 className="border-0 rounded d-flex align-items-center justify-content-center"
-                                onClick={() => dispatch(decrease(cart, item.id))}
+                                onClick={() => dispatch(removeFromCart(item.id))}
                                 style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
                               >
                                 -
@@ -57,7 +64,7 @@ const CartModal = ({ setShow }) => {
                               <span className="mx-2">{item.quantity}</span>
                               <button
                                 className="border-0 rounded d-flex align-items-center justify-content-center"
-                                onClick={() => dispatch(increase(cart, item))}
+                                onClick={() => dispatch(addToCart(item))}
                                 style={{ backgroundColor: '#f7a76c', color: '#fff', fontSize: 22, height: 30, width: 30 }}
                               >
                                 +
@@ -74,7 +81,7 @@ const CartModal = ({ setShow }) => {
                 )
               }
             </div>
-            <p className="border-bottom border-dark">Tổng thanh toán: <span className="cart-item-price">129.000 đ</span></p>
+            <p className="border-bottom border-dark">Tổng thanh toán: <span className="cart-item-price">{formatter.format(total)}</span></p>
             <div className="cartButtonGroup">
               <Link href="/cart">
                 <a className="btn mx-auto btn-success w-100 text-light justify-content-center d-flex align-items-center gap-1">

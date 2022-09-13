@@ -1,12 +1,21 @@
 import Image from "next/image";
 import React, { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 import { decrease, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
 
 const MenuItem = ({ data: it }) => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state } = useContext(DataContext);
   const { cart } = state;
+  const dispatch = useDispatch()
+  const handleIncrement = (item) => {
+    dispatch(addToCart(item))
+  }
+  const handleDecrement = (item) => {
+    dispatch(removeFromCart(item))
+  }
   return (
     <article key={it.id} className="menuItem__article">
       <div className="menuItem__image">
@@ -33,7 +42,7 @@ const MenuItem = ({ data: it }) => {
                     <>
                       <button
                         className="border-0 rounded d-flex align-items-center justify-content-center"
-                        onClick={() => dispatch(decrease(cart, it.id))}
+                        onClick={() => handleDecrement(it)}
                         style={{
                           backgroundColor: "#f7a76c",
                           color: "#fff",
@@ -52,7 +61,7 @@ const MenuItem = ({ data: it }) => {
             })}
             <button
               className="ms-auto border-0 rounded d-flex align-items-center justify-content-center"
-              onClick={() => dispatch(increase(cart, it))}
+              onClick={()=>handleIncrement(it)}
               style={{
                 backgroundColor: "#f7a76c",
                 color: "#fff",
