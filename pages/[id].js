@@ -24,6 +24,7 @@ import { menuApi } from "../api-client/menu";
 import { useSelector } from "react-redux";
 import { selectCart, totalCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
+import { merchantApi } from "../api-client";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -49,11 +50,7 @@ const Detail = () => {
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading, isError } = getBrandDetail(id);
-  // const { banner, info, isDefault, productList } = data || {}
-  // const { menus } = productList || {}
-
-  const { state, dispatch } = useContext(DataContext);
+  console.log(id)
   const cart = useSelector(selectCart)
   const total = useSelector(totalCart)
   const [menuPos, setMenuPos] = useState(false);
@@ -62,15 +59,30 @@ const Detail = () => {
     setShow(!show);
   };
   const total2 = 0
-cart.forEach(item => {
-  total2 += item.totalPrice
-})
+  cart.forEach(item => {
+    total2 += item.totalPrice
+  })
   const [menuDeskPos, setMenuDeskPos] = useState(false);
   const [menu, setMenu] = useState();
   const [menuItems, setMenuItems] = useState([]);
+  const [data, setData] = useState()
   let mbref = useRef();
   let mbDref = useRef();
-
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        if (id) {
+          const res = await merchantApi.merChantInfo(id)
+          if (res.data) {
+            setData(res.data)
+          }
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, [id])
   useEffect(() => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
@@ -91,37 +103,37 @@ cart.forEach(item => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  useEffect(() => {
-    const getData = async () => {
-      const formData = new FormData();
-      formData.append("BrandId", id);
-      try {
-        const res = await menuApi.loadData(formData);
-        if (res.successful && res.data) {
-          setMenu(res.data.data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getData();
-  }, [id]);
-  useEffect(() => {
-    if (menu) {
-      let arr = [];
-      menu.forEach((item) => {
-        const formData = new FormData();
-        formData.append("MenuID", item.id);
-        formData.append("BrandId", item.brandId);
-        const getData = async () => {
-          const res = await menuApi.itemLoadData(formData);
-          arr.push(res.data.data);
-          setMenuItems(arr);
-        };
-        getData();
-      });
-    }
-  }, [menu]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const formData = new FormData();
+  //     formData.append("BrandId", id);
+  //     try {
+  //       const res = await menuApi.loadData(formData);
+  //       if (res.successful && res.data) {
+  //         setMenu(res.data.data);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getData();
+  // }, [id]);
+  // useEffect(() => {
+  //   if (menu) {
+  //     let arr = [];
+  //     menu.forEach((item) => {
+  //       const formData = new FormData();
+  //       formData.append("MenuID", item.id);
+  //       formData.append("BrandId", item.brandId);
+  //       const getData = async () => {
+  //         const res = await menuApi.itemLoadData(formData);
+  //         arr.push(res.data.data);
+  //         setMenuItems(arr);
+  //       };
+  //       getData();
+  //     });
+  //   }
+  // }, [menu]);
   return (
     <>
       <Head>
@@ -131,13 +143,14 @@ cart.forEach(item => {
         <meta charset="UTF-8"></meta>
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
-      <section className={`container py-2 ${show && "vh-100 overflow-hidden"}`}>
-        <Banner />
-        {/* <InfoDefault info={info} /> */}
+
+      <section className={`${show && "vh-100 overflow-hidden"}`}>
+        <Banner banner={data?.banner} />
+        <InfoDefault info={data?.info} />
         {/* <MenuPhoto isDefault={false} map={info} /> */}
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <MobileMenu menuPos={menuPos} menu={menu} items={menuItems} />
+          <MobileMenu productList={data?.productList} menuPos={menuPos} />
         </div>
         {/* <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos}/>}</div> */}
 

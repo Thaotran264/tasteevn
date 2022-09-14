@@ -1,13 +1,28 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { listRes } from "../db";
+import { bannerApi } from "../api-client";
 const CarouselComponent = ({ }) => {
+  const [banner, setBanner] = useState()
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await bannerApi.getBanner()
+        if (res.data) {
+          setBanner(res.data)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, [])
   return (
     <Carousel className="mb-2 rounded">
-      {listRes.map((item, index) => (
+      {banner?.map((item, index) => (
         <Carousel.Item className="carouselconfig rounded" key={index}>
-          <Image className="rounded" src={item} alt="First slide" width={2000} height={1000}/>
+          <Image className="rounded" src={item.uri || '/image/logo512.png'} alt="First slide" width={2000} height={1000} />
         </Carousel.Item>
       ))}
     </Carousel>

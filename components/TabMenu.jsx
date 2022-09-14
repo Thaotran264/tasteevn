@@ -23,13 +23,13 @@ const TabMenu = () => {
   let userInfo = {}
   useEffect(() => {
     userInfo = localStorage.getItem("userInfo") ? localStorage.getItem("userInfo") : {}
-    if(!userInfo && userInfo === 'undefined'){
+    if (!userInfo && userInfo === 'undefined') {
       handleLogOut();
     }
-    else{
+    else {
       let name = JSON.parse(localStorage.getItem("userInfo")) || "";
       setusername(name.fullName);
-      console.log('%cTabMenu.jsx line:32 name', 'color: #007acc;', name);
+      // console.log('%cTabMenu.jsx line:32 name', 'color: #007acc;', name);
     }
   }, [userInfo]);
 
