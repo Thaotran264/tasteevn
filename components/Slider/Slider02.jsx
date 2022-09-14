@@ -43,21 +43,23 @@ const settings = {
 
 const Slider02 = ({ text }) => {
   return (
-    <div className="p-2 bg-white rounded mb-2">
-      <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
-      <div className="mx-auto" style={{ width: '100%' }}>
-        <Slider {...settings}>
-          {listBrand.map((item, index) => (
-            <div key={index} className=''>
-              <div className="d-flex justify-content-center w-100">
-                <img className="rounded border border-dark" src={item} alt={item} style={{width: 130, height: 130}} />
+    <div className="container">
+      <div className=" p-2 bg-white rounded mb-2">
+        <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
+        <div className="mx-auto" style={{ width: '100%' }}>
+          <Slider {...settings}>
+            {listBrand.map((item, index) => (
+              <div key={index} className=''>
+                <div className="d-flex justify-content-center w-100">
+                  <img className="rounded border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
+                </div>
+                <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
               </div>
-              <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
-            </div>
-          ))}
-        </Slider>
-      </div>
-    </div >
+            ))}
+          </Slider>
+        </div>
+      </div >
+    </div>
   );
 };
 
