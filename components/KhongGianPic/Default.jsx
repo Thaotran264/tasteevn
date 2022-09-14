@@ -6,7 +6,6 @@ const Default = ({ map }) => {
             <section className="d-flex gap-1">
                 <div
                     className="w-50 showOnDesktop align-items-center"
-                // style={{ aspectRatio: '1/1' }}
                 >
                     {parse(map.webMap)}
                 </div>

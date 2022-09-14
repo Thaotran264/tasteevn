@@ -12,7 +12,13 @@
 
 ul::-webkit-scrollbar {
   width: 3px !important;
+  /* height: 5px; */
   display: none;
+}
+
+ul:hover::-webkit-scrollbar {
+  display: block;
+
 }
 
 /* Track */

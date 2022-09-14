@@ -43,7 +43,7 @@ const settings = {
 
 const Slider02 = ({ text }) => {
   return (
-    <div className="container">
+    <div className="container px-0">
       <div className=" p-2 bg-white rounded mb-2">
         <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
         <div className="mx-auto" style={{ width: '100%' }}>

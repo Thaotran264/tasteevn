@@ -23,7 +23,7 @@ const Pages = () => {
       <h2>Quán mới nhất</h2>
       <div className="d-flex flex-wrap">
         {listId.map(item =>
-          <Card className="card-item card-config rounded mx-auto" style={{ width: '49%' }}>
+          <Card className="card-item card-config rounded mx-auto">
             <Card.Img
               className="w-100"
               variant="top"

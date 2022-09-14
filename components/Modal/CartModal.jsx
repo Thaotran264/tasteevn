@@ -10,22 +10,26 @@ import { DataContext } from "../../store/globalState";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
+
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0)
-const cart = useSelector(selectCart)
-const dispatch = useDispatch()
-const total = 0
-cart.forEach(item => {
-  total += item.totalPrice
-})
+  const cart = useSelector(selectCart)
+  const dispatch = useDispatch()
+  const total = 0
+  cart.forEach(item => {
+    total += item.totalPrice
+  })
+
 
   return (
+
     <section
-      className="vh-100 vw-100 position-fixed top-0 start-0 bg-dark bg-opacity-75 d-flex align-items-center
-      justify-content-center"
+      className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
       style={{ zIndex: 100 }}
     >
-      <article className="rounded px-2 py-4 d-flex flex-column align-items-center bg-white bg-opacity-75 cart-container position-relative " style={{ height: '70vh' }}>
+      <article className="rounded px-2 py-4 d-flex bg-light flex-column align-items-center cart-container position-absolute bottom-0 start-0 end-0 w-100" style={{ height: '70vh' }}>
         <h2 className="cart-title">Thông tin giỏ hàng</h2>
         {
           cart.length >= 1 ? <>
@@ -40,7 +44,6 @@ cart.forEach(item => {
                         alt=""
                         width={110}
                         height={110}
-                      // style={{ width: 80, height: 80 }}
                       />
                     </div>
                     <article className="w-100">
@@ -75,8 +78,8 @@ cart.forEach(item => {
                         </div>
                       </div>
                     </article>
-                    {/* <button className="button button--delete position-absolute top-0 end-0"
-                      onClick={() => dispatch(deleteItem(cart, item.id))}><BsTrash className="text-light" /></button> */}
+                    <button className="button button--delete position-absolute top-0 end-0"
+                      onClick={() => dispatch(deleteItem(cart, item.id))}><BsTrash className="text-light" /></button>
                   </div>
                 )
               }
@@ -98,15 +101,9 @@ cart.forEach(item => {
               <button className="btn btn-danger" onClick={() => setShow(false)}><AiOutlineClose /> Đóng</button>
             </>
         }
-        {/* <button
-          className="btn mx-auto fs-5 text-danger position-absolute"
-          style={{ top: 0, right: 0 }}
-          onClick={() => setShow(false)}
-        >
-          <AiOutlineClose style={{ fontSize: 14 }} />
-        </button> */}
       </article>
     </section>
+
   );
 };
 

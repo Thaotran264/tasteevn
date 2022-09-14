@@ -11,7 +11,7 @@ const InfoDefault = ({ info }) => {
   const [isLike, setIsLike] = useState(false)
   return (
     <div className="container">
-      <article className="container info__article">
+      <article className="info__article">
         <section className="info__section">
           <div className="info__image">
             <Image src={info?.logo || '/image/logo512.png'} width={384} height={384} />

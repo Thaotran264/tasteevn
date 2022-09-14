@@ -29,6 +29,6 @@
 
 @media (min-width: 992px) {
     .card-config {
-        width: 19%;
+        width: 19% !important;
     }
 }

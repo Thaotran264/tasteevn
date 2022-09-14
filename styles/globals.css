@@ -43,7 +43,7 @@ img {
 }
 
 :root {
-  --primary-color: rgb(255, 140, 0);
+  --primary-color: #FFAE6D;
   --text-white: #fff;
   --text-dark: rgb(100, 100, 109);
   ;
@@ -174,7 +174,7 @@ input:focus {
 
 footer,
 .configMenuMobile {
-  margin-bottom: 48px;
+  margin-bottom: 58px;
 }
 
 @media (min-width: 992px) {
@@ -279,6 +279,12 @@ footer,
 }
 
 @media (min-width: 992px) {
+  .menuMobile {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
   .info__image {
     width: 10%;
     /* padding-left: 15px; */
@@ -347,6 +353,8 @@ footer,
 
 .button {
   outline: none;
+  color: var(--text-white);
+  background-color: transparent;
   border: none;
   cursor: pointer;
   transition: all ease .25s;

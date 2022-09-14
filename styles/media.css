@@ -12,22 +12,6 @@
     }
 }
 
-@media (min-width: 992px) {
-    .card-item {
-        width: 19%;
-        /* flex: 1 1 20%; */
-    }
-}
-
-/* @media (max-width: 767px) {
-    .thumb-3 .box {
-        height: 100%;
-    }
-
-    .thumb-3 .box.img1 {
-        height: 100%;
-    }
-} */
 
 @media (max-width: 991px) {
     .hideonmobile {
@@ -47,23 +31,9 @@
     .showOnDesktop {
         display: flex !important;
     }
-}
 
-
-@media (min-width: 992px) {
-    .menuRecipe.active {
-        margin: 0 72px;
-    }
-}
-
-@media (min-width: 1140px) {
-    .menuRecipe.active {
-        margin: 0 172.5px;
-    }
-}
-
-@media (min-width: 1320px) {
-    .menuRecipe.active {
-        margin: 0 172.5px;
+    .card-item {
+        width: 19%;
+        /* flex: 1 1 20%; */
     }
 }
