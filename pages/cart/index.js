@@ -53,19 +53,23 @@ const Cart = () => {
       <Head>
         <title>Cart</title>
       </Head>
-      <article className="cart__article">
-        <h2 className="text-center border-bottom text-uppercase">Cart</h2>
+      <article className="cart__article position-relative">
+        <h5 className="text-center border-bottom pb-3">Trang thanh toán</h5>
         {cart.map((item) => (
           <CartItem item={item} key={item.id} />
         ))}
         <hr />
-        <div className="d-flex justify-content-between align-items-center">
-          <span className="mb-0">Tổng tiền</span>
-          <p>{formatter.format(total)}</p>
-        </div>
-        <button className="btn btn-success w-25 mx-auto" onClick={handleDatHangButton}>
+        <div className="d-flex justify-content-between start-0 end-0 position-fixed bottom-0 px-2 py-3 border-top border-danger">
+          <div className="d-flex justify-content-between w-100 align-items-center">
+            <div>
+            <span className="" style={{fontSize: 14, color: '#000', textDecoration: 'line-through'}}>{formatter.format(total)}</span>
+          <span className="ms-2 text-danger">{formatter.format(total)}</span>
+            </div>
+        <button className="btn btn-success w-50" onClick={handleDatHangButton}>
           Đặt hàng
         </button>
+            </div>
+        </div>
       </article>
     
     </section>
