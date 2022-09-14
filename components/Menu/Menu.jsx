@@ -6,9 +6,8 @@ const Menu = ({ menuPos, productList }) => {
     console.log('productList', productList)
     return (
         <>
-            <h2>Menu</h2>
-            <MobileMenu menuPos={menuPos} menus={productList} />
-            <DesktopMenu menuPos={menuPos} menus={productList} />
+            <MobileMenu menuPos={menuPos} productList={productList} />
+            <DesktopMenu menuPos={menuPos} productList={productList} />
         </>
     )
 }

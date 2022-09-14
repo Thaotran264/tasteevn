@@ -21,6 +21,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
           <div className="row">
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
+
                 {productList?.menus?.map((item, index) => (
                   <li
                     key={item.id}
@@ -41,6 +42,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
         <div className="row">
           <div className={`col-md-4 col-lg-4 py-2 ${menuPos && "d-none"}`}>
             <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
+
               {productList?.menus?.map((item, index) => (
                 <li
                   key={item.id}

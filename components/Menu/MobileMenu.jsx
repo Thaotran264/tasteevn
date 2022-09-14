@@ -12,7 +12,6 @@ const MobileMenu = ({ productList, menuPos }) => {
     setTabMenu(tab)
   };
   const data = productList?.menus.find(item => item.name == tabMenu)
-  console.log('mobile')
   return (
     <>
       <section className="menu__section position-relative menuMobile">
