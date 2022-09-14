@@ -20,7 +20,6 @@ const TabInfor = ({ userDetail }) => {
   useEffect(() => {
     setMobile(isMobile);
   }, [_isMobile]);
-
   const [show, setShow] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const handleClose = () => setShow(false);
@@ -43,7 +42,7 @@ const TabInfor = ({ userDetail }) => {
   const handleChangePass = async () => {
     try {
       const res = await userApi.changePassword(changePass)
-      if (res.status == 200 && res.data.successful) {
+      if (res.successful) {
         dispatch({ type: "NOTIFY", payload: { success: 'Bạn đã đổi mật khẩu thành công' } });
         setchangePass({})
         handleClose()

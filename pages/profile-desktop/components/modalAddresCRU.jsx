@@ -24,13 +24,14 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
     const [cities, setCities] = useState([])
     const [areas, setAreas] = useState([])
 
+    
     useEffect(() => {
         if (show) {
+            setAddressData(item)
             cities?.length <= 0 ? getCities() : ''
             item ? getAreas(addressData.cityId) : ''
         }
     }, [show])
-
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -40,10 +41,10 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                 handleClose()
             }
             else {
-                dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại dd" } });
+                dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại " } });
             }
         } catch (error) {
-            dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng kiểm tra lại 123" } });
+            dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng kiểm tra lại " } });
         }
 
     }
@@ -62,7 +63,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
             const res = await adressApi.getAreasByCity(id)
             setAreas(res)
         } catch (error) {
-            console.log('%cmodalAddresCRU.jsx line:15 error', 'color: #007acc;', error);
+            console.log('%c error getAreas', 'color: #007acc;', error);
         }
     }
 
@@ -107,7 +108,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <label htmlFor="">Họ và tên</label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, name: e.target.value })} value={addressData['name'] || ''} type="text" placeholder="Họ và tên" />
+                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, name: e.target.value })} value={addressData && addressData['name'] || ''} type="text" placeholder="Họ và tên" />
                             </div>
                         </div>
                         <div className="row">
@@ -115,7 +116,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <label htmlFor="Số điện thoại">Số điện thoại</label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
+                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData && addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
                             </div>
                         </div>
                         <div className="row">
@@ -123,7 +124,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <label htmlFor="Tỉnh/ Thành phố">Tỉnh/ Thành phố</label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <select value={addressData.cityId || 0} name="day" id="cities-select" className="w-100 rounded p-1" onChange={changeCities}>
+                                <select value={addressData && addressData.cityId || 0} name="day" id="cities-select" className="w-100 rounded p-1" onChange={changeCities}>
                                     <option value={0}>Tỉnh/ Thành phố</option>
                                     {cities?.map((item, index) =>
                                         <option key={item.id} value={Number(item.id)}>{item.name}</option>
@@ -136,7 +137,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <label htmlFor="Quận huyện">Quận huyện </label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <select value={addressData.areaId || 0} name="day" id="area-select" className="w-100 rounded p-1" onChange={changeArea}>
+                                <select value={addressData && addressData.areaId || 0} name="day" id="area-select" className="w-100 rounded p-1" onChange={changeArea}>
                                     <option value={0}>Quận/ Huyện</option>
                                     {areas?.map((item, index) =>
                                         <option key={item.id} value={Number(item.id)} >{item.name}</option>
@@ -150,7 +151,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <label htmlFor="Địa chỉ:">Địa chỉ:</label>
                             </div>
                             <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
+                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData && addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
                             </div>
                         </div>
 

@@ -23,9 +23,9 @@ const ShippingAddress = () => {
         setMobile(isMobile);
     }, [_isMobile]);
 
-    // useEffect(() => {
-    //     getData()
-    // }, []);
+    useEffect(() => {
+        getData()
+    }, []);
 
     const getData = async () => {
         try {

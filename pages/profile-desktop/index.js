@@ -40,9 +40,9 @@ const Cart = () => {
   useEffect(() => {
     const getDetailUser = async () => {
       try {
-        const res = await userApi.getDetail();
+        const res = await userApi.getUserInfor();
         if (res['successful']) {
-          setUser(res['data']);
+          setUser(res['data'].userInfo);
         }
       } catch (error) {
         dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
