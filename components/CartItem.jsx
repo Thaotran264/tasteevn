@@ -17,33 +17,39 @@ const CartItem = ({ item }) => {
             "https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
           }
           alt=""
-          width={100}
-          height={100}
+          width={80}
+          height={80}
         />
       </div>
       <div className="cartItem__content">
-        <h6>{item.name}</h6>
-        <p className="text-danger">{formatter.format(item.price)}</p>
+        <div>
+        <h6 className="mb-0">{item.name}</h6>
+<p className="mb-0" style={{fontSize: 13}}>Note</p>
+        </div>
+        <span className="mx-2 text-danger" style={{fontSize: 13}}>x{item.quantity}</span>
+        <div>
+        <span className="text-dark" style={{fontSize: 13, textDecoration:' line-through'}}>{formatter.format(item.price)}</span>
+        <span className="text-danger ms-2" style={{fontSize: 14}}>{formatter.format(item.salePrice)}</span>
+        </div>
+
         <div className="d-flex align-items-center">
-          <button
+          {/* <button
             className="button button--orange"
             onClick={() => dispatch(removeFromCart(item.id))}
-          // disabled={item?.quantity == 1}
           >
             -
-          </button>
-          <span className="mx-2 text-danger">{item.quantity}</span>
-          <button className="button button--orange" onClick={() => dispatch(addToCart(item))}>
+          </button> */}
+          {/* <button className="button button--orange" onClick={() => dispatch(addToCart(item))}>
             +
-          </button>
+          </button> */}
         </div>
       </div>
-      {/* <button
+      <button
         className="button button--delete btn-danger ms-auto"
-        onClick={() => dispatch(deleteItem(cart, item.id))}
+        // onClick={() => dispatch(deleteItem(cart, item.id))}
       >
         <BsTrash />
-      </button> */}
+      </button>
     </article>
   );
 };
