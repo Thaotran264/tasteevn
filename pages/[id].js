@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { selectCart, totalCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
 import { merchantApi } from "../api-client";
+import Menu from "../components/Menu/Menu";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -103,37 +104,7 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const formData = new FormData();
-  //     formData.append("BrandId", id);
-  //     try {
-  //       const res = await menuApi.loadData(formData);
-  //       if (res.successful && res.data) {
-  //         setMenu(res.data.data);
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getData();
-  // }, [id]);
-  // useEffect(() => {
-  //   if (menu) {
-  //     let arr = [];
-  //     menu.forEach((item) => {
-  //       const formData = new FormData();
-  //       formData.append("MenuID", item.id);
-  //       formData.append("BrandId", item.brandId);
-  //       const getData = async () => {
-  //         const res = await menuApi.itemLoadData(formData);
-  //         arr.push(res.data.data);
-  //         setMenuItems(arr);
-  //       };
-  //       getData();
-  //     });
-  //   }
-  // }, [menu]);
+
   return (
     <>
       <Head>
@@ -144,29 +115,31 @@ const Detail = () => {
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
 
-      <section className={`${show && "vh-100 overflow-hidden"}`}>
+      <section
+        className={`${show && "overflow-hidden"}`}
+      >
         <Banner banner={data?.banner} />
         <InfoDefault info={data?.info} />
-        {/* <MenuPhoto isDefault={false} map={info} /> */}
+        <MenuPhoto isDefault={false} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <MobileMenu productList={data?.productList} menuPos={menuPos} />
+          {/* <MobileMenu productList={data?.productList} menuPos={menuPos} /> */}
+          <Menu productList={data?.productList} menuPos={menuPos} />
         </div>
-        {/* <div ref={mbDref}>{<DesktopMenu menuPos={menuDeskPos}/>}</div> */}
 
         {show && <CartModal setShow={setShow} />}
-        <div className="position-fixed bottom-0 end-0 start-0">
+        <div className="hideOnDesktop position-fixed bottom-0 end-0 start-0" style={{ backgroundColor: "#FFAE6D" }}>
           <div className="container w-100">
-            <div className="container d-flex bg-light justify-content-between">
+            <div className="d-flex justify-content-between">
               <button
-                className="button bg-light d-flex align-items-center text-danger"
+                className="button  d-flex align-items-center "
                 style={{ height: 48, minWidth: 80 }}
                 onClick={handleShow}
               >
                 <BsCartCheck style={{ fontSize: 22 }} />
                 <span style={{ fontSize: 20 }}>{total || 0}</span>
               </button>
-              <button className="button bg-light">Tổng tiền: {formatter.format(total2)}</button>
+              <button className="button ">Tổng tiền: {formatter.format(total2)}</button>
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@ const settings = {
 };
 const MultiRowSlide = ({ item, text }) => {
   return (
-    <div className="p-2 bg-white rounded mb-2">
+    <div className="bg-white rounded mb-2">
       <h2 className="text-center mb-2 border-bottom pb-1">{text}</h2>
       <Slider {...settings} className="">
         {listBrand.map((it, index) => (

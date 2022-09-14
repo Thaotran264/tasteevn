@@ -61,7 +61,7 @@ const MenuItem = ({ data: it }) => {
             })}
             <button
               className="ms-auto border-0 rounded d-flex align-items-center justify-content-center"
-              onClick={()=>handleIncrement(it)}
+              onClick={() => handleIncrement(it)}
               style={{
                 backgroundColor: "#f7a76c",
                 color: "#fff",

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { formatter } from "../utils";
 import { decrease, deleteItem, increase } from '../store/actions/actionsType'
 import { DataContext } from "../store/globalState";
-import {BsTrash} from 'react-icons/bs'
+import { BsTrash } from 'react-icons/bs'
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, selectCart } from "../features/cart/cartSlice";
 const CartItem = ({ item }) => {
@@ -28,7 +28,7 @@ const CartItem = ({ item }) => {
           <button
             className="button button--orange"
             onClick={() => dispatch(removeFromCart(item.id))}
-            disabled={item?.quantity == 1}
+          // disabled={item?.quantity == 1}
           >
             -
           </button>
