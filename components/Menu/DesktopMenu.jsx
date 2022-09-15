@@ -10,7 +10,6 @@ const DesktopMenu = ({ menuPos, productList }) => {
   const handleMenuItem = (tab) => {
     setTabMenu(tab)
   };
-  console.log('desktop')
   return (
     <section className="d-none showOnDesktop w-100 mx-auto py-2">
       <div

@@ -8,7 +8,7 @@ import { BsTrash } from "react-icons/bs";
 import { decrease, deleteItem, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart, selectCart } from "../../features/cart/cartSlice";
+import { addToCart, clearCart, removeFromCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
 import Button from "react-bootstrap/Button";
@@ -16,15 +16,21 @@ import Modal from "react-bootstrap/Modal";
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
   const cart = useSelector(selectCart);
+  console.log('cart', cart)
   const dispatch = useDispatch();
   const total = 0;
   const totalItem = 0;
+  const toppingTotal = 0
   cart.forEach((item) => {
     total += item.totalPrice;
     totalItem += item.quantity;
+    item.toppings.forEach(it =>
+      toppingTotal += it.price
+      )
   });
-
   return (
+    <>
+    {totalItem &&
     <section
       className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
       style={{ zIndex: 100 }}
@@ -37,8 +43,8 @@ const CartModal = ({ setShow }) => {
         <button className="btn text-dark" onClick={() => setShow(false)}>
             <AiOutlineClose style={{fontSize:22}}/>
           </button>
-        <h2 className="border-bottom border-light mb-0 text-center">Giỏ hàng</h2>
-        <button className="btn text-danger">
+        <h5 className="border-bottom border-light mb-0 text-center">Giỏ hàng</h5>
+        <button className="btn text-danger" style={{fontSize: 14, fontWeight: 'bold'}} onClick={()=>dispatch(clearCart([]))}>
             Xoá
           </button>
         </div>
@@ -63,17 +69,19 @@ const CartModal = ({ setShow }) => {
               <article className="w-100">
                 <div>
                   <h6 className="mb-0">{item.name}</h6>
-                  <p className="mb-0">Note</p>
+                  {item.toppings.map(item =>
+                    <span className="" style={{fontSize: 13, color: 'hsl(0,0%,40%)'}} key={item.id}>{item.name}</span>)}
+                  <p className="mb-0" style={{fontSize:13, color: '#8d8d8d'}}>{item.note || "Không có ghi chú"}</p>
                 </div>
-                <div className="d-flex w-100 justify-content-between align-items-end">
-                  <div>
+                <div className="d-flex  w-100 justify-content-between align-items-center">
+                  <div className="d-flex align-items-center">
                     <span
-                      className="cart-item-price"
+                      className="cart-item-price mb-0"
                       style={{ textDecoration: " line-through" }}
                     >
-                      {formatter.format(item.price)}
+                      {formatter.format(item.price + toppingTotal)}
                     </span>
-                    <span className="cart-item-price mx-2 text-danger">
+                    <span className="cart-item-price mx-2 text-danger mb-0">
                       {formatter.format(item.saleNumber) || 0}
                     </span>
                   </div>
@@ -119,16 +127,18 @@ const CartModal = ({ setShow }) => {
         <div className="position-absolute bottom-0 start-0 end-0 px-2 border-top border-dark py-3">
           <Link href="/cart">
             <a className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1" style={{fontSize: 18, backgroundColor:'#f7a76c', color: '#fff'}}>
-              <span>{totalItem} Món</span>
+              <span style={{fontSize: 16}}>{totalItem} Món</span>
               {/* <BsCart style={{ fontSize: 22 }} /> */}
               Trang thanh toán
-              <span>{formatter.format(total)}</span>
+              <span>{formatter.format(total + toppingTotal)}</span>
             </a>
           </Link>
           
         </div>
       </article>
     </section>
+    }
+    </>
   );
 };
 

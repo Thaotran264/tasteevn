@@ -21,11 +21,12 @@ import useSWR from "swr";
 import Head from "next/head";
 import { brandApi } from "../api-client/brand";
 import { menuApi } from "../api-client/menu";
-import { useSelector } from "react-redux";
-import { selectCart, totalCart } from "../features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart, totalCart, totalQuantityCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
 import { merchantApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
+import { addToCart } from "../store/actions/actionsType";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -51,39 +52,38 @@ const Detail = () => {
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
-  console.log(id)
-  const cart = useSelector(selectCart)
-  const total = useSelector(totalCart)
+  const cart = useSelector(selectCart);
+  const total = useSelector(totalQuantityCart);
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
   };
-  const total2 = 0
-  cart.forEach(item => {
-    total2 += item.totalPrice
-  })
+  const total2 = 0;
+  cart.forEach((item) => {
+    total2 += item.totalPrice;
+  });
   const [menuDeskPos, setMenuDeskPos] = useState(false);
   const [menu, setMenu] = useState();
   const [menuItems, setMenuItems] = useState([]);
-  const [data, setData] = useState()
+  const [data, setData] = useState();
   let mbref = useRef();
   let mbDref = useRef();
   useEffect(() => {
     const getData = async () => {
       try {
         if (id) {
-          const res = await merchantApi.merChantInfo(id)
+          const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            setData(res.data)
+            setData(res.data);
           }
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    getData()
-  }, [id])
+    };
+    getData();
+  }, [id]);
   useEffect(() => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
@@ -104,7 +104,6 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
   return (
     <>
       <Head>
@@ -115,34 +114,38 @@ const Detail = () => {
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
 
-      <section
-        className={`${show && "overflow-hidden"}`}
-      >
+      <section className={`${show && "overflow-hidden"}`}>
         <Banner banner={data?.banner} />
         <InfoDefault info={data?.info} />
         <MenuPhoto isDefault={false} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          {/* <MobileMenu productList={data?.productList} menuPos={menuPos} /> */}
           <Menu productList={data?.productList} menuPos={menuPos} />
         </div>
 
         {show && <CartModal setShow={setShow} />}
-        <div className="hideOnDesktop position-fixed bottom-0 end-0 start-0" style={{ backgroundColor: "#FFAE6D" }}>
-          <div className="container w-100">
-            <div className="d-flex justify-content-between">
-              <button
-                className="button  d-flex align-items-center "
-                style={{ height: 48, minWidth: 80 }}
-                onClick={handleShow}
-              >
-                <BsCartCheck style={{ fontSize: 22 }} />
-                <span style={{ fontSize: 20 }}>{total || 0}</span>
-              </button>
-              <button className="button ">Tổng tiền: {formatter.format(total2)}</button>
+       {
+        total >=1  && 
+          <div
+            className="hideOnDesktop position-fixed bottom-0 end-0 start-0"
+            style={{ backgroundColor: "#FFAE6D" }}
+          >
+            <div className="container w-100">
+              <div className="d-flex justify-content-between">
+                <button
+                  className="button  d-flex align-items-center "
+                  style={{ height: 48, minWidth: 80 }}
+                  onClick={handleShow}
+                >
+                  <BsCartCheck style={{ fontSize: 22 }} />
+                  <span style={{ fontSize: 20 }}>{total}</span>
+                </button>
+                <button className="button ">Tổng tiền: {formatter.format(total2)}</button>
+              </div>
             </div>
           </div>
-        </div>
+       }
+        
       </section>
     </>
   );

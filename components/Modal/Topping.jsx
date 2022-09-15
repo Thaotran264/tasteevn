@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { BsShopWindow } from "react-icons/bs";
@@ -6,32 +7,43 @@ import { addToCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
-    const [count,setCount] = useState(1)
-    const [note, setNote] = useState('')
-    const [check, setCheck] = useState(false)
-    const dispatch = useDispatch()
+  console.log(show);
+  const [count, setCount] = useState(1);
+  const [note, setNote] = useState("");
+  const [toppings, setToppings] = useState([]);
+  const [check, setCheck] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setShow({ ...show, open: false });
   };
   const handleAdd = (value) => {
-    setCount(count += 1)
-  }
+    setCount((count += 1));
+  };
+
+  const handleMinus = (value) => {
+    count > 1 ? setCount((count -= 1)) : setShow({ ...show, open: false });
+  };
+  const handleCheck = (data) => {
+    setToppings([...toppings, data]);
+  };
+  const total = 0;
+  toppings.forEach((item) => {
+    total += item.price;
+  });
   const handleAddCart = (value) => {
     const data = {
-      ...value, quantity: count, note: note
-    }
-    console.log(data)
-    // dispatch(addToCart(value))
-    // setShow({ ...show, open: false });
-  }
-  const handleMinus = (value) => {
-    // console.log(value);
-    count >1 ? setCount(count -= 1) :  setShow({ ...show, open: false })
-  }
-  const handleCheck = () => {
-    setCheck(!check)
-  }
+      ...value,
+      quantity: count,
+      note: note,
+      toppings,
+      totalPrice: total + show.data.price,
+    };
+    // console.log(data);
+    dispatch(addToCart(data));
+    setShow({ ...show, open: false });
+  };
+  console.log(toppings);
   return (
     <section
       className="hideOnDesktop position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
@@ -51,9 +63,8 @@ const Topping = ({ setShow, show }) => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
-        >
-        </div>
-        <div className="w-100 p-2" >
+        ></div>
+        <div className="w-100 p-2">
           <div className="d-flex justify-content-between align-items-center">
             <h2>{show.data.name}</h2>
             <span>{formatter.format(show.data.price)}</span>
@@ -62,31 +73,34 @@ const Topping = ({ setShow, show }) => {
           <input
             type="text"
             value={note}
-            onChange={(e)=>setNote(e.target.value)}
+            onChange={(e) => setNote(e.target.value)}
             placeholder="Thêm ghi chú"
-            className="border-0 bg-opacity-100 w-100" style={{color: '#555252#5552521f1'}}
+            className="border-0 bg-opacity-100 w-100"
+            style={{ color: "hsl(0,0%,51%)" }}
           />
         </div>
         <div style={{ minHeight: 700 }} className="w-100">
-            {
-                show.data?.toppings?.map(item =>
-                    <div key={item.id} className='px-3 d-flex justify-content-between border-bottom border-dark py-3'>
-                    <h6>  {item.name}</h6>
-                  <p className="text-danger">{item.price}</p>
-                    <input type="radio" />
-                  </div> 
-                    )
-            }
+          {show.data?.toppings?.map((item) => (
+            <div
+              key={item.id}
+              className="px-3 d-flex justify-content-between border-bottom border-dark py-3"
+            >
+              <h6> {item.name}</h6>
+              <p className="text-danger">{item.price}</p>
+              <input type="radio" />
+            </div>
+          ))}
           {show.data.groupToppings?.map((item) => (
-            <div key={item.id} className='mb-2 px-2'>
-              <h5 className="bg-dark bg-opacity-50 p-2 text-light">
-                {item.name}
-              </h5>
-              {item.toppings.map((it) => (
-                <div key={it.id} className='px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3'>
-                  <h6>  {it.name}</h6>
+            <div key={item.id} className="mb-2 px-2">
+              <h5 className="bg-dark bg-opacity-50 p-2 text-light">{item.name}</h5>
+              {item.toppings.map((it, index) => (
+                <div
+                  key={index}
+                  className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
+                >
+                  <h6> {it.name}</h6>
                   <p className="mb-0 ms-auto me-2 text-danger">{formatter.format(it.price)}</p>
-                  <input checked={check} type="checkbox" onChange={()=>handleCheck()} />
+                  <input checked={check} type="checkbox" onChange={() => handleCheck(it)} />
                 </div>
               ))}
             </div>
@@ -97,11 +111,17 @@ const Topping = ({ setShow, show }) => {
           style={{ boxShadow: "0 5px 10px rgba(0,0,0,0.8)", zIndex: 99 }}
         >
           <div className="d-flex align-items-center gap-2">
-            <button className="btn text-success" onClick={()=>handleMinus()}>-</button>
+            <button className="btn text-success" onClick={() => handleMinus()}>
+              -
+            </button>
             <span>{count}</span>
-            <button className="btn text-success" onClick={()=>handleAdd(show.data)}>+</button>
+            <button className="btn text-success" onClick={() => handleAdd(show.data)}>
+              +
+            </button>
           </div>
-          <button className="btn btn-success" onClick={()=>handleAddCart(show.data)}>Thêm 33.000 đ</button>
+          <button className="btn btn-success" onClick={() => handleAddCart(show.data)}>
+            Thêm {formatter.format(total + show.data.price)}
+          </button>
           <button className="btn btn-danger" onClick={handleClose}>
             Đóng
           </button>

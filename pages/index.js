@@ -1,9 +1,13 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Pages from "../components/Pages";
+import { selectCart } from "../features/cart/cartSlice";
+import { addToCart } from "../store/actions/actionsType";
 export default function Home({ data }) {
+ 
   return (
     <>
       <Head>
