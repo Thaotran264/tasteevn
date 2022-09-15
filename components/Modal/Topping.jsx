@@ -7,18 +7,10 @@ import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
     const [count,setCount] = useState(1)
+    const [note, setNote] = useState('')
+    const [check, setCheck] = useState(false)
     const dispatch = useDispatch()
-  let mbref = useRef();
-  let titleRef = useRef();
-  // useEffect(() => {
-  //     const handleScroll = () => {
 
-  //     };
-  //     mbref.current.addEventListener("scroll", handleScroll);
-  //     return () => {
-  //         mbref.current.removeEventListener("scroll", handleScroll);
-  //     };
-  // });
   const handleClose = () => {
     setShow({ ...show, open: false });
   };
@@ -26,17 +18,19 @@ const Topping = ({ setShow, show }) => {
     setCount(count += 1)
   }
   const handleAddCart = (value) => {
-    dispatch(addToCart(value))
-    setShow({ ...show, open: false });
+    const data = {
+      ...value, quantity: count, note: note
+    }
+    console.log(data)
+    // dispatch(addToCart(value))
+    // setShow({ ...show, open: false });
   }
   const handleMinus = (value) => {
     // console.log(value);
-    if(count >1) {
-        setCount(count -= 1)
-    }
-    else {
-        setShow({ ...show, open: false });
-    }
+    count >1 ? setCount(count -= 1) :  setShow({ ...show, open: false })
+  }
+  const handleCheck = () => {
+    setCheck(!check)
   }
   return (
     <section
@@ -44,7 +38,6 @@ const Topping = ({ setShow, show }) => {
       style={{ zIndex: 100 }}
     >
       <article
-        ref={mbref}
         className="rounded d-flex bg-light flex-column align-items-center cart-container position-absolute bottom-0 start-0 end-0 w-100"
         style={{ height: "90vh", overflow: "scroll" }}
       >
@@ -60,7 +53,7 @@ const Topping = ({ setShow, show }) => {
           }}
         >
         </div>
-        <div className="w-100 p-2" ref={titleRef}>
+        <div className="w-100 p-2" >
           <div className="d-flex justify-content-between align-items-center">
             <h2>{show.data.name}</h2>
             <span>{formatter.format(show.data.price)}</span>
@@ -68,15 +61,18 @@ const Topping = ({ setShow, show }) => {
           <p style={{ fontSize: 14 }}>Size</p>
           <input
             type="text"
+            value={note}
+            onChange={(e)=>setNote(e.target.value)}
             placeholder="Thêm ghi chú"
-            className="border-0 bg-opacity-100 w-100 text-success"
+            className="border-0 bg-opacity-100 w-100" style={{color: '#555252#5552521f1'}}
           />
         </div>
-        <div style={{ minHeight: 700 }} className="w-100 ">
+        <div style={{ minHeight: 700 }} className="w-100">
             {
                 show.data?.toppings?.map(item =>
                     <div key={item.id} className='px-3 d-flex justify-content-between border-bottom border-dark py-3'>
                     <h6>  {item.name}</h6>
+                  <p className="text-danger">{item.price}</p>
                     <input type="radio" />
                   </div> 
                     )
@@ -87,9 +83,10 @@ const Topping = ({ setShow, show }) => {
                 {item.name}
               </h5>
               {item.toppings.map((it) => (
-                <div key={it.id} className='px-3 d-flex justify-content-between border-bottom border-dark py-3'>
+                <div key={it.id} className='px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3'>
                   <h6>  {it.name}</h6>
-                  <input type="checkbox" />
+                  <p className="mb-0 ms-auto me-2 text-danger">{formatter.format(it.price)}</p>
+                  <input checked={check} type="checkbox" onChange={()=>handleCheck()} />
                 </div>
               ))}
             </div>

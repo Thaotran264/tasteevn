@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React, { useContext } from "react";
 import { formatter } from "../utils";
-import { decrease, deleteItem, increase } from '../store/actions/actionsType'
+import { decrease, deleteItem, increase } from "../store/actions/actionsType";
 import { DataContext } from "../store/globalState";
-import { BsTrash } from 'react-icons/bs'
+import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, selectCart } from "../features/cart/cartSlice";
 const CartItem = ({ item }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <article className="cartItem__article hideOnDeskTop">
       <div className="cartItem__image">
@@ -23,13 +23,21 @@ const CartItem = ({ item }) => {
       </div>
       <div className="cartItem__content">
         <div>
-        <h6 className="mb-0">{item.name}</h6>
-<p className="mb-0" style={{fontSize: 13}}>Note</p>
+          <h6 className="mb-0">{item.name}</h6>
+          <p className="mb-0" style={{ fontSize: 13 }}>
+            Note
+          </p>
         </div>
-        <span className="mx-2 text-danger" style={{fontSize: 13}}>x{item.quantity}</span>
+        <span className="mx-2 text-danger" style={{ fontSize: 13 }}>
+          x{item.quantity}
+        </span>
         <div>
-        <span className="text-dark" style={{fontSize: 13, textDecoration:' line-through'}}>{formatter.format(item.price)}</span>
-        <span className="text-danger ms-2" style={{fontSize: 14}}>{formatter.format(item.salePrice)}</span>
+          <span className="text-dark" style={{ fontSize: 13, textDecoration: " line-through" }}>
+            {formatter.format(item.price)}
+          </span>
+          <span className="text-danger ms-2" style={{ fontSize: 14 }}>
+            {formatter.format(item.salePrice)}
+          </span>
         </div>
 
         <div className="d-flex align-items-center">
