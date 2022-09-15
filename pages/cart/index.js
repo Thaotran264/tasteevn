@@ -17,7 +17,7 @@ const Cart = () => {
   const {id: userId} = auth || ""
   const total = 0
   const totalSale = 0
-  cart.forEach(item => {
+  cart?.forEach(item => {
     total += item.totalPrice
     totalSale += item.saleNumber
   })
@@ -44,7 +44,7 @@ const Cart = () => {
     }
   };
 
-  if (cart.length == 0) return (
+  if (cart?.length == 0) return (
     <>
     <h2 className="text-center">Empty</h2>
     {
@@ -60,7 +60,7 @@ const Cart = () => {
       </Head>
       <article className="cart__article position-relative">
         <h6 className="text-center border-bottom pb-3">Trang thanh toán</h6>
-        {cart.map((item) => (
+        {cart?.map((item) => (
           <CartItem item={item} key={item.id} />
         ))}
         <hr />

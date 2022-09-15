@@ -60,7 +60,7 @@ const Detail = () => {
     setShow(!show);
   };
   const total2 = 0;
-  cart.forEach((item) => {
+  cart?.forEach((item) => {
     total2 += item.totalPrice;
   });
   const [menuDeskPos, setMenuDeskPos] = useState(false);

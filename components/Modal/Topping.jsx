@@ -28,7 +28,7 @@ const Topping = ({ setShow, show }) => {
     setToppings([...toppings, data]);
   };
   const total = 0;
-  toppings.forEach((item) => {
+  toppings?.forEach((item) => {
     total += item.price;
   });
   const handleAddCart = (value) => {

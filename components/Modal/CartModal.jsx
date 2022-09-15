@@ -21,10 +21,10 @@ const CartModal = ({ setShow }) => {
   const total = 0;
   const totalItem = 0;
   const toppingTotal = 0
-  cart.forEach((item) => {
+  cart?.forEach((item) => {
     total += item.totalPrice;
     totalItem += item.quantity;
-    item.toppings.forEach(it =>
+    item.toppings?.forEach(it =>
       toppingTotal += it.price
       )
   });
