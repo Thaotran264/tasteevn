@@ -372,3 +372,376 @@ export const listId = [
   '5d334783-c67b-4a51-b2d4-7f4c18bc69e6',
   'dc755cef-0924-4188-a481-9098ea1bd83c'
 ]
+
+export const brand = {
+  "id": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
+  "isDefault": true,
+  "info": {
+    "name": "Cửa hàng chuyên bán niềm tin, khó tin được",
+    "address": "133 Nguyen",
+    "hotline": "0909000002",
+    "email": "abcdwf@gmail.com",
+    "phone": "0909000002",
+    "headOffice": "0909000002",
+    "uri": "https://tastee.vn/thaotv",
+    "logo": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/eq1naq00.j153008202275232.png",
+    "cityId": "3",
+    "cityName": "Đà Nẵng",
+    "areaId": "46",
+    "areaName": "Ngũ Hành Sơn",
+    "minPrice": null,
+    "maxPrice": null,
+    "metaDescription": "Đây là mô tả về cửa hàng nhé Thạo",
+    "seoTitle": null,
+    "seoDescription": null,
+    "seoImage": null,
+    "latitude": null,
+    "longitude": null,
+    "cuisines": [],
+    "categories": [],
+    "openTimeA": "08:00:00",
+    "closeTimeA": "12:00:00",
+    "openTimeP": "01:00:00",
+    "closeTimeP": "08:00:00",
+    "startDate": null,
+    "endDate": null,
+    "type": null,
+    "webMap":  `<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1959.8428719421165!2d106.6537272!3d10.758685!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fe21ee9a737%3A0xd61569af28504041!2zSGlnaGxhbmRzIENvZmZlZSBU4bqhIFV5w6pu!5e0!3m2!1svi!2s!4v1663144545527!5m2!1svi!2s" width="600" height="576" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
+    "style": 0,
+    "fontColor": null,
+    "backgroundColor": null
+  },
+  "banner": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/mbqzu0xx.hb53008202275232.png",
+  "restaurantSpace": {
+    "images": [
+      "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/nuvlqrv5.1zw3108202293919.jpg",
+      "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/nuvlqrv5.1zw3108202293919.jpg",
+      "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/nuvlqrv5.1zw3108202293919.jpg",
+      "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/8d3932d9-c541-4699-ac49-9f7edbbe05f7/nuvlqrv5.1zw3108202293919.jpg",
+      "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    ]
+  },
+  "productList": {
+    "menus": [
+      {
+        "id": "7c4875d8-5bd0-493d-b0f8-f824253e1db1",
+        "name": "Cà phê",
+        "items": [
+          {
+            "id": "11b8c429-2d67-4646-a25a-92ab839437e8",
+            "name": "Sản phẩm tes1r",
+            "image": null,
+            "description": "Khing có mô tả lần 2",
+            "shortDescription": null,
+            "price": 8000012,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": false,
+            "toppings": [
+              {
+                "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
+                "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                "name": "Topping bị ẩn 2",
+                "status": 1,
+                "orderBy": 0,
+                "isRequired": true,
+                "price": 15000,
+                "max": 1,
+                "min": 0,
+                "isSelected": false,
+                "capitalPrice": 0
+              },
+              {
+                "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
+                "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                "name": "Topping bị ẩn",
+                "status": 1,
+                "orderBy": 0,
+                "isRequired": true,
+                "price": 10000,
+                "max": 1,
+                "min": 0,
+                "isSelected": false,
+                "capitalPrice": 0
+              }
+            ],
+            "groupToppings": null
+          },
+          {
+            "id": "22608612-a735-4800-90ff-d812cd86f2ae",
+            "name": "Cao cao",
+            "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/22608612-a735-4800-90ff-d812cd86f2ae/skaybbtt.etl3008202210819.png",
+            "description": null,
+            "shortDescription": null,
+            "price": 35000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": false,
+            "toppings": [
+              {
+                "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
+                "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                "name": "Topping bị ẩn 2",
+                "status": 1,
+                "orderBy": 0,
+                "isRequired": true,
+                "price": 15000,
+                "max": 1,
+                "min": 0,
+                "isSelected": false,
+                "capitalPrice": 0
+              }
+            ],
+            "groupToppings": null
+          },
+          {
+            "id": "28cbf2af-7550-479c-a456-8478808f990e",
+            "name": "123",
+            "image": null,
+            "description": null,
+            "shortDescription": null,
+            "price": 580000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": false,
+            "toppings": [
+              {
+                "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
+                "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                "name": "Topping bị ẩn 2",
+                "status": 1,
+                "orderBy": 0,
+                "isRequired": true,
+                "price": 15000,
+                "max": 1,
+                "min": 0,
+                "isSelected": false,
+                "capitalPrice": 0
+              }
+            ],
+            "groupToppings": null
+          },
+          {
+            "id": "6d10745a-b850-439f-939e-afa0df6f81a0",
+            "name": "Cà phê sữa đá",
+            "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/6d10745a-b850-439f-939e-afa0df6f81a0/rx20zsxk.eyr2808202254121.png",
+            "description": null,
+            "shortDescription": null,
+            "price": 25000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": false,
+            "toppings": [],
+            "groupToppings": null
+          },
+          {
+            "id": "9b2ebfeb-3625-4487-b84a-2be2fe4aaff8",
+            "name": "Sp xóa",
+            "image": null,
+            "description": null,
+            "shortDescription": null,
+            "price": 12000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": false,
+            "toppings": [],
+            "groupToppings": null
+          }
+        ]
+      },
+      {
+        "id": "9cb2ef03-f95f-4af4-b308-62d1b0ba9324",
+        "name": "Trà sữa",
+        "items": [
+          {
+            "id": "6479b38f-0ce3-4c3f-9c60-7e3e1f5cc1f7",
+            "name": "Trà sữa Thái xanh - nhóm nhiều topping",
+            "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/6479b38f-0ce3-4c3f-9c60-7e3e1f5cc1f7/iovefmej.nyf3008202255729.png",
+            "description": null,
+            "shortDescription": null,
+            "price": 25000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": true,
+            "toppings": null,
+            "groupToppings": [
+              {
+                "id": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                "name": "Trân châu - sử dụng - nhiều",
+                "status": 1,
+                "isRequire": false,
+                "toppings": [
+                  {
+                    "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Topping bị ẩn 2",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 15000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Topping bị ẩn",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "86b61900-d5d8-43a5-9102-00cdf1cbfcf7",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Trân châu đen - mặc định chọn",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": true,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Topping bị ẩn 2",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 15000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Topping bị ẩn",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "86b61900-d5d8-43a5-9102-00cdf1cbfcf7",
+                    "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
+                    "name": "Trân châu đen - mặc định chọn",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": true,
+                    "capitalPrice": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "6bf6bb44-72a3-45ad-ad1b-8cef441ab565",
+            "name": "Trà sữa",
+            "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/6bf6bb44-72a3-45ad-ad1b-8cef441ab565/esnktquo.izs2808202255834.png",
+            "description": null,
+            "shortDescription": null,
+            "price": 22000,
+            "likeNumber": null,
+            "saleNumber": null,
+            "status": 1,
+            "isGroupTopping": true,
+            "toppings": null,
+            "groupToppings": [
+              {
+                "id": "7a656ab4-3b79-4d6a-9ac5-8a09f5d67f70",
+                "name": "Nhóm radio button",
+                "status": 1,
+                "isRequire": true,
+                "toppings": [
+                  {
+                    "id": "138747fd-4782-4f01-91fb-f78203edf107",
+                    "groupToppingId": "7a656ab4-3b79-4d6a-9ac5-8a09f5d67f70",
+                    "name": "Trân châu hoàng kim",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "bb0c12fe-bf7a-49eb-be42-6c5b98cb2cc6",
+                    "groupToppingId": "7a656ab4-3b79-4d6a-9ac5-8a09f5d67f70",
+                    "name": "Trân châu trắng",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": false,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "138747fd-4782-4f01-91fb-f78203edf107",
+                    "groupToppingId": "7a656ab4-3b79-4d6a-9ac5-8a09f5d67f70",
+                    "name": "Trân châu hoàng kim",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": true,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  },
+                  {
+                    "id": "bb0c12fe-bf7a-49eb-be42-6c5b98cb2cc6",
+                    "groupToppingId": "7a656ab4-3b79-4d6a-9ac5-8a09f5d67f70",
+                    "name": "Trân châu trắng",
+                    "status": 1,
+                    "orderBy": 0,
+                    "isRequired": false,
+                    "price": 10000,
+                    "max": 1,
+                    "min": 0,
+                    "isSelected": false,
+                    "capitalPrice": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "widgets": null,
+  "isLike": false
+}

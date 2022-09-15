@@ -26,6 +26,7 @@ import { selectCart, totalCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
 import { merchantApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
+import { brand } from "../db";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -69,6 +70,18 @@ const Detail = () => {
   const [data, setData] = useState()
   let mbref = useRef();
   let mbDref = useRef();
+  let MenuPhotoData = {}
+
+  // brand.widgets?.filter((item, i) => {
+  //   if(typeof item.data == 'string') {
+  //     item.data = JSON.parse(item.data)
+  //   }
+  //   if(item.widgetType == 3){
+  //     MenuPhotoData = item
+  //   }
+  // })
+  // console.log('%c[id].js line:74 brand', 'color: #007acc;', MenuPhotoData);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -84,6 +97,8 @@ const Detail = () => {
     }
     getData()
   }, [id])
+
+
   useEffect(() => {
     let mbT = mbref.current?.offsetTop;
     let mbDT = mbDref.current?.offsetTop;
@@ -120,7 +135,7 @@ const Detail = () => {
       >
         <Banner banner={data?.banner} />
         <InfoDefault info={data?.info} />
-        <MenuPhoto isDefault={false} />
+        <MenuPhoto isDefault={data?.['isDefault']} map={data?.info.webMap} info={data?.info} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
           {/* <MobileMenu productList={data?.productList} menuPos={menuPos} /> */}

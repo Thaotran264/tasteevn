@@ -14,7 +14,7 @@ const InfoDefault = ({ info }) => {
       <article className="info__article">
         <section className="info__section">
           <div className="info__image">
-            <Image src={info?.logo || '/image/logo512.png'} width={384} height={384} />
+            <img src={info?.logo || '/image/logo512.png'} width={384} height={384} />
           </div>
           <div className="info__content ">
             <h5>{info?.name}</h5>
@@ -50,8 +50,7 @@ const InfoDefault = ({ info }) => {
           {show && (
             <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
-                {/* {parse(info?webMap)} */}
-                This is map
+                {parse(info?.webMap)}
               </div>
             </div>
           )}
