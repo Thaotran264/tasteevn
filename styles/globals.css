@@ -330,11 +330,7 @@ footer,
   padding: 5px;
 }
 
-.cartItem__content h6 {
-  font-weight: 300;
-  margin-bottom: 10px;
-  letter-spacing: .5px;
-}
+
 
 .cartItem__content p {
   margin-bottom: 10px;

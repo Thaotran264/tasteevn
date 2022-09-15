@@ -3,7 +3,6 @@ import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 
 const Menu = ({ menuPos, productList }) => {
-    console.log('productList', productList)
     return (
         <>
             <MobileMenu menuPos={menuPos} productList={productList} />
