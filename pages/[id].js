@@ -14,6 +14,7 @@ import TabMenu from "../components/TabMenu";
 import { DataContext } from "../store/globalState";
 import Slider02 from "../components/Slider/Slider02";
 import { BsCartCheck } from "react-icons/bs";
+import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineFlag, AiOutlineHome } from "react-icons/ai";
 import CartModal from "../components/Modal/CartModal";
 import Default from "../components/KhongGianPic/Default";
 import { getBrandDetail } from "../hooks/useBrandDetail";
@@ -24,10 +25,9 @@ import { menuApi } from "../api-client/menu";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart, totalCart, totalQuantityCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
-import { merchantApi } from "../api-client";
+import { merchantApi, orderApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
-
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
 //   const paths = res.data.data.map((item) => ({
@@ -104,6 +104,17 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const res = await orderApi.loadData({ start: '1' })
+  //       console.log(res)
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   getData()
+  // }, [])
   return (
     <>
       <Head>
@@ -124,8 +135,8 @@ const Detail = () => {
         </div>
 
         {show && <CartModal setShow={setShow} />}
-       {
-        total >=1  && 
+        {
+          total >= 1 &&
           <div
             className="hideOnDesktop position-fixed bottom-0 end-0 start-0"
             style={{ backgroundColor: "#FFAE6D" }}
@@ -144,8 +155,21 @@ const Detail = () => {
               </div>
             </div>
           </div>
-       }
-        
+        }
+        <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
+          <button className="  border border-bottom-0  p-2" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHome style={{ fontSize: 20 }} /></button>
+          <button className="  border border-bottom-0  p-2 " style={{ backgroundColor: "#fff" }}
+            onClick={handleShow}
+          ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
+            {total >= 1 &&
+              <span style={{ fontSize: 20 }}>{total}</span>
+            }
+          </button>
+
+          <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
+          <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
+
+        </div>
       </section>
     </>
   );

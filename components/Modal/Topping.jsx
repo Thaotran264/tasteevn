@@ -46,7 +46,7 @@ const Topping = ({ setShow, show }) => {
   console.log(toppings);
   return (
     <section
-      className="hideOnDesktop position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
+      className="container position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
       style={{ zIndex: 100 }}
     >
       <article

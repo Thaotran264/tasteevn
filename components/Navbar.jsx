@@ -7,11 +7,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../store/globalState";
 import LoginModal from "./LoginModal";
 import Search from "./Search";
+import { cityApi } from "../api-client";
 const Navbar = () => {
   const { state, dispatch } = useContext(DataContext);
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
+  const [cities, setCities] = useState([])
+
   let userInfo = {}
 
   useEffect(() => {
@@ -29,7 +32,20 @@ const Navbar = () => {
     setMobile(isMobile);
     // console.log('%cNavbar.jsx line:30 _isMobile', 'color: #007acc;', _isMobile);
   }, [_isMobile]);
-
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await cityApi.getCity()
+        if (res) {
+          setCities(res)
+          console.log(res)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, [])
   const handleSearch = () => {
     console.log("first");
     setShowSearch(!showSearch);
@@ -73,7 +89,7 @@ const Navbar = () => {
             </div>
           </div>
           {/* Dropdown */}
-          <div className="col-4 col-sm-3 col-md-3 col-lg-2">
+          <div className="col-4 col-sm-3 col-md-3 col-lg-2 ">
             <Dropdown>
               <Dropdown.Toggle
                 className="border-0 rounded-0 border-warning border-bottom"
@@ -82,9 +98,12 @@ const Navbar = () => {
                 TP HCM
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">DN</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">HN</Dropdown.Item>
+              <Dropdown.Menu style={{ height: 400, overflow: 'scroll-y' }}>
+                {
+                  cities.map(item =>
+                    <Dropdown.Item href="#/action-1" value={item.id}>{item.name}</Dropdown.Item>
+                  )
+                }
               </Dropdown.Menu>
             </Dropdown>
           </div>

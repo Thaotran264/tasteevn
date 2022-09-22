@@ -56,7 +56,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
             </ul>
           </div>
           <div
-            className={`col-md-8 col-lg-8 rounded ${menuPos && "offset-4"}`}
+            className={`col-md-8 col-lg-8 rounded px-0 ${menuPos && "offset-4"}`}
             style={menuPos ? { zIndex: 2 } : {}}
           >
             {productList?.menus?.map((it, index) => (
@@ -71,7 +71,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
             ))}
             {productList?.menus?.map((it, index) => (
               <article key={it.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
-                <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
+                <h4 id={`menuRC${index + 2}`} className="border-bottom border-dark p-2">
                   {it.name}
                 </h4>
                 {it.items.map((its) => (
