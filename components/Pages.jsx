@@ -18,7 +18,7 @@ const Pages = () => {
 
 
   return (
-    <section className="mt-2">
+    <section className="container mx-auto mt-2">
       <CarouselComponent />
       <MultiRowSlide text="Quán nổi bật" />
       <Slider02 text="Cửa hàng được yêu thích" />
@@ -27,7 +27,7 @@ const Pages = () => {
         <hr></hr>
         <div className="d-flex flex-wrap ">
           {listId.map(item =>
-            <Card className="card-item card-config rounded mx-auto">
+            <Card className="card-item card-config rounded mx-auto" key={item.id}>
               <Card.Img
                 className="w-100"
                 variant="top"

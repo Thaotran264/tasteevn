@@ -8,13 +8,15 @@ import { DataContext } from "../store/globalState";
 import LoginModal from "./LoginModal";
 import Search from "./Search";
 import { cityApi } from "../api-client";
+import Image from "next/image";
 const Navbar = () => {
   const { state, dispatch } = useContext(DataContext);
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   const [cities, setCities] = useState([])
-
+const [showSearchForm, setShowSearchForm] = useState(false)
+const [searchText, setSearchText] = useState('')
   let userInfo = {}
 
   useEffect(() => {
@@ -38,7 +40,6 @@ const Navbar = () => {
         const res = await cityApi.getCity()
         if (res) {
           setCities(res)
-          console.log(res)
         }
       } catch (err) {
         console.log(err)
@@ -51,7 +52,16 @@ const Navbar = () => {
     setShowSearch(!showSearch);
 
   };
-
+const handleSearchChange = (value) => {
+  if(value)
+  {
+    setShowSearchForm(true)
+    setSearchText(value)
+  }
+  else {
+    setShowSearchForm(false)
+  }
+}
   const router = useRouter();
   const handleLogOut = () => {
     localStorage.removeItem("userInfo");
@@ -60,7 +70,49 @@ const Navbar = () => {
     router.push("/");
     window.location.reload();
   };
-
+const data = [
+  {
+    id: 1,
+    image: 'https://images.pexels.com/photos/12346579/pexels-photo-12346579.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Cơm chiên dương châu'
+  },
+  {
+    id: 2,
+    image: 'https://images.pexels.com/photos/13538314/pexels-photo-13538314.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Cơm chay thập cẩm'
+  },
+  {
+    id: 3,
+    image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Mì Tomyum Bò Úc'
+  },
+  {
+    id: 4,
+    image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Mì Tomyum Bò Mĩ'
+  },
+  {
+    id: 5,
+    image: 'https://images.pexels.com/photos/10819066/pexels-photo-10819066.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Bò kho bánh mì'
+  },
+  {
+    id: 6,
+    image: 'https://images.pexels.com/photos/12788117/pexels-photo-12788117.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Phở Hà Nội'
+  },
+  {
+    id: 7,
+    image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Phở Bắc'
+  },
+  {
+    id: 8,
+    image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    name: 'Mì Quảng'
+  },
+]
+const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))
   return (
     <header
       className="bg-white position-fixed top-0 start-0 w-100 border border-bottom"
@@ -74,14 +126,17 @@ const Navbar = () => {
             <div>
               <div className="d-none showOnDesktop p-1">
                 <Link href="/">
-                  <img src="/image/logo.jpg" className=" w-75 h-75" style={{ cursor: "pointer" }} />
+                  <Image alt="" src="/image/logo.jpg" style={{ cursor: "pointer" }} width={150} height={60}/>
                 </Link>
               </div>
               <div className="hideOnDesktop" style={{ aspectRatio: "1/1", padding: 5 }}>
                 <Link href="/">
-                  <img
+                  <Image
+                  width={350}
+                  height={150}
+                  alt=''
                     src="/image/mobileLogo.jpg"
-                    className=" w-100 h-100"
+                    // className=" w-100 h-100"
                     style={{ cursor: "pointer" }}
                   />
                 </Link>
@@ -101,7 +156,7 @@ const Navbar = () => {
               <Dropdown.Menu style={{ height: 400, overflow: 'scroll-y' }}>
                 {
                   cities.map(item =>
-                    <Dropdown.Item href="#/action-1" value={item.id}>{item.name}</Dropdown.Item>
+                    <Dropdown.Item key={item.id} href="#/action-1" value={item.id}>{item.name}</Dropdown.Item>
                   )
                 }
               </Dropdown.Menu>
@@ -115,6 +170,7 @@ const Navbar = () => {
             >
               <input
                 className="form-control text-dark"
+                onChange={(e)=>handleSearchChange(e.target.value)}
                 style={{
                   backgroundColor: "transparent",
                   outline: "none",
@@ -126,10 +182,23 @@ const Navbar = () => {
               <button className="btn d-flex align-items-center" type="submit">
                 <BsSearch style={{ color: "#000" }} />
               </button>
-              {/* <div
-                className="position-absolute w-100 top-100 bg-danger "
-                style={{ minHeight: 500 }}
-              ></div> */}
+              {
+                showSearchForm &&
+              <div
+                className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded "
+              >
+                {
+                  search.length ?
+                  search.map(item =>
+                    <div key={item.id} className="d-flex align-items-center gap-2 border border-bottom my-1">
+                      <Image width={80} height={80} alt='' src={item.image}/>
+                      <div>{item.name}</div>
+                    </div>)
+                    :
+                    <p className="text-center">Không tìm thấy</p>
+                }
+              </div>
+              }
             </form>
             <button className="btn align-items-center hideOnDesktop" onClick={handleSearch}>
               <BsSearch style={{ color: "#000", fontSize: 18 }} />
@@ -154,12 +223,15 @@ const Navbar = () => {
                       className="d-flex gap-1 align-items-center"
                     >
                       <span className="d-flex align-items-center"> {username} </span>
-                      <img
+                      <Image
+                      alt=''
                         className="m-0 p-0"
                         style={{
                           borderRadius: '20px',
                           width: 40, height: 40
                         }}
+                        width={50}
+                        height={50}
                         src={username.avatar || 'https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} />
 
                     </div>

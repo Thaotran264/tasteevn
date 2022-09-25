@@ -14,9 +14,9 @@ export default function Home({ data }) {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="container">
+      <>
         <Pages />
-      </div>
+      </>
       <Footer />
 
     </>
