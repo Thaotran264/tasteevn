@@ -16,7 +16,7 @@ import Modal from "react-bootstrap/Modal";
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
   const cart = useSelector(selectCart);
-  console.log('cart', cart)
+  // console.log('cart', cart)
   const dispatch = useDispatch();
   const total = 0;
   const totalItem = 0;
@@ -32,19 +32,18 @@ const CartModal = ({ setShow }) => {
     <>
       {totalItem &&
         <section
-          className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100"
+          className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100 d-flex"
           style={{ zIndex: 100 }}
         >
           <article
-            className="container mx-auto rounded px-2 d-flex bg-light flex-column align-items-center cart-container position-absolute bottom-0 start-0 end-0 w-100"
-            style={{ height: "90vh" }}
-          >
-            <div className="border-bottom border-dark py-2 w-100 d-flex align-items-center justify-content-between">
-              <button className="btn text-dark" onClick={() => setShow(false)}>
-                <AiOutlineClose style={{ fontSize: 22 }} />
+            className="mt-auto mx-auto rounded cartModalCss">
+            <div className="border-bottom border-dark p-2 w-100 d-flex align-items-center justify-content-between">
+              <button className="border-0 rounded text-dark p-1" onClick={() => setShow(false)}>
+                <AiOutlineClose style={{ fontSize: 18 }} />
               </button>
               <h5 className="border-bottom border-light mb-0 text-center">Giỏ hàng</h5>
-              <button className="btn text-danger" style={{ fontSize: 14, fontWeight: 'bold' }} onClick={() => dispatch(clearCart([]))}>
+              <button className="btn text-danger" style={{ fontSize: 13, fontWeight: 'bold' }}
+               onClick={() => dispatch(clearCart([]))}>
                 Xoá
               </button>
             </div>
@@ -124,7 +123,7 @@ const CartModal = ({ setShow }) => {
                 </div>
               ))}
             </div>
-            <div className="position-absolute bottom-0 start-0 end-0 px-2 border-top border-dark py-3">
+            <div className="position-absolute cardModalGroupButton">
               <Link href="/cart">
                 <a className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1" style={{ fontSize: 18, backgroundColor: '#f7a76c', color: '#fff' }}>
                   <span style={{ fontSize: 16 }}>{totalItem} Món</span>

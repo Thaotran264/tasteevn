@@ -28,6 +28,8 @@ import { formatter } from "../utils";
 import { merchantApi, orderApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
+import parse from "html-react-parser";
+
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
 //   const paths = res.data.data.map((item) => ({
@@ -67,6 +69,9 @@ const Detail = () => {
   const [menu, setMenu] = useState();
   const [menuItems, setMenuItems] = useState([]);
   const [data, setData] = useState();
+  const [infoWg, setInfoWg] = useState()
+  const [bannerWg, setBannerWg] = useState()
+  const [menuWg, setMenuWg] = useState()
   let mbref = useRef();
   let mbDref = useRef();
   useEffect(() => {
@@ -75,7 +80,13 @@ const Detail = () => {
         if (id) {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            setData(res.data);
+            // setData(res.data);
+            console.log(res.data);
+            let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
+            setMenuWg(JSON.parse(menuWb).Menus)
+            // setMenuWg();
+            // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
+            // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));
           }
         }
       } catch (err) {
@@ -104,6 +115,13 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+  // const {widgets} = data && data || []
+  // const menus = widgets?.filter(item => item.widgetType == 5)
+  // console.log(menus);
+  // const {data: dataMenu} = menus
+  // const menuInfo = parse(dataMenu)
+  // console.log(menuInfo);
   // useEffect(() => {
   //   const getData = async () => {
   //     try {
@@ -127,11 +145,11 @@ const Detail = () => {
 
       <section className={`${show && "overflow-hidden"}`}>
         <Banner banner={data?.banner} />
-        <InfoDefault info={data?.info} />
+        {/* <InfoDefault info={infoWg} /> */}
         <MenuPhoto isDefault={false} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <Menu productList={data?.productList} menuPos={menuPos} />
+          <Menu productList={menuWg} menuPos={menuPos} />
         </div>
 
         {show && <CartModal setShow={setShow} />}

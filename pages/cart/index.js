@@ -61,7 +61,7 @@ const Cart = () => {
       <article className="cart__article position-relative">
         <h6 className="text-center border-bottom pb-3">Trang thanh toán</h6>
         {cart?.map((item) => (
-          <CartItem item={item} key={item.id} />
+          <CartItem item={item} key={item.Id} />
         ))}
         <hr />
         <div className="container mx-auto d-flex justify-content-between start-0 end-0 position-fixed bottom-0 px-2 py-3 border-top border-danger">

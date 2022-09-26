@@ -26,8 +26,8 @@ const Pages = () => {
         <h2 className="ps-3 mb-0">Quán mới nhất</h2>
         <hr></hr>
         <div className="d-flex flex-wrap ">
-          {listId.map(item =>
-            <Card className="card-item card-config rounded mx-auto" key={item.id}>
+          {listId.map((item,index) =>
+            <Card className="card-item card-config rounded mx-auto" key={index}>
               <Card.Img
                 className="w-100"
                 variant="top"
