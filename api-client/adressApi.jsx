@@ -2,7 +2,7 @@ import axiosAPI2 from "./axios-client-2";
 import axiosAuth from './axios-auth';
 
 
-export const adressApi = { 
+export const adressApi = {
     getAddress() {
         return axiosAuth.get(`/Users/shipping_address`);
     },
@@ -11,13 +11,13 @@ export const adressApi = {
         const url = "/Users/shipping_address/set";
         return axiosAuth.post(url, params)
     },
-    
+
     getCities() {
-        return axiosAPI2.get(`/api/Cities`);
+        return axiosAPI2.get(`/Cities`);
     },
 
     getAreasByCity(id) {
-        return axiosAPI2.get(`/api/Areas/by-city/${id}`);
+        return axiosAPI2.get(`/Areas/by-city/${id}`);
     },
 
     setDefault(id) {
@@ -30,7 +30,7 @@ export const adressApi = {
         return axiosAuth.post(url)
     },
 
-    
 
-    
+
+
 }

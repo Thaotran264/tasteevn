@@ -1,10 +1,8 @@
 import axiosClient from './axios-client'
 import axiosFormData from './axiosFormData';
 import axiosAuth from './axios-auth';
-import axiosAPI2 from './axios-client-2'
 
-
-export const accountAPI = { 
+export const accountAPI = {
     login(params) {
         const url = "/Users/Login";
         return axiosClient.post(url, params)

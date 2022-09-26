@@ -1,8 +1,8 @@
-import axiosClient2 from './axios-client2'
+import axiosClient from './axios-client'
 
 export const cityApi = {
     getCity() {
-        const url = '/Cities'
-        return axiosClient2.get(url);
+        const url = 'api/Cities'
+        return axiosClient.get(url);
     }
 }
