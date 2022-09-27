@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import DesktopMenu from "./DesktopMenu";
 const MobileMenu = ({ productList, menuPos }) => {
-  console.log(productList);
+  // console.log(productList);
   const [tabMenu, setTabMenu] = useState("all");
   const handleMenuItem = (tab) => {
     setTabMenu(tab);

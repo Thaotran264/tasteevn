@@ -116,31 +116,11 @@ const Detail = () => {
     };
   });
 
-  // const {widgets} = data && data || []
-  // const menus = widgets?.filter(item => item.widgetType == 5)
-  // console.log(menus);
-  // const {data: dataMenu} = menus
-  // const menuInfo = parse(dataMenu)
-  // console.log(menuInfo);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const res = await orderApi.loadData({ start: '1' })
-  //       console.log(res)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   getData()
-  // }, [])
+
   return (
     <>
       <Head>
         <title>Brand Detail</title>
-        {/* <meta name="description" content={info?.metaDescription} /> */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta charset="UTF-8"></meta>
-        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
 
       <section className={`${show && "overflow-hidden"}`}>

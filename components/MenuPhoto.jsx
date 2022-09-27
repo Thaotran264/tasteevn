@@ -172,9 +172,10 @@ const MenuPhoto = ({ isDefault, map }) => {
         <div className="mb-2">
           <section className="d-flex gap-1">
             <div
-              className="w-50 showOnDesktop align-items-center"
+              className="w-100 showOnDesktop align-items-center"
+              style={{ aspectRatio: '1/1' }}
             >
-              {/* {parse(map.webMap)} */}
+              {/* {parse(map.webMap)} */}<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1602434711103!2d106.67697395057361!3d10.79903626169063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d7a839e4b3%3A0x4296396dc7eb4bb5!2zMzcgSG_DoG5nIFbEg24gVGjhu6UsIFBoxrDhu51uZyAxNSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1664282095387!5m2!1sen!2s" width="600" height="600" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div className="w-100">
               <div className="thumb-3 rounded">
