@@ -51,7 +51,7 @@ const CartModal = ({ setShow }) => {
               {cart?.map((item) => (
                 <div
                   className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"
-                  key={item.id}
+                  key={item.Id}
                 >
                   <div className="me-2">
                     <Image
@@ -69,7 +69,7 @@ const CartModal = ({ setShow }) => {
                     <div>
                       <h6 className="mb-0">{item.name}</h6>
                       {item.toppings.map(item =>
-                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.id}>{item.name}</span>)}
+                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.Id}>{item.name}</span>)}
                       <p className="mb-0" style={{ fontSize: 13, color: '#8d8d8d' }}>{item.note || "Không có ghi chú"}</p>
                     </div>
                     <div className="d-flex  w-100 justify-content-between align-items-center">

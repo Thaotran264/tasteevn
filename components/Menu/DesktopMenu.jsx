@@ -5,11 +5,9 @@ import { addToCart } from "../../store/actions/actionsType";
 import { formatter } from "../../utils";
 import Link from "next/link";
 import MenuItem from "./MenuItem";
-const DesktopMenu = ({ menuPos, productList }) => {
-  const [tabMenu, setTabMenu] = useState('all')
-  const handleMenuItem = (tab) => {
-    setTabMenu(tab)
-  };
+import { listMenu } from "../../db";
+const DesktopMenu = ({ menuPos }) => {
+
   return (
     <section className="d-none showOnDesktop w-100 mx-auto py-2">
       <div
@@ -21,7 +19,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
 
-                {productList?.map((item, index) => (
+                {listMenu?.map((item, index) => (
                   <li
                     key={item.Id}
                     className="border rounded border-primary px-2 text-center bg-white "
@@ -41,7 +39,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
         <div className="row">
           <div className={`col-md-4 col-lg-4 py-2 ${menuPos && "d-none"}`}>
             <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
-              {productList?.map((item, index) => (
+              {listMenu?.map((item, index) => (
                 <li
                   key={item.Id}
                   className="border rounded border-primary px-2 text-center bg-white "
@@ -58,7 +56,7 @@ const DesktopMenu = ({ menuPos, productList }) => {
             className={`col-md-8 col-lg-8 rounded px-0 ${menuPos && "offset-4"}`}
             style={menuPos ? { zIndex: 2 } : {}}
           >
-            {productList?.map((it, index) => (
+            {listMenu?.map((it, index) => (
               <article key={it.Id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
                 <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
                   {it.Name}
