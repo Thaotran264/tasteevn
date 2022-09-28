@@ -8,7 +8,7 @@ import { BsTrash } from "react-icons/bs";
 import { decrease, deleteItem, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, clearCart, removeFromCart, selectCart } from "../../features/cart/cartSlice";
+import { addToCart, clearCart, removeFromCart, selectCart, totalQuantityCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
 import Button from "react-bootstrap/Button";
@@ -16,7 +16,9 @@ import Modal from "react-bootstrap/Modal";
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
   const cart = useSelector(selectCart);
+  const quantity = useSelector(totalQuantityCart);
   console.log('cart', cart)
+  console.log('cart', quantity)
   const dispatch = useDispatch();
   const total = 0;
   const totalItem = 0;
@@ -91,7 +93,7 @@ const CartModal = ({ setShow }) => {
                           <>
                             <button
                               className="border-0 rounded d-flex align-items-center justify-content-center"
-                              onClick={() => dispatch(removeFromCart(item.id))}
+                              onClick={() => dispatch(removeFromCart(item.Id))}
                               style={{
                                 backgroundColor: "#f7a76c",
                                 color: "#fff",

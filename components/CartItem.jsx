@@ -40,7 +40,7 @@ const CartItem = ({ item }) => {
             <AiOutlineTag className="me-1" />{formatter.format(item.Price)}
           </span>
           <span className="text-danger ms-2" style={{ fontSize: 14 }}>
-            {formatter.format(item.discountPrice) || 0}
+            {formatter.format(item.totalPrice) || 0}
           </span>
         </div>
 
@@ -58,7 +58,7 @@ const CartItem = ({ item }) => {
       </div>
       <button
         className="button button--delete btn-danger ms-auto"
-        onClick={() => dispatch(removeFromCart(item.id))}
+        onClick={() => dispatch(removeFromCart(item.Id))}
       >
         <BsTrash />
       </button>

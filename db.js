@@ -505,7 +505,7 @@ export const listMenu = [
         Price: 38000,
         image:
           "https://i.pinimg.com/564x/8d/05/ca/8d05ca52f851f3142815a68a835f2223.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -649,7 +649,7 @@ export const listMenu = [
         Price: 49000,
         image:
           "https://i.pinimg.com/474x/96/55/8e/96558e920df78bfb8026682a2a3cb97f.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -793,7 +793,7 @@ export const listMenu = [
         Price: 38000,
         image:
           "https://i.pinimg.com/736x/d5/92/27/d59227bea93f9479a095aabfed9bcc03.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -937,7 +937,7 @@ export const listMenu = [
         Price: 48000,
         image:
           "https://i.pinimg.com/474x/fa/ae/d1/faaed179c695deb6072fd827064ebd61.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1087,7 +1087,7 @@ export const listMenu = [
         Price: 42000,
         image:
           "https://i.pinimg.com/564x/2a/33/82/2a3382a71c6139c33a11415849165460.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1231,7 +1231,7 @@ export const listMenu = [
         Price: 42000,
         image:
           "https://i.pinimg.com/564x/88/2d/a6/882da699df18aa836bf73200dba7e507.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1375,7 +1375,7 @@ export const listMenu = [
         Price: 48000,
         image:
           "https://i.pinimg.com/564x/02/b4/24/02b424815e4e0b92bdf11e64e366b2cc.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1513,7 +1513,7 @@ export const listMenu = [
           },
         ]
       },
-  
+
     ],
   },
   {
@@ -1526,7 +1526,7 @@ export const listMenu = [
         Price: 38000,
         image:
           "https://i.pinimg.com/564x/73/f7/75/73f77558be3b21299c3d5e268a2ee31d.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1670,7 +1670,7 @@ export const listMenu = [
         Price: 38000,
         image:
           "https://i.pinimg.com/564x/ca/a2/90/caa2902551069e077b3bb9c60622ea98.jpg",
-          GroupToppings: [
+        GroupToppings: [
           {
             Id: "groupTopping-01",
             Name: "size",
@@ -1815,5 +1815,7 @@ export const listId = [
   '0909000007',
   '0909000008',
   '0909959982',
-  '0396296673'
+  '0396296673',
+  'thaotv1',
+  'tasteepos'
 ]

@@ -43,13 +43,13 @@ const Cart = () => {
     //   });
     //   return;
     // }    
-    // const params = {
-    //   orderDetails: cart,
-    //   shippingAddressId: '50dfee76-8ce6-4e11-bf7b-937165188fe1',
-    //   total: quantity
+    const params = {
+      orderDetails: cart,
+      shippingAddressId: '50dfee76-8ce6-4e11-bf7b-937165188fe1',
+      total: quantity
 
-    // };
-    // console.log(params)
+    };
+    console.log(params)
     // const res = await orderApi.orders(params)
     // if (res.data) {
     //   setCheck(true)

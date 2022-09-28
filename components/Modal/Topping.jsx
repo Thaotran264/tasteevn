@@ -8,8 +8,9 @@ import { addToCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
-  const {Id, Name,Price, SalePrice,discountPrice, image} = show.data
-    const [count, setCount] = useState(1);
+  console.log('data', show.data)
+  const { Id, Name, Price, SalePrice, discountPrice, Image: image } = show.data
+  const [count, setCount] = useState(1);
   const [note, setNote] = useState("");
   const [toppings, setToppings] = useState([]);
   const [check, setCheck] = useState(false);
@@ -28,19 +29,15 @@ const Topping = ({ setShow, show }) => {
     count > 1 ? setCount((count -= 1)) : setShow({ ...show, open: false });
   };
 
-  const total = 0;
-  toppings?.forEach((item) => {
-    total += item.price;
-  });
-  const toppingPrice = listTopping.reduce((cal, item) => cal+item.price,0)
-  const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal+item.data.Price,0)
-const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
+  const toppingPrice = listTopping.reduce((cal, item) => cal + item.price, 0)
+  const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal + item.data.Price, 0)
+  const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
   const handleRadioBtn = (value, data, parentID) => {
     let index = listGroupTopping?.filter(item => item.parentID != parentID)
     const newData = [...index, { data, parentID }]
-    setListGroupTopping(newData)  
+    setListGroupTopping(newData)
   }
-  const handleCheckboxBtn = (value,data) => {
+  const handleCheckboxBtn = (value, data) => {
     const { Id } = data;
     let item = listTopping.filter((item) => item.Id === Id);
     if (!item.length && value) setListTopping([...listTopping, { Id, Name: data.Name, price: data.Price }]);
@@ -51,15 +48,14 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
   const handleAddCart = () => {
     const data = {
       Id,
-      Name,Price,discountPrice,image,
+      Name, Price, discountPrice, image,
       quantity: count,
       note: note,
       toppings: listTopping,
       groupToppings: listGroupTopping,
-      totalPrice,
-      toppingPrice,groupToppingPrice
+      toppingPrice, groupToppingPrice,
+      totalPrice
     };
-    // console.log(data)
     dispatch(addToCart(data));
     setShow({ ...show, open: false });
   };
@@ -84,7 +80,7 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
         <div className="d-flex gap-2 px-2 mb-2" style={{ marginTop: 44 }}>
           <div className="d-flex align-items-center">
             <Image
-              src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src={image}
               alt=""
               width={120}
               height={120}
@@ -93,7 +89,7 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
           <div className="p-2">
             <h4 className="mb-1">{show.data.Name}</h4>
 
-            <p className="mb-0" style={{fontSize: 13, color: 'lightgray'}}>Trà xanh</p>
+            <p className="mb-0" style={{ fontSize: 13, color: 'lightgray' }}>Trà xanh</p>
             <p className="mb-0 text-danger">{formatter.format(show.data.Price)}</p>
             <p className="mb-1" style={{ fontSize: 14 }}>
               Size
@@ -110,13 +106,13 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
         />
         <hr ></hr>
         <div style={{ marginBottom: 75 }} className="w-100">
-        {show.data.GroupToppings?.map((item) => (
+          {show.data.GroupToppings?.map((item) => (
             <div key={item.Id} className="mb-2" >
               <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.Name}</h5>
               {item.Toppings.map((it, index) => (
                 <div
                   key={index}
-                  onChange={(e) =>handleRadioBtn(e.target.value, it, item.Id)}
+                  onChange={(e) => handleRadioBtn(e.target.value, it, item.Id)}
                   className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
                 >
                   <h6> {it.Name}</h6>
@@ -126,7 +122,7 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
               ))}
             </div>
           ))}
-              <h5 className="bg-dark bg-opacity-25 p-2 text-light">Toppings</h5>
+          <h5 className="bg-dark bg-opacity-25 p-2 text-light">Toppings</h5>
           {show.data?.Toppings?.map((item) => (
             <div
               key={item.Id}
@@ -134,10 +130,10 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
             >
               <h6> {item.Name}</h6>
               <p className="text-danger ms-auto mb-0 me-2">{formatter.format(item.Price)}</p>
-              <input type="checkbox" onChange={(e)=>handleCheckboxBtn(e.target.checked, item)}/>
+              <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, item)} />
             </div>
           ))}
-          
+
         </div>
         <div className="position-fixed bottom-0 py-3 d-flex justify-content-center align-items-center gap-3 toppingButtonGroup">
           <div className="d-flex align-items-center gap-2">
@@ -149,10 +145,10 @@ const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
               +
             </button>
           </div>
-          <button className="border-0 rounded px-3 py-2" 
-          style={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length ? {backgroundColor: '#f8fafa', color: '#909090'} : {backgroundColor: 'rgb(247, 167, 108)',color: '#fff'}}
-      onClick={handleAddCart}
-          disabled={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length}>
+          <button className="border-0 rounded px-3 py-2"
+            style={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length ? { backgroundColor: '#f8fafa', color: '#909090' } : { backgroundColor: 'rgb(247, 167, 108)', color: '#fff' }}
+            onClick={handleAddCart}
+            disabled={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length}>
             Thêm {formatter.format(totalPrice)}
           </button>
         </div>

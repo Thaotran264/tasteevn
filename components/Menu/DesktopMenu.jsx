@@ -6,8 +6,8 @@ import { formatter } from "../../utils";
 import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { listMenu } from "../../db";
-const DesktopMenu = ({ menuPos }) => {
-
+const DesktopMenu = ({ productList, menuPos }) => {
+  console.log(productList)
   return (
     <section className="d-none showOnDesktop w-100 mx-auto py-2">
       <div
@@ -21,7 +21,7 @@ const DesktopMenu = ({ menuPos }) => {
                 {listMenu?.map((item, index) => (
                   <li
                     key={item.Id}
-                    className="border rounded border-primary px-2 text-center bg-white "
+                    className="border rounded border-dark px-2 text-center bg-white "
                     style={{ listStyle: "none" }}
                   >
                     <Link href={`#menuRC${index}`}>
@@ -38,10 +38,10 @@ const DesktopMenu = ({ menuPos }) => {
         <div className="row">
           <div className={`col-md-4 col-lg-4 py-2 ${menuPos && "d-none"}`}>
             <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
-              {listMenu?.map((item, index) => (
+              {productList?.map((item, index) => (
                 <li
                   key={item.Id}
-                  className="border rounded border-primary px-2 text-center bg-white "
+                  className="border rounded border-dark px-2 text-center bg-white "
                   style={{ listStyle: "none" }}
                 >
                   <Link href={`#menuRC${index}`} scroll={true}>
@@ -55,7 +55,7 @@ const DesktopMenu = ({ menuPos }) => {
             className={`col-md-8 col-lg-8 rounded px-0 ${menuPos && "offset-4"}`}
             style={menuPos ? { zIndex: 2 } : {}}
           >
-            {listMenu?.map((it, index) => (
+            {productList?.map((it, index) => (
               <article key={it.Id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
                 <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
                   {it.Name}
