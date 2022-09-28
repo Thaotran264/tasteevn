@@ -20,5 +20,8 @@ export const userApi = {
     login(params) {
         const url = `/Users/Login`
         return axiosClient.post(url, params)
+    },
+    getShippingAddress() {
+        return axiosAuth.get(`/Users/shipping_address`);
     }
 }

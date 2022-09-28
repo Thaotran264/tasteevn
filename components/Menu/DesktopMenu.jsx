@@ -18,7 +18,6 @@ const DesktopMenu = ({ menuPos }) => {
           <div className="row">
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
-
                 {listMenu?.map((item, index) => (
                   <li
                     key={item.Id}
@@ -66,7 +65,7 @@ const DesktopMenu = ({ menuPos }) => {
                 ))}
               </article>
             ))}
-           
+
           </div>
         </div>
       </div>

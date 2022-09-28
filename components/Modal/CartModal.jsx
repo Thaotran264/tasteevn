@@ -16,7 +16,7 @@ import Modal from "react-bootstrap/Modal";
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
   const cart = useSelector(selectCart);
-  // console.log('cart', cart)
+  console.log('cart', cart)
   const dispatch = useDispatch();
   const total = 0;
   const totalItem = 0;
@@ -30,7 +30,7 @@ const CartModal = ({ setShow }) => {
   });
   return (
     <>
-      {totalItem &&
+      {totalItem ?
         <section
           className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100 d-flex"
           style={{ zIndex: 100 }}
@@ -43,7 +43,7 @@ const CartModal = ({ setShow }) => {
               </button>
               <h5 className="border-bottom border-light mb-0 text-center">Giỏ hàng</h5>
               <button className="btn text-danger" style={{ fontSize: 13, fontWeight: 'bold' }}
-               onClick={() => dispatch(clearCart([]))}>
+                onClick={() => dispatch(clearCart([]))}>
                 Xoá
               </button>
             </div>
@@ -67,9 +67,11 @@ const CartModal = ({ setShow }) => {
                   </div>
                   <article className="w-100">
                     <div>
-                      <h6 className="mb-0">{item.name}</h6>
+                      <h6 className="mb-0">{item.Name}</h6>
                       {item.toppings.map(item =>
-                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.Id}>{item.name}</span>)}
+                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.Id}>{item.Name}</span>)}
+                      {item.groupToppings.map(item =>
+                        <span className="me-1" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.data.Id}>{item.data.Name}</span>)}
                       <p className="mb-0" style={{ fontSize: 13, color: '#8d8d8d' }}>{item.note || "Không có ghi chú"}</p>
                     </div>
                     <div className="d-flex  w-100 justify-content-between align-items-center">
@@ -78,10 +80,10 @@ const CartModal = ({ setShow }) => {
                           className="cart-item-price mb-0"
                           style={{ textDecoration: " line-through" }}
                         >
-                          {formatter.format(item.price + toppingTotal)}
+                          {formatter.format(item.Price + toppingTotal)}
                         </span>
                         <span className="cart-item-price mx-2 text-danger mb-0">
-                          {formatter.format(item.saleNumber) || 0}
+                          {formatter.format(item.Price) || 0}
                         </span>
                       </div>
                       <div className="d-flex align-items-center">
@@ -136,6 +138,7 @@ const CartModal = ({ setShow }) => {
             </div>
           </article>
         </section>
+        : ''
       }
     </>
   );

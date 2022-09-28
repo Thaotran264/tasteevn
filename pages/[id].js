@@ -81,7 +81,6 @@ const Detail = () => {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
             // setData(res.data);
-            console.log(res.data);
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
             setMenuWg(JSON.parse(menuWb).Menus)
             // setMenuWg();
@@ -132,7 +131,7 @@ const Detail = () => {
           <Menu productList={menuWg} menuPos={menuPos} />
         </div>
 
-        {show && <CartModal setShow={setShow} />}
+        {show ? <CartModal setShow={setShow} /> : ''}
         {
           total >= 1 &&
           <div
@@ -154,6 +153,7 @@ const Detail = () => {
             </div>
           </div>
         }
+
         <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
           <button className="  border border-bottom-0  p-2" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHome style={{ fontSize: 20 }} /></button>
           <button className="  border border-bottom-0  p-2 " style={{ backgroundColor: "#fff" }}
@@ -163,10 +163,8 @@ const Detail = () => {
               <span style={{ fontSize: 20 }}>{total}</span>
             }
           </button>
-
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
-
         </div>
       </section>
     </>

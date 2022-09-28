@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuth } from "../../features/auth/authSlice";
 import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 import { decrease, increase } from "../../store/actions/actionsType";
 import { DataContext } from "../../store/globalState";
@@ -10,9 +11,17 @@ import Topping from "../Modal/Topping";
 const MenuItem = ({ data: it }) => {
   const { state } = useContext(DataContext);
   const { cart } = state;
+  const auth = useSelector(selectAuth)
+  const { isLogged } = auth
+  // console.log(auth)
+
   const dispatch = useDispatch()
   const [show, setShow] = useState({ open: false, data: {} })
   const handleIncrement = (item) => {
+    if (!isLogged) {
+      alert('XIn vui lòng đăng nhập!!!')
+      return
+    }
     // dispatch(addToCart(item))
     setShow({
       open: true,
@@ -25,7 +34,7 @@ const MenuItem = ({ data: it }) => {
   return (
     <>
       <article key={it.id} className="menuItem__article d-flex justify-content-around">
-        <div className="menuItem__image" style={{width: 60, height: 60}}>
+        <div className="menuItem__image" style={{ width: 60, height: 60 }}>
           <Image
             src={
               it?.image ||
@@ -38,7 +47,7 @@ const MenuItem = ({ data: it }) => {
         </div>
         <div className="menuItem__content">
           <h5>{it.Name}</h5>
-          <p style={{fontSize: 13, color: 'gray', marginBottom: 8}}>{String(it.Description).substr(0,100) + "..."}</p>
+          <p style={{ fontSize: 13, color: 'gray', marginBottom: 8 }}>{String(it.Description).substr(0, 100) + "..."}</p>
           <div className="d-flex justify-content-between align-items-center">
             <p className="text-danger mb-0">{formatter.format(it.Price)}</p>
             <div className="d-flex align-items-center">

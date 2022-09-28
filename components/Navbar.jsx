@@ -9,14 +9,17 @@ import LoginModal from "./LoginModal";
 import Search from "./Search";
 import { cityApi } from "../api-client";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 const Navbar = () => {
-  const { state, dispatch } = useContext(DataContext);
+  // const { state, dispatch } = useContext(DataContext);
+  const dispatch = useDispatch()
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   const [cities, setCities] = useState([])
-const [showSearchForm, setShowSearchForm] = useState(false)
-const [searchText, setSearchText] = useState('')
+  const [showSearchForm, setShowSearchForm] = useState(false)
+  const [searchText, setSearchText] = useState('')
   let userInfo = {}
 
   useEffect(() => {
@@ -52,67 +55,65 @@ const [searchText, setSearchText] = useState('')
     setShowSearch(!showSearch);
 
   };
-const handleSearchChange = (value) => {
-  if(value)
-  {
-    setShowSearchForm(true)
-    setSearchText(value)
+  const handleSearchChange = (value) => {
+    if (value) {
+      setShowSearchForm(true)
+      setSearchText(value)
+    }
+    else {
+      setShowSearchForm(false)
+    }
   }
-  else {
-    setShowSearchForm(false)
-  }
-}
   const router = useRouter();
   const handleLogOut = () => {
+    dispatch(logout())
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
-    dispatch({ type: "NOTIFY", payload: { success: "Đăng xuất thành công" } });
     router.push("/");
-    window.location.reload();
   };
-const data = [
-  {
-    id: 1,
-    image: 'https://images.pexels.com/photos/12346579/pexels-photo-12346579.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Cơm chiên dương châu'
-  },
-  {
-    id: 2,
-    image: 'https://images.pexels.com/photos/13538314/pexels-photo-13538314.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Cơm chay thập cẩm'
-  },
-  {
-    id: 3,
-    image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Mì Tomyum Bò Úc'
-  },
-  {
-    id: 4,
-    image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Mì Tomyum Bò Mĩ'
-  },
-  {
-    id: 5,
-    image: 'https://images.pexels.com/photos/10819066/pexels-photo-10819066.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Bò kho bánh mì'
-  },
-  {
-    id: 6,
-    image: 'https://images.pexels.com/photos/12788117/pexels-photo-12788117.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Phở Hà Nội'
-  },
-  {
-    id: 7,
-    image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Phở Bắc'
-  },
-  {
-    id: 8,
-    image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-    name: 'Mì Quảng'
-  },
-]
-const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))
+  const data = [
+    {
+      id: 1,
+      image: 'https://images.pexels.com/photos/12346579/pexels-photo-12346579.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Cơm chiên dương châu'
+    },
+    {
+      id: 2,
+      image: 'https://images.pexels.com/photos/13538314/pexels-photo-13538314.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Cơm chay thập cẩm'
+    },
+    {
+      id: 3,
+      image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Mì Tomyum Bò Úc'
+    },
+    {
+      id: 4,
+      image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Mì Tomyum Bò Mĩ'
+    },
+    {
+      id: 5,
+      image: 'https://images.pexels.com/photos/10819066/pexels-photo-10819066.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Bò kho bánh mì'
+    },
+    {
+      id: 6,
+      image: 'https://images.pexels.com/photos/12788117/pexels-photo-12788117.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Phở Hà Nội'
+    },
+    {
+      id: 7,
+      image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Phở Bắc'
+    },
+    {
+      id: 8,
+      image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+      name: 'Mì Quảng'
+    },
+  ]
+  const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))
   return (
     <header
       className="bg-white position-fixed top-0 start-0 w-100 border border-bottom"
@@ -126,15 +127,15 @@ const search = data.filter(item => item.name.toLowerCase().includes(searchText.t
             <div>
               <div className="d-none showOnDesktop p-1">
                 <Link href="/">
-                  <Image alt="" src="/image/logo.jpg" style={{ cursor: "pointer" }} width={150} height={60}/>
+                  <Image alt="" src="/image/logo.jpg" style={{ cursor: "pointer" }} width={150} height={60} />
                 </Link>
               </div>
               <div className="hideOnDesktop" style={{ aspectRatio: "1/1", padding: 5 }}>
                 <Link href="/">
                   <Image
-                  width={350}
-                  height={150}
-                  alt=''
+                    width={350}
+                    height={150}
+                    alt=''
                     src="/image/mobileLogo.jpg"
                     // className=" w-100 h-100"
                     style={{ cursor: "pointer" }}
@@ -170,7 +171,7 @@ const search = data.filter(item => item.name.toLowerCase().includes(searchText.t
             >
               <input
                 className="form-control text-dark"
-                onChange={(e)=>handleSearchChange(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 style={{
                   backgroundColor: "transparent",
                   outline: "none",
@@ -184,20 +185,20 @@ const search = data.filter(item => item.name.toLowerCase().includes(searchText.t
               </button>
               {
                 showSearchForm &&
-              <div
-                className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded "
-              >
-                {
-                  search.length ?
-                  search.map(item =>
-                    <div key={item.id} className="d-flex align-items-center gap-2 border border-bottom my-1">
-                      <Image width={80} height={80} alt='' src={item.image}/>
-                      <div>{item.name}</div>
-                    </div>)
-                    :
-                    <p className="text-center">Không tìm thấy</p>
-                }
-              </div>
+                <div
+                  className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded "
+                >
+                  {
+                    search.length ?
+                      search.map(item =>
+                        <div key={item.id} className="d-flex align-items-center gap-2 border border-bottom my-1">
+                          <Image width={80} height={80} alt='' src={item.image} />
+                          <div>{item.name}</div>
+                        </div>)
+                      :
+                      <p className="text-center">Không tìm thấy</p>
+                  }
+                </div>
               }
             </form>
             <button className="btn align-items-center hideOnDesktop" onClick={handleSearch}>
@@ -224,7 +225,7 @@ const search = data.filter(item => item.name.toLowerCase().includes(searchText.t
                     >
                       <span className="d-flex align-items-center"> {username} </span>
                       <Image
-                      alt=''
+                        alt=''
                         className="m-0 p-0"
                         style={{
                           borderRadius: '20px',

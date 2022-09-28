@@ -14,8 +14,11 @@ import { DataContext } from "../store/globalState";
 import { AiOutlineClose, AiOutlineLogin, AiOutlineUser } from "react-icons/ai";
 import Countdown from "./Countdown";
 import { accountAPI } from "../api-client/account";
+import { useDispatch } from "react-redux";
+import { logIn } from "../features/auth/authSlice";
 
 function LoginModal({ btnStyle }) {
+  const dispatch = useDispatch()
   const [show, setShow] = useState(false);
   const ip1 = useRef();
   const ip2 = useRef();
@@ -35,7 +38,7 @@ function LoginModal({ btnStyle }) {
     passwordMsg: false,
     nameMsg: false,
   });
-  const { state, dispatch } = useContext(DataContext);
+  // const { state, dispatch } = useContext(DataContext);
   const [textButton, setTextButton] = useState({ btnSubmit: "Tiếp tục" });
   // const [toastmsg, settoastmsg] = useState('')
   const handleClose = () => {
@@ -64,7 +67,7 @@ function LoginModal({ btnStyle }) {
         email: data.PhoneNumber,
         password: data.Password,
       };
-      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      // dispatch({ type: "NOTIFY", payload: { loading: true } });
       login(params);
       return
     }
@@ -106,16 +109,16 @@ function LoginModal({ btnStyle }) {
     try {
       const res = await accountAPI.login(params);
       if (res.successful && res.data) {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("userInfo", JSON.stringify(res.data));
-        dispatch({ type: "NOTIFY", payload: { success: res.successful } });
-        dispatch({ type: 'AUTH', payload: res })
+        // localStorage.setItem("token", JSON.stringify(res.data.token));
+        // localStorage.setItem("userInfo", JSON.stringify(res.data));
+        // dispatch({ type: "NOTIFY", payload: { success: res.successful } });
+        // dispatch({ type: 'AUTH', payload: res })
+        dispatch(logIn(res.data))
         handleClose();
         router.push("/");
         window.location.reload();
-      } else {
-        dispatch({ type: "NOTIFY", payload: { error: res.message } });
       }
+
     } catch (error) {
       console.log(error);
     }
