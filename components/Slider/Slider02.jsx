@@ -51,7 +51,7 @@ const Slider02 = ({ text }) => {
             {listBrand.map((item, index) => (
               <div key={index} className=''>
                 <div className="d-flex justify-content-center w-100">
-                  <img className="rounded border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
+                  <img className="rounded-circle border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
                 </div>
                 <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
               </div>

@@ -1,21 +1,24 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { orderApi } from "../api-client";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Pages from "../components/Pages";
+import { selectAuth } from "../features/auth/authSlice";
 import { selectCart } from "../features/cart/cartSlice";
 import { addToCart } from "../store/actions/actionsType";
 export default function Home({ data }) {
- 
+
   return (
     <>
       <Head>
         <title>Home</title>
       </Head>
-      <div className="container">
+      <>
         <Pages />
-      </div>
+      </>
       <Footer />
 
     </>
