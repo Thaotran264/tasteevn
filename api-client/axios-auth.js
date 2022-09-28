@@ -1,8 +1,8 @@
 import axios from 'axios';
 const ISSERVER = typeof window === "undefined";
 
-function getToken (){
-    if(!ISSERVER) {
+function getToken() {
+    if (!ISSERVER) {
         let token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
         return eval(token || '')
     }
@@ -13,7 +13,7 @@ const axiosAuth = axios.create({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${getToken()}`
     },
-}); 
+});
 axiosAuth.interceptors.response.use(
     function (response) {
         return response.data;
