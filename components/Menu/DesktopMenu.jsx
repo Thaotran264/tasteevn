@@ -18,13 +18,13 @@ const DesktopMenu = ({ productList, menuPos }) => {
           <div className="row">
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
-                {listMenu?.map((item, index) => (
+                {productList?.map((item, index) => (
                   <li
                     key={item.Id}
-                    className="border rounded border-dark px-2 text-center bg-white "
+                    className="border rounded-5 border-dark px-2 text-center bg-white "
                     style={{ listStyle: "none" }}
                   >
-                    <Link href={`#menuRC${index}`}>
+                    <Link href={`#menuRC${index}`} scroll={true}>
                       <a className="py-1 px-4 d-block" >{item.Name}</a>
                     </Link>
                   </li>
@@ -41,7 +41,7 @@ const DesktopMenu = ({ productList, menuPos }) => {
               {productList?.map((item, index) => (
                 <li
                   key={item.Id}
-                  className="border rounded border-dark px-2 text-center bg-white "
+                  className="border rounded-5 border-dark px-2 text-center bg-white "
                   style={{ listStyle: "none" }}
                 >
                   <Link href={`#menuRC${index}`} scroll={true}>
