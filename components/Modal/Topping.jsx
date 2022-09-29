@@ -9,11 +9,9 @@ import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
   console.log('data', show.data)
-  const { Id, Name, Price, SalePrice, discountPrice, Image: image } = show.data
+  const { Id, Name, Price, SalePrice, discountPrice, Image: image,GroupToppings,Toppings } = show.data
   const [count, setCount] = useState(1);
   const [note, setNote] = useState("");
-  const [toppings, setToppings] = useState([]);
-  const [check, setCheck] = useState(false);
   const [listGroupTopping, setListGroupTopping] = useState([]);
   const [listTopping, setListTopping] = useState([]);
   const dispatch = useDispatch();
@@ -32,6 +30,7 @@ const Topping = ({ setShow, show }) => {
   const toppingPrice = listTopping.reduce((cal, item) => cal + item.price, 0)
   const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal + item.data.Price, 0)
   const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
+
   const handleRadioBtn = (value, data, parentID) => {
     let index = listGroupTopping?.filter(item => item.parentID != parentID)
     const newData = [...index, { data, parentID }]
@@ -61,11 +60,16 @@ const Topping = ({ setShow, show }) => {
     // setShow({ ...show, open: false });
   };
 
+  const setGroupToppingsIsrequired = GroupToppings.filter(item => item.IsRequire == true)
+  // const setToppings = Toppings.map()
+  const renderGroupTopping = () => {}
+
   return (
     <section
       className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100 d-flex justify-content-center"
       style={{ zIndex: 100 }}
     >
+      
       <article className="mx-auto position-relative mt-auto rounded d-flex flex-column toppingCss">
         {/* Topping title */}
         <div className="position-fixed toppingTitleCss py-1 rounded" style={{ zIndex: 10 }}>
@@ -110,9 +114,9 @@ const Topping = ({ setShow, show }) => {
           {show.data.IsGroupTopping && show.data.GroupToppings?.map((item) => (
             <div key={item.Id} className="mb-2" >
               <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.Name}</h5>
-              {item.Toppings.map((it, index) => (
+              {item.Toppings.filter(item=> item.IsRequired).map((it, index) => {
                 <div
-                  key={index}
+                  key={it.Id}
                   onChange={(e) => handleRadioBtn(e.target.value, it, item.Id)}
                   className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
                 >
@@ -120,11 +124,27 @@ const Topping = ({ setShow, show }) => {
                   <p className="mb-0 ms-auto me-2 text-danger">{formatter.format(it.Price)}</p>
                   <input type="radio" value={it.Name} name={item.Name} />
                 </div>
-              ))}
+              }
+              )}
+              {
+                item.Toppings.filter(item=> item.IsRequired == false).map((it, index) => {
+                  <div
+                    key={it.Id}
+                    className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
+                  >
+                    <h6> {it.Name}</h6>
+                    <p className="text-danger ms-auto mb-0 me-2">{formatter.format(it.Price)}</p>
+                    <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, it)} />
+                  </div>
+                })
+              }
             </div>
           ))}
+          {
+            !show.data.IsGroupTopping && 
+          <>
           <h5 className="bg-dark bg-opacity-25 p-2 text-light">Toppings</h5>
-          {!show.data.IsGroupTopping && show.data?.Toppings?.map((item) => (
+          {show.data?.Toppings?.map((item) => (
             <div
               key={item.Id}
               className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
@@ -134,7 +154,8 @@ const Topping = ({ setShow, show }) => {
               <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, item)} />
             </div>
           ))}
-
+        </>
+          }
         </div>
         <div className="position-fixed bottom-0 py-3 d-flex justify-content-center align-items-center gap-3 toppingButtonGroup">
           <div className="d-flex align-items-center gap-2">
