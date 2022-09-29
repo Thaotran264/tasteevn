@@ -56,8 +56,9 @@ const Topping = ({ setShow, show }) => {
       toppingPrice, groupToppingPrice,
       totalPrice
     };
-    dispatch(addToCart(data));
-    setShow({ ...show, open: false });
+    console.log(data)
+    // dispatch(addToCart(data));
+    // setShow({ ...show, open: false });
   };
 
   return (
@@ -106,7 +107,7 @@ const Topping = ({ setShow, show }) => {
         />
         <hr ></hr>
         <div style={{ marginBottom: 75 }} className="w-100">
-          {show.data.GroupToppings?.map((item) => (
+          {show.data.IsGroupTopping && show.data.GroupToppings?.map((item) => (
             <div key={item.Id} className="mb-2" >
               <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.Name}</h5>
               {item.Toppings.map((it, index) => (
@@ -123,7 +124,7 @@ const Topping = ({ setShow, show }) => {
             </div>
           ))}
           <h5 className="bg-dark bg-opacity-25 p-2 text-light">Toppings</h5>
-          {show.data?.Toppings?.map((item) => (
+          {!show.data.IsGroupTopping && show.data?.Toppings?.map((item) => (
             <div
               key={item.Id}
               className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
@@ -146,9 +147,9 @@ const Topping = ({ setShow, show }) => {
             </button>
           </div>
           <button className="border-0 rounded px-3 py-2"
-            style={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length ? { backgroundColor: '#f8fafa', color: '#909090' } : { backgroundColor: 'rgb(247, 167, 108)', color: '#fff' }}
+            style={show.data.IsGroupTopping && (!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length) ? { backgroundColor: '#f8fafa', color: '#909090' } : { backgroundColor: 'rgb(247, 167, 108)', color: '#fff' }}
             onClick={handleAddCart}
-            disabled={!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length}>
+            disabled={show.data.IsGroupTopping && (!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length)}>
             Thêm {formatter.format(totalPrice)}
           </button>
         </div>
