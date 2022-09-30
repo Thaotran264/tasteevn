@@ -81,8 +81,9 @@ const Detail = () => {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
             // setData(res.data);
+            console.log(res.data)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
-            setMenuWg(JSON.parse(menuWb).Menus)
+            setMenuWg(JSON.parse(menuWb).menus)
             // setMenuWg();
             // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
             // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));

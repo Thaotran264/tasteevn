@@ -5,7 +5,7 @@ import MobileMenu from './MobileMenu';
 const Menu = ({ menuPos, productList }) => {
     return (
         <>
-            <MobileMenu menuPos={menuPos} productList={productList} />
+            {/* <MobileMenu menuPos={menuPos} productList={productList} /> */}
             <DesktopMenu menuPos={menuPos} productList={productList} />
         </>
     )

@@ -9,13 +9,12 @@ import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
   console.log('data', show.data)
-  const { Id, Name, Price, SalePrice, discountPrice, Image: image,GroupToppings,Toppings } = show.data
+  const { id, name, price, salePrice, discountPrice, image, groupToppings, toppings } = show.data
   const [count, setCount] = useState(1);
   const [note, setNote] = useState("");
   const [listGroupTopping, setListGroupTopping] = useState([]);
   const [listTopping, setListTopping] = useState([]);
   const dispatch = useDispatch();
-
   const handleClose = () => {
     setShow({ ...show, open: false });
   };
@@ -28,8 +27,8 @@ const Topping = ({ setShow, show }) => {
   };
 
   const toppingPrice = listTopping.reduce((cal, item) => cal + item.price, 0)
-  const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal + item.data.Price, 0)
-  const totalPrice = (Price + toppingPrice + groupToppingPrice) * count
+  const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal + item.data.price, 0)
+  const totalPrice = (price + toppingPrice + groupToppingPrice) * count
 
   const handleRadioBtn = (value, data, parentID) => {
     let index = listGroupTopping?.filter(item => item.parentID != parentID)
@@ -37,17 +36,17 @@ const Topping = ({ setShow, show }) => {
     setListGroupTopping(newData)
   }
   const handleCheckboxBtn = (value, data) => {
-    const { Id } = data;
-    let item = listTopping.filter((item) => item.Id === Id);
-    if (!item.length && value) setListTopping([...listTopping, { Id, Name: data.Name, price: data.Price }]);
+    const { id } = data;
+    let item = listGroupTopping.filter((item) => item.id === id);
+    if (!item.length && value) setListGroupTopping([...listGroupTopping, { id, name: data.name, price: data.price }]);
     if (item.length && !value) {
-      setListTopping(listTopping.filter((item) => item.Id !== Id));
+      setListGroupTopping(listGroupTopping.filter((item) => item.id !== id));
     }
   }
   const handleAddCart = () => {
     const data = {
-      Id,
-      Name, Price, discountPrice, image,
+      id,
+      name, price, discountPrice, image,
       quantity: count,
       note: note,
       toppings: listTopping,
@@ -60,16 +59,70 @@ const Topping = ({ setShow, show }) => {
     // setShow({ ...show, open: false });
   };
 
-  const setGroupToppingsIsrequired = GroupToppings.filter(item => item.IsRequire == true)
-  // const setToppings = Toppings.map()
-  const renderGroupTopping = () => {}
+  // render Data
+  const renderGroupToppings = groupToppings?.map(item => {
+    const { isRequire, toppings } = item
+    if (isRequire) {
+      return (
+        <div key={item.id} className="mb-2" >
+          <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.name}</h5>
+          {
+            toppings.map((it) => {
+              return (<div
+                key={it.id}
+                onChange={(e) => handleRadioBtn(e.target.value, it, item.id)}
+                className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
+              >
+                <h6> {it.name}</h6>
+                <p className="mb-0 ms-auto me-2 text-danger">{formatter.format(it.price)}</p>
+                <input type="radio" value={it.name} name={item.name} />
+              </div>)
+            })
+          }
+        </div>
+      )
+    }
+    if (!isRequire) {
+      return (
+        <div key={item.id} className="mb-2" >
+          <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.name}</h5>
+          {
+            toppings?.map((it) => {
+              return (<div
+                key={it.id}
+                className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
+              >
+                <h6> {it.name}</h6>
+                <p className="text-danger ms-auto mb-0 me-2">{formatter.format(it.price)}</p>
+                <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, it)} />
+              </div>
+              )
+            })
+          }
+        </div>
+      )
+    }
+  })
+  const renderToppings = toppings?.map(topping => {
+    const { id, name, price } = topping
+    return (
+      <div
+        key={id}
+        className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
+      >
+        <h6> {name}</h6>
+        <p className="text-danger ms-auto mb-0 me-2">{formatter.format(price)}</p>
+        <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, topping)} />
+      </div>
+    )
+  })
 
   return (
     <section
       className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100 d-flex justify-content-center"
       style={{ zIndex: 100 }}
     >
-      
+
       <article className="mx-auto position-relative mt-auto rounded d-flex flex-column toppingCss">
         {/* Topping title */}
         <div className="position-fixed toppingTitleCss py-1 rounded" style={{ zIndex: 10 }}>
@@ -111,50 +164,16 @@ const Topping = ({ setShow, show }) => {
         />
         <hr ></hr>
         <div style={{ marginBottom: 75 }} className="w-100">
-          {show.data.IsGroupTopping && show.data.GroupToppings?.map((item) => (
-            <div key={item.Id} className="mb-2" >
-              <h5 className="bg-dark bg-opacity-25 p-2 text-light">{item.Name}</h5>
-              {item.Toppings.filter(item=> item.IsRequired).map((it, index) => {
-                <div
-                  key={it.Id}
-                  onChange={(e) => handleRadioBtn(e.target.value, it, item.Id)}
-                  className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
-                >
-                  <h6> {it.Name}</h6>
-                  <p className="mb-0 ms-auto me-2 text-danger">{formatter.format(it.Price)}</p>
-                  <input type="radio" value={it.Name} name={item.Name} />
-                </div>
-              }
-              )}
-              {
-                item.Toppings.filter(item=> item.IsRequired == false).map((it, index) => {
-                  <div
-                    key={it.Id}
-                    className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
-                  >
-                    <h6> {it.Name}</h6>
-                    <p className="text-danger ms-auto mb-0 me-2">{formatter.format(it.Price)}</p>
-                    <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, it)} />
-                  </div>
-                })
-              }
-            </div>
-          ))}
           {
-            !show.data.IsGroupTopping && 
-          <>
-          <h5 className="bg-dark bg-opacity-25 p-2 text-light">Toppings</h5>
-          {show.data?.Toppings?.map((item) => (
-            <div
-              key={item.Id}
-              className="px-3 d-flex justify-content-between align-items-center border-bottom border-dark py-3"
-            >
-              <h6> {item.Name}</h6>
-              <p className="text-danger ms-auto mb-0 me-2">{formatter.format(item.Price)}</p>
-              <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, item)} />
-            </div>
-          ))}
-        </>
+            show.data.isGroupTopping && renderGroupToppings
+          }
+
+          {
+            !show.data.isGroupTopping &&
+            <>
+              <h5 className="bg-dark bg-opacity-25 p-2 text-light">Topping</h5>
+              {renderToppings}
+            </>
           }
         </div>
         <div className="position-fixed bottom-0 py-3 d-flex justify-content-center align-items-center gap-3 toppingButtonGroup">
