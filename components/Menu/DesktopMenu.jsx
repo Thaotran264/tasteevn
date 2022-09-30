@@ -7,7 +7,6 @@ import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { listMenu } from "../../db";
 const DesktopMenu = ({ productList, menuPos }) => {
-  console.log(productList)
   return (
     <section className="d-none showOnDesktop w-100 mx-auto py-2">
       <div

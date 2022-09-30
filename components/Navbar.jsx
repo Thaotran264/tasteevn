@@ -62,56 +62,6 @@ const Navbar = () => {
     localStorage.removeItem("token");
     router.push("/");
   };
-  const data = [
-    {
-      id: 1,
-      image:
-        "https://images.pexels.com/photos/12346579/pexels-photo-12346579.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Cơm chiên dương châu",
-    },
-    {
-      id: 2,
-      image:
-        "https://images.pexels.com/photos/13538314/pexels-photo-13538314.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Cơm chay thập cẩm",
-    },
-    {
-      id: 3,
-      image:
-        "https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Mì Tomyum Bò Úc",
-    },
-    {
-      id: 4,
-      image:
-        "https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Mì Tomyum Bò Mĩ",
-    },
-    {
-      id: 5,
-      image:
-        "https://images.pexels.com/photos/10819066/pexels-photo-10819066.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Bò kho bánh mì",
-    },
-    {
-      id: 6,
-      image:
-        "https://images.pexels.com/photos/12788117/pexels-photo-12788117.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Phở Hà Nội",
-    },
-    {
-      id: 7,
-      image:
-        "https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Phở Bắc",
-    },
-    {
-      id: 8,
-      image:
-        "https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      name: "Mì Quảng",
-    },
-  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
