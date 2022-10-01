@@ -31,13 +31,22 @@ const Topping = ({ setShow, show }) => {
 
   const handleRadioBtn = (value, data, parentID) => {
     let index = listGroupTopping?.filter((item) => item.groupToppingId != parentID);
-    const newData = [...index, { ...data }];
-    setListGroupTopping(newData);
+    const newData = {
+      toppingId: data.id,
+      price: data.price,
+      groupId: parentID
+    }
+    setListGroupTopping([...index, { ...newData}]);
   };
   const handleCheckboxBtn = (value, data, parentID) => {
     const { id } = data;
+    const newData = {
+      toppingId: data.id,
+      price: data.price,
+      groupId: parentID
+    }
     if(value) {
-      setListGroupTopping([...listGroupTopping, {...data}])
+      setListGroupTopping([...listGroupTopping, {...newData}])
     }
     else {
       const newData = listGroupTopping.filter(item => item.id != id)
@@ -46,15 +55,14 @@ const Topping = ({ setShow, show }) => {
   };
   const handleAddCart = () => {
     const data = {
-      id,
+      itemId: id,
       name,
       price,
-      discountPrice,
       image,
       quantity: count,
       note: note,
       toppings: listTopping,
-      groupToppings: listGroupTopping,
+      orderToppings: listGroupTopping,
       // groupToppingPrice,
       // totalPrice
     };
