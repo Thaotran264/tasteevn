@@ -80,7 +80,7 @@ const ProfileMobile = () => {
   };
   return (
     <>
-      <div className="profile-mobile custom-card-hover" style={{ height: "100vh" }}>
+      <div className="container profile-mobile custom-card-hover" style={{ height: "100vh" }}>
         <Card>
           <a href="/profile/edit">
             <Card.Body className="p-3">
