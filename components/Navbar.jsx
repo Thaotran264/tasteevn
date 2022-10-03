@@ -16,7 +16,6 @@ const Navbar = () => {
   // const { state, dispatch } = useContext(DataContext);
   const auth = useSelector(selectAuth)
   const {isLogged,authData} = auth
-  console.log(auth)
   const dispatch = useDispatch();
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);

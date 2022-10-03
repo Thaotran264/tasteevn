@@ -109,6 +109,7 @@ function LoginModal({ btnStyle }) {
     try {
       const res = await accountAPI.login(params);
       if (res.successful && res.data) {
+        console.log('daataa', res.data)
         // localStorage.setItem("token", JSON.stringify(res.data.token));
         // localStorage.setItem("userInfo", JSON.stringify(res.data));
         // dispatch({ type: "NOTIFY", payload: { success: res.successful } });

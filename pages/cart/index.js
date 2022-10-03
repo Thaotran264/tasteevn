@@ -13,6 +13,7 @@ import { formatter } from "../../utils";
 const Cart = () => {
   const [check, setCheck] = useState(false);
   const cart = useSelector(selectCart);
+  console.log(cart);
   const auth = useSelector(selectAuth);
   const quantity = useSelector(totalQuantityCart);
   const { isLogged, authData } = auth;
@@ -20,12 +21,14 @@ const Cart = () => {
   const [userAdress, setUserAdress] = useState();
   const router = useRouter();
   const dispatch = useDispatch();
+const totalPrice = cart?.reduce((cal, item) => cal+item.price,0)
+console.log(totalPrice);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log(...res);
+        console.log('shpiing',...res);
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -42,11 +45,11 @@ const Cart = () => {
     };
     console.log(params);
     try {
-      const res= await orderApi.orders(params)
+      const res = await orderApi.orders(params);
       console.log(res);
-      if(res.data && res.successful) {
-        alert('Đặt hàng thành công')
-        dispatch(clearCart())
+      if (res.data && res.successful) {
+        alert("Đặt hàng thành công");
+        dispatch(clearCart());
       }
     } catch (err) {
       console.log(err);
@@ -69,10 +72,11 @@ const Cart = () => {
       <div className="w-100 d-flex mb-2 gap-2">
         <article className="cart__article position-relative w-50 rounded-2 bg-light p-2">
           <h4 className="text-center border-bottom">Trang thanh toán</h4>
-          {cart?.map((item) => (
-            <CartItem item={item} key={item.Id} />
+          {cart?.map((cartItem) => (
+            <CartItem item={cartItem} key={cartItem.itemId} />
           ))}
         </article>
+        {/* Shipping Address */}
         <article className="w-50 rounded p-2" style={{ backgroundColor: "#fff" }}>
           <h4 className="text-center border-bottom">Thông tin người nhận</h4>
           <form className="mb-2" style={{ fontSize: 15 }}>
@@ -80,7 +84,7 @@ const Cart = () => {
               <label>Tên:</label>
               <input
                 readOnly
-                // placeholder={userAdress?.name}
+                placeholder={userAdress?.name}
                 type="text"
                 className="p-1 w-100 rounded-2"
                 style={{ fontSize: 15, borderColor: "lightgray" }}
@@ -90,7 +94,7 @@ const Cart = () => {
               <label>Số điện thoại:</label>
               <input
                 readOnly
-                // placeholder={userAdress?.phone || '123456'}
+                placeholder={userAdress?.phone || '123456'}
                 type="text"
                 className="p-1 w-100 rounded-2"
                 style={{ fontSize: 15 }}
@@ -103,10 +107,9 @@ const Cart = () => {
                   readOnly
                   type="text"
                   className="p-1 w-100 rounded-2"
-                  // placeholder={`${userAdress?.wardName}-${userAdress?.districtName}-${userAdress?.cityName }`}
+                  placeholder={`${userAdress?.wardName}-${userAdress?.districtName}-${userAdress?.cityName }`}
                   style={{ fontSize: 15 }}
                 />
-                
               </div>
             </div>
           </form>
@@ -129,9 +132,9 @@ const Cart = () => {
                 textDecoration: "line-through",
               }}
             >
-              {formatter.format(0)}
+              {formatter.format(totalPrice)}
             </span>
-            <span className="text-danger">Tổng tiền: {formatter.format(0)}</span>
+            <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
           </div>
           <button className="btn btn-success w-50" onClick={handleDatHangButton}>
             Thanh toán

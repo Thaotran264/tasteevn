@@ -24,7 +24,7 @@ const DesktopMenu = ({ productList, menuPos }) => {
                     style={{ listStyle: "none" }}
                   >
                     <Link href={`#menuRC${index}`} scroll={true}>
-                      <a className="py-1 px-4 d-block text-decoration-none text-dark" >{item.Name}</a>
+                      <a className="py-1 px-4 d-block text-decoration-none text-dark" >{item.name}</a>
                     </Link>
                   </li>
                 ))}

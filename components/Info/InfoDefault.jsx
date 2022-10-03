@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 
 const InfoDefault = ({ info }) => {
+  // console.log(info);
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (
@@ -14,18 +15,21 @@ const InfoDefault = ({ info }) => {
       <article className="info__article">
         <section className="info__section">
           <div className="info__image">
-            <Image src={info?.logo || '/image/logo512.png'} width={384} height={384} />
+            <Image alt={info?.name} src={info?.logo || '/image/logo512.png'} width={384} height={384} />
           </div>
-          <div className="info__content ">
-            <h5>{info?.name}</h5>
-            <p>
+          <div className="info__content">
+            <h2 className="fw-bold">{info?.name}</h2>
+            <div className="bg-dark bg-opacity-10 rounded p-3">
+            <p><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address}
             </p>
-            <p>Hotline: {info?.hotline}</p>
-            <p >
-              <BsClock style={{ fontSize: 24 }} className="me-2" />
+            <p><span className="fw-bold me-2">Mức giá:</span>
+              {info?.minPrice || 0}-{info?.maxPrice || 0} đồng/món
+            </p>
+            <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
             </p>
+            </div>
             {/* <div className="d-flex gap-1">
               <button className="border-0" href="#menu">
                 <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="" />

@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
-
-@import url('../node_modules/react-date-range/dist/styles.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&display=swap');@import url('../node_modules/react-date-range/dist/styles.css');
 @import url('../node_modules/react-date-range/dist/theme/default.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
 
@@ -219,6 +217,7 @@ footer {
   margin-bottom: 15px;
   border-radius: 10px;
   background-color: white;
+  font-family: 'Poppins', sans-serif;;
 }
 
 .info__section {
@@ -237,17 +236,18 @@ footer {
 
 .info__content {
   width: 60%;
-
+  font-family: 'Poppins', sans-serif;;
   margin-left: 5px;
 }
-
-.info__content h5 {
-  font-weight: 400;
+.info__content h2 {
+  font-family: 'Raleway', sans-serif;;
 }
 
 .info__content p {
   font-size: 13px;
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;;
+
   line-height: 1.5;
 }
 
