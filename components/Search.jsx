@@ -1,14 +1,30 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { searchApi } from "../api-client/search";
 
 const Search = ({ showSearch, setShowSearch }) => {
   const [searchText, setSearchText] = useState('')
 const [showSearchForm, setShowSearchForm] = useState(false)
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const [searchData, setSearchData] = useState([]);
 
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // setShowSearchForm(true)
+  if(!searchText) return
+  let formData = new FormData();
+  formData.append("Name", searchText);
+  try {
+    const res = await searchApi.searchProduct(formData);
+    console.log(res.data.data);
+    if (res.successful && res.data) {
+      setSearchData(res.data.data);
+    }
+    setSearchText('')
+  } catch (err) {
+    console.log(err);
+  }
+};
 const handleSearchChange = (value) => {
   if(value) {
     setSearchText(value)
@@ -20,6 +36,7 @@ const handleSearchChange = (value) => {
 }
   const handleClick = () => {
     setShowSearch(!showSearch);
+    setSearchText('')
   };
 
   const data = [
@@ -64,7 +81,7 @@ const handleSearchChange = (value) => {
       name: 'Mì Quảng'
     },
   ]
-  const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase())).slice(0,5)
+  // const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase())).slice(0,5)
   
   return (
     <section
@@ -91,32 +108,31 @@ const handleSearchChange = (value) => {
             style={{ border: "none", outline: "none" }}
             onChange={(e)=>handleSearchChange(e.target.value)}
           />
-          <button className="border-0 px-4 py-2" >
+          <button className="border-0 px-4 py-2" htmlType='submit'>
             <BsSearch />
           </button>
         </form>
         {
           showSearchForm && 
         <div
-          className="bg-light w-100 position-absolute mt-2 top-100 start-0 p-2 rounded mb-2"
+          className="bg-light w-100 mt-2 p-2 rounded mb-2"
           style={{ zIndex: 99 }}
         >
-          {search.length ?
-          search.map(item=>
+          {
+          searchData.map(item=>
           <div className="d-flex align-items-center gap-2 mb-2 border border-bottom" key={item.id}>
-            <Image
+            {/* <Image
               width={80}
               height={80}
               className="rounded"
               src={item.image}
               alt=""
-            />
+            /> */}
             <p className="mb-0">{item.name}</p>
           </div>
-            )
-            : <p className="text-center mb-0">Không tìm thấy</p>
-          }
-        </div>
+          
+)}
+           </div>
         }
         <button className="border-0 w-100 py-2 rounded bg-danger text-light " onClick={handleClick}>Đóng</button>
       </div>

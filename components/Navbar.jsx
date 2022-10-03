@@ -11,27 +11,20 @@ import { cityApi } from "../api-client";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
+import { searchApi } from "../api-client/search";
 const Navbar = () => {
   // const { state, dispatch } = useContext(DataContext);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [_isMobile, setMobile] = useState(false);
-  const [cities, setCities] = useState([])
-  const [showSearchForm, setShowSearchForm] = useState(false)
-  const [searchText, setSearchText] = useState('')
-  let userInfo = {}
+  const [cities, setCities] = useState([]);
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [searchData, setSearchData] = useState([]);
+  let userInfo = {};
 
-  useEffect(() => {
-    userInfo = localStorage.getItem("userInfo") ? localStorage.getItem("userInfo") : null
-    if (!userInfo && userInfo === 'undefined') {
-      handleLogOut();
-    }
-    else {
-      let name = JSON.parse(localStorage.getItem("userInfo")) || "";
-      setusername(name.fullName);
-    }
-  }, [userInfo]);
+  useEffect(() => {});
 
   useEffect(() => {
     setMobile(isMobile);
@@ -40,86 +33,62 @@ const Navbar = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await cityApi.getCity()
+        const res = await cityApi.getCity();
         if (res) {
-          setCities(res)
+          setCities(res);
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    getData()
-  }, [])
+    };
+    getData();
+  }, []);
   const handleSearch = () => {
     console.log("first");
     setShowSearch(!showSearch);
-
   };
   const handleSearchChange = (value) => {
     if (value) {
-      setShowSearchForm(true)
-      setSearchText(value)
+      setShowSearchForm(true);
+      setSearchText(value);
+    } else {
+      setShowSearchForm(false);
     }
-    else {
-      setShowSearchForm(false)
-    }
-  }
+  };
   const router = useRouter();
   const handleLogOut = () => {
-    dispatch(logout())
+    dispatch(logout());
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
     router.push("/");
   };
-  const data = [
-    {
-      id: 1,
-      image: 'https://images.pexels.com/photos/12346579/pexels-photo-12346579.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Cơm chiên dương châu'
-    },
-    {
-      id: 2,
-      image: 'https://images.pexels.com/photos/13538314/pexels-photo-13538314.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Cơm chay thập cẩm'
-    },
-    {
-      id: 3,
-      image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Mì Tomyum Bò Úc'
-    },
-    {
-      id: 4,
-      image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Mì Tomyum Bò Mĩ'
-    },
-    {
-      id: 5,
-      image: 'https://images.pexels.com/photos/10819066/pexels-photo-10819066.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Bò kho bánh mì'
-    },
-    {
-      id: 6,
-      image: 'https://images.pexels.com/photos/12788117/pexels-photo-12788117.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Phở Hà Nội'
-    },
-    {
-      id: 7,
-      image: 'https://images.pexels.com/photos/13636706/pexels-photo-13636706.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Phở Bắc'
-    },
-    {
-      id: 8,
-      image: 'https://images.pexels.com/photos/13629371/pexels-photo-13629371.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-      name: 'Mì Quảng'
-    },
-  ]
-  const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()))
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(!searchText) return
+    let formData = new FormData();
+    formData.append("Name", searchText);
+    try {
+      const res = await searchApi.searchProduct(formData);
+      console.log(res.data.data);
+      if (res.successful && res.data) {
+        setSearchData(res.data.data);
+      }
+      setSearchText('')
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // const search = searchData?.filter((item) =>
+  //   item.name.toLowerCase().includes(searchText.toLowerCase())
+  // );
   return (
     <header
       className="bg-white position-fixed top-0 start-0 w-100 border border-bottom"
       style={{ zIndex: 99 }}
       id="nav"
     >
+   
       <nav className="container">
         <div className="row align-items-center justify-content-between">
           {/* Logo */}
@@ -127,7 +96,13 @@ const Navbar = () => {
             <div>
               <div className="d-none showOnDesktop p-1">
                 <Link href="/">
-                  <Image alt="" src="/image/logo.jpg" style={{ cursor: "pointer" }} width={150} height={60} />
+                  <Image
+                    alt=""
+                    src="/image/logo.jpg"
+                    style={{ cursor: "pointer" }}
+                    width={150}
+                    height={60}
+                  />
                 </Link>
               </div>
               <div className="hideOnDesktop" style={{ aspectRatio: "1/1", padding: 5 }}>
@@ -135,7 +110,7 @@ const Navbar = () => {
                   <Image
                     width={350}
                     height={150}
-                    alt=''
+                    alt=""
                     src="/image/mobileLogo.jpg"
                     // className=" w-100 h-100"
                     style={{ cursor: "pointer" }}
@@ -154,12 +129,12 @@ const Navbar = () => {
                 TP HCM
               </Dropdown.Toggle>
 
-              <Dropdown.Menu style={{ height: 400, overflow: 'scroll-y' }}>
-                {
-                  cities.map(item =>
-                    <Dropdown.Item key={item.id} href="#/action-1" value={item.id}>{item.name}</Dropdown.Item>
-                  )
-                }
+              <Dropdown.Menu style={{ height: 400, overflow: "scroll-y" }}>
+                {cities.map((item) => (
+                  <Dropdown.Item key={item.id} href="#/action-1" value={item.id}>
+                    {item.name}
+                  </Dropdown.Item>
+                ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -168,6 +143,7 @@ const Navbar = () => {
             <form
               className=" d-none border border-dark showOnDesktop rounded position-relative"
               role="search"
+              onSubmit={handleSubmit}
             >
               <input
                 className="form-control text-dark"
@@ -183,22 +159,34 @@ const Navbar = () => {
               <button className="btn d-flex align-items-center" type="submit">
                 <BsSearch style={{ color: "#000" }} />
               </button>
-              {
-                showSearchForm &&
-                <div
-                  className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded "
-                >
+              {showSearchForm && (
+                <div className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded ">
+                  {/* {
+                    searchData?.map((item) => (
+                      <div
+                        key={item.id}
+                        className="d-flex align-items-center gap-2 border border-bottom my-1"
+                      >
+                        <Image width={80} height={80} alt="" src={item.image} />
+                        <div>{item.name}</div>
+                      </div>
+                    ))
+                  } */}
                   {
-                    search.length ?
-                      search.map(item =>
-                        <div key={item.id} className="d-flex align-items-center gap-2 border border-bottom my-1">
-                          <Image width={80} height={80} alt='' src={item.image} />
-                          <div>{item.name}</div>
-                        </div>)
-                      :
-                      <p className="text-center">Không tìm thấy</p>
-                  }
-                </div>
+                    searchData.map(item => (
+                      <div
+                        key={item.id}
+                        className="d-flex align-items-center gap-2 border border-bottom my-1"
+                      >
+                        {/* <Image width={80} height={80} alt="" src={item.image} /> */}
+                        <div>{item.name}</div>
+                      </div>
+                    )
+               
+                    
+              )}
+              </div>
+              )
               }
             </form>
             <button className="btn align-items-center hideOnDesktop" onClick={handleSearch}>
@@ -216,27 +204,25 @@ const Navbar = () => {
 
               {username ? (
                 <Dropdown>
-                  <Dropdown.Toggle
-                    id="dropdown-menu-align-responsive-1"
-                    className="border-0"
-                  >
-                    <div
-                      className="d-flex gap-1 align-items-center"
-                    >
+                  <Dropdown.Toggle id="dropdown-menu-align-responsive-1" className="border-0">
+                    <div className="d-flex gap-1 align-items-center">
                       <span className="d-flex align-items-center"> {username} </span>
                       <Image
-                        alt=''
+                        alt=""
                         className="m-0 p-0"
                         style={{
-                          borderRadius: '20px',
-                          width: 40, height: 40
+                          borderRadius: "20px",
+                          width: 40,
+                          height: 40,
                         }}
                         width={50}
                         height={50}
-                        src={username.avatar || 'https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'} />
-
+                        src={
+                          username.avatar ||
+                          "https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                        }
+                      />
                     </div>
-
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

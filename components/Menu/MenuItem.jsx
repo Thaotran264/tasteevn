@@ -37,7 +37,7 @@ const MenuItem = ({ data: it }) => {
         <div className="menuItem__image" style={{ width: 60, height: 60 }}>
           <Image
             src={
-              it?.Image ||
+              it?.image ||
               "https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
             }
             width={60}
@@ -46,10 +46,10 @@ const MenuItem = ({ data: it }) => {
           />
         </div>
         <div className="menuItem__content">
-          <h5>{it.Name}</h5>
-          <p style={{ fontSize: 13, color: 'gray', marginBottom: 8 }}>{String(it.Description).substr(0, 100) + "..."}</p>
+          <h5>{it.name}</h5>
+          <p style={{ fontSize: 13, color: 'gray', marginBottom: 8 }}>{String(it.description).substr(0, 100) + "..."}</p>
           <div className="d-flex justify-content-between align-items-center">
-            <p className="text-danger mb-0">{formatter.format(it.Price)}</p>
+            <p className="text-danger mb-0">{formatter.format(it.price)}</p>
             <div className="d-flex align-items-center">
               {cart.map((item) => {
                 if (item.id == it.id) {

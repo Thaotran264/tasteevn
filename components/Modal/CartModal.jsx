@@ -24,7 +24,7 @@ const CartModal = ({ setShow }) => {
   const totalItem = 0;
   const toppingTotal = 0
   cart?.forEach((item) => {
-    total += item.totalPrice;
+    total += item.totalprice;
     totalItem += item.quantity;
     item.toppings?.forEach(it =>
       toppingTotal += it.price
@@ -53,7 +53,7 @@ const CartModal = ({ setShow }) => {
               {cart?.map((item) => (
                 <div
                   className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"
-                  key={item.Id}
+                  key={item.id}
                 >
                   <div className="me-2">
                     <Image
@@ -69,11 +69,12 @@ const CartModal = ({ setShow }) => {
                   </div>
                   <article className="w-100">
                     <div>
-                      <h6 className="mb-0">{item.Name}</h6>
+                      <h6 className="mb-0">{item.name}</h6>
                       {item.toppings.map(item =>
-                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.Id}>{item.Name}</span>)}
-                      {item.groupToppings.map(item =>
-                        <span className="me-1" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.data.Id}>{item.data.Name}</span>)}
+                        <span className="" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.id}>{item.name}</span>)}
+                      {/* {item.groupToppings.map(item =>
+                        <span className="me-1" style={{ fontSize: 13, color: 'hsl(0,0%,40%)' }} key={item.data.id}>{item.data.name}</span>
+                        )} */}
                       <p className="mb-0" style={{ fontSize: 13, color: '#8d8d8d' }}>{item.note || "Không có ghi chú"}</p>
                     </div>
                     <div className="d-flex  w-100 justify-content-between align-items-center">
@@ -82,10 +83,10 @@ const CartModal = ({ setShow }) => {
                           className="cart-item-price mb-0"
                           style={{ textDecoration: " line-through" }}
                         >
-                          {formatter.format(item.Price + toppingTotal)}
+                          {formatter.format(item.price + toppingTotal)}
                         </span>
                         <span className="cart-item-price mx-2 text-danger mb-0">
-                          {formatter.format(item.Price) || 0}
+                          {formatter.format(item.price) || 0}
                         </span>
                       </div>
                       <div className="d-flex align-items-center">
@@ -93,7 +94,7 @@ const CartModal = ({ setShow }) => {
                           <>
                             <button
                               className="border-0 rounded d-flex align-items-center justify-content-center"
-                              onClick={() => dispatch(removeFromCart(item.Id))}
+                              onClick={() => dispatch(removeFromCart(item.id))}
                               style={{
                                 backgroundColor: "#f7a76c",
                                 color: "#fff",

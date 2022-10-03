@@ -1817,5 +1817,6 @@ export const listId = [
   '0909959982',
   '0396296673',
   'thaotv1',
-  'tasteepos'
+  'tasteepos',
+  'tasteePOS'
 ]

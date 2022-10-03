@@ -42,6 +42,11 @@ img {
   display: block;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 :root {
   --primary-color: #FFAE6D;
   --text-white: #fff;
@@ -172,8 +177,7 @@ input:focus {
   }
 }
 
-footer
- {
+footer {
   margin-bottom: 58px;
 }
 
@@ -385,6 +389,7 @@ footer
     margin: 0 calc(100vw - 40vw);
   }
 }
+
 /* Topping Css */
 .toppingCss {
   height: 100vh;
@@ -392,6 +397,7 @@ footer
   background-color: #fff;
   overflow-y: scroll;
 }
+
 .toppingTitleCss {
   top: 0;
   background-color: #fff;
@@ -400,6 +406,7 @@ footer
   box-shadow: 0px 5px 5px #aaaaaa;
 
 }
+
 .toppingButtonGroup {
   /* width: 50vw; */
   width: 98vw;
@@ -407,33 +414,41 @@ footer
   z-index: 99;
   background-color: #fff;
 }
+
 .cartModalCss {
   height: 100vh;
   width: 98vw;
   background-color: #fff;
 }
+
 .cardModalGroupButton {
   width: 98vw;
   bottom: 4px;
 
 }
+
 @media (min-width: 992px) {
-.toppingCss {
-  width: 50vw
+  .toppingCss {
+    width: 50vw
+  }
+
+  .toppingTitleCss {
+    width: 50vw
+  }
+
+  .toppingButtonGroup {
+    width: 50vw;
+  }
+
+  .cartModalCss {
+    width: 50vw;
+  }
+
+  .cardModalGroupButton {
+    width: 50vw;
+  }
 }
-.toppingTitleCss {
-  width: 50vw
-}
-.toppingButtonGroup {
-  width: 50vw;
-}
-.cartModalCss {
-  width: 50vw;
-}
-.cardModalGroupButton {
-  width: 50vw;
-}
-}
+
 @import url('./card');
 @import url('./menuPhoto.css');
 @import url('./button.css');

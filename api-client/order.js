@@ -7,6 +7,7 @@ export const orderApi = {
     loadData(params) {
         const url = `api/Orders/load-data`
         return axiosClient2.post(url, params)
-    }
+    },
+
 
 }
