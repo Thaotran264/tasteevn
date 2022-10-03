@@ -4,8 +4,9 @@ import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import OrderDetail from '../detailOrder'
 import { BsFillFunnelFill, BsChevronLeft } from 'react-icons/bs'
-import HandleSort from "../../../profile/components/handleSort";
 import { Card } from "react-bootstrap";
+import HandleSort from "../../pages/profile/components/handleSort";
+import { orderApi } from "../../api-client";
 
 const HistoryOrder = ({ }) => {
   const [_isMobile, setMobile] = useState(false);
@@ -14,8 +15,12 @@ const HistoryOrder = ({ }) => {
   useEffect(() => {
     setMobile(isMobile);
   }, [_isMobile]);
-
-
+useEffect(()=>{
+  const getData = async () => {
+    const res = await orderApi.loadData()
+  }
+  getData()
+},[])
   return (
     <>
       <div className="profile-content custom-card-hover">

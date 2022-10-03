@@ -50,325 +50,1773 @@ export const listBanner = [
   'https://i.pinimg.com/236x/26/81/b1/2681b1b69634981fb2bfd657048017a4.jpg'
 ]
 
+
 export const listMenu = [
   {
-    "totalItem": 0,
-    "name": "Cà phê bị ẩn",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "status": 0,
-    "order": 0,
-    "createdDate": 1661838758,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": null,
-    "updatedBy": "test 2",
-    "id": "106d4060-7501-4e94-b694-1f70ea702691"
-  },
-  {
-    "totalItem": 4,
-    "name": "Cà phê",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "status": 1,
-    "order": 0,
-    "createdDate": 1661838744,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": null,
-    "updatedBy": "test 2",
-    "id": "7c4875d8-5bd0-493d-b0f8-f824253e1db1"
-  },
-  {
-    "totalItem": 0,
-    "name": "Trà sữa - ẩn",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "status": 0,
-    "order": 0,
-    "createdDate": 1661838735,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": null,
-    "updatedBy": "test 2",
-    "id": "b4c44c97-fcb6-4628-aabb-71269cb81a19"
-  },
-  {
-    "totalItem": 2,
-    "name": "Trà sữa",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "status": 1,
-    "order": 0,
-    "createdDate": 1661673663,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": 1661838711,
-    "updatedBy": "test22@gmail.com",
-    "id": "9cb2ef03-f95f-4af4-b308-62d1b0ba9324"
-  }
-]
-
-export const listMenuItems = [
-  {
-    "id": "11b8c429-2d67-4646-a25a-92ab839437e8",
-    "name": "Sản phẩm tes1r",
-    "menuId": "7c4875d8-5bd0-493d-b0f8-f824253e1db1",
-    "image": null,
-    "description": "Khing có mô tả lần 2",
-    "shortDescription": null,
-    "price": 8000012,
-    "likeNumber": null,
-    "saleNumber": null,
-    "status": 1,
-    "order": null,
-    "createdDate": 1661934765,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": 1662353839,
-    "updatedBy": "test22@gmail.com",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "capitalPrice": 5800012,
-    "wholesalePrice": 0,
-    "promotionPrice": 0,
-    "isGroupTopping": false,
-    "productCode": null,
-    "barcode": null,
-    "isInventory": true,
-    "totalInventory": null,
-    "unit": null,
-    "toppings": [
+    Id: 1,
+    Name: "Milk tea",
+    Items: [
       {
-        "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
-        "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-        "name": "Topping bị ẩn 2",
-        "status": 1,
-        "orderBy": 0,
-        "isRequired": true,
-        "price": 15000,
-        "max": 1,
-        "min": 0,
-        "isSelected": false,
-        "capitalPrice": 0
+        Id: "milk-tea-01",
+        Name: "Trà xanh",
+        Price: 32000,
+        discountPrice: 32000,
+        image:
+          "https://i.pinimg.com/564x/43/d1/ef/43d1efb1db89deecc110990e529d94c9.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: "pudding",
+            Price: 8000,
+          },
+          {
+            Id: "topping-02",
+            Name: "Rau câu",
+            Price: 8000,
+          },
+          {
+            Id: "topping-03",
+            Name: "Macchiato ream cheese",
+            Price: 9000,
+          },
+          {
+            Id: "topping-04",
+            Name: "Thạch băng tuyết",
+            Price: 8000,
+          },
+          {
+            Id: "topping-05",
+            Name: "Đậu đỏ",
+            Price: 8000,
+          },
+          {
+            Id: "topping-06",
+            Name: "Trân trâu sợi",
+            Price: 8000,
+          },
+          {
+            Id: "topping-07",
+            Name: "Trân trâu baby",
+            Price: 8000,
+          },
+          {
+            Id: "topping-08",
+            Name: "Trân trâu hoàng kim",
+            Price: 8000,
+          },
+          {
+            Id: "topping-09",
+            Name: "Thạch cà phê",
+            Price: 8000,
+          },
+          {
+            Id: "topping-10",
+            Name: "Trân châu sương mai",
+            Price: 9000,
+          },
+          {
+            Id: "topping-11",
+            Name: "Thạch dứa",
+            Price: 9000,
+          },
+        ],
       },
       {
-        "id": "96057d9b-32dc-4d8e-a74d-5b28dd183758",
-        "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-        "name": "Topping 0 thuộc nhóm nào",
-        "status": 0,
-        "orderBy": 0,
-        "isRequired": true,
-        "price": 10000,
-        "max": 1,
-        "min": 0,
-        "isSelected": false,
-        "capitalPrice": 0
+        Id: "milk-tea-02",
+        Name: "Trà sữa socola",
+        description: 'Socola đậm đà, thơm nồng độc quyền của TocoToco',
+        Price: 40000,
+        discountPrice: 40000,
+        image:
+          "https://i.pinimg.com/474x/7e/5f/df/7e5fdf4443abd5d6e54ad5b11cd2ef6f.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: "pudding",
+            Price: 8000,
+          },
+          {
+            Id: "topping-02",
+            Name: "Rau câu",
+            Price: 8000,
+          },
+          {
+            Id: "topping-03",
+            Name: "Macchiato ream cheese",
+            Price: 9000,
+          },
+          {
+            Id: "topping-04",
+            Name: "Thạch băng tuyết",
+            Price: 8000,
+          },
+          {
+            Id: "topping-05",
+            Name: "Đậu đỏ",
+            Price: 8000,
+          },
+          {
+            Id: "topping-06",
+            Name: "Trân trâu sợi",
+            Price: 8000,
+          },
+          {
+            Id: "topping-07",
+            Name: "Trân trâu baby",
+            Price: 8000,
+          },
+          {
+            Id: "topping-08",
+            Name: "Trân trâu hoàng kim",
+            Price: 8000,
+          },
+          {
+            Id: "topping-09",
+            Name: "Thạch cà phê",
+            Price: 8000,
+          },
+          {
+            Id: "topping-10",
+            Name: "Trân châu sương mai",
+            Price: 9000,
+          },
+          {
+            Id: "topping-11",
+            Name: "Thạch dứa",
+            Price: 9000,
+          },
+        ],
       },
       {
-        "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
-        "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-        "name": "Topping bị ẩn",
-        "status": 1,
-        "orderBy": 0,
-        "isRequired": true,
-        "price": 10000,
-        "max": 1,
-        "min": 0,
-        "isSelected": false,
-        "capitalPrice": 0
-      }
+        Id: "milk-tea-03",
+        Name: "Hồng trà",
+        Price: 32000,
+        description: "Hồng trà tươi Phú Thọ đạt chuẩn Châu Âu mang lại hậu vị chát ngọt dịu dàng",
+        image:
+          "https://i.pinimg.com/474x/00/ea/76/00ea767b6c075bafcf2546e67274734c.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: "pudding",
+            Price: 8000,
+          },
+          {
+            Id: "topping-02",
+            Name: "Rau câu",
+            Price: 8000,
+          },
+          {
+            Id: "topping-03",
+            Name: "Macchiato ream cheese",
+            Price: 9000,
+          },
+          {
+            Id: "topping-04",
+            Name: "Thạch băng tuyết",
+            Price: 8000,
+          },
+          {
+            Id: "topping-05",
+            Name: "Đậu đỏ",
+            Price: 8000,
+          },
+          {
+            Id: "topping-06",
+            Name: "Trân trâu sợi",
+            Price: 8000,
+          },
+          {
+            Id: "topping-07",
+            Name: "Trân trâu baby",
+            Price: 8000,
+          },
+          {
+            Id: "topping-08",
+            Name: "Trân trâu hoàng kim",
+            Price: 8000,
+          },
+          {
+            Id: "topping-09",
+            Name: "Thạch cà phê",
+            Price: 8000,
+          },
+          {
+            Id: "topping-10",
+            Name: "Trân châu sương mai",
+            Price: 9000,
+          },
+          {
+            Id: "topping-11",
+            Name: "Thạch dứa",
+            Price: 9000,
+          },
+        ],
+      },
     ],
-    "groupToppings": null
   },
   {
-    "id": "22608612-a735-4800-90ff-d812cd86f2ae",
-    "name": "Cao cao",
-    "menuId": "7c4875d8-5bd0-493d-b0f8-f824253e1db1",
-    "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/22608612-a735-4800-90ff-d812cd86f2ae/skaybbtt.etl3008202210819.png",
-    "description": null,
-    "shortDescription": null,
-    "price": 35000,
-    "likeNumber": null,
-    "saleNumber": null,
-    "status": 1,
-    "order": null,
-    "createdDate": 1661854100,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": 1661953312,
-    "updatedBy": "test22@gmail.comx",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "capitalPrice": 0,
-    "wholesalePrice": 1,
-    "promotionPrice": 0,
-    "isGroupTopping": true,
-    "productCode": null,
-    "barcode": null,
-    "isInventory": true,
-    "totalInventory": 1,
-    "unit": "2",
-    "toppings": null,
-    "groupToppings": [
+    Id: 2,
+    Name: "Fresh fruit tea",
+    Items: [
       {
-        "id": "d7472590-6d08-4181-9f99-01e1c89d4318",
-        "name": "Trân châu - sử dụng - nhiều",
-        "status": 1,
-        "isRequire": false,
-        "toppings": [
+        Id: "fresh-fruit-tea-01",
+        Name: "Trà đào bưởi hồng",
+        description: "Trà xanh kết nối với màu hồng đào của siro đào và mứt bưởi đỏ tạo sản ohaamr có màu sắc tổng thể bắt mắt",
+        Price: 38000,
+        image:
+          "https://i.pinimg.com/564x/8d/05/ca/8d05ca52f851f3142815a68a835f2223.jpg",
+        GroupToppings: [
           {
-            "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping bị ẩn 2",
-            "status": 1,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 15000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
           },
           {
-            "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping bị ẩn",
-            "status": 1,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 10000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
           },
           {
-            "id": "96057d9b-32dc-4d8e-a74d-5b28dd183758",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping 0 thuộc nhóm nào",
-            "status": 0,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 10000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
           },
           {
-            "id": "199d1e19-905a-4512-957b-8d0f56d8739e",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping bị ẩn 2",
-            "status": 1,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 15000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
           },
           {
-            "id": "4b27eb27-4898-48ea-b0da-7f838a96afeb",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping bị ẩn",
-            "status": 1,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 10000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
           },
           {
-            "id": "86b61900-d5d8-43a5-9102-00cdf1cbfcf7",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Trân châu đen - mặc định chọn",
-            "status": 1,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 10000,
-            "max": 1,
-            "min": 0,
-            "isSelected": true,
-            "capitalPrice": 0
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
           },
           {
-            "id": "96057d9b-32dc-4d8e-a74d-5b28dd183758",
-            "groupToppingId": "d7472590-6d08-4181-9f99-01e1c89d4318",
-            "name": "Topping 0 thuộc nhóm nào",
-            "status": 0,
-            "orderBy": 0,
-            "isRequired": true,
-            "price": 10000,
-            "max": 1,
-            "min": 0,
-            "isSelected": false,
-            "capitalPrice": 0
-          }
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
         ]
       },
       {
-        "id": "1a68d715-7b84-4745-894d-0be1b1210f2d",
-        "name": "Trân châu - ẩn - nhiều",
-        "status": 0,
-        "isRequire": false,
-        "toppings": []
-      }
-    ]
+        Id: "fresh-fruit-tea-02",
+        Name: "Oolong xoài kem cà phê",
+        Price: 49000,
+        image:
+          "https://i.pinimg.com/474x/96/55/8e/96558e920df78bfb8026682a2a3cb97f.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+      {
+        Id: "fresh-fruit-tea-03",
+        Name: "Trà xoài bưởi hồng",
+        Price: 38000,
+        image:
+          "https://i.pinimg.com/736x/d5/92/27/d59227bea93f9479a095aabfed9bcc03.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+      {
+        Id: "fresh-fruit-tea-04",
+        Name: "Trà xoài bưởi hồng kem phô mai",
+        Price: 48000,
+        image:
+          "https://i.pinimg.com/474x/fa/ae/d1/faaed179c695deb6072fd827064ebd61.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+    ],
   },
   {
-    "id": "82a89c02-a606-48e9-87d0-19786de307d9",
-    "name": "Sản phẩm đã ẩn",
-    "menuId": "7c4875d8-5bd0-493d-b0f8-f824253e1db1",
-    "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/82a89c02-a606-48e9-87d0-19786de307d9/mniqabht.dvb3008202255940.png",
-    "description": null,
-    "shortDescription": null,
-    "price": 20000,
-    "likeNumber": null,
-    "saleNumber": null,
-    "status": 0,
-    "order": null,
-    "createdDate": 1661838776,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": 1661942632,
-    "updatedBy": "test22@gmail.comx",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "capitalPrice": 0,
-    "wholesalePrice": 0,
-    "promotionPrice": 0,
-    "isGroupTopping": false,
-    "productCode": null,
-    "barcode": null,
-    "isInventory": false,
-    "totalInventory": null,
-    "unit": null,
-    "toppings": null,
-    "groupToppings": null
+    Id: 3,
+    Name: "Macchiato cream cheese",
+    Items: [
+      {
+        Id: "macchiato-cream-cheese-01",
+        Name: "Trà xanh kem phô mai",
+        Price: 42000,
+        image:
+          "https://i.pinimg.com/564x/2a/33/82/2a3382a71c6139c33a11415849165460.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+      {
+        Id: "macchiato-cream-cheese-02",
+        Name: "Hồng trà kem phô mai",
+        Price: 42000,
+        image:
+          "https://i.pinimg.com/564x/88/2d/a6/882da699df18aa836bf73200dba7e507.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+      {
+        Id: "macchiato-cream-cheese-03",
+        Name: "Match kem phô mai",
+        Price: 48000,
+        image:
+          "https://i.pinimg.com/564x/02/b4/24/02b424815e4e0b92bdf11e64e366b2cc.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+
+    ],
   },
   {
-    "id": "6d10745a-b850-439f-939e-afa0df6f81a0",
-    "name": "Cà phê sữa đá",
-    "menuId": "7c4875d8-5bd0-493d-b0f8-f824253e1db1",
-    "image": "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/menuItem/6d10745a-b850-439f-939e-afa0df6f81a0/rx20zsxk.eyr2808202254121.png",
-    "description": null,
-    "shortDescription": null,
-    "price": 25000,
-    "likeNumber": null,
-    "saleNumber": null,
-    "status": 1,
-    "order": null,
-    "createdDate": 1661665282,
-    "createdBy": "test22@gmail.com",
-    "updatedDate": 1661838792,
-    "updatedBy": "test22@gmail.com",
-    "brandId": "8d3932d9-c541-4699-ac49-9f7edbbe05f7",
-    "capitalPrice": 15000,
-    "wholesalePrice": 1,
-    "promotionPrice": 20000,
-    "isGroupTopping": false,
-    "productCode": null,
-    "barcode": null,
-    "isInventory": true,
-    "totalInventory": 100,
-    "unit": "Ly",
-    "toppings": null,
-    "groupToppings": null
-  }
-]
+    Id: 4,
+    Name: "Milk coffee",
+    Items: [
+      {
+        Id: "milk-coffee-01",
+        Name: "Grass jelly milk coffee",
+        Price: 38000,
+        image:
+          "https://i.pinimg.com/564x/73/f7/75/73f77558be3b21299c3d5e268a2ee31d.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+      {
+        Id: "milk-coffee-02",
+        Name: "Royal pearl milk coffee",
+        Price: 38000,
+        image:
+          "https://i.pinimg.com/564x/ca/a2/90/caa2902551069e077b3bb9c60622ea98.jpg",
+        GroupToppings: [
+          {
+            Id: "groupTopping-01",
+            Name: "size",
+            Toppings: [
+              {
+                Id: "groupTopping-01-topping-01",
+                Name: "size M",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-01-topping-02",
+                Name: "size L",
+                Price: 7000,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-02",
+            Name: "ice",
+            Toppings: [
+              {
+                Id: "groupTopping-02-topping-01",
+                Name: "Nóng",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-02",
+                Name: "100% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-03",
+                Name: "70% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-04",
+                Name: "50% đá",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-02-topping-05",
+                Name: "30% đá",
+                Price: 0,
+              },
+            ],
+          },
+          {
+            Id: "groupTopping-03",
+            Name: "sugar",
+            Toppings: [
+              {
+                Id: "groupTopping-03-topping-01",
+                Name: "0% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-02",
+                Name: "100% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-03",
+                Name: "70% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-04",
+                Name: "50% đường",
+                Price: 0,
+              },
+              {
+                Id: "groupTopping-03-topping-05",
+                Name: "30% đường",
+                Price: 0,
+              },
+            ],
+          },
+        ],
+        Toppings: [
+          {
+            Id: "topping-01",
+            Name: 'pudding',
+            Price: 8000
+          },
+          {
+            Id: "topping-02",
+            Name: 'Rau câu',
+            Price: 8000
+          },
+          {
+            Id: "topping-03",
+            Name: 'Macchiato ream cheese',
+            Price: 9000
+          },
+          {
+            Id: "topping-04",
+            Name: 'Thạch băng tuyết',
+            Price: 8000
+          },
+          {
+            Id: "topping-05",
+            Name: 'Đậu đỏ',
+            Price: 8000
+          },
+          {
+            Id: "topping-06",
+            Name: 'Trân trâu sợi',
+            Price: 8000
+          },
+          {
+            Id: "topping-07",
+            Name: 'Trân trâu baby',
+            Price: 8000
+          },
+          {
+            Id: "topping-08",
+            Name: 'Trân trâu hoàng kim',
+            Price: 8000
+          },
+          {
+            Id: "topping-09",
+            Name: 'Thạch cà phê',
+            Price: 8000
+          },
+          {
+            Id: "topping-10",
+            Name: 'Trân châu sương mai',
+            Price: 9000
+          },
+          {
+            Id: "topping-11",
+            Name: 'Thạch dứa',
+            Price: 9000
+          },
+        ]
+      },
+    ],
+  },
+];
 export const listId = [
-  'e212fc05-f7c2-4a83-9c61-676cbe1eb81f',
-  '8d3932d9-c541-4699-ac49-9f7edbbe05f7',
-  '5d334783-c67b-4a51-b2d4-7f4c18bc69e6',
-  'dc755cef-0924-4188-a481-9098ea1bd83c'
+  '0909000007',
+  '0909000008',
+  '0909959982',
+  '0396296673',
+  'thaotv1',
+  'tasteepos',
+  'tasteePOS'
 ]

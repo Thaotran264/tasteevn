@@ -14,6 +14,7 @@ import TabMenu from "../components/TabMenu";
 import { DataContext } from "../store/globalState";
 import Slider02 from "../components/Slider/Slider02";
 import { BsCartCheck } from "react-icons/bs";
+import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineFlag, AiOutlineHome } from "react-icons/ai";
 import CartModal from "../components/Modal/CartModal";
 import Default from "../components/KhongGianPic/Default";
 import { getBrandDetail } from "../hooks/useBrandDetail";
@@ -24,9 +25,10 @@ import { menuApi } from "../api-client/menu";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart, totalCart, totalQuantityCart } from "../features/cart/cartSlice";
 import { formatter } from "../utils";
-import { merchantApi } from "../api-client";
+import { merchantApi, orderApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
+import parse from "html-react-parser";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -67,6 +69,9 @@ const Detail = () => {
   const [menu, setMenu] = useState();
   const [menuItems, setMenuItems] = useState([]);
   const [data, setData] = useState();
+  const [infoWg, setInfoWg] = useState()
+  const [bannerWg, setBannerWg] = useState()
+  const [menuWg, setMenuWg] = useState()
   let mbref = useRef();
   let mbDref = useRef();
   useEffect(() => {
@@ -75,7 +80,13 @@ const Detail = () => {
         if (id) {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            setData(res.data);
+            // setData(res.data);
+            console.log(res.data)
+            let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
+            setMenuWg(JSON.parse(menuWb).menus)
+            // setMenuWg();
+            // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
+            // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));
           }
         }
       } catch (err) {
@@ -104,28 +115,26 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+
   return (
     <>
       <Head>
         <title>Brand Detail</title>
-        {/* <meta name="description" content={info?.metaDescription} /> */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta charset="UTF-8"></meta>
-        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8"></meta>
       </Head>
 
       <section className={`${show && "overflow-hidden"}`}>
         <Banner banner={data?.banner} />
-        <InfoDefault info={data?.info} />
+        {/* <InfoDefault info={infoWg} /> */}
         <MenuPhoto isDefault={false} />
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <Menu productList={data?.productList} menuPos={menuPos} />
+          <Menu productList={menuWg} menuPos={menuPos} />
         </div>
 
-        {show && <CartModal setShow={setShow} />}
-       {
-        total >=1  && 
+        {show ? <CartModal setShow={setShow} /> : ''}
+        {
+          total >= 1 &&
           <div
             className="hideOnDesktop position-fixed bottom-0 end-0 start-0"
             style={{ backgroundColor: "#FFAE6D" }}
@@ -144,8 +153,20 @@ const Detail = () => {
               </div>
             </div>
           </div>
-       }
-        
+        }
+
+        <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
+          <button className="  border border-bottom-0  p-2" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHome style={{ fontSize: 20 }} /></button>
+          <button className="  border border-bottom-0  p-2 " style={{ backgroundColor: "#fff" }}
+            onClick={handleShow}
+          ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
+            {total >= 1 &&
+              <span style={{ fontSize: 20 }}>{total}</span>
+            }
+          </button>
+          <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
+          <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
+        </div>
       </section>
     </>
   );

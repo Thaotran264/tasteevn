@@ -6,10 +6,10 @@
  * @desc [description]
  */
 import React, { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../../store/globalState";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { adressApi } from '../../../api-client/adressApi';
+import { adressApi } from "../api-client/adressApi";
+import { DataContext } from "../store/globalState";
 
 function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
     const [addressData, setAddressData] = useState(item ? item : {})
