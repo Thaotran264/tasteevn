@@ -13,14 +13,13 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import { FcAddImage } from "react-icons/fc";
-
 import Form from "react-bootstrap/Form";
-import TabInfor from "./components/Infor";
-import HistoryOrder from "./components/HistoryOrder";
 import { DataContext } from "../../store/globalState";
 import { useRouter } from "next/router";
-import WishlistShop from "./components/wishlistShop";
-import ShippingAddress from "./components/ShippingAddress";
+import TabInfor from "../../components/Infor";
+import WishlistShop from "../../components/wishlistShop";
+import HistoryOrder from "../../components/HistoryOrder";
+import ShippingAddress from "../../components/ShippingAddress";
 
 const Cart = () => {
   const [count, setCount] = useState(1);

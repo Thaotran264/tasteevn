@@ -5,12 +5,12 @@ import Button from 'react-bootstrap/Button';
 import { useRouter } from "next/router";
 import OrderDetail from '../detailOrder'
 import { BsPlusLg, BsChevronLeft } from 'react-icons/bs'
-import HandleSort from "../../../profile/components/handleSort";
 import { Card } from "react-bootstrap";
 import ModalAddresCRU from "../modalAddresCRU";
-import { adressApi } from "../../../../api-client/adressApi";
-import { DataContext } from "../../../../store/globalState";
-import Nodata from "../../../../components/Nodata";
+import { adressApi } from "../../api-client/adressApi";
+import Link from "next/link";
+import { DataContext } from "../../store/globalState";
+import Nodata from "../Nodata";
 
 
 const ShippingAddress = () => {
@@ -83,11 +83,13 @@ const ShippingAddress = () => {
                 <Card.Body>
                     <div className="d-flex gap-3 text-center ">
                         {_isMobile &&
-                            <a href="/profile">
+                        <Link href="/profile">
+                            <a >
                                 <div>
                                     <BsChevronLeft />
                                 </div>
                             </a>
+                            </Link>
                         }
                         <span className="w-100"><ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
                     </div>
@@ -96,7 +98,7 @@ const ShippingAddress = () => {
 
             <div className="rounded w-100 bg-white p-2">
                 <hr className="my-1" />
-                {dataAddres.length <= 0 && <Nodata></Nodata> }
+                {dataAddres.length <= 0 && <Nodata /> }
                 { dataAddres && dataAddres.map((item =>
                     <div key={item.id}>
                         <div className="p-2" >

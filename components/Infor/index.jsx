@@ -5,13 +5,13 @@ import { FcAddImage } from "react-icons/fc"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { DataContext } from "../../../../store/globalState";
-import { userApi } from "../../../../api-client/user";
 import Moment from 'moment';
 import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
-import { accountAPI } from "../../../../api-client/account";
+import { accountAPI } from "../../api-client/account";
 import { BiEdit } from "react-icons/bi";
+import { DataContext } from "../../store/globalState";
+import { userApi } from "../../api-client";
 
 
 const TabInfor = ({ userDetail }) => {

@@ -72,6 +72,8 @@ const Detail = () => {
   const [infoWg, setInfoWg] = useState()
   const [bannerWg, setBannerWg] = useState()
   const [menuWg, setMenuWg] = useState()
+  const [maps, setMaps] = useState()
+  const [brandView, setBrandView] = useState()
   let mbref = useRef();
   let mbDref = useRef();
   useEffect(() => {
@@ -81,9 +83,12 @@ const Detail = () => {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
             // setData(res.data);
-            console.log(res.data)
+            console.log('data',res.data)
+            setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
             setMenuWg(JSON.parse(menuWb).menus)
+            setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
+            setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))
             // setMenuWg();
             // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
             // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));
@@ -125,11 +130,11 @@ const Detail = () => {
 
       <section className={`${show && "overflow-hidden"}`}>
         <Banner banner={data?.banner} />
-        {/* <InfoDefault info={infoWg} /> */}
-        <MenuPhoto isDefault={false} />
+        <InfoDefault info={infoWg} maps={maps} />
+        <MenuPhoto isDefault={false} maps={maps} brandView={brandView}/>
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <Menu productList={menuWg} menuPos={menuPos} />
+          <Menu productList={menuWg} menuPos={menuPos}/>
         </div>
 
         {show ? <CartModal setShow={setShow} /> : ''}

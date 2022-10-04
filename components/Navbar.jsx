@@ -9,11 +9,13 @@ import LoginModal from "./LoginModal";
 import Search from "./Search";
 import { cityApi } from "../api-client";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { logout } from "../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectAuth } from "../features/auth/authSlice";
 import { searchApi } from "../api-client/search";
 const Navbar = () => {
   // const { state, dispatch } = useContext(DataContext);
+  const auth = useSelector(selectAuth)
+  const {isLogged,authData} = auth
   const dispatch = useDispatch();
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
@@ -202,11 +204,11 @@ const Navbar = () => {
                 </a>
               </Link>
 
-              {username ? (
+              {isLogged ? (
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-menu-align-responsive-1" className="border-0">
                     <div className="d-flex gap-1 align-items-center">
-                      <span className="d-flex align-items-center"> {username} </span>
+                      <span className="d-flex align-items-center"> {authData.fullName} </span>
                       <Image
                         alt=""
                         className="m-0 p-0"
@@ -218,7 +220,7 @@ const Navbar = () => {
                         width={50}
                         height={50}
                         src={
-                          username.avatar ||
+                          authData.avatar ||
                           "https://images.pexels.com/photos/8407039/pexels-photo-8407039.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
                         }
                       />
