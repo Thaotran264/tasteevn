@@ -18,7 +18,7 @@ const Pages = () => {
 
 
   return (
-    <section className="container mx-auto mt-2">
+    <section className="container mx-auto mt-2 mb-2">
       <CarouselComponent />
       <MultiRowSlide text="Quán nổi bật" />
       <Slider02 text="Cửa hàng được yêu thích" />

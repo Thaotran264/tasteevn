@@ -2,7 +2,7 @@
  * @author [daoNguyen]
  * @email [daonds@vinorsoft.com ]
  * @create date 2022-08-15 16:48:49
- * @modify date 2022-09-09 16:14:24
+ * @modify date 2022-10-04 10:56:47
  * @desc [description]
  */
 /***
@@ -314,4 +314,10 @@ body {
     background-position: 0 -100%;
     color: #2590EB;
     border: 1px solid #dee2e6;
+  }
+
+  .text-footer {
+    font-size: 12px;
+    line-height: 2;
+    color: #555;
   }
