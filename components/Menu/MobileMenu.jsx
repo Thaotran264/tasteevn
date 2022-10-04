@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 const MobileMenu = ({ productList, menuPos }) => {
+  console.log('data',productList);
   return (
     <>
       <section className="menu__section position-relative menuMobile">
@@ -19,13 +20,13 @@ const MobileMenu = ({ productList, menuPos }) => {
         >
           {productList?.map((item, index) => (
             <li
-              key={item.Id}
+              key={item.id}
               className="p-2 text-center"
               style={{ listStyle: "none", fontWeight: 600, cursor: "pointer" }}
 
             >
               <Link href={`#menuRC${index}`}>
-                <a className="py-1 px-4 d-block text-decoration-none text-dark" style={{ width: 'max-content' }}>{item.Name}</a>
+                <a className="py-1 px-4 d-block text-decoration-none text-dark" style={{ width: 'max-content' }}>{item.name}</a>
               </Link>
             </li>
           ))}
@@ -34,12 +35,12 @@ const MobileMenu = ({ productList, menuPos }) => {
         <div className="container rounded "
           style={{ paddingTop: 56, overflow: 'scroll' }} >
           {productList?.map((item, index) => (
-            <article key={item.Id} className="menu__article">
-              <h4 id={`menuRC${index}`} className="ms-2">
-                {item.Name}
+            <article key={item.id} className="menu__article">
+              <h4 id={`menuRC${index}`} className='mb-2'>
+                {item.name}
               </h4>
-              {item.Items.map((its) => (
-                <MenuItem data={its} key={its.Id} />
+              {item.items.map((its) => (
+                <MenuItem data={its} key={its.id} />
               ))}
             </article>
           ))}

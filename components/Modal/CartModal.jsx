@@ -26,14 +26,7 @@ const CartModal = ({ setShow }) => {
   console.log("cart", cart);
   console.log("cart", quantity);
   const dispatch = useDispatch();
-  const total = 0;
-  const totalItem = 0;
-  const toppingTotal = 0;
-  cart?.forEach((item) => {
-    total += item.totalprice;
-    totalItem += item.quantity;
-    item.toppings?.forEach((it) => (toppingTotal += it.price));
-  });
+
 
   const renderCartItem = cart.map((cartItem) => {
     return (
@@ -83,7 +76,7 @@ const CartModal = ({ setShow }) => {
           <div className="d-flex  w-100 justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <span className="cart-item-price mb-0" style={{ textDecoration: " line-through" }}>
-                {formatter.format(cartItem.price + toppingTotal)}
+                {formatter.format(cartItem.price)}
               </span>
               <span className="cart-item-price mx-2 text-danger mb-0">
                 {formatter.format(cartItem.price) || 0}
@@ -135,7 +128,7 @@ const CartModal = ({ setShow }) => {
           className="position-fixed bottom-0 start-0 end-0 start-0 bg-opacity-75 bg-dark h-100 d-flex"
           style={{ zIndex: 100 }}>
           <article className="mx-auto rounded cartModalCss">
-            <div className="border-bottom position-fixed top-0 left-0 border-dark p-2 d-flex align-items-center justify-content-between" style={{zIndex: 99, width: '50vw', backgroundColor: '#fff'}}>
+            <div className="border-bottom position-fixed top-0 left-0 border-dark p-2 d-flex align-items-center justify-content-between cartModalTitle" >
               <button className="border-0 rounded text-dark p-1" onClick={() => setShow(false)}>
                 <AiOutlineClose style={{ fontSize: 18 }} />
               </button>
@@ -157,9 +150,9 @@ const CartModal = ({ setShow }) => {
                   className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1"
                   style={{ fontSize: 18, backgroundColor: "#f7a76c", color: "#fff" }}
                 >
-                  <span style={{ fontSize: 16 }}>{totalItem} Món</span>
+                  <span style={{ fontSize: 16 }}>{quantity} Món</span>
                   Trang thanh toán
-                  <span>{formatter.format(total + toppingTotal)}</span>
+                  <span>{formatter.format(0)}</span>
                 </a>
               </Link>
             </div>

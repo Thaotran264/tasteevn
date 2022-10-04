@@ -4,10 +4,10 @@ import MobileMenu from './MobileMenu';
 
 const Menu = ({ menuPos, productList }) => {
     return (
-        <>
-            {/* <MobileMenu menuPos={menuPos} productList={productList} /> */}
+        <div  style={{marginBottom: 56}}>
+            <MobileMenu menuPos={menuPos} productList={productList} />
             <DesktopMenu menuPos={menuPos} productList={productList} />
-        </>
+        </div>
     )
 }
 

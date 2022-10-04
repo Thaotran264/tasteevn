@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import parse from "html-react-parser";
 import { listRes } from "../db";
 import Image from "next/image";
+import { isMobile } from "react-device-detect";
 
 const MenuPhoto = ({ isDefault, maps,brandView }) => {
   // console.log(brandView);
@@ -175,12 +176,12 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
         <div className="mb-2">
           <section className="d-flex gap-1">
             <div
-              className="w-50 showOnDesktop align-items-center"
+              className="w-50 d-none showOnDesktop align-items-center"
               // style={{ aspectRatio: '1/1' }}
             >
               {parse(String(maps))}
             </div>
-            <div className="w-50">
+            <div className={`${isMobile ? 'w-100' : 'w-50'}`}>
               <div className="thumb-3 rounded h-100">
                 {listRes.slice(0, 3).map((item, index) => (
                   <div className={`box img${index + 1} h-100`} key={index}>

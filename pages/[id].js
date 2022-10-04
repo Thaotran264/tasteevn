@@ -130,11 +130,11 @@ const Detail = () => {
 
       <section className={`${show && "overflow-hidden"}`}>
         <Banner banner={data?.banner} />
-        <InfoDefault info={infoWg} />
+        <InfoDefault info={infoWg} maps={maps} />
         <MenuPhoto isDefault={false} maps={maps} brandView={brandView}/>
         <Slider02 text="Món ăn đang giảm giá" />
         <div ref={mbref}>
-          <Menu productList={menuWg} menuPos={menuPos} />
+          <Menu productList={menuWg} menuPos={menuPos}/>
         </div>
 
         {show ? <CartModal setShow={setShow} /> : ''}

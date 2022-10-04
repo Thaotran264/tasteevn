@@ -5,8 +5,10 @@ import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import parse from "html-react-parser";
 import Image from "next/image";
+import { isMobile } from "react-device-detect";
+import { formatter } from "../../utils";
 
-const InfoDefault = ({ info }) => {
+const InfoDefault = ({ info ,maps}) => {
   // console.log(info);
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
@@ -15,16 +17,20 @@ const InfoDefault = ({ info }) => {
       <article className="info__article">
         <section className="info__section">
           <div className="info__image">
-            <Image alt={info?.name} src={info?.logo || '/image/logo512.png'} width={384} height={384} />
+            {isMobile ? 
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={80} height={80} />
+            : 
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={120} height={120} />
+            }
           </div>
           <div className="info__content">
             <h2 className="fw-bold">{info?.name}</h2>
-            <div className="bg-dark bg-opacity-10 rounded p-3">
+            <div className={`bg-dark bg-opacity-10 rounded ${isMobile ? 'p-2' : 'p-3'}`}>
             <p><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address}
             </p>
             <p><span className="fw-bold me-2">Mức giá:</span>
-              {info?.minPrice || 0}-{info?.maxPrice || 0} đồng/món
+              {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
             </p>
             <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
@@ -54,8 +60,7 @@ const InfoDefault = ({ info }) => {
           {show && (
             <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
-                {/* {parse(info?webMap)} */}
-                This is map
+                {parse(maps)}
               </div>
             </div>
           )}
