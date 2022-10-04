@@ -24,6 +24,10 @@
   background: #FFAE6D;
 }
 
+li {
+  list-style: none !important;
+}
+
 *,
 *::after,
 *::before {
