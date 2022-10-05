@@ -4,7 +4,7 @@ let logged;
 let token;
 if (typeof window !== "undefined") {
   auth = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : {};
-  token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : {};
+  token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "";
   logged = localStorage.getItem("isLogged") ? JSON.parse(localStorage.getItem("isLogged")) : false;
 }
 const setAuthFunc = (userInfo, isLogged, token) => {

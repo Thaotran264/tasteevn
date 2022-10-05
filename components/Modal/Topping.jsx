@@ -38,12 +38,13 @@ const Topping = ({ setShow, show }) => {
     }
     setListGroupTopping([...index, { ...newData}]);
   };
-  const handleCheckboxBtn = (value, data, parentID) => {
-    const { id } = data;
+  const handleCheckboxBtn = (value, data) => {
+    const { id,groupToppingId,price,name } = data;
     const newData = {
-      toppingId: data.id,
-      price: data.price,
-      groupId: parentID
+      toppingId:id,
+      price,
+      name,
+      groupId: groupToppingId
     }
     if(value) {
       setListGroupTopping([...listGroupTopping, {...newData}])
@@ -63,10 +64,8 @@ const Topping = ({ setShow, show }) => {
       note: note,
       toppings: listTopping,
       orderToppings: listGroupTopping,
-      // groupToppingPrice,
-      // totalPrice
     };
-    console.log(data);
+    // console.log(data);
     dispatch(addToCart(data));
     setShow({ ...show, open: false });
   };
@@ -108,7 +107,7 @@ const Topping = ({ setShow, show }) => {
                 <p className="text-danger ms-auto mb-0 me-2">{formatter.format(it.price)}</p>
                 <input
                   type="checkbox"
-                  onChange={(e) => handleCheckboxBtn(e.target.checked, it, item.id)}
+                  onChange={(e) => handleCheckboxBtn(e.target.checked, it)}
                 />
               </div>
             );
@@ -126,7 +125,7 @@ const Topping = ({ setShow, show }) => {
       >
         <h6> {name}</h6>
         <p className="text-danger ms-auto mb-0 me-2">{formatter.format(price)}</p>
-        <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, topping)} />
+        <input type="checkbox" onChange={(e) => handleCheckboxBtn(e.target.checked, topping, id)} />
       </div>
     );
   });

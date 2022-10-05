@@ -4,8 +4,8 @@ import Layout from '../../components/Layout';
 import  HistoryOrder  from './components/HistoryOrder';
 import Wishlist from './components/Wishlist'
 import { isMobile } from "react-device-detect";
-import WishlistShop from '../profile-desktop/components/wishlistShop';
-import ShippingAddress from '../profile-desktop/components/ShippingAddress';
+import WishlistShop from '../../components/wishlistShop';
+import ShippingAddress from '../../components/ShippingAddress';
 
 const ListProfilePage = () => {
     const router = useRouter();
