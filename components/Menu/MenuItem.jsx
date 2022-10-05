@@ -34,14 +34,14 @@ const MenuItem = ({ data: it }) => {
   return (
     <>
       <article key={it.id} className="menuItem__article d-flex justify-content-around">
-        <div className="menuItem__image" style={{ width: 60, height: 60 }}>
+        <div className="menuItem__image" style={{ width: 80, height: 80 }}>
           <Image
             src={
               it?.image ||
               "https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
             }
-            width={60}
-            height={60}
+            width={80}
+            height={80}
             alt=""
           />
         </div>

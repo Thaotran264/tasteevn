@@ -83,9 +83,9 @@ const Detail = () => {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
             // setData(res.data);
-            console.log('data',res.data)
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
+            console.log('data',JSON.parse(menuWb).menus)
             setMenuWg(JSON.parse(menuWb).menus)
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
             setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))

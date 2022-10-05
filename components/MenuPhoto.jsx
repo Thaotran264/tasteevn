@@ -176,12 +176,12 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
         <div className="mb-2">
           <section className="d-flex gap-1">
             <div
-              className="w-50 d-none showOnDesktop align-items-center"
+              className="d-none showOnDesktop w-50  align-items-center"
               // style={{ aspectRatio: '1/1' }}
             >
               {parse(String(maps))}
             </div>
-            <div className={`${isMobile ? 'w-100' : 'w-50'}`}>
+            <div className='w-100'>
               <div className="thumb-3 rounded h-100">
                 {listRes.slice(0, 3).map((item, index) => (
                   <div className={`box img${index + 1} h-100`} key={index}>
