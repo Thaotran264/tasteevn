@@ -108,7 +108,15 @@ input:focus {
 .list-group-item {
   border: none,
 }
-
+.card-config {
+min-width: 150px;
+margin: auto;
+}
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
 .color-primary {
   color: var(--primary-color)
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 
 const Banner = ({ banner,info }) => {
-  console.log('info',info)
+  // console.log('info',info)
   // const {brandImage} = info
   return (
     <div className="container mb-3 d-flex justify-content-center">

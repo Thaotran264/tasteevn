@@ -5,9 +5,34 @@ import Image from "next/image";
 import { isMobile } from "react-device-detect";
 
 const MenuPhoto = ({ isDefault, maps,brandView }) => {
-  // console.log(brandView);
   return (
     <div className="container">
+      {!isDefault && (
+        <div className="mb-2">
+          <section className="d-flex gap-1">
+            <div
+              className="d-none showOnDesktop w-50  align-items-center"
+            >
+              {parse(String(maps))}
+            </div>
+            <div className='w-100'>
+              <div className="thumb-3 rounded">
+                {listRes.slice(0, 3).map((item, index) => (
+                  <div className={`box img${index + 1}`} key={index}>
+                    <Image
+                      className="border border-light"
+                      src={item}
+                      alt=""
+                      width={500}
+                      height={500}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
       {isDefault && (
         <div className="container d-flex gap-2">
           <div className="d-flex align-items-center showOnDesktop">{maps}</div>
@@ -172,52 +197,7 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
           </div>
         </div>
       )}
-      {!isDefault && (
-        <div className="mb-2">
-          <section className="d-flex gap-1">
-            <div
-              className="d-none showOnDesktop w-50  align-items-center"
-              // style={{ aspectRatio: '1/1' }}
-            >
-              {parse(String(maps))}
-            </div>
-            <div className='w-100'>
-              <div className="thumb-3 rounded h-100">
-                {listRes.slice(0, 3).map((item, index) => (
-                  <div className={`box img${index + 1} h-100`} key={index}>
-                    <Image
-                      className="border border-light"
-                      src={item}
-                      alt=""
-                      width={500}
-                      height={500}
-                    />
-                  </div>
-                ))}
-
-                {/* <div className="box img2" style={{ aspectRatio: '1/1' }}>
-                  <img
-                    className="border border-light"
-                    src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                    style={{ borderTopRightRadius: 6 }}
-
-                  />
-                </div>
-                <div className="box img3 position-relative" style={{ aspectRatio: '1/1' }}>
-                  <img
-                    className="border border-light"
-                    src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt=""
-                    style={{ borderBottomRightRadius: 6 }}
-                  />
-                 
-                </div> */}
-              </div>
-            </div>
-          </section>
-        </div>
-      )}
+      
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 const MobileMenu = ({ productList, menuPos }) => {
-  console.log('data',productList);
+  // console.log('data',productList);
   return (
     <>
       <section className="menu__section position-relative menuMobile">

@@ -9,7 +9,7 @@ import { isMobile } from "react-device-detect";
 import { formatter } from "../../utils";
 
 const InfoDefault = ({ info ,maps}) => {
-  console.log(info);
+  // console.log(info);
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (

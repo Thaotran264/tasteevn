@@ -21,11 +21,11 @@ const Pages = () => {
     <section className="container mx-auto mt-2 mb-2">
       <CarouselComponent />
       <MultiRowSlide text="Quán nổi bật" />
-      <Slider02 text="Cửa hàng được yêu thích" />
+      {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
       <section className="rounded" style={{ backgroundColor: "#fff" }}>
         <h2 className="ps-3 mb-0">Quán mới nhất</h2>
         <hr></hr>
-        <div className="d-flex flex-wrap ">
+        <div className="card__container ">
           {listId.map((item,index) =>
             <Card className="card-item card-config rounded mx-auto" key={index}>
               <Card.Img
@@ -35,7 +35,7 @@ const Pages = () => {
                 onClick={() => handleViewBtn(item)}
               />
               <Card.Body>
-                <Card.Title onClick={() => handleViewBtn()}>The Coffee House</Card.Title>
+                <Card.Title onClick={() => handleViewBtn()}>{item}</Card.Title>
                 <Card.Text className="" style={{ fontSize: 13, color: "#848484" }}>
                   123 Hai Bà Trưng, quận 1, Thành phố HCM
                 </Card.Text>

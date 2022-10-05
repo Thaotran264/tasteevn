@@ -145,27 +145,26 @@
 .thumb-3 {
     display: grid;
     cursor: pointer;
-    grid-template-areas: 'img1 img2'
-        'img1 img3'
+    grid-template-areas: 'img1 img1 img2'
+        'img1 img1 img3';
+        height: 100%;
 }
 
 .thumb-3 .box {
-    /* width: 100%; */
-    height: 100px;
-    /* aspect-ratio: 1/1; */
     transition: 0.5s linear;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 100%;
 }
 
 .thumb-3 .box img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+
 }
 
 .thumb-3 .box.img1 {
     grid-area: img1;
-    height: 200px;
+   
 }
 
 .thumb-3 .box.img2 {

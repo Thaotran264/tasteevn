@@ -50,7 +50,8 @@ import parse from "html-react-parser";
 //   };
 // }
 
-const Detail = () => {
+const Detail = ({info}) => {
+  console.log('x', info)
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
@@ -82,12 +83,9 @@ const Detail = () => {
         if (id) {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            // setData(res.data);
-            // console.log('*****',res.data.widgets[1])
             console.log('data***',JSON.parse(res.data.widgets[1].data))
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
-            console.log('data',JSON.parse(menuWb).menus)
             setMenuWg(JSON.parse(menuWb).menus)
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
             setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))
@@ -119,7 +117,6 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
 
   return (
     <>
