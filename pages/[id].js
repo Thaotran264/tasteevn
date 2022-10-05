@@ -83,15 +83,14 @@ const Detail = () => {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
             // setData(res.data);
+            // console.log('*****',res.data.widgets[1])
+            console.log('data***',JSON.parse(res.data.widgets[1].data))
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
             console.log('data',JSON.parse(menuWb).menus)
             setMenuWg(JSON.parse(menuWb).menus)
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
             setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))
-            // setMenuWg();
-            // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
-            // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));
           }
         }
       } catch (err) {
@@ -129,10 +128,10 @@ const Detail = () => {
       </Head>
 
       <section className={`${show && "overflow-hidden"}`}>
-        <Banner banner={data?.banner} />
+        <Banner banner={data?.banner} info={infoWg}/>
         <InfoDefault info={infoWg} maps={maps} />
         <MenuPhoto isDefault={false} maps={maps} brandView={brandView}/>
-        <Slider02 text="Món ăn đang giảm giá" />
+        {/* <Slider02 text="Món ăn đang giảm giá" /> */}
         <div ref={mbref}>
           <Menu productList={menuWg} menuPos={menuPos}/>
         </div>
