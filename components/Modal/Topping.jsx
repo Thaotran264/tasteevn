@@ -8,6 +8,7 @@ import { addToCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
 const Topping = ({ setShow, show }) => {
+  console.log(show.data)
   const { id, name, price, salePrice, discountPrice, image, groupToppings, toppings } = show.data;
   const [count, setCount] = useState(1);
   const [note, setNote] = useState("");
@@ -24,10 +25,6 @@ const Topping = ({ setShow, show }) => {
   const handleMinus = (value) => {
     count > 1 ? setCount((count -= 1)) : setShow({ ...show, open: false });
   };
-
-  const toppingPrice = listTopping.reduce((cal, item) => cal + item.price, 0);
-  // const groupToppingPrice = listGroupTopping.reduce((cal, item) => cal + item.data.price, 0)
-  // const totalPrice = (price + toppingPrice + groupToppingPrice) * count
 
   const handleRadioBtn = (value, data, parentID) => {
     let index = listGroupTopping?.filter((item) => item.groupToppingId != parentID);
@@ -149,18 +146,13 @@ const Topping = ({ setShow, show }) => {
         </div>
         <div className="d-flex gap-2 px-2 mb-2" style={{ marginTop: 44 }}>
           <div className="d-flex align-items-center">
-            <Image src={image} alt="" width={120} height={120} />
+            <Image src={image || 'https://images.pexels.com/photos/13623493/pexels-photo-13623493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} alt="" width={120} height={120} />
           </div>
           <div className="p-2">
-            <h4 className="mb-1">{show.data.Name}</h4>
-
-            <p className="mb-0" style={{ fontSize: 13, color: "lightgray" }}>
-              Trà xanh
-            </p>
-            <p className="mb-0 text-danger">{formatter.format(show.data.Price)}</p>
-            <p className="mb-1" style={{ fontSize: 14 }}>
-              Size
-            </p>
+            <h4 className="mb-1">{show.data.name}</h4>
+            <h4 className="mb-1">{show.data.description || ''}</h4>
+            <p className="mb-0 text-danger">{formatter.format(show.data.price)}</p>
+  
           </div>
         </div>
         <input
@@ -175,7 +167,7 @@ const Topping = ({ setShow, show }) => {
         <div style={{ marginBottom: 75 }} className="w-100">
           {show.data.isGroupTopping && renderGroupToppings}
 
-          {!show.data.isGroupTopping && (
+          {show.data.toppings?.length > 0 && (
             <>
               <h5 className="bg-dark bg-opacity-25 p-2 text-light">Topping</h5>
               {renderToppings}

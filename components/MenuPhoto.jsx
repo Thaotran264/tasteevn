@@ -4,8 +4,24 @@ import { listRes } from "../db";
 import Image from "next/image";
 import { isMobile } from "react-device-detect";
 
-const MenuPhoto = ({ isDefault, maps,brandView }) => {
-  console.log('brandView', brandView)
+const MenuPhoto = ({ isDefault, maps, brandView }) => {
+  const [showModal, setShowModal] = useState(false)
+  const [count, setCount] = useState(0)
+  const [bg, setBg] = useState()
+  const handleShowModal = (list,data, id) => {
+    console.log('data',data)
+    setShowModal(!showModal)
+    setBg(data)
+  }
+  const handleNextBtn = () => {
+    console.log('first')
+    setBg(brandView[count + 1])
+  }
+  const handlePrevBtn = () => {
+    console.log('first')
+    setBg(brandView[count - 1])
+
+  }
   return (
     <div className="container">
       {!isDefault && (
@@ -19,7 +35,8 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
             <div className='w-100'>
               <div className="thumb-3 rounded">
                 {brandView?.slice(0, 3).map((item, index) => (
-                  <div className={`box img${index + 1}`} key={index}>
+                  <div className={`box img${index + 1}`} key={index}
+                    onClick={() => handleShowModal(brandView?.slice(0, 3),item, index)}>
                     <Image
                       className="border border-light"
                       src={item}
@@ -198,7 +215,28 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
           </div>
         </div>
       )}
-      
+      {
+        showModal && <div className="position-fixed  bg-dark bg-opacity-25 d-flex align-items-center justiyf-content-center" style={{ top: 0, left: 0, right: 0, bottom: 0, zIndex: 99 }}>
+          <div className="mx-auto rounded bg-light p-2" style={{ width: '50vw', height: '60vh' }}>
+            <button onClick={() => setShowModal(false)}>x</button>
+            <div className="position-relative mb-2">
+              <button className="position-absolute start-0 top-0 bottom-0 border-0" style={{zIndex: 10}}onClick={handlePrevBtn}>prev</button>
+              <div className="w-100 d-flex justify-content-center">
+                <Image src={bg || 'https://images.pexels.com/photos/13623493/pexels-photo-13623493.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load}'} alt='' width={500} height={250}/>
+              </div>
+              <button className="position-absolute end-0 top-0 bottom-0 border-0" style={{zIndex: 10}}onClick={handleNextBtn}>next</button>
+            </div>
+            <div>
+              <ul className="d-flex gap-1 ps-0">
+              {brandView?.slice(0, 3).map((item, index) =>
+                <li key={index} onClick={()=>setBg(brandView[index])}>
+                  <Image src={item} width={200} height={80} alt=''/>
+                </li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      }
     </div>
   );
 };
