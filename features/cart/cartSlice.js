@@ -28,16 +28,21 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart(state, action) {
-      const newItem = action.payload;
-      const existingItem = state.itemList.find((item) => item.itemId === newItem.itemId);
-      state.itemList.push({
-        ...newItem,
-      });
-      // if(!existingItem) {
-      //   state.itemList.push({
-      //         ...newItem,
-      //       });
-      // }
+      const id = action.payload.itemId;
+      const existingItem = state.itemList.find((item) => item.itemId == id);
+
+      if(!existingItem) {
+        state.itemList.push({
+              ...action.payload,
+            });
+      } else {
+        existingItem.quantity += action.payload.quantity
+        if(existingItem.note != action.payload.note) {
+          state.itemList.push({
+            ...action.payload,
+          });
+        }
+      }
       // else {
       //   if(existingItem.)
       // }
@@ -49,15 +54,20 @@ export const cartSlice = createSlice({
       //     ...newItem,
       //   });
       // }
-      state.totalQuantity++;
+      state.totalQuantity+= action.payload.quantity;
       setItemFunc(state.itemList, state.totalQuantity, state.totalAmount);
     },
     removeFromCart(state, action) {
-      const id = action.payload;
-      console.log("id", id);
-      state.itemList = state.itemList.filter((item) => item.itemId !== id);
+      const id = action.payload.id;
+      const exisItem = state.itemList.find(item => item.itemId == id)
+      if (exisItem && exisItem.quantity > 1) {
+        exisItem.quantity--;
+      }
+      else {
+        state.itemList = state.itemList.filter((item) => item.itemId !== id);
+      }
 
-      state.totalQuantity = state.itemList.filter((item) => item.itemId !== id).length;
+      state.totalQuantity--;
       setItemFunc(state.itemList, state.totalQuantity, state.totalAmount);
     },
     clearCart(state) {
