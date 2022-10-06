@@ -3,21 +3,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { bannerApi } from "../api-client";
-const CarouselComponent = ({ }) => {
-  const [banner, setBanner] = useState()
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await bannerApi.getBanner()
-        if (res.data) {
-          setBanner(res.data)
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getData()
-  }, [])
+const CarouselComponent = ({banner }) => {
+ 
   return (
     <Carousel className="mb-2 rounded">
       {banner?.map((item, index) => (

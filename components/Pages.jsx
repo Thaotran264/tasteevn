@@ -1,25 +1,41 @@
-import React, { useState } from "react";
-import { Card } from "react-bootstrap";
-import useGetBanner from "../hooks/useGetBanner";
-import CardItems from "./Card";
-import CarouselComponent from "./Carousel";
-import MultiRowSlide from "./Slider/MultiRowSlide";
-import Slider02 from "./Slider/Slider02";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import TabMenu from "./TabMenu";
+import React, { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
+import { bannerApi } from "../api-client";
 import { listId } from "../db";
-import { cityApi } from "../api-client";
+import CarouselComponent from "./Carousel";
+import Loading from "./Loading";
+import MultiRowSlide from "./Slider/MultiRowSlide";
+import TabMenu from "./TabMenu";
 const Pages = () => {
   const router = useRouter();
   const handleViewBtn = (id) => {
     router.push(`/${id}`);
   };
-
+  const [banner, setBanner] = useState()
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true)
+      try {
+        const res = await bannerApi.getBanner()
+        if (res.data) {
+          setBanner(res.data)
+          setLoading(false)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, [])
+  if(loading) {
+    return <Loading />
+  }
 
   return (
     <section className="container mx-auto mt-2 mb-2">
-      <CarouselComponent />
+      <CarouselComponent banner={banner}/>
       <MultiRowSlide text="Quán nổi bật" />
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
       <section className="rounded" style={{ backgroundColor: "#fff" }}>

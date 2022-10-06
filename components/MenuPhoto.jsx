@@ -5,6 +5,7 @@ import Image from "next/image";
 import { isMobile } from "react-device-detect";
 
 const MenuPhoto = ({ isDefault, maps,brandView }) => {
+  console.log('brandView', brandView)
   return (
     <div className="container">
       {!isDefault && (
@@ -17,7 +18,7 @@ const MenuPhoto = ({ isDefault, maps,brandView }) => {
             </div>
             <div className='w-100'>
               <div className="thumb-3 rounded">
-                {listRes.slice(0, 3).map((item, index) => (
+                {brandView?.slice(0, 3).map((item, index) => (
                   <div className={`box img${index + 1}`} key={index}>
                     <Image
                       className="border border-light"
