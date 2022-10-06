@@ -29,6 +29,7 @@ import { merchantApi, orderApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
 import parse from "html-react-parser";
+import Loading from "../components/Loading";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -51,7 +52,7 @@ import parse from "html-react-parser";
 // }
 
 const Detail = ({info}) => {
-  console.log('x', info)
+  // console.log('x', info)
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
@@ -59,6 +60,7 @@ const Detail = ({info}) => {
   const total = useSelector(totalQuantityCart);
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false)
   const handleShow = () => {
     setShow(!show);
   };
@@ -79,16 +81,18 @@ const Detail = ({info}) => {
   let mbDref = useRef();
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       try {
         if (id) {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            console.log('data***',JSON.parse(res.data.widgets[1].data))
+            setLoading(false)
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
             setMenuWg(JSON.parse(menuWb).menus)
+            console.log('data***', JSON.parse(menuWb).menus)
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
-            setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))
+            setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 3).data))
           }
         }
       } catch (err) {
@@ -117,7 +121,9 @@ const Detail = ({info}) => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
+if(loading) {
+  return <Loading />
+}
   return (
     <>
       <Head>

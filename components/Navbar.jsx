@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectAuth } from "../features/auth/authSlice";
 import { searchApi } from "../api-client/search";
+import { ToastContainer, toast } from "react-toastify";
 const Navbar = () => {
   // const { state, dispatch } = useContext(DataContext);
   const auth = useSelector(selectAuth)
@@ -45,6 +46,7 @@ const Navbar = () => {
     };
     getData();
   }, []);
+  const notify = () => toast.success('Đăng xuất thành công')
   const handleSearch = () => {
     console.log("first");
     setShowSearch(!showSearch);
@@ -63,6 +65,7 @@ const Navbar = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
     router.push("/");
+    notify()
   };
 
   const handleSubmit = async (e) => {
@@ -90,7 +93,7 @@ const Navbar = () => {
       style={{ zIndex: 99 }}
       id="nav"
     >
-   
+   <ToastContainer />
       <nav className="container">
         <div className="row align-items-center justify-content-between">
           {/* Logo */}
