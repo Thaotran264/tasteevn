@@ -18,22 +18,22 @@ const InfoDefault = ({ info ,maps}) => {
         <section className="info__section">
           <div className="info__image">
             {isMobile ? 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={80} height={80} />
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={120} height={120} />
             : 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={150} height={150} />
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={160} height={160} />
             }
           </div>
           <div className="info__content">
             <h2 className="fw-bold">{info?.name}</h2>
             <div className={`bg-dark bg-opacity-10 rounded ${isMobile ? 'p-2' : 'p-3'}`}>
-            <p><span className="fw-bold me-2">Địa chỉ:</span>
+            <p className=""><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address} - {info?.districtName} - {info?.wardName}
             </p>
-            {/* <p><span className="fw-bold me-2">Mức giá:</span>
-              {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
-            </p> */}
-            <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
+            <p className=""><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
+            </p>
+            <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
+              {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
             </p>
             {/* <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address}

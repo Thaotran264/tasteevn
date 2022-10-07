@@ -18,7 +18,7 @@ const MobileMenu = ({ productList, menuPos }) => {
             menuPos ? { top: 0, left: 0, width: "100%", zIndex: 99 } : { backgroundColor: "#fff", overflow: 'scroll', width: '100vw' }
           }
         >
-          {productList?.map((item, index) => (
+          {productList?.menus.map((item, index) => (
             <li
               key={item.id}
               className="p-2 text-center"
@@ -34,7 +34,7 @@ const MobileMenu = ({ productList, menuPos }) => {
 
         <div className="container rounded "
           style={{ paddingTop: 56, overflow: 'scroll' }} >
-          {productList?.map((item, index) => (
+          {productList?.menus.map((item, index) => item.items.length > 0 && (
             <article key={item.id} className="menu__article">
               <h4 id={`menuRC${index}`} className='mb-2'>
                 {item.name}
@@ -42,6 +42,11 @@ const MobileMenu = ({ productList, menuPos }) => {
               {item.items.map((its) => (
                 <MenuItem data={its} key={its.id} />
               ))}
+            </article>
+          ))}
+          {productList?.items.map((item, index) => (
+            <article key={item.id} className="menu__article">
+              <MenuItem data={item} key={item.id} />
             </article>
           ))}
         </div>

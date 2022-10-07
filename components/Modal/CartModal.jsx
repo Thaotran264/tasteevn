@@ -23,8 +23,6 @@ const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
   const cart = useSelector(selectCart);
   const quantity = useSelector(totalQuantityCart);
-  console.log("cart", cart);
-  console.log("cart", quantity);
   const dispatch = useDispatch();
 
 

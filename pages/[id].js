@@ -30,6 +30,7 @@ import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
 import parse from "html-react-parser";
 import Loading from "../components/Loading";
+import Link from "next/link";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -89,8 +90,8 @@ const Detail = ({info}) => {
             setLoading(false)
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
-            setMenuWg(JSON.parse(menuWb).menus)
-            console.log('data***', JSON.parse(menuWb).menus)
+            setMenuWg(JSON.parse(menuWb))
+            // console.log('data***', JSON.parse(menuWb))
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
             setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 3).data))
           }
@@ -163,12 +164,16 @@ if(loading) {
         }
 
         <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
-          <button className="  border border-bottom-0  p-2" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHome style={{ fontSize: 20 }} /></button>
-          <button className="  border border-bottom-0  p-2 " style={{ backgroundColor: "#fff" }}
+          <Link href='/'>
+            <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
+            <AiOutlineHome style={{ fontSize: 20 }} />
+            </a>
+            </Link>
+          <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
             {total >= 1 &&
-              <span style={{ fontSize: 20 }}>{total}</span>
+              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16,  backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total}</span>
             }
           </button>
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
