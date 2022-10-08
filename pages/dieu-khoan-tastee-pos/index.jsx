@@ -13,7 +13,7 @@ const DieuKhoanDv = () => {
                 <meta property="og:type" content="article" />
                 <meta property="og:title" content="Điều khoản và dịch vụ của Tastee" />
                 <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
-                <meta property="og:image" content="https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-6/306924619_7983509318387061_5915609229902822402_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8631f5&_nc_ohc=RKbcYTw-jUUAX_H6waD&_nc_ht=scontent.fsgn5-5.fna&oh=00_AT_bowTZcedGeL0pw21OQ7ughYA8rZrtUUU_CDdkfnjLPw&oe=6346619B" />
+                <meta property="og:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
                 <meta property="og:description" content="Điều khoản và dịch vụ của Tastee. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
                 <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
                 <meta property="og:image:width" content="1200" />
@@ -31,7 +31,7 @@ const DieuKhoanDv = () => {
                 <meta name="twitter:description" content="Điều khoản và dịch vụ của Tastee. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
                 <meta name="twitter:title" content="Điều khoản và dịch vụ của Tastee" />
                 <meta name="twitter:site" content="@tastee" />
-                <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpg&w=3840&q=75" />
+                <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
                 <meta name="twitter:creator" content="@tastee" />
             </Head>
             <div className="container">
