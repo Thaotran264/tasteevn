@@ -14,18 +14,21 @@ const DieuKhoanDv = () => {
                 <meta property="og:title" content="Điều khoản và dịch vụ của Tastee" />
                 <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
                 <meta property="og:image" content="https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-6/306924619_7983509318387061_5915609229902822402_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8631f5&_nc_ohc=RKbcYTw-jUUAX_H6waD&_nc_ht=scontent.fsgn5-5.fna&oh=00_AT_bowTZcedGeL0pw21OQ7ughYA8rZrtUUU_CDdkfnjLPw&oe=6346619B" />
-                <meta property="og:description" content="Chúng tôi có thể chỉnh sửa và bổ sung quy định về các điều khoản bất kỳ lúc nào. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
+                <meta property="og:description" content="Điều khoản và dịch vụ của Tastee. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
+                <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="628" />
+                <meta property="og:image:alt " content="Điều khoản và dịch vụ của Tastee"/>
+                <meta property="fb:app_id" content="401975274852327" />
                 <meta property="article:author" content="Tastee" />
                 <meta property="article:published_time" content="2022-10-08T23:26:00.000+07:00" />
                 <meta property="article:modified_time" content="2022-10-08T23:26:00.000+07:00" />
                 <meta property="article:section" content="Điều khoản dịch vụ Tastee" />
                 <meta property="article:tag" content="Điều khoản dịch vụ Tastee" />
-                <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="628" />
+
                 {/* -- End Open Graph Metadata -- */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content="Chúng tôi có thể chỉnh sửa và bổ sung quy định về các điều khoản bất kỳ lúc nào. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
+                <meta name="twitter:description" content="Điều khoản và dịch vụ của Tastee. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
                 <meta name="twitter:title" content="Điều khoản và dịch vụ của Tastee" />
                 <meta name="twitter:site" content="@tastee" />
                 <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpg&w=3840&q=75" />
@@ -33,7 +36,7 @@ const DieuKhoanDv = () => {
             </Head>
             <div className="container">
                 <a href="https://www.facebook.com/groups/tasteepos/" target='_blank'>
-                    <Image className="rounded" src={'/image/Tastee-POS.jpg'} alt="First slide" width={2000} height={1000} />
+                    <Image className="rounded" src={'/image/Tastee-POS.jpeg'} alt="First slide" width={2000} height={1000} />
                 </a>
                 {/* {parse(DieuKhoanDichVu)} */}
                 <p><strong>Quy định sử dụng phần mềm</strong></p>
