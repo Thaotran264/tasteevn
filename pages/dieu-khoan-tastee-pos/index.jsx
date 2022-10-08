@@ -18,7 +18,7 @@ const DieuKhoanDv = () => {
                 <meta property="og:url" content="https://tastee.vn/dieu-khoan-tastee-pos" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="628" />
-                <meta property="og:image:alt " content="Điều khoản và dịch vụ của Tastee"/>
+                <meta property="og:image:alt" content="Điều khoản và dịch vụ của Tastee"/>
                 <meta property="fb:app_id" content="401975274852327" />
                 <meta property="article:author" content="Tastee" />
                 <meta property="article:published_time" content="2022-10-08T23:26:00.000+07:00" />
