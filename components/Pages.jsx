@@ -35,8 +35,8 @@ const Pages = () => {
 
   return (
     <section className="container mx-auto mt-2 mb-2">
-      <CarouselComponent banner={banner}/>
-      <MultiRowSlide text="Quán nổi bật" />
+      {/* <CarouselComponent banner={banner}/> */}
+      {/* <MultiRowSlide text="Quán nổi bật" /> */}
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
       <section className="rounded" style={{ backgroundColor: "#fff" }}>
         <h2 className="ps-3 mb-0">Quán mới nhất</h2>
