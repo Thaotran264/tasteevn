@@ -9,11 +9,14 @@ import { Provider, useSelector } from 'react-redux'
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { selectAuth } from "../features/auth/authSlice";
+import React from "react";
+import { SSRProvider } from "react-bootstrap";
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
 
   return (
+    <SSRProvider>
     <Provider store={store}>
       <DataProvider>
         <SWRConfig
@@ -33,6 +36,7 @@ function MyApp({ Component, pageProps }) {
         </SWRConfig>
       </DataProvider>
     </Provider>
+    </SSRProvider>
   );
 }
 
