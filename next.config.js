@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['images.pexels.com', 'images.pexels.com', 'tastee-test.s3.ap-southeast-1.amazonaws.com', 'i.pinimg.com'],
+    domains: ['images.pexels.com', 'images.pexels.com', 'tastee-test.s3.ap-southeast-1.amazonaws.com', 'i.pinimg.com','tastee-pro.s3.ap-southeast-1.amazonaws.com'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -13,6 +13,7 @@ const nextConfig = {
   env: {
     //  BASE_URL: 'https://tmerchant.tastee.vn/api',
     BASE_URL: 'https://test.tastee.vn/',
+    // BASE_URL: 'https://pro.tastee.vn/',
     API_TEST: 'https://test.tastee.vn',
     MERCHANT_URL: 'https://tmerchant.tastee.vn'
   }
