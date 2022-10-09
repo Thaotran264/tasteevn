@@ -15,8 +15,8 @@ import { searchApi } from "../api-client/search";
 import { ToastContainer, toast } from "react-toastify";
 const Navbar = () => {
   // const { state, dispatch } = useContext(DataContext);
-  const auth = useSelector(selectAuth)
-  const {isLogged,authData} = auth
+  const auth = useSelector(selectAuth);
+  const { isLogged, authData } = auth;
   const dispatch = useDispatch();
   const [username, setusername] = useState();
   const [showSearch, setShowSearch] = useState(false);
@@ -46,7 +46,7 @@ const Navbar = () => {
     };
     getData();
   }, []);
-  const notify = () => toast.success('Đăng xuất thành công')
+  const notify = () => toast.success("Đăng xuất thành công");
   const handleSearch = () => {
     console.log("first");
     setShowSearch(!showSearch);
@@ -65,12 +65,12 @@ const Navbar = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
     router.push("/");
-    notify()
+    notify();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!searchText) return
+    if (!searchText) return;
     let formData = new FormData();
     formData.append("Name", searchText);
     try {
@@ -79,7 +79,7 @@ const Navbar = () => {
       if (res.successful && res.data) {
         setSearchData(res.data.data);
       }
-      setSearchText('')
+      setSearchText("");
     } catch (err) {
       console.log(err);
     }
@@ -93,7 +93,7 @@ const Navbar = () => {
       style={{ zIndex: 99 }}
       id="nav"
     >
-   <ToastContainer />
+      <ToastContainer />
       <nav className="container">
         <div className="row align-items-center justify-content-between">
           {/* Logo */}
@@ -114,10 +114,9 @@ const Navbar = () => {
                 <Link href="/">
                   <Image
                     width={350}
-                    height={150}
+                    height={350}
                     alt=""
                     src="/image/mobileLogo.jpg"
-                    // className=" w-100 h-100"
                     style={{ cursor: "pointer" }}
                   />
                 </Link>
@@ -134,13 +133,13 @@ const Navbar = () => {
                 TP HCM
               </Dropdown.Toggle>
 
-              <Dropdown.Menu style={{ height: 400, overflow: "scroll-y" }}>
+              {/* <Dropdown.Menu style={{ height: 400, overflow: "scroll-y" }}>
                 {cities.map((item) => (
                   <Dropdown.Item key={item.id} href="#/action-1" value={item.id}>
                     {item.name}
                   </Dropdown.Item>
                 ))}
-              </Dropdown.Menu>
+              </Dropdown.Menu> */}
             </Dropdown>
           </div>
           {/* Search Form */}
@@ -164,8 +163,8 @@ const Navbar = () => {
               <button className="btn d-flex align-items-center" type="submit">
                 <BsSearch style={{ color: "#000" }} />
               </button>
-              {showSearchForm && (
-                <div className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded ">
+              {/* {showSearchForm && (
+                <div className="position-absolute w-100 p-2 top-100 border border-dark bg-light mt-2 rounded "> */}
                   {/* {
                     searchData?.map((item) => (
                       <div
@@ -177,22 +176,17 @@ const Navbar = () => {
                       </div>
                     ))
                   } */}
-                  {
-                    searchData.map(item => (
-                      <div
-                        key={item.id}
-                        className="d-flex align-items-center gap-2 border border-bottom my-1"
-                      >
-                        {/* <Image width={80} height={80} alt="" src={item.image} /> */}
-                        <div>{item.name}</div>
-                      </div>
-                    )
-               
-                    
-              )}
-              </div>
-              )
-              }
+                  {/* {searchData.map((item) => (
+                    <div
+                      key={item.id}
+                      className="d-flex align-items-center gap-2 border border-bottom my-1"
+                    >
+                      <Image width={80} height={80} alt="" src={item.image} />
+                      <div>{item.name}</div>
+                    </div>
+                  ))}
+                </div> */}
+              {/* )} */}
             </form>
             <button className="btn align-items-center hideOnDesktop" onClick={handleSearch}>
               <BsSearch style={{ color: "#000", fontSize: 18 }} />
@@ -201,11 +195,11 @@ const Navbar = () => {
           {/* CTA */}
           <div className="col-4 col-sm-3 col-md-3 col-lg-2 cart-user d-none showOnDesktop">
             <div className="d-flex justify-content-around align-items-center w-100 align-items-center">
-              <Link href="/cart">
+              {/* <Link href="/cart">
                 <a className="text-decoration-none d-flex align-items-center hideOnMobile">
                   <BsCartCheck style={{ fontSize: 24, color: "#000" }} />
                 </a>
-              </Link>
+              </Link> */}
 
               {isLogged ? (
                 <Dropdown>

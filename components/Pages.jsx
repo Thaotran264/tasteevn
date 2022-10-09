@@ -35,10 +35,10 @@ const Pages = () => {
 
   return (
     <section className="container mx-auto mt-2 mb-2">
-      {/* <CarouselComponent banner={banner}/> */}
+      <CarouselComponent banner={banner}/>
       {/* <MultiRowSlide text="Quán nổi bật" /> */}
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
-      <section className="rounded" style={{ backgroundColor: "#fff" }}>
+      {/* <section className="rounded" style={{ backgroundColor: "#fff" }}>
         <h2 className="ps-3 mb-0">Quán mới nhất</h2>
         <hr></hr>
         <div className="card__container ">
@@ -60,7 +60,7 @@ const Pages = () => {
 
           )}
         </div>
-      </section>
+      </section> */}
       <TabMenu />
     </section>
   );

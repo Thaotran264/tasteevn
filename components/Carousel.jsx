@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { bannerApi } from "../api-client";
+// import { bannerApi } from "../api-client";
 const CarouselComponent = ({banner }) => {
  
   return (
