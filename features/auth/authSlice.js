@@ -3,14 +3,14 @@ let auth;
 let logged;
 let token;
 if (typeof window !== "undefined") {
-  auth = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : {};
-  token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "";
-  logged = localStorage.getItem("isLogged") ? JSON.parse(localStorage.getItem("isLogged")) : false;
+  auth = sessionStorage.getItem("userInfo") ? JSON.parse(sessionStorage.getItem("userInfo")) : {};
+  token = sessionStorage.getItem("token") ? JSON.parse(sessionStorage.getItem("token")) : "";
+  logged = sessionStorage.getItem("isLogged") ? JSON.parse(sessionStorage.getItem("isLogged")) : false;
 }
 const setAuthFunc = (userInfo, isLogged, token) => {
-  localStorage.setItem("userInfo", JSON.stringify(userInfo));
-  localStorage.setItem("token", JSON.stringify(token));
-  localStorage.setItem("isLogged", JSON.stringify(isLogged));
+  sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+  sessionStorage.setItem("token", JSON.stringify(token));
+  sessionStorage.setItem("isLogged", JSON.stringify(isLogged));
 };
 export const authSlice = createSlice({
   name: "auth",

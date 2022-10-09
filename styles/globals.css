@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&display=swap');@import url('../node_modules/react-date-range/dist/styles.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&display=swap');
+@import url('../node_modules/react-date-range/dist/styles.css');
 @import url('../node_modules/react-date-range/dist/theme/default.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
 
@@ -36,9 +37,17 @@ li {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-h1,h2,h3,h4,h5,h6,p {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin-bottom: 0;
 }
+
 img {
   width: 100%;
   height: 100%;
@@ -107,6 +116,25 @@ input:focus {
 
 .list-group-item {
   border: none,
+}
+
+.card-config {
+  min-width: 150px;
+  margin: auto;
+}
+
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+/* code */
+@media screen and (max-width: 481px) {
+  .card__container {
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
 }
 
 .color-primary {
@@ -223,7 +251,8 @@ footer {
   margin-bottom: 15px;
   border-radius: 10px;
   background-color: white;
-  font-family: 'Poppins', sans-serif;;
+  font-family: 'Poppins', sans-serif;
+  ;
 }
 
 .info__section {
@@ -244,17 +273,22 @@ footer {
 }
 
 .info__content {
-  font-family: 'Poppins', sans-serif;;
+  font-family: 'Poppins', sans-serif;
+  ;
   margin-left: 5px;
+  flex: 1;
 }
+
 .info__content h2 {
-  font-family: 'Raleway', sans-serif;;
+  font-family: 'Raleway', sans-serif;
+  ;
 }
 
 .info__content p {
   font-size: 13px;
   margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;;
+  font-family: 'Poppins', sans-serif;
+  ;
 
   line-height: 1.5;
 }
@@ -265,6 +299,7 @@ footer {
   margin-bottom: 10px;
   padding: 5px;
 }
+
 .menu__article:last-child {
   margin-bottom: 0px;
 
@@ -434,9 +469,11 @@ footer {
   width: 98vw;
   background-color: #fff;
 }
+
 .cartModalTitle {
   width: 100vw;
 }
+
 .cardModalGroupButton {
   width: 98vw;
   bottom: 4px;
@@ -460,10 +497,43 @@ footer {
     width: 50vw;
   }
 
-  .cardModalGroupButton,.cartModalTitle {
+  .cardModalGroupButton,
+  .cartModalTitle {
     width: 50vw;
   }
 
+}
+
+.loading_contain {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.422);
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @import url('./card');

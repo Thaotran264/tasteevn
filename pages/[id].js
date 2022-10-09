@@ -29,6 +29,8 @@ import { merchantApi, orderApi } from "../api-client";
 import Menu from "../components/Menu/Menu";
 import { addToCart } from "../store/actions/actionsType";
 import parse from "html-react-parser";
+import Loading from "../components/Loading";
+import Link from "next/link";
 
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
@@ -50,7 +52,8 @@ import parse from "html-react-parser";
 //   };
 // }
 
-const Detail = () => {
+const Detail = ({info}) => {
+  // console.log('x', info)
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
@@ -58,6 +61,7 @@ const Detail = () => {
   const total = useSelector(totalQuantityCart);
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false)
   const handleShow = () => {
     setShow(!show);
   };
@@ -78,20 +82,18 @@ const Detail = () => {
   let mbDref = useRef();
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       try {
         if (id) {
           const res = await merchantApi.merChantInfo(id);
           if (res.data) {
-            // setData(res.data);
+            setLoading(false)
             setMaps(res.data?.webMap)
             let menuWb = res.data.widgets.filter(item => item.widgetType == 5)[0].data
-            console.log('data',JSON.parse(menuWb).menus)
-            setMenuWg(JSON.parse(menuWb).menus)
+            setMenuWg(JSON.parse(menuWb))
+            // console.log('data***', JSON.parse(menuWb))
             setInfoWg(JSON.parse(res.data.widgets.find(item => item.widgetType == 0).data))
-            setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 2).data))
-            // setMenuWg();
-            // setInfoWg(res.data.widgets.filter(item => item.widgetType == 0));
-            // setBannerWg(res.data.widgets.filter(item => item.widgetType == 0));
+            setBrandView(JSON.parse(res.data.widgets.find(item => item.widgetType == 3).data))
           }
         }
       } catch (err) {
@@ -120,8 +122,9 @@ const Detail = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
-
+if(loading) {
+  return <Loading />
+}
   return (
     <>
       <Head>
@@ -129,10 +132,10 @@ const Detail = () => {
       </Head>
 
       <section className={`${show && "overflow-hidden"}`}>
-        <Banner banner={data?.banner} />
+        <Banner banner={data?.banner} info={infoWg}/>
         <InfoDefault info={infoWg} maps={maps} />
         <MenuPhoto isDefault={false} maps={maps} brandView={brandView}/>
-        <Slider02 text="Món ăn đang giảm giá" />
+        {/* <Slider02 text="Món ăn đang giảm giá" /> */}
         <div ref={mbref}>
           <Menu productList={menuWg} menuPos={menuPos}/>
         </div>
@@ -161,12 +164,16 @@ const Detail = () => {
         }
 
         <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
-          <button className="  border border-bottom-0  p-2" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHome style={{ fontSize: 20 }} /></button>
-          <button className="  border border-bottom-0  p-2 " style={{ backgroundColor: "#fff" }}
+          <Link href='/'>
+            <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
+            <AiOutlineHome style={{ fontSize: 20 }} />
+            </a>
+            </Link>
+          <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
             {total >= 1 &&
-              <span style={{ fontSize: 20 }}>{total}</span>
+              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16,  backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total}</span>
             }
           </button>
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>

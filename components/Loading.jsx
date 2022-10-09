@@ -2,9 +2,10 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="">
-      <h2>Loading....</h2>
-    </div>
+    <section className="loading_contain">
+      <div className="loader">
+      </div>
+    </section>
   );
 };
 

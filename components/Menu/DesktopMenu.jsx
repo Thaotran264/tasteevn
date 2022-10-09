@@ -6,7 +6,13 @@ import { formatter } from "../../utils";
 import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { listMenu } from "../../db";
+import { toast, ToastContainer } from "react-toastify";
 const DesktopMenu = ({ productList, menuPos }) => {
+
+  const notify = () => toast.error("Vui lòng đăng nhập !!!", {
+    pauseOnHover: false,
+  });
+
   return (
     <section className="d-none showOnDesktop w-100 mx-auto py-2">
       <div
@@ -17,7 +23,7 @@ const DesktopMenu = ({ productList, menuPos }) => {
           <div className="row">
             <div className="col-md-4 col-lg-4">
               <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
-                {productList?.map((item, index) => (
+                {productList?.menus.map((item, index) => (
                   <li
                     key={item.id}
                     className="border rounded-5 border-dark px-2 text-center bg-white "
@@ -37,7 +43,7 @@ const DesktopMenu = ({ productList, menuPos }) => {
         <div className="row">
           <div className={`col-md-4 col-lg-4 py-2 ${menuPos && "d-none"}`}>
             <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
-              {productList?.map((item, index) => (
+              {productList?.menus?.map((item, index) => (
                 <li
                   key={item.id}
                   className="border rounded-5 border-dark px-2 text-center bg-white "
@@ -54,20 +60,27 @@ const DesktopMenu = ({ productList, menuPos }) => {
             className={`col-md-8 col-lg-8 rounded px-0 ${menuPos && "offset-4"}`}
             style={menuPos ? { zIndex: 2 } : {}}
           >
-            {productList?.map((it, index) => (
-              <article key={it.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
-                <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
-                  {it.name}
-                </h4>
-                {it.items.map((its) => (
-                  <MenuItem data={its} key={its.id} />
-                ))}
+            
+            {productList?.menus.map((menu, index) => 
+              menu.items?.length > 0 && (<article key={menu.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
+                  <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
+                    {menu.name}
+                  </h4>
+                  {menu.items.map((menuItem) => (
+                    <MenuItem data={menuItem} key={menuItem.id} notify={notify} />
+                  ))}
+                </article>)
+            )}
+            {productList?.items.map((item, index) =>
+              <article key={item.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
+                <MenuItem data={item} key={item.id} notify={notify} />
               </article>
-            ))}
-
+            )}
           </div>
         </div>
       </div>
+      <ToastContainer position="top-center" />
+
     </section>
   );
 };

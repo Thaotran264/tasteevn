@@ -11,16 +11,16 @@ const Footer = () => {
         <div className="row">
           <div className="col-6 col-md-6 col-lg-3 text-dark">
             <h5 className="fw-bold">TASTEE</h5>
-            <ul class="text-footer p-1 m-1">
-              <li><span class="fw-bolder">Email: </span><a href="#">cskh@tastee.com</a></li>
-              <li><span class="fw-bolder">Điện thoại:</span><a href="#">028 xxxx xxxx</a> </li>
-              <li><span class="fw-bolder">ĐKKD:</span><a href="#">37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a></li>
-              <li><span class="fw-bolder">Văn phòng:</span> <a href="#">Tầng 14 Tòa nhà Halo Tower, 37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a> </li>
+            <ul className="text-footer p-1 m-1">
+              <li><span className="fw-bolder">Email: </span><a href="#">cskh@tastee.com</a></li>
+              <li><span className="fw-bolder">Điện thoại:</span><a href="#">028 xxxx xxxx</a> </li>
+              <li><span className="fw-bolder">ĐKKD:</span><a href="#">37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a></li>
+              <li><span className="fw-bolder">Văn phòng:</span> <a href="#">Tầng 14 Tòa nhà Halo Tower, 37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a> </li>
             </ul>
           </div>
           <div className="col-6 col-md-6 col-lg-3 text-dark">
             <h5 className="fw-bold">VỀ TASTEE</h5>
-            <ul class="text-footer p-1 m-1">
+            <ul className="text-footer p-1 m-1">
               <li><a href="#">Giới thiệu về Tastee</a></li>
               <li><a href="#">Tuyển dụng nhân sự</a> </li>
               <li><a href="#">Chính sách bảo mật</a></li>
@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
           <div className="col-6 col-md-6 col-lg-3 text-dark">
             <h5 className="fw-bold">HỖ TRỢ KHÁCH HÀNG</h5>
-            <ul class="text-footer p-1 m-1">
+            <ul className="text-footer p-1 m-1">
               <li><a href="#">Tra cứu hoá đơn</a></li>
               <li><a href="#">Mua và giao nhận Online</a> </li>
               <li><a href="#">Qui định và hình thức thanh toán</a></li>
