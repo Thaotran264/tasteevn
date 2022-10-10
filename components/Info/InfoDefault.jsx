@@ -27,7 +27,7 @@ const InfoDefault = ({ info ,maps}) => {
             <h2 className="fw-bold">{info?.name}</h2>
             <div className={`bg-dark bg-opacity-10 rounded ${isMobile ? 'p-2' : 'p-3'}`}>
             <p className=""><span className="fw-bold me-2">Địa chỉ:</span>
-              {info?.address} - {info?.districtName} - {info?.wardName}
+              {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
             </p>
             <p className=""><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
