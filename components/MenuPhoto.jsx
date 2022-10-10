@@ -30,7 +30,7 @@ const MenuPhoto = ({ isDefault, maps, brandView }) => {
             <div
               className="d-none showOnDesktop w-50  align-items-center"
             >
-              {parse(String(maps))}
+              {maps ? parse(String(maps)) : ''}
             </div>
             <div className='w-100'>
               <div className="thumb-3 rounded">

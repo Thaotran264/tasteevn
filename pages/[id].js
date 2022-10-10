@@ -148,7 +148,7 @@ const Detail = ({ info }) => {
               >
                 <MdArrowBackIosNew style={{ fontSize: 22 }} />
               </button>
-              <Dropdown >
+              {/* <Dropdown >
                 <Dropdown.Toggle variant="success" id="dropdown-basic" className="text-light border-0">
                   <FaBars style={{ fontSize: 22 }} />
                 </Dropdown.Toggle>
@@ -158,7 +158,7 @@ const Detail = ({ info }) => {
                   <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                   <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
            
             </div>
           </div>

@@ -32,9 +32,9 @@ const InfoDefault = ({ info ,maps}) => {
             <p className=""><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
             </p>
-            <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
+            {/* <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
               {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
-            </p>
+            </p> */}
             {/* <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address}
             </p> */}
@@ -63,7 +63,7 @@ const InfoDefault = ({ info ,maps}) => {
           {show && (
             <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
-                {parse(maps)}
+                {maps ? parse(maps) : '' }
               </div>
             </div>
           )}
