@@ -135,7 +135,7 @@ const Detail = ({ info }) => {
 
       <section className={`${show && "overflow-hidden"}`}>
 
-        <div
+        {/* <div
           className="hideOnDesktop position-fixed top-0 w-100 start-0"
           style={{ backgroundColor: "#FFAE6D", zIndex: 99 }}
         >
@@ -162,7 +162,7 @@ const Detail = ({ info }) => {
            
             </div>
           </div>
-        </div>
+        </div> */}
         <Banner banner={data?.banner} info={infoWg} />
         <InfoDefault info={infoWg} maps={maps} />
         <MenuPhoto isDefault={false} maps={maps} brandView={brandView} />
