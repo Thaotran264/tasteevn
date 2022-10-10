@@ -18,7 +18,7 @@ const InfoDefault = ({ info ,maps}) => {
         <section className="info__section">
           <div className="info__image">
             {isMobile ? 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={120} height={120} />
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} layout='fill' />
             : 
             <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={160} height={160} />
             }
@@ -48,10 +48,10 @@ const InfoDefault = ({ info ,maps}) => {
               </button>
           </div> */}
           </div>
-          {!isLike ?
+          {/* {!isLike ?
             <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', backgroundColor: 'transparent' }}><AiOutlineHeart style={{ fontSize: 24, color: '#F7A76C', backgroundColor: 'transparent' }} /></button>
             : <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', color: '#F7A76C', backgroundColor: 'transparent' }}><AiFillHeart style={{ fontSize: 24 }} /></button>
-          }
+          } */}
         </section>
         <section className="info__section__map d-flex flex-column mb-1">
           <button

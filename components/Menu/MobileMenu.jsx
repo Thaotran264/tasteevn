@@ -5,9 +5,13 @@ import Image from "next/image";
 import { selectCart } from "../../features/cart/cartSlice";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
 
 const MobileMenu = ({ productList, menuPos }) => {
   // console.log('data',productList);
+  const notify = () => toast.error("Vui lòng đăng nhập !!!", {
+    pauseOnHover: false,
+  });
   return (
     <>
       <section className="menu__section position-relative menuMobile">
@@ -40,17 +44,19 @@ const MobileMenu = ({ productList, menuPos }) => {
                 {item.name}
               </h4>
               {item.items.map((its) => (
-                <MenuItem data={its} key={its.id} />
+                <MenuItem data={its} key={its.id} notify={notify} />
               ))}
             </article>
           ))}
           {productList?.items.map((item, index) => (
             <article key={item.id} className="menu__article">
-              <MenuItem data={item} key={item.id} />
+              <MenuItem data={item} key={item.id} notify={notify} />
             </article>
           ))}
         </div>
+      <ToastContainer position="top-center" />
       </section>
+
     </>
   );
 };
