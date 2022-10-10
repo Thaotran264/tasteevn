@@ -1,18 +1,35 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { useState } from "react";
 import { Carousel } from "react-bootstrap";
+import { bannerApi } from "../api-client";
 // import { bannerApi } from "../api-client";
-const CarouselComponent = ({banner }) => {
- 
+const CarouselComponent = ({ banner }) => {
+  const [banners, setBanner] = useState()
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await bannerApi.getBanner()
+        if (res.data) {
+          setBanner(res.data)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, [])
   return (
-    <Carousel className="mb-2 rounded">
-      {banner?.map((item, index) => (
-        <Carousel.Item className="carouselconfig rounded" key={index}>
-          <Image className="rounded" src={item.uri || '/image/logo512.png'} alt="First slide" width={2000} height={1000} />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <section className="container mx-auto banner">
+      <Carousel>
+        {banners?.map((item, index) => (
+          <Carousel.Item key={index} style={{height: '60vh', width:' 100%'}}>
+            <Image src={item?.uri || '/image/logo.jpg'} alt="First slide" 
+            layout="fill" objectFit="cover"/>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </section>
   );
 };
 

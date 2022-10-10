@@ -1,13 +1,6 @@
 header {
-    min-height: 66px;
-    display: flex;
-    align-items: center;
+    /* gap: 5px; */
 }
-
-.showOnDesktop {
-    display: none;
-}
-
 
 .cart-user .dropdown .dropdown-toggle::after {
     display: none !important;

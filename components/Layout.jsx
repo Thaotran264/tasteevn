@@ -6,11 +6,13 @@ import Notify from "./Notify";
 import Search from "./Search";
 import TabMenu from "./TabMenu";
 import 'react-toastify/dist/ReactToastify.css';
+import Header from "./Header";
 const Layout = ({ children }) => {
   return (
     <div className="position-relative">
       {/* <Search /> */}
-      <Navbar />
+      <Header />
+      {/* <Navbar /> */}
       <Notify />
       <main style={{ marginTop: 75 }}>{children}</main>
       {/* <TabMenu /> */}

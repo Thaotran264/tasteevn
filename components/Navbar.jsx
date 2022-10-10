@@ -93,7 +93,7 @@ const Navbar = () => {
       style={{ zIndex: 99 }}
       id="nav"
     >
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <nav className="container">
         <div className="row align-items-center justify-content-between">
           {/* Logo */}

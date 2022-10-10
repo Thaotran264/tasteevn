@@ -12,30 +12,15 @@ const Pages = () => {
   const handleViewBtn = (id) => {
     router.push(`/${id}`);
   };
-  const [banner, setBanner] = useState()
   const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true)
-      try {
-        const res = await bannerApi.getBanner()
-        if (res.data) {
-          setBanner(res.data)
-          setLoading(false)
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getData()
-  }, [])
+ 
   if(loading) {
     return <Loading />
   }
 
   return (
     <section className="container mx-auto mt-2 mb-2">
-      <CarouselComponent banner={banner}/>
+      {/* <CarouselComponent banner={banner}/> */}
       {/* <MultiRowSlide text="Quán nổi bật" /> */}
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
       {/* <section className="rounded" style={{ backgroundColor: "#fff" }}>
@@ -61,7 +46,7 @@ const Pages = () => {
           )}
         </div>
       </section> */}
-      <TabMenu />
+      {/* <TabMenu /> */}
     </section>
   );
 };
