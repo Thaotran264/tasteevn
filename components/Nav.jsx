@@ -5,8 +5,11 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { BsSearch } from 'react-icons/bs';
 import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
+import LoginModal from './LoginModal';
+import Login from './Modal/Login';
 const Nav = () => {
   const [searchBox, setShowSearchBox] = useState(true)
+  const [showLoginModal, setShowLoginModal] = useState(false)
   const logIn = true
   const cities = [
     { name: 'HCM', id: 1 },
@@ -21,6 +24,9 @@ const Nav = () => {
     setShowSearchBox(!searchBox)
   }
   const handleSearchChange = () => { }
+  const handleShowModalLogin = () => {
+    setShowLoginModal(!showLoginModal)
+  }
   return (
     <nav className='nav container px-2 gap-2'>
       <div className='hideOnMobile position-relative d-flex align-items-center '>
@@ -82,9 +88,8 @@ const Nav = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown> :
-            <div className='d-flex align-items-center gap-1'>
-              <button className='px-3 py-1 rounded-4 border-0'>Login</button>
-              <button className='px-3 py-1 rounded-4 border-0'>Logout</button>
+            <div className='d-flex align-items-center gap-1 justify-content-end'>
+              <LoginModal />
             </div>
         }
       </div>
@@ -98,15 +103,25 @@ const Nav = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu >
-          <Dropdown.Item className='text-center py-2 border-bottom' href="#/action-1">Thông tin tài khoản
+          {
+            !logIn ? 
+        <Dropdown.Item className='text-center py-2 border-bottom'>
+          <LoginModal />
           </Dropdown.Item>
-          <Dropdown.Item className='text-center py-2 border-bottom' href="#/action-1">Gio hang
+          : <>
+          <Dropdown.Item className='text-center py-2 border-bottom'>Thông tin tài khoản
           </Dropdown.Item>
-          <Dropdown.Item className='text-center py-2 border-bottom' href="#/action-1">Đăng xuất
+          <Dropdown.Item className='text-center py-2 border-bottom'>Giỏ hàng
           </Dropdown.Item>
+          <Dropdown.Item className='text-center py-2 border-bottom'>Đăng xuất
+          </Dropdown.Item>
+          </>
+          }
         </Dropdown.Menu>
       </Dropdown>
-
+{
+  showLoginModal && <Login setShowLoginModal={setShowLoginModal}/>
+}
     </nav >
   )
 }

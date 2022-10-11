@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
 
 :root {
+  --primary-color: hsl(27, 100%, 71%);
   --bg-primary-color: hsl(27, 100%, 71%);
   --bg-color-white: hsl(0, 0%, 100%);
   --text-white: hsla(0, 0%, 100%, 0.758);
@@ -24,8 +25,8 @@ li {
 *,
 *::after,
 *::before {
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0 ;
+  margin: 0;
   box-sizing: border-box;
 
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -39,7 +40,7 @@ h4,
 h5,
 h6,
 p {
-  margin-bottom: 0 !important;
+  /* margin-bottom: 0; */
 }
 
 img {
@@ -149,16 +150,6 @@ input:focus {
   }
 }
 
-.bannerCss {
-  margin-top: 52px;
-}
-
-@media screen and (min-width: 992px) {
-  .bannerCss {
-    margin-top: 0;
-  }
-}
-
 .color-primary {
   color: var(--primary-color)
 }
@@ -231,16 +222,6 @@ input:focus {
   }
 }
 
-footer {
-  margin-bottom: 58px;
-}
-
-
-@media (min-width: 992px) {
-  footer {
-    margin-bottom: 0;
-  }
-}
 
 .cart-container {
   width: 90vw;
@@ -511,42 +492,14 @@ footer {
 
 }
 
-.loading_contain {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.422);
-}
 
-.loader {
-  border: 16px solid #f3f3f3;
-  /* Light grey */
-  border-top: 16px solid #3498db;
-  /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 @import url('./header.css');
 @import url('./nav');
 @import url('./banner');
 @import url('./footer');
+@import url('./menu');
+@import url('./loading');
 @import url('./card');
 @import url('./menuPhoto.css');
 @import url('./button.css');

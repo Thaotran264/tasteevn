@@ -14,12 +14,12 @@ const Pages = () => {
   };
   const [loading, setLoading] = useState(false)
  
-  if(loading) {
-    return <Loading />
-  }
+  // if(loading) {
+  //   return <Loading />
+  // }
 
   return (
-    <section className="container mx-auto mt-2 mb-2">
+    <section className="px-0 mt-2 mb-2">
       {/* <CarouselComponent banner={banner}/> */}
       {/* <MultiRowSlide text="Quán nổi bật" /> */}
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}

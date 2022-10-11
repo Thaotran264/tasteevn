@@ -20,7 +20,7 @@ const CarouselComponent = ({ banner }) => {
     getData()
   }, [])
   return (
-    <section className="container mx-auto banner">
+    <section className="container px-0 banner">
       <Carousel>
         {banners?.map((item, index) => (
           <Carousel.Item key={index} style={{height: '60vh', width:' 100%'}}>

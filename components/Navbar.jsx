@@ -99,7 +99,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="col-2 col-sm-2 col-md-2 col-lg-2">
             <div>
-              <div className="d-none showOnDesktop p-1">
+              <div className="p-1">
                 <Link href="/">
                   <Image
                     alt=""
@@ -110,7 +110,7 @@ const Navbar = () => {
                   />
                 </Link>
               </div>
-              <div className="hideOnDesktop" style={{ aspectRatio: "1/1", padding: 5 }}>
+              <div className="">
                 <Link href="/">
                   <Image
                     width={350}

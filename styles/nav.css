@@ -19,14 +19,10 @@
     border: 1px solid var(--text-white);
     transition: all .25s ease-in-out;
 }
-/* .navForm.active {
-    border: 1px solid #fff;
-} */
+
 .navForm input {
     border: none;
     font-size: 13px;
-    /* border-top-left-radius: 10px; */
-    /* border-bottom-left-radius: 10px; */
     width: 100%;
     padding: 5px !important;
     background-color: transparent;
@@ -43,4 +39,16 @@
 .navForm > button:hover,.navForm > button:focus,.navForm > button:visited {
     border: none;
     outline: none;
+}
+.ctaButton {
+    background-color: var(--bg-primary-color);
+    border: 1px solid var(--text-white) !important;
+    color: var(--text-white);
+    transition: all .25s ease-in-out;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.ctaButton:hover {
+    background-color: #fff;
+    color: var(--bg-primary-color);
 }

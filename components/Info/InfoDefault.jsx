@@ -13,15 +13,11 @@ const InfoDefault = ({ info ,maps}) => {
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (
-    <div className="container">
-      <article className="info__article">
+    <div className="container mx-auto px-0">
+      <article className="info__article p-2">
         <section className="info__section">
           <div className="info__image">
-            {isMobile ? 
             <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} layout='fill' />
-            : 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={160} height={160} />
-            }
           </div>
           <div className="info__content">
             <h2 className="fw-bold">{info?.name}</h2>

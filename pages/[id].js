@@ -124,18 +124,18 @@ const Detail = ({ info }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  if (loading) {
-    return <Loading />
-  }
+  // if (loading) {
+  //   return <Loading />
+  // }
   return (
     <>
       <Head>
         <title>Brand Detail</title>
       </Head>
 
-      <section className={`${show && "overflow-hidden"}`}>
+      <section className=''>
 
-        {/* <div
+        <div
           className="hideOnDesktop position-fixed top-0 w-100 start-0"
           style={{ backgroundColor: "#FFAE6D", zIndex: 99 }}
         >
@@ -148,7 +148,7 @@ const Detail = ({ info }) => {
               >
                 <MdArrowBackIosNew style={{ fontSize: 22 }} />
               </button>
-              {/* <Dropdown >
+              <Dropdown >
                 <Dropdown.Toggle variant="success" id="dropdown-basic" className="text-light border-0">
                   <FaBars style={{ fontSize: 22 }} />
                 </Dropdown.Toggle>
@@ -158,12 +158,12 @@ const Detail = ({ info }) => {
                   <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                   <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown> */}
-           
+              </Dropdown>
+
             </div>
           </div>
-        </div> */}
-        <Banner banner={data?.banner} info={infoWg} />
+        </div>
+        {/* <Banner banner={data?.banner} info={infoWg} /> */}
         <InfoDefault info={infoWg} maps={maps} />
         <MenuPhoto isDefault={false} maps={maps} brandView={brandView} />
         {/* <Slider02 text="Món ăn đang giảm giá" /> */}
