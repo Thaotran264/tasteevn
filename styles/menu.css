@@ -10,9 +10,42 @@
 }
 .menuItems:hover {
     box-shadow:    2px 2px 2px 2px #ccc;
+    transform: scale(1.05);
+}
+.menuScrollbar {
+overflow-x: scroll;
+}
+.menuScrollbar::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.menuScrollbar::-webkit-scrollbar
+{
+	width: 1px;
+}
+
+.menuScrollbar::-webkit-scrollbar-thumb
+{
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+.menuListItem {
+    white-space: nowrap;
+    transition: all .25s ease-in-out;
+}
+
+.menuListItem:hover{
+    /* text-decoration: underline; */
+    transform: scale(1.05);
+    color: var(--text-white)
 }
 @media screen and (min-width: 769px) {
     .menuContainer {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
+    .menuScrollbar {
+        overflow-x: hidden;
+        }
 }

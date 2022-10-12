@@ -12,7 +12,6 @@ const DesktopMenu = ({ productList, menuPos }) => {
   const notify = () => toast.error("Vui lòng đăng nhập !!!", {
     pauseOnHover: false,
   });
-  console.log('first', productList)
   return (
     <section className="container px-0">
       <div className="d-flex flex-column">

@@ -15,7 +15,7 @@ const MerchantLayout = ({ children }) => {
   return (
     <div className="px-0">
       <Nav />
-      <Banner />
+      {/* <Banner /> */}
       {children}
       <Notify />
       <Footer />
