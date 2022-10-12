@@ -13,28 +13,24 @@ const InfoDefault = ({ info ,maps}) => {
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (
-    <div className="container">
-      <article className="info__article">
+    <div className="container mx-auto px-0">
+      <article className="info__article p-2">
         <section className="info__section">
           <div className="info__image">
-            {isMobile ? 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={120} height={120} />
-            : 
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} width={160} height={160} />
-            }
+            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} layout='fill' />
           </div>
           <div className="info__content">
             <h2 className="fw-bold">{info?.name}</h2>
             <div className={`bg-dark bg-opacity-10 rounded ${isMobile ? 'p-2' : 'p-3'}`}>
             <p className=""><span className="fw-bold me-2">Địa chỉ:</span>
-              {info?.address} - {info?.districtName} - {info?.wardName}
+              {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
             </p>
             <p className=""><span className="fw-bold me-2">Thời gian mở cửa:</span>
               {info?.openTimeA}-{info?.closeTimeA}
             </p>
-            <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
+            {/* <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
               {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
-            </p>
+            </p> */}
             {/* <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
               {info?.address}
             </p> */}
@@ -48,10 +44,10 @@ const InfoDefault = ({ info ,maps}) => {
               </button>
           </div> */}
           </div>
-          {!isLike ?
+          {/* {!isLike ?
             <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', backgroundColor: 'transparent' }}><AiOutlineHeart style={{ fontSize: 24, color: '#F7A76C', backgroundColor: 'transparent' }} /></button>
             : <button onClick={() => setIsLike(!isLike)} className=" position-absolute" style={{ top: 5, right: 10, border: 'none', outline: 'none', color: '#F7A76C', backgroundColor: 'transparent' }}><AiFillHeart style={{ fontSize: 24 }} /></button>
-          }
+          } */}
         </section>
         <section className="info__section__map d-flex flex-column mb-1">
           <button
@@ -63,7 +59,7 @@ const InfoDefault = ({ info ,maps}) => {
           {show && (
             <div className="col-12 col-md-6 hideOnDeskTop mb-2">
               <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
-                {parse(maps)}
+                {maps ? parse(maps) : '' }
               </div>
             </div>
           )}
