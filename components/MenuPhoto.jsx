@@ -3,27 +3,22 @@ import parse from "html-react-parser";
 import { listRes } from "../db";
 import Image from "next/image";
 import { isMobile } from "react-device-detect";
+import Photos from "./Modal/Photos";
 
 const MenuPhoto = ({ maps, brandView }) => {
   let isDefault = false
-  console.log('brandView',maps)
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState({
+    open: false,
+    data: null
+  })
   const [count, setCount] = useState(0)
   const [bg, setBg] = useState()
   const handleShowModal = (list,data, id) => {
-    console.log('data',data)
-    setShowModal(!showModal)
-    setBg(data)
+    setShowModal({open: !showModal.open,
+    index: id,
+  list: list})
   }
-  const handleNextBtn = () => {
-    console.log('first')
-    setBg(brandView[count + 1])
-  }
-  const handlePrevBtn = () => {
-    console.log('first')
-    setBg(brandView[count - 1])
-// commit
-  }
+
   return (
     <div className="container">
       {!isDefault && (
@@ -218,27 +213,25 @@ const MenuPhoto = ({ maps, brandView }) => {
         </div>
       )}
       {
-        showModal && <div className="position-fixed  bg-dark bg-opacity-25 d-flex align-items-center justiyf-content-center" style={{ top: 0, left: 0, right: 0, bottom: 0, zIndex: 99 }}>
-          <div className="mx-auto rounded bg-light p-2 d-flex flex-column" style={{ width: '50vw', height: '60vh' }}>
-            <button className="border-0 mb-2 text-light align-self-end px-2 py-1 bg-danger rounded" onClick={() => setShowModal(false)}>x</button>
-            <div className="mb-2">
-              {/* <button className="position-absolute start-0 top-0 bottom-0 border-0" style={{zIndex: 10}}onClick={handlePrevBtn}>prev</button> */}
-              <div className="w-100 d-flex justify-content-center position-relative" style={{height: '40vh'}}>
-                <Image src={bg || 'https://images.pexels.com/photos/13623493/pexels-photo-13623493.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load}'} alt='' layout="fill"/>
-              </div>
-              {/* <button className="position-absolute end-0 top-0 bottom-0 border-0" style={{zIndex: 10}}onClick={handleNextBtn}>next</button> */}
-            </div>
-            <div>
-              <ul className="d-flex gap-1 ps-0">
-              {brandView?.slice(0, 3).map((item, index) =>
-                <li key={index} onClick={()=>setBg(brandView[index])}>
-                  <Image src={item} width={200} height={80} alt=''/>
-                </li>)}
-              </ul>
-            </div>
-          </div>
-        </div>
-      }
+        // showModal && <div className="position-fixed  bg-dark bg-opacity-25 d-flex align-items-center justiyf-content-center" style={{ top: 0, left: 0, right: 0, bottom: 0, zIndex: 99 }}>
+        //   <div className="mx-auto rounded bg-light p-2 d-flex flex-column" style={{ width: '50vw', height: '60vh' }}>
+        //     <button className="border-0 mb-2 text-light align-self-end px-2 py-1 bg-danger rounded" onClick={() => setShowModal(false)}>x</button>
+        //     <div className="mb-2">
+        //       <div className="w-100 d-flex justify-content-center position-relative" style={{height: '40vh'}}>
+        //         <Image src={bg || 'https://images.pexels.com/photos/13623493/pexels-photo-13623493.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load}'} alt='' layout="fill"/>
+        //       </div>
+        //     </div>
+        //     <div>
+        //       <ul className="d-flex gap-1 ps-0">
+        //       {brandView?.slice(0, 3).map((item, index) =>
+        //         <li key={index} onClick={()=>setBg(brandView[index])}>
+        //           <Image src={item} width={200} height={80} alt=''/>
+        //         </li>)}
+        //       </ul>
+        //     </div>
+        //   </div>
+        // </div>
+        showModal.open && <Photos data={showModal} setShowModal={setShowModal}/>  }
     </div>
   );
 };

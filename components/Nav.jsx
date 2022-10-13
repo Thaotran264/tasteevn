@@ -10,7 +10,7 @@ import Login from './Modal/Login';
 const Nav = () => {
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const logIn = true
+  const logIn = false
   const cities = [
     { name: 'HCM', id: 1 },
     { name: 'DN', id: 2 },
@@ -38,7 +38,7 @@ const Nav = () => {
       <Dropdown className='d-flex align-items-center justify-content-center navItem' >
         <Dropdown.Toggle
           className="border-0 rounded-0 border-warning border-bottom"
-          id="dropdown-basic"style={{color: '#fff'}}
+          id="dropdown-basic" style={{ color: '#fff' }}
         >
           TP HCM
         </Dropdown.Toggle>
@@ -56,9 +56,8 @@ const Nav = () => {
           className={`${searchBox ? 'active' : ''} navForm justify-content-end`}
           onSubmit={handleSubmit}
         >
-
           <input
-          disabled={!searchBox}
+            disabled={!searchBox}
             onChange={(e) => handleSearchChange(e.target.value)}
           />
           <button className="d-flex align-items-center" type="submit"
@@ -75,7 +74,7 @@ const Nav = () => {
               <Dropdown.Toggle
                 className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
                 id="dropdown-basic"
-                style={{color: '#fff'}}
+                style={{ color: '#fff' }}
               >
                 User 01
               </Dropdown.Toggle>
@@ -97,31 +96,31 @@ const Nav = () => {
         <Dropdown.Toggle
           className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
           id="dropdown-basic"
-          style={{color: '#fff'}}
+          style={{ color: '#fff' }}
         >
           <FaBars />
         </Dropdown.Toggle>
 
         <Dropdown.Menu >
           {
-            !logIn ? 
-        <Dropdown.Item className='text-center py-2 border-bottom'>
-          <LoginModal />
-          </Dropdown.Item>
-          : <>
-          <Dropdown.Item className='text-center py-2 border-bottom'>Thông tin tài khoản
-          </Dropdown.Item>
-          <Dropdown.Item className='text-center py-2 border-bottom'>Giỏ hàng
-          </Dropdown.Item>
-          <Dropdown.Item className='text-center py-2 border-bottom'>Đăng xuất
-          </Dropdown.Item>
-          </>
+            !logIn ?
+              <Dropdown.Item className='text-center py-2 border-bottom'>
+                <LoginModal />
+              </Dropdown.Item>
+              : <>
+                <Dropdown.Item className='text-center py-2 border-bottom'>Thông tin tài khoản
+                </Dropdown.Item>
+                <Dropdown.Item className='text-center py-2 border-bottom'>Giỏ hàng
+                </Dropdown.Item>
+                <Dropdown.Item className='text-center py-2 border-bottom'>Đăng xuất
+                </Dropdown.Item>
+              </>
           }
         </Dropdown.Menu>
       </Dropdown>
-{
-  showLoginModal && <Login setShowLoginModal={setShowLoginModal}/>
-}
+      {
+        showLoginModal && <Login setShowLoginModal={setShowLoginModal} />
+      }
     </nav >
   )
 }

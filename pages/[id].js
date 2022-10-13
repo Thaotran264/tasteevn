@@ -77,7 +77,6 @@ const Detail = ({ detail }) => {
       <Head>
         <title>Brand Detail</title>
       </Head>
-
       <section className=''>
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />

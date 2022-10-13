@@ -1,58 +1,86 @@
 import Image from 'next/image';
 import React from 'react'
+import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { formatter } from '../../utils';
+import Topping from '../Modal/Topping';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 
 const Menu = ({ menuPos, productList }) => {
-    const {items, menus} = productList
-    const notify = () => toast.error("Vui lòng đăng nhập !!!", {
-        pauseOnHover: false,
-    });
-    return (
-        <section className="container px-0">
-            <div className="d-flex flex-column">
-                <ul className="d-flex bg-dark text-dark bg-opacity-25 ps-0 menuScrollbar">
-                    {items.map(item => <li className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
-                    {menus.map(item => <li className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
-                </ul>
-                {
-                    items.map(item => <div className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
-                    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
-                    <div className="menuContainer">
-                        {items.map(it => <div className="bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '19%' }}>
-                            <div>
-                                <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
-                            </div>
-                            <p>{it.name}</p>
-                            <p>{formatter.format(it.price)}</p>
-                        </div>)}
-                    </div>
+  const isLogin = true
+  const { items, menus } = productList
+  const [showToppingModal, setShowToppingModal] = useState({
+    open: false,
+    data: null
+  })
+  const notify = () => toast.error("Vui lòng đăng nhập !!!", {
+    pauseOnHover: false,
+  });
+  const handleAddTopping = (value) => {
+    if (!isLogin) {
+      notify()
+      return
+    } else {
+      console.log(value)
+      setShowToppingModal({
+        open: !showToppingModal.open,
+        data: value
+      })
+    }
 
-                </div>)
-                }
-                {
-                    menus.map(item => <div className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
-                        <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
-                        <div className="menuContainer">
-                            {item.items.map(it => <div className="bg-light d-flex flex-column align-items-center menuItems py-2" style={{ minWidth: '19%' }}>
-                                <div>
-                                    <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
-                                </div>
-                                <p>{it.name}</p>
-                                <p>{formatter.format(it.price)}</p>
-                            </div>)}
-                        </div>
+  }
 
-                    </div>)
-                }
-            </div>
-            <div
-            // className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
-            // style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
-            >
-                {/* <div className="container">
+  const renderMenus = menus.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
+    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
+    <div className="menuContainer">
+      {item.items.map(it => <div key={it.id} className="bg-light d-flex flex-column align-items-center menuItems py-2" style={{ minWidth: '19%' }}>
+        <div>
+          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
+        </div>
+        <p>{it.name}</p>
+        <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
+        <button
+          onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+      </div>)}
+    </div>
+  </div>
+  )
+  const renderItems = items.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
+    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
+    <div className="menuContainer">
+      {items.map(it => <div key={it.id} className="bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '19%' }}>
+        <div>
+          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
+        </div>
+        <p className='fw-bold'>{it.name}</p>
+        <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
+        <button
+          onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+      </div>)}
+    </div>
+  </div>
+  )
+  return (
+    <section className="container px-0">
+      <div className="d-flex flex-column">
+        <ul className="d-flex bg-dark text-dark bg-opacity-25 ps-0 menuScrollbar">
+          {items.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
+          {menus.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
+        </ul>
+        {
+          renderItems
+        }
+        {
+          renderMenus
+        }
+      </div>
+
+      <div
+      // className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
+      // style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
+      >
+        {/* <div className="container">
               <div className="row">
                 <div className="col-md-4 col-lg-4">
                   <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
@@ -71,9 +99,9 @@ const Menu = ({ menuPos, productList }) => {
                 </div>
               </div>
             </div> */}
-            </div>
-            {/* <div className="container">
-            <div className="row">
+      </div>
+      <div className="container">
+        {/* <div className="row">
               <div className={`col-md-4 col-lg-4 py-2 `}>
                 <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
                   {menus?.map((item, index) => (
@@ -110,11 +138,14 @@ const Menu = ({ menuPos, productList }) => {
                   </article>
                 )}
               </div>
-            </div>
-          </div> */}
-            <ToastContainer position="top-center" />
-        </section>
-    );
+            </div> */}
+      </div>
+      {showToppingModal.open && <Topping 
+      showToppingModal={showToppingModal}
+      setShowToppingModal={setShowToppingModal}/>}
+      <ToastContainer position="top-center" />
+    </section>
+  );
 }
 
 export default Menu

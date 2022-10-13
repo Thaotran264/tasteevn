@@ -7,16 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, selectCart } from "../../features/cart/cartSlice";
 import { formatter } from "../../utils";
 
-const Topping = ({ setShow, show }) => {
-  console.log(show.data)
-  const { id, name, price, salePrice, discountPrice, image, groupToppings, toppings } = show.data;
+const Topping = ({ setShow, show,setShowToppingModal,showToppingModal }) => {
+  console.log('first',showToppingModal )
+  const { id, name, price, salePrice, discountPrice, image, groupToppings, toppings,description
+,isGroupTopping
+} = showToppingModal.data;
+  console.log(id)
   const [count, setCount] = useState(1);
   const [note, setNote] = useState("");
   const [listGroupTopping, setListGroupTopping] = useState([]);
   const [listTopping, setListTopping] = useState([]);
   const dispatch = useDispatch();
   const handleClose = () => {
-    setShow({ ...show, open: false });
+    setShowToppingModal({ ...showToppingModal, open: false });
   };
   const handleAdd = (value) => {
     setCount((count += 1));
@@ -64,7 +67,7 @@ const Topping = ({ setShow, show }) => {
     };
     // console.log(data);
     dispatch(addToCart(data));
-    setShow({ ...show, open: false });
+    setShowToppingModal({ ...showToppingModal, open: false });
   };
 
   // render Data
@@ -133,7 +136,6 @@ const Topping = ({ setShow, show }) => {
       style={{ zIndex: 100 }}
     >
       <article className="mx-auto position-relative mt-auto rounded d-flex flex-column toppingCss">
-        {/* Topping title */}
         <div className="position-fixed toppingTitleCss py-1 rounded" style={{ zIndex: 10 }}>
           <h5 className="text-center">Thêm topping</h5>
           <button
@@ -149,9 +151,9 @@ const Topping = ({ setShow, show }) => {
             <Image src={image || 'https://images.pexels.com/photos/13623493/pexels-photo-13623493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} alt="" width={120} height={120} />
           </div>
           <div className="p-2">
-            <h4 className="mb-1">{show.data.name}</h4>
-            <h4 className="mb-1">{show.data.description || ''}</h4>
-            <p className="mb-0 text-danger">{formatter.format(show.data.price)}</p>
+            <h4 className="mb-1">{name}</h4>
+            <h4 className="mb-1">{description || ''}</h4>
+            <p className="mb-0 text-danger">{formatter.format(price)}</p>
   
           </div>
         </div>
@@ -165,9 +167,9 @@ const Topping = ({ setShow, show }) => {
         />
         <hr></hr>
         <div style={{ marginBottom: 75 }} className="w-100">
-          {show.data.isGroupTopping && renderGroupToppings}
+          {isGroupTopping && renderGroupToppings}
 
-          {show.data.toppings?.length > 0 && (
+          {toppings?.length > 0 && (
             <>
               <h5 className="bg-dark bg-opacity-25 p-2 text-light">Topping</h5>
               {renderToppings}
@@ -187,19 +189,18 @@ const Topping = ({ setShow, show }) => {
           <button
             className="border-0 rounded px-3 py-2"
             style={
-              show.data.IsGroupTopping &&
-              (!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length)
+              isGroupTopping &&
+              (!listGroupTopping.length || listGroupTopping.length < groupToppings.length)
                 ? { backgroundColor: "#f8fafa", color: "#909090" }
                 : { backgroundColor: "rgb(247, 167, 108)", color: "#fff" }
             }
             onClick={handleAddCart}
             disabled={
-              show.data.IsGroupTopping &&
-              (!listGroupTopping.length || listGroupTopping.length < show.data.GroupToppings.length)
+              isGroupTopping &&
+              (!listGroupTopping.length || listGroupTopping.length < groupToppings.length)
             }
           >
             Thêm
-            {/* {formatter.format(totalPrice)} */}
           </button>
         </div>
       </article>
