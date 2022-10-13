@@ -4,7 +4,9 @@ import { listRes } from "../db";
 import Image from "next/image";
 import { isMobile } from "react-device-detect";
 
-const MenuPhoto = ({ isDefault, maps, brandView }) => {
+const MenuPhoto = ({ maps, brandView }) => {
+  let isDefault = false
+  console.log('brandView',maps)
   const [showModal, setShowModal] = useState(false)
   const [count, setCount] = useState(0)
   const [bg, setBg] = useState()
@@ -20,7 +22,7 @@ const MenuPhoto = ({ isDefault, maps, brandView }) => {
   const handlePrevBtn = () => {
     console.log('first')
     setBg(brandView[count - 1])
-
+// commit
   }
   return (
     <div className="container">
@@ -28,9 +30,9 @@ const MenuPhoto = ({ isDefault, maps, brandView }) => {
         <div className="mb-2">
           <section className="d-flex gap-1">
             <div
-              className="d-none showOnDesktop w-50  align-items-center"
+              className="hideOnMobile w-50  align-items-center"
             >
-              {maps ? parse(String(maps)) : ''}
+              {parse(maps) || ''}
             </div>
             <div className='w-100'>
               <div className="thumb-3 rounded">
