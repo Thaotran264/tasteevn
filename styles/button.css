@@ -9,7 +9,7 @@
   appearance: none;
   background-color: transparent;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   font-size: 0.875rem;
   padding: 0.5rem 0.8em;
   text-align: center;
@@ -18,10 +18,10 @@
   outline: none;
 }
 
-.btn-custom:hover,
+/* .btn-custom:hover,
 .btn-custom:focus {
   color: var(--primary-color);
-}
+} */
 
 .btn-custom:active {
   color: var(--primary-color);
@@ -30,7 +30,7 @@
 .button-custom-primary {
   border: 1px solid var(--primary-color);
   border-radius: 0.6em;
-  color: var(--primary-color);
+  color: var(--text-white);
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 
