@@ -22,7 +22,7 @@ const MenuPhoto = ({ maps, brandView }) => {
   const handlePrevBtn = () => {
     console.log('first')
     setBg(brandView[count - 1])
-
+// commit
   }
   return (
     <div className="container">
