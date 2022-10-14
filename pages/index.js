@@ -45,9 +45,9 @@ export default function Home({ data }) {
         {
           data.map(item => (
             <Link key={item.id} href={`/${item?.brandId}`}>
-              <a className="mb-2 d-block" style={{ border: '1px solid #ccc', width: '20%' }}>
+              <a className="mb-2 d-block indexItems">
                 <div className=" d-flex text-center flex-column ">
-                  <Image src={item?.image || ''} alt={item?.name} width="100%" height="100%" />
+                  <Image src={item?.image || ''} alt={item?.name} width="200" height="250" />
                   <p>{item?.brandName}</p>
                 </div>
               </a></Link>

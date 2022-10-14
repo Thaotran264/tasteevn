@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 let totalAmount;
 let totalQuantity;
 let items;
 if (typeof window !== "undefined") {
   // Perform localStorage action
-  // const item = localStorage.getItem('key')
   totalAmount = localStorage.getItem("totalAmount")
     ? JSON.parse(localStorage.getItem("totalAmount"))
     : 0;
