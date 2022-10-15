@@ -9,6 +9,7 @@ import InfoDefault from "../components/Info/InfoDefault";
 import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
+import CartModal from "../components/Modal/CartModal";
 import { selectAuth } from "../features/auth/authSlice";
 import { selectCart, totalQuantityCart } from "../features/cart/cartSlice";
 export async function getStaticPaths() {
@@ -35,11 +36,10 @@ const Detail = ({ detail }) => {
   const { webMap, widgets } = detail
   const infoWg = widgets.filter(item => item.widgetType == 0)[0]
   const photos = JSON.parse(widgets.filter(item => item.widgetType == 3)[0].data)
-  const menuWg =  JSON.parse(widgets.filter(item => item.widgetType == 5)[0].data)
+  const menuWg = JSON.parse(widgets.filter(item => item.widgetType == 5)[0].data)
   const { brandImage } = infoWg.data
 
   const cart = useSelector(selectCart);
-  const auth = useSelector(selectAuth)
   const total = useSelector(totalQuantityCart);
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
@@ -50,7 +50,7 @@ const Detail = ({ detail }) => {
 
   let mbref = useRef();
   let mbDref = useRef();
-  
+
   // useEffect(() => {
   //   let mbT = mbref.current?.offsetTop;
   //   let mbDT = mbDref.current?.offsetTop;
@@ -77,6 +77,7 @@ const Detail = ({ detail }) => {
       <Head>
         <title>Brand Detail</title>
       </Head>
+
       <section className=''>
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />
@@ -108,7 +109,7 @@ const Detail = ({ detail }) => {
           </div>
         } */}
 
-        <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
+        <div className="hideOnMobile d-flex flex-column position-fixed" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
           <Link href='/'>
             <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
               <AiOutlineHome style={{ fontSize: 20 }} />
@@ -117,14 +118,17 @@ const Detail = ({ detail }) => {
           <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
-            {/* {total >= 1 &&
-              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16,  backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total}</span>
-            } */}
+            {cart?.length &&
+              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{cart?.length || 0}</span>
+            }
           </button>
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
         </div>
       </section>
+      {
+        show && <CartModal setShow={setShow} />
+      }
     </>
   );
 };
