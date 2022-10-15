@@ -63,6 +63,19 @@ a {
   transform: translateY(-5px);
   box-shadow: 3px 3px 3px 3px rgba(0,0,0,.1);
 }
+@media screen and (max-width: 991px) {
+  .indexItems {
+    width: 96%;
+    margin: auto;
+    background-color: hsla(0, 0%, 0%, 0.048);
+    border-radius: 10px;
+  }
+  .indexItems img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+  }
+}
 button:active,
 button:hover {
   outline: none;
