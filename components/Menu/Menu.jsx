@@ -1,19 +1,22 @@
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
+import { removeFromCart, selectCart } from '../../features/cart/cartSlice';
 import { formatter } from '../../utils';
 import Topping from '../Modal/Topping';
-import DesktopMenu from './DesktopMenu';
-import MobileMenu from './MobileMenu';
 
-const Menu = ({ menuPos, productList }) => {
+const Menu = ({ productList }) => {
   const isLogin = true
   const { items, menus } = productList
   const [showToppingModal, setShowToppingModal] = useState({
     open: false,
     data: null
   })
+  const cartData = useSelector(selectCart)
+  const dispatch = useDispatch()
+  // console.log('cartData', cartData)
   const notify = () => toast.error("Vui lòng đăng nhập !!!", {
     pauseOnHover: false,
   });
@@ -28,9 +31,27 @@ const Menu = ({ menuPos, productList }) => {
         data: value
       })
     }
-
   }
-
+  const handleRemoveCartItem = (value) => {
+console.log('data', value)
+dispatch(removeFromCart(value))
+  }
+  let mbref = useRef();
+  const [menuPos, setMenuPos] = useState(false)
+  useEffect(() => {
+    let mbT = mbref.current?.offsetTop;
+    const handleScroll = () => {
+      if (window.scrollY >= mbT + 40) {
+        setMenuPos(true);
+      } else {
+        setMenuPos(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
   const renderMenus = menus.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
     <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
     <div className="menuContainer">
@@ -40,13 +61,26 @@ const Menu = ({ menuPos, productList }) => {
         </div>
         <p>{it.name}</p>
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-        <button
-          onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+        {
+          !cartData?.filter(cartItem => cartItem.itemId == it.id).length &&
+          <button
+            onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0 mb-1' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+
+        }
+        {
+          cartData?.filter(cartItem => cartItem.itemId == it.id)?.map(item => <div>
+            <button
+              className='px-2 py-1 border-0' onClick={() => handleRemoveCartItem(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>-</button>
+            <span className='mx-2'>{item.quantity}</span>
+            <button
+              className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>+</button>
+          </div>)
+        }
       </div>)}
     </div>
   </div>
   )
-  const renderItems = items.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
+  const renderItems = items.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2" style={{ marginTop: 48 }}>
     <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
     <div className="menuContainer">
       {items.map(it => <div key={it.id} className="bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '19%' }}>
@@ -55,16 +89,32 @@ const Menu = ({ menuPos, productList }) => {
         </div>
         <p className='fw-bold'>{it.name}</p>
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-        <button
-          onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+        {
+          !cartData?.filter(cartItem => cartItem.itemId == it.id).length &&
+          <button
+            onClick={() => handleAddTopping(it)} className='px-2 py-1 border-0 mb-1' style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>Mua</button>
+
+        }
+        {
+          cartData?.filter(cartItem => cartItem.itemId == it.id)?.map(item => <div>
+            <button
+              className='px-2 py-1 border-0' onClick={() => handleRemoveCartItem(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>-</button>
+            <span className='mx-2'>{item.quantity}</span>
+            <button
+              className='px-2 py-1 border-0'
+              onClick={() => handleAddTopping(it)}
+              style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>+</button>
+          </div>)
+        }
       </div>)}
     </div>
-  </div>
+  </div >
   )
   return (
-    <section className="container px-0">
-      <div className="d-flex flex-column">
-        <ul className="d-flex bg-dark text-dark bg-opacity-25 ps-0 menuScrollbar">
+    <section className="container px-0" ref={mbref}>
+      <div className="d-flex flex-column position-relative" >
+        <ul className="d-flex ps-0 menuScrollbar"
+          style={menuPos ? { position: 'fixed', top: '0', left: 0, right: 0, zIndex: 99, backgroundColor: '#000', color: '#fff', fontWeight: 300 } : { backgroundColor: '#fff', color: '#000', position: 'absolute', top: 0 }}>
           {items.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
           {menus.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
         </ul>
@@ -140,9 +190,9 @@ const Menu = ({ menuPos, productList }) => {
               </div>
             </div> */}
       </div>
-      {showToppingModal.open && <Topping 
-      showToppingModal={showToppingModal}
-      setShowToppingModal={setShowToppingModal}/>}
+      {showToppingModal.open && <Topping
+        showToppingModal={showToppingModal}
+        setShowToppingModal={setShowToppingModal} />}
       <ToastContainer position="top-center" />
     </section>
   );
