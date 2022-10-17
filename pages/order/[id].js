@@ -37,8 +37,8 @@ const Detail = () => {
         }
         getData()
     }, [])
-    const {userInfo} = userData || {}
-    const totalPrice = data?.orderDetails?.map(order => order.price).reduce((cal, item)=>cal += item)
+    const { userInfo } = userData || {}
+    const totalPrice = data?.orderDetails?.map(order => order.price).reduce((cal, item) => cal += item)
     const renderOrderDetails = data?.orderDetails?.map(order => (
         <div className='bg-dark bg-opacity-10 rounded p-2 mb-2' key={order.id}>
             <div className='d-flex justify-content-between'>
@@ -79,8 +79,6 @@ const Detail = () => {
 
             </div>
         </div>
-
-
 
     return (
         <MerchantLayout>

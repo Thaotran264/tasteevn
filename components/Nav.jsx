@@ -9,7 +9,7 @@ import LoginModal from './LoginModal';
 import Login from './Modal/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectAuth } from '../features/auth/authSlice';
-import { selectCart } from '../features/cart/cartSlice';
+import { selectCart, totalQuantityCart } from '../features/cart/cartSlice';
 import CartModal from './Modal/CartModal';
 import Link from 'next/link';
 const Nav = () => {
@@ -17,6 +17,7 @@ const Nav = () => {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const auth = useSelector(selectAuth)
   const cart = useSelector(selectCart)
+  // const total = useSelector(totalQuantityCart)
   const { isLogged, authData } = auth
   const dispatch = useDispatch()
   const cities = [
@@ -43,7 +44,7 @@ const Nav = () => {
     setShowCart(true)
   }
   return (
-    <nav className='nav container px-2 gap-2'>
+    <nav className='nav container px-2 gap-2 active'>
       {
         showCart && <CartModal setShow={setShowCart} />
       }
@@ -97,11 +98,11 @@ const Nav = () => {
         <span
         className='rounded-5 d-flex align-items-center justify-content-center'
         style={{fontSize: 13, position:'absolute', top: '-3px', right: '-5px',
-         backgroundColor: '#fff', width: 20, height: 20 }}>{cart?.length || 0}</span>
+         backgroundColor: '#fff', width: 20, height: 20 }}>0</span>
       </div>
       <div className='px-2 align-items-center navItem hideOnMobile' >
         {
-          isLogged ?
+        isLogged ?
             <Dropdown className='d-flex align-items-center justify-content-end ' >
               <Image src={authData.avatar || '/image/logo512.png'} width="30" height="30" alt={authData.fullName || ''} />
               <Dropdown.Toggle

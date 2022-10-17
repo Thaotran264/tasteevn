@@ -9,13 +9,13 @@ function getTotalAmount() {
 function getTotalQuantity() {
   if (typeof window !== "undefined") {
       let totalQuantity = sessionStorage.getItem('totalQuantity') 
-      return eval(totalQuantity || 0)
+      return eval(JSON.parse(totalQuantity) || 0)
   }
 }
 function getItems() {
   if (typeof window !== "undefined") {
-      let items = sessionStorage.getItem('isitems')
-      return eval(items || [])
+      let items = sessionStorage.getItem('cartItems')
+      return eval(JSON.parse(items) || [])
   }
 }
 
@@ -41,24 +41,15 @@ export const cartSlice = createSlice({
               ...action.payload,
             });
       } else {
-        existingItem.quantity += action.payload.quantity
         if(existingItem.note != action.payload.note) {
           state.itemList.push({
             ...action.payload,
           });
         }
+        else {
+        existingItem.quantity += action.payload.quantity
+        }
       }
-      // else {
-      //   if(existingItem.)
-      // }
-      // if (existingItem) {
-      //   existingItem.quantity++;
-      //   existingItem.totalPrice += newItem.price;
-      // } else {
-      //   state.itemList.push({
-      //     ...newItem,
-      //   });
-      // }
       state.totalQuantity+= action.payload.quantity;
       setItemFunc(state.itemList, state.totalQuantity, state.totalAmount);
     },

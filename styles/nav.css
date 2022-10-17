@@ -1,10 +1,24 @@
 .nav {
    height: 48px;
    display: flex;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 99;
     align-items: center;
     background-color: var(--bg-primary-color);
-
 }
+/* @media screen and (max-width: 991px) {
+    .nav.active {
+        position: fixed;
+        right: 0;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+} */
+
 .navItem {
     flex: 1;
 }
