@@ -21,12 +21,14 @@ const Topping = ({ setShow, show,setShowToppingModal,showToppingModal }) => {
   const handleClose = () => {
     setShowToppingModal({ ...showToppingModal, open: false });
   };
-  const handleAdd = (value) => {
-    setCount((count += 1));
+  const handleAdd = () => {
+    setCount(count + 1)
   };
 
-  const handleMinus = (value) => {
-    count > 1 ? setCount((count -= 1)) : setShow({ ...show, open: false });
+  const handleMinus = () => {
+    setCount(count - 1)
+
+    // count > 1 ? setCount((count -= 1)) : setShow({ ...show, open: false });
   };
 
   const handleRadioBtn = (value, data, parentID) => {
@@ -162,7 +164,7 @@ const Topping = ({ setShow, show,setShowToppingModal,showToppingModal }) => {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Thêm ghi chú"
-          className="border-0 px-2 bg-opacity-100 w-100"
+          className="border-0 bg-dark p-2 bg-opacity-10 w-100"
           style={{ color: "hsl(0,0%,51%)" }}
         />
         <hr></hr>
@@ -178,11 +180,11 @@ const Topping = ({ setShow, show,setShowToppingModal,showToppingModal }) => {
         </div>
         <div className="position-fixed bottom-0 py-3 d-flex justify-content-center align-items-center gap-3 toppingButtonGroup">
           <div className="d-flex align-items-center gap-2">
-            <button className="btn text-success bg-light" onClick={() => handleMinus()}>
+            <button className="btn btn-success text-success bg-light" onClick={handleMinus} disabled={count == 1}>
               -
             </button>
             <span>{count}</span>
-            <button className="btn text-success bg-light" onClick={() => handleAdd(show.data)}>
+            <button className="btn btn-success text-success bg-light" onClick={handleAdd}>
               +
             </button>
           </div>

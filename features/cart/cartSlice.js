@@ -20,9 +20,9 @@ function getItems() {
 }
 
 const setItemFunc = (itemsList, totalQuantity, totalAmount) => {
-  localStorage.setItem("cartItems", JSON.stringify(itemsList));
-  localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
-  localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
+  sessionStorage.setItem("cartItems", JSON.stringify(itemsList));
+  sessionStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+  sessionStorage.setItem("totalAmount", JSON.stringify(totalAmount));
 };
 export const cartSlice = createSlice({
   name: "cart",

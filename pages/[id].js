@@ -118,7 +118,7 @@ const Detail = ({ detail }) => {
           <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
-            {cart?.length &&
+            {cart?.length > 0 &&
               <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{cart?.length || 0}</span>
             }
           </button>

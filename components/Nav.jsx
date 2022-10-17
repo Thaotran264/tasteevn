@@ -103,8 +103,7 @@ const Nav = () => {
         {
           isLogged ?
             <Dropdown className='d-flex align-items-center justify-content-end ' >
-
-              <Image src={authData.avatar} width="30" height="30" alt={authData.fullName || '/image/logo512.png'} />
+              <Image src={authData.avatar || '/image/logo512.png'} width="30" height="30" alt={authData.fullName || ''} />
               <Dropdown.Toggle
                 className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
                 id="dropdown-basic"
@@ -114,9 +113,9 @@ const Nav = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu >
-                <Dropdown.Item className='text-center py-2 border-bottom' href="#/action-1">Thông tin tài khoản
+                <Dropdown.Item className='text-center py-2 border-bottom'>Thông tin tài khoản
                 </Dropdown.Item>
-                <Dropdown.Item className='text-center py-2 border-bottom' href="#/action-1">Gio hang</Dropdown.Item>
+                <Dropdown.Item className='text-center py-2 border-bottom'>Gio hang</Dropdown.Item>
                 <Dropdown.Item className='text-center py-2 border-bottom' onClick={handleLogout}>Đăng xuất
                 </Dropdown.Item>
               </Dropdown.Menu>
