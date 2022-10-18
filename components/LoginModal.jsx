@@ -348,8 +348,7 @@ function LoginModal({ btnStyle }) {
         </button>
       }
 
-
-      <Modal show={show} onHide={handleClose} animation={false} centered size="small" backdrop="static">
+      <Modal centered show={show} onHide={handleClose} animation={false}  size="small" backdrop="static">
         {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <div className="mx-auto bg-white rounded w-100">

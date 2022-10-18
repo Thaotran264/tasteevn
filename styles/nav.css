@@ -1,0 +1,54 @@
+.nav {
+   height: 48px;
+   display: flex;
+    align-items: center;
+    background-color: var(--bg-primary-color);
+
+}
+.navItem {
+    flex: 1;
+}
+.navItem:nth-child(4) {
+    flex: 2;
+}
+.navForm {
+    display: flex;
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid var(--text-white);
+    transition: all .25s ease-in-out;
+}
+
+.navForm input {
+    border: none;
+    font-size: 13px;
+    width: 100%;
+    padding: 5px !important;
+    background-color: transparent;
+}
+.navForm > button {
+    background-color: transparent;
+    padding: 5px !important;
+    border: none;
+    color: var(--text-white);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+.navForm > button:hover,.navForm > button:focus,.navForm > button:visited {
+    border: none;
+    outline: none;
+}
+.ctaButton {
+    background-color: var(--bg-primary-color);
+    border: 1px solid var(--text-white) !important;
+    color: var(--text-white);
+    transition: all .25s ease-in-out;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.ctaButton:hover {
+    background-color: #fff;
+    color: var(--bg-primary-color);
+}

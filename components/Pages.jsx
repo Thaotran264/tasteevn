@@ -12,33 +12,18 @@ const Pages = () => {
   const handleViewBtn = (id) => {
     router.push(`/${id}`);
   };
-  const [banner, setBanner] = useState()
   const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true)
-      try {
-        const res = await bannerApi.getBanner()
-        if (res.data) {
-          setBanner(res.data)
-          setLoading(false)
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getData()
-  }, [])
-  if(loading) {
-    return <Loading />
-  }
+ 
+  // if(loading) {
+  //   return <Loading />
+  // }
 
   return (
-    <section className="container mx-auto mt-2 mb-2">
+    <section className="px-0 mt-2 mb-2">
       {/* <CarouselComponent banner={banner}/> */}
       {/* <MultiRowSlide text="Quán nổi bật" /> */}
       {/* <Slider02 text="Cửa hàng được yêu thích" /> */}
-      <section className="rounded" style={{ backgroundColor: "#fff" }}>
+      {/* <section className="rounded" style={{ backgroundColor: "#fff" }}>
         <h2 className="ps-3 mb-0">Quán mới nhất</h2>
         <hr></hr>
         <div className="card__container ">
@@ -60,8 +45,8 @@ const Pages = () => {
 
           )}
         </div>
-      </section>
-      <TabMenu />
+      </section> */}
+      {/* <TabMenu /> */}
     </section>
   );
 };

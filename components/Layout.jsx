@@ -6,14 +6,18 @@ import Notify from "./Notify";
 import Search from "./Search";
 import TabMenu from "./TabMenu";
 import 'react-toastify/dist/ReactToastify.css';
+import Header from "./Header";
+import Nav from "./Nav";
+import CarouselComponent from "./Carousel";
 const Layout = ({ children }) => {
   return (
     <div className="position-relative">
-      {/* <Search /> */}
-      <Navbar />
+      <Nav />
+      <CarouselComponent />
       <Notify />
       <main style={{ marginTop: 75 }}>{children}</main>
       {/* <TabMenu /> */}
+      <Footer />
       <ToastContainer />
     </div>
   );

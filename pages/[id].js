@@ -14,6 +14,8 @@ import TabMenu from "../components/TabMenu";
 import { DataContext } from "../store/globalState";
 import Slider02 from "../components/Slider/Slider02";
 import { BsCartCheck } from "react-icons/bs";
+import { FaBars } from "react-icons/fa";
+import { MdArrowBackIosNew } from "react-icons/md";
 import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineFlag, AiOutlineHome } from "react-icons/ai";
 import CartModal from "../components/Modal/CartModal";
 import Default from "../components/KhongGianPic/Default";
@@ -31,7 +33,9 @@ import { addToCart } from "../store/actions/actionsType";
 import parse from "html-react-parser";
 import Loading from "../components/Loading";
 import Link from "next/link";
-
+import { selectAuth } from "../features/auth/authSlice";
+import LoginModal from "../components/LoginModal";
+import Dropdown from 'react-bootstrap/Dropdown';
 // export async function getStaticPaths() {
 //   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
 //   const paths = res.data.data.map((item) => ({
@@ -52,12 +56,13 @@ import Link from "next/link";
 //   };
 // }
 
-const Detail = ({info}) => {
+const Detail = ({ info }) => {
   // console.log('x', info)
   let firstLoggin = true;
   const router = useRouter();
   const { id } = router.query;
   const cart = useSelector(selectCart);
+  const auth = useSelector(selectAuth)
   const total = useSelector(totalQuantityCart);
   const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
@@ -65,10 +70,7 @@ const Detail = ({info}) => {
   const handleShow = () => {
     setShow(!show);
   };
-  const total2 = 0;
-  cart?.forEach((item) => {
-    total2 += item.totalPrice;
-  });
+
   const [menuDeskPos, setMenuDeskPos] = useState(false);
   const [menu, setMenu] = useState();
   const [menuItems, setMenuItems] = useState([]);
@@ -122,26 +124,55 @@ const Detail = ({info}) => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-if(loading) {
-  return <Loading />
-}
+  // if (loading) {
+  //   return <Loading />
+  // }
   return (
     <>
       <Head>
         <title>Brand Detail</title>
       </Head>
 
-      <section className={`${show && "overflow-hidden"}`}>
-        <Banner banner={data?.banner} info={infoWg}/>
+      <section className=''>
+
+        <div
+          className="hideOnDesktop position-fixed top-0 w-100 start-0"
+          style={{ backgroundColor: "#FFAE6D", zIndex: 99 }}
+        >
+          <div className="container w-100">
+            <div className="d-flex justify-content-between align-items-center">
+              <button
+                className="button  d-flex align-items-center "
+                style={{ height: 48, minWidth: 80 }}
+                onClick={() => router.push('/')}
+              >
+                <MdArrowBackIosNew style={{ fontSize: 22 }} />
+              </button>
+              <Dropdown >
+                <Dropdown.Toggle variant="success" id="dropdown-basic" className="text-light border-0">
+                  <FaBars style={{ fontSize: 22 }} />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+
+            </div>
+          </div>
+        </div>
+        {/* <Banner banner={data?.banner} info={infoWg} /> */}
         <InfoDefault info={infoWg} maps={maps} />
-        <MenuPhoto isDefault={false} maps={maps} brandView={brandView}/>
+        <MenuPhoto isDefault={false} maps={maps} brandView={brandView} />
         {/* <Slider02 text="Món ăn đang giảm giá" /> */}
         <div ref={mbref}>
-          <Menu productList={menuWg} menuPos={menuPos}/>
+          <Menu productList={menuWg} menuPos={menuPos} />
         </div>
 
         {show ? <CartModal setShow={setShow} /> : ''}
-        {
+        {/* {
           total >= 1 &&
           <div
             className="hideOnDesktop position-fixed bottom-0 end-0 start-0"
@@ -157,24 +188,24 @@ if(loading) {
                   <BsCartCheck style={{ fontSize: 22 }} />
                   <span style={{ fontSize: 20 }}>{total}</span>
                 </button>
-                <button className="button ">Tổng tiền: {formatter.format(total2)}</button>
+                <button className="button ">Tổng tiền: {formatter.format(0)}</button>
               </div>
             </div>
           </div>
-        }
+        } */}
 
         <div className="d-none flex-column position-fixed showOnDesktop" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
           <Link href='/'>
             <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
-            <AiOutlineHome style={{ fontSize: 20 }} />
+              <AiOutlineHome style={{ fontSize: 20 }} />
             </a>
-            </Link>
+          </Link>
           <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
-            {total >= 1 &&
+            {/* {total >= 1 &&
               <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16,  backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total}</span>
-            }
+            } */}
           </button>
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>

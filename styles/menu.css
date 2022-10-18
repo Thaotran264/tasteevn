@@ -1,0 +1,18 @@
+.menuContainer {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+.menuItems {
+    border: 1px solid transparent;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+}
+.menuItems:hover {
+    box-shadow:    2px 2px 2px 2px #ccc;
+}
+@media screen and (min-width: 769px) {
+    .menuContainer {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
