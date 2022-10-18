@@ -12,8 +12,8 @@ const nextConfig = {
   },
   env: {
     //  BASE_URL: 'https://tmerchant.tastee.vn/api',
-    // BASE_URL: 'https://test.tastee.vn/',
-    BASE_URL: 'https://pro.tastee.vn/',
+    BASE_URL: 'https://test.tastee.vn/',
+    // BASE_URL: 'https://pro.tastee.vn/',
     API_TEST: 'https://test.tastee.vn',
     MERCHANT_URL: 'https://tmerchant.tastee.vn'
   }

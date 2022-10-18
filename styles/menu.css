@@ -1,18 +1,50 @@
 .menuContainer {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
+
 .menuItems {
     border: 1px solid transparent;
     transition: all .25s ease-in-out;
     cursor: pointer;
 }
+
 .menuItems:hover {
-    box-shadow:    2px 2px 2px 2px #ccc;
+    box-shadow: 2px 2px 2px 2px #ccc;
+    transform: translateY(-5px);
 }
+
+.menuScrollbar {
+    overflow: scroll;
+}
+
+.menuScrollbar::-webkit-scrollbar {
+    display: none !important;
+}
+
+.menuScrollbar::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+.menuListItem {
+    white-space: nowrap;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+}
+
+.menuListItem:hover {
+    transform: translateY(-3px);
+    color: var(--text-white)
+}
+
 @media screen and (min-width: 769px) {
     .menuContainer {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .menuScrollbar {
+        overflow: hidden;
     }
 }

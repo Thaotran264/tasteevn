@@ -8,6 +8,10 @@ export const orderApi = {
         const url = `api/Orders/load-data`
         return axiosClient2.post(url, params)
     },
+    detail(id) {
+        const url = `api/Orders/detail/${id}`
+        return axiosClient2.get(url)
+    }
 
 
 }

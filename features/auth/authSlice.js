@@ -1,12 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-let auth;
-let logged;
-let token;
-if (typeof window !== "undefined") {
-  auth = sessionStorage.getItem("userInfo") ? JSON.parse(sessionStorage.getItem("userInfo")) : {};
-  token = sessionStorage.getItem("token") ? JSON.parse(sessionStorage.getItem("token")) : "";
-  logged = sessionStorage.getItem("isLogged") ? JSON.parse(sessionStorage.getItem("isLogged")) : false;
+
+function getAuth() {
+    if (typeof window !== "undefined") {
+        let auth = sessionStorage.getItem('userInfo')
+        return eval(JSON.parse(auth) || '')
+    }
 }
+function getToken() {
+    if (typeof window !== "undefined") {
+        let token = sessionStorage.getItem('token') ? sessionStorage.getItem('token') : ''
+        return eval(token || '')
+    }
+}
+function getLogged() {
+    if (typeof window !== "undefined") {
+        let logged = sessionStorage.getItem('isLogged') ? sessionStorage.getItem('isLogged') : ''
+        return eval(logged || '')
+    }
+}
+
 const setAuthFunc = (userInfo, isLogged, token) => {
   sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
   sessionStorage.setItem("token", JSON.stringify(token));
@@ -15,9 +27,9 @@ const setAuthFunc = (userInfo, isLogged, token) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    authData: auth,
-    isLogged: logged,
-    token
+    authData: getAuth(),
+    isLogged: getLogged(),
+    token: getToken()
   },
   reducers: {
     logIn(state, action) {

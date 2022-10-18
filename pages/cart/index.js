@@ -49,6 +49,7 @@ console.log(totalPrice);
       console.log(res);
       if (res.data && res.successful) {
         alert("Đặt hàng thành công");
+        router.push(`/order/${res.data}`)
         dispatch(clearCart());
       }
     } catch (err) {
@@ -84,7 +85,7 @@ console.log(totalPrice);
               <label>Tên:</label>
               <input
                 readOnly
-                placeholder={userAdress?.name}
+                placeholder={userAdress?.name || ""}
                 type="text"
                 className="p-1 w-100 rounded-2"
                 style={{ fontSize: 15, borderColor: "lightgray" }}
@@ -107,7 +108,7 @@ console.log(totalPrice);
                   readOnly
                   type="text"
                   className="p-1 w-100 rounded-2"
-                  placeholder={`${userAdress?.wardName}-${userAdress?.districtName}-${userAdress?.cityName }`}
+                  placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
                   style={{ fontSize: 15 }}
                 />
               </div>

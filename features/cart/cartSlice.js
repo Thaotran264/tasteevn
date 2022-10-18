@@ -1,30 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-let totalAmount;
-let totalQuantity;
-let items;
-if (typeof window !== "undefined") {
-  // Perform localStorage action
-  // const item = localStorage.getItem('key')
-  totalAmount = localStorage.getItem("totalAmount")
-    ? JSON.parse(localStorage.getItem("totalAmount"))
-    : 0;
-  totalQuantity = localStorage.getItem("totalQuantity")
-    ? JSON.parse(localStorage.getItem("totalQuantity"))
-    : 0;
-  items = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
+
+function getTotalAmount() {
+  if (typeof window !== "undefined") {
+      let totalAmount = sessionStorage.getItem('totalAmount')
+      return eval(JSON.parse(totalAmount) || 0)
+  }
 }
+function getTotalQuantity() {
+  if (typeof window !== "undefined") {
+      let totalQuantity = sessionStorage.getItem('totalQuantity') 
+      return eval(totalQuantity || 0)
+  }
+}
+function getItems() {
+  if (typeof window !== "undefined") {
+      let items = sessionStorage.getItem('isitems')
+      return eval(items || [])
+  }
+}
+
 const setItemFunc = (itemsList, totalQuantity, totalAmount) => {
-  localStorage.setItem("cartItems", JSON.stringify(itemsList));
-  localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
-  localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
+  sessionStorage.setItem("cartItems", JSON.stringify(itemsList));
+  sessionStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+  sessionStorage.setItem("totalAmount", JSON.stringify(totalAmount));
 };
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    itemList: items,
-    totalQuantity: totalQuantity,
-    totalAmount: totalAmount,
+    itemList: getItems(),
+    totalQuantity: getTotalQuantity(),
+    totalAmount: getTotalAmount(),
   },
   reducers: {
     addToCart(state, action) {
