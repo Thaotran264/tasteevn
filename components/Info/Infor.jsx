@@ -59,7 +59,7 @@ const datar = ({ setShowBooking, isDefault, data }) => {
         </div>
       )}
       {isDefault && (
-        <div className="container d-flex flex-column align-items-center py-3">
+        <div className="d-flex flex-column align-items-center py-3">
           <div className="mb-3">
             <Image
               src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -89,7 +89,7 @@ const datar = ({ setShowBooking, isDefault, data }) => {
         </div>
       )}
       {isDefault && (
-        <div className="container d-flex flex-column align-items-center py-3">
+        <div className="d-flex flex-column align-items-center py-3">
           {/* <div className="mb-3">
           <Image
             src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

@@ -1,0 +1,20 @@
+.info__image {
+    width: 30%;
+    height: auto;
+    position: relative;
+}
+.info__content {
+    margin-left: 10px;
+    flex: 1;
+}
+.info__content p {
+    font-size: 13px;
+}
+@media screen and (min-width: 769px) {
+    .info__image {
+        width: 20%;
+    }
+    .info__content p {
+        font-size: 16px;
+    }
+}

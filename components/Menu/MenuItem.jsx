@@ -9,6 +9,7 @@ import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
 import Topping from "../Modal/Topping";
 import 'react-toastify/dist/ReactToastify.css';
+import LoginModal from "../LoginModal";
 
 const MenuItem = ({ data: it, notify }) => {
   const carts = useSelector(selectCart)
@@ -16,9 +17,11 @@ const MenuItem = ({ data: it, notify }) => {
   const { isLogged } = auth
   const dispatch = useDispatch()
   const [show, setShow] = useState({ open: false, data: {} })
+  const [showLogin, setShowLogin] = useState(false)
   const handleIncrement = (item) => {
     if (!isLogged) {
-      notify()
+      // notify()
+      setShowLogin(true)
       return
     }
     setShow({
@@ -90,6 +93,7 @@ const MenuItem = ({ data: it, notify }) => {
         </div>
       </article>
       {show.open && <Topping setShow={setShow} show={show} />}
+      {showLogin && <LoginModal />}
     </>
 
   );
