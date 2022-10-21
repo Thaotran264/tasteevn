@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
@@ -19,11 +19,17 @@ import { formatter } from "../../utils";
 
 const CartModal = ({ setShow }) => {
   const [count, setCount] = useState(0);
-  const cart = useSelector(selectCart) || [];
-  const quantity = useSelector(totalQuantityCart);
+  // const cart = useSelector(selectCart) || [];
+  // const quantity = useSelector(totalQuantityCart);
+  const [cart, setCart] = useState()
+  const [total, setTotal] = useState()
+  useEffect(()=>{
+    setCart(JSON.parse(sessionStorage.getItem('cartItems')) || [])
+    setTotal(JSON.parse(sessionStorage.getItem('totalQuantity')) || 0)
+  },[])
   const dispatch = useDispatch();
 
-  const renderCartItem = cart.map((cartItem) => {
+  const renderCartItem = cart && cart?.map((cartItem) => {
     return (
       <div
         className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"

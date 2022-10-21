@@ -67,7 +67,7 @@
 
 @media screen and (min-width: 769px) {
     .menuContainer {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(19%, 1fr));
     }
 
     .menuScrollbar {

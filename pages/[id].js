@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart ,AiOutlineArrowUp} from "react-icons/ai";
 import { useSelector } from "react-redux";
 import Banner from "../components/Banner";
+import Booking from "../components/Booking";
 import InfoDefault from "../components/Info/InfoDefault";
 import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
@@ -70,6 +71,7 @@ const Detail = ({ detail }) => {
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
+        <Booking />
         <Menu productList={menuWg} menuPos={false} />
         {/* {show ? <CartModal setShow={setShow} /> : ''} */}
         {/* {

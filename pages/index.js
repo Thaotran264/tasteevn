@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bannerApi, orderApi } from "../api-client";
+import Booking from "../components/Booking";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";

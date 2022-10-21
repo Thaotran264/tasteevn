@@ -33,7 +33,7 @@ const Menu = ({ productList }) => {
     }
   }
   const handleRemoveCartItem = (value) => {
-dispatch(removeFromCart(value))
+    dispatch(removeFromCart(value))
   }
   let mbref = useRef();
   const [menuPos, setMenuPos] = useState(false)
@@ -51,22 +51,27 @@ dispatch(removeFromCart(value))
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  const renderMenus = menus.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
-    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
+  const renderMenus = menus.map(item => <div key={item.id}
+
+    className=" text-dark mb-2 rounded p-2" style={items.length ? { marginTop: 0 } : { marginTop: 48 }}>
+    <div className='d-flex justify-content-between'>
+    <h3 className='pb-1'>{item.name}</h3>
+    <span className='' style={{fontSize: 13}}>Xem thêm</span>
+    </div>
     <div className="menuContainer">
-      {item.items.map(it => <div key={it.id} className="bg-light d-flex flex-column align-items-center menuItems py-2" style={{ minWidth: '19%' }}>
+      {item.items.slice(0,5).map(it => <div key={it.id} className="rounded d-flex flex-column rounded align-items-center menuItems py-2" style={{boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
         <div>
-          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
+          <Image src={it.image || '/image/logo512.png'} alt={it.name} width={160} height={160} objectFit='cover' />
         </div>
         <p>{it.name}</p>
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
         <div>
-            <button
-              className='px-2 py-1 border-0' onClick={() => handleRemoveCartItem(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>-</button>
-            <span className='mx-2'>{it.quantity}</span>
-            <button
-              className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>+</button>
-          </div>
+          <button
+            className='px-2 py-1 border-0' onClick={() => handleRemoveCartItem(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>-</button>
+          <span className='mx-2'>{it.quantity}</span>
+          <button
+            className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>+</button>
+        </div>
         {/* {
           !cartData?.find(cartItem => cartItem.itemId == it.id)?.length &&
           <button
@@ -86,23 +91,26 @@ dispatch(removeFromCart(value))
     </div>
   </div>
   )
-  const renderItems = items.map(item => <div key={item.id} className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2" style={{ marginTop: 48 }}>
-    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
+  const renderItems = items.map(item => <div key={item.id} className="text-dark mb-2 rounded p-2" style={{ marginTop: 48 }}>
+    <div className='d-flex justify-content-between'>
+      <h3 className='pb-1'>{item.name}</h3>
+      <span>Xem thêm</span>
+    </div>
     <div className="menuContainer">
-      {items.map(it => <div key={it.id} className="bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '19%' }}>
+      {items.map(it => <div key={it.id} className="rounded bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
         <div>
-          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
+          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="120" height={120} />
         </div>
         <p className='fw-bold'>{it.name}</p>
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
         <div className='d-flex align-items-center'>
           <button
-         className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
-        {
-          cartData?.filter(cartItem => cartItem.itemId == it.id).length > 0 &&
-          <span className='mx-2 text-danger'>{`${cartData?.filter(cartItem => cartItem.itemId == it.id).length}x`}</span>
-        }
-              </div>
+            className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
+          {
+            cartData?.filter(cartItem => cartItem.itemId == it.id).length > 0 &&
+            <span className='mx-2 text-danger'>{`${cartData?.filter(cartItem => cartItem.itemId == it.id).length}x`}</span>
+          }
+        </div>
         {/* {
           !cartData?.filter(cartItem => cartItem.itemId == it.id).length &&
           <button
@@ -127,8 +135,8 @@ dispatch(removeFromCart(value))
   return (
     <section className="container px-0" ref={mbref}>
       <div className="d-flex flex-column position-relative" >
-        <ul className={`d-flex ps-0 menuScrollbar ${menuPos ? 'active container px-0' : ''}`}
-          >
+        <ul className={`rounded d-flex ps-0 menuScrollbar ${menuPos ? 'active container px-0' : ''}`}
+        >
           {items.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
           {menus.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
         </ul>

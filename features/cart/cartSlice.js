@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 function getTotalAmount() {
   if (typeof window !== "undefined") {
-      let totalAmount = sessionStorage.getItem('totalAmount')
-      return eval(JSON.parse(totalAmount) || 0)
+    let totalAmount = sessionStorage.getItem('totalAmount')
+    return eval(JSON.parse(totalAmount) || 0)
   }
 }
 function getTotalQuantity() {
   if (typeof window !== "undefined") {
-      let totalQuantity = sessionStorage.getItem('totalQuantity') 
-      return eval(JSON.parse(totalQuantity) || 0)
+    let totalQuantity = sessionStorage.getItem('totalQuantity')
+    return eval(JSON.parse(totalQuantity) || 0)
   }
 }
 function getItems() {
   if (typeof window !== "undefined") {
-      let items = sessionStorage.getItem('cartItems')
-      return eval(JSON.parse(items) || [])
+    let items = sessionStorage.getItem('cartItems')
+    return eval(JSON.parse(items) || [])
   }
 }
 
@@ -36,21 +36,33 @@ export const cartSlice = createSlice({
       const id = action.payload.itemId;
       const existingItem = state.itemList.find((item) => item.itemId == id);
 
-      if(!existingItem) {
+      if (!existingItem) {
         state.itemList.push({
-              ...action.payload,
-            });
+          ...action.payload,
+        });
       } else {
-        if(existingItem.note != action.payload.note) {
+        //
+        // th1: đã tồn tại 1 sp và chưa có note
+        //th2: đã tồn tại sp và có note trùng với sp mới
+        //th3: chưa có note và có topppings
+        //th4: có note và có topping
+        //cà phê: 
+        //cà phê 1: có topping 100% đường, đá 30%
+        // cà phê 2: topping 50% đường, đá 50%
+        //  ==> thêm cà phê 3: toppong 70% đường, đá 30%
+
+        // thêm cà phê mới: kiểm tra cà phê đã tồn tại trong list chưa => [cà phê 1, cà phê 2]
+        // thêm vào list và tăng số lượng sản phẩm
+        // if (existingItem.note != action.payload.note) {
           state.itemList.push({
             ...action.payload,
           });
-        }
-        else {
-        existingItem.quantity += action.payload.quantity
-        }
+        // }
+        // else {
+        //   existingItem.quantity += action.payload.quantity
+        // }
       }
-      state.totalQuantity+= action.payload.quantity;
+      state.totalQuantity += action.payload.quantity;
       setItemFunc(state.itemList, state.totalQuantity, state.totalAmount);
     },
     removeFromCart(state, action) {

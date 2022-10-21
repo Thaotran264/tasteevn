@@ -39,15 +39,15 @@ const ProfileMobile = () => {
     } catch (error) {
       console.log(error)
       dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("userInfo");
+      sessionStorage.removeItem("token");
       window.location.replace("/");
     }
   };
 
   const [username, setusername] = useState('');
   useEffect(() => {
-    let user = localStorage.getItem("userInfo") ?  JSON.parse(localStorage.getItem("userInfo") || '' ) : null
+    let user = sessionStorage.getItem("userInfo") ?  JSON.parse(sessionStorage.getItem("userInfo") || '' ) : null
     console.log('%cindex.js line:51 user', 'color: #007acc;', user);
     let userInfor = user
     console.log('%cindex.js line:50 userInfor', 'color: #007acc;', userInfor);
@@ -62,8 +62,8 @@ const ProfileMobile = () => {
 
 
   const handleLogOut = (mess) => {
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("token");
     dispatch({ type: "NOTIFY", payload: { success: mess } });
     window.location.replace("/");
   };
