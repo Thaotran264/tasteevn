@@ -1,91 +1,73 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-
-const Booking = ({ showBooking, setShowBooking }) => {
-  const [peoples, setPeoples] = useState("");
-  const [times, setTimes] = useState("");
-  const [dates, setDates] = useState("");
-  const [address, setAdrees] = useState("");
-  const isActive = () => {
-    if (showBooking) return "show";
-    return "";
-  };
-  const currentTime = new Date();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newData = { peoples, times, dates, address };
-    console.log("data", newData);
-  };
+import { Col, Row } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { bookingApi } from "../api-client";
+const Booking = () => {
+  const [adult, setAdult] = useState()
+  const [children, setChildren] = useState()
+  const [time, setTime] = useState()
+  const [description, setDescription] = useState()
+  const router = useRouter()
+  const {query: {id}} = router
+  console.log('id',id)
+  const onSubmit =async (event) => {
+    event.preventDefault()
+    const data = {
+      adultQuantity: adult,
+      childrenQuantity: children,
+      bookingTime: time,
+      description,
+      brandId: id
+    }
+    try {
+      const res = await bookingApi.booking({data})
+      if(res.data) {
+        alert('Đặt chỗ thành công')
+        setAdult('')
+        setChildren('')
+        setTime('')
+        setDescription('')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  
+  }
   return (
-    <div
-      className={` toggleMenu ${isActive()} container position-fixed top-0 bg-light bottom-0 d-flex flex-column  w-25 p-5 border-start border-dark`}
-      //   style={showBooking ? { right: 0 } : { right: "-100%" }}
-    >
-      <button
-        className="position-absolute btn btn-outline-danger"
-        style={{ top: 15, right: 15 }}
-        onClick={() => setShowBooking(false)}
-      >
-        x
-      </button>
-      <h4 className="text-center border-bottom pb-2 border-dark">Booking</h4>
-      <form className="w-100" onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Số người
-          </label>
-          <input
-            value={peoples}
-            onChange={(e) => setPeoples(e.target.value)}
-            type="text"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Thời gian
-          </label>
-          <input
-            value={times}
-            onChange={(e) => setTimes(e.target.value)}
-            type="time"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Ngày
-          </label>
-          <input
-            value={dates}
-            onChange={(e) => setDates(e.target.value)}
-            type="date"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Địa chỉ
-          </label>
-          <input
-            value={address}
-            onChange={(e) => setAdrees(e.target.value)}
-            type="text"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
+    <section className="container mb-2 rounded" style={{backgroundColor: '#fff'}}>
+      <h2>Đặt chỗ</h2>
+      <Row>
+        <Col xs={6}>
+          <Form onSubmit={onSubmit}>
+            <Form.Group className="mb-3" controlId="adultQuantity">
+              <Form.Label>Số người lớn:</Form.Label>
+              <Form.Control type="text" value={adult} onChange={(e) => setAdult(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="childrenQuantity">
+              <Form.Label>Số trẻ em:</Form.Label>
+              <Form.Control type="text" value={children} onChange={(e) => setChildren(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="bookingTime">
+              <Form.Label>Thời gian:</Form.Label>
+              <Form.Control type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="description">
+              <Form.Label>Ghi chú:</Form.Label>
+              <Form.Control type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+            </Form.Group>
 
-        <button type="submit" className="btn btn-primary">
-          Đặt chỗ
-        </button>
-      </form>
-    </div>
-  );
+
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+
+    </section>
+  )
 };
 
 export default Booking;

@@ -1,10 +1,11 @@
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
-import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart } from "react-icons/ai";
+import React, { useEffect, useRef, useState } from "react";
+import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart ,AiOutlineArrowUp} from "react-icons/ai";
 import { useSelector } from "react-redux";
 import Banner from "../components/Banner";
+import Booking from "../components/Booking";
 import InfoDefault from "../components/Info/InfoDefault";
 import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
@@ -33,6 +34,7 @@ export async function getStaticProps({ params }) {
 }
 
 const Detail = ({ detail }) => {
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
   const { webMap, widgets } = detail
   const infoWg = widgets.filter(item => item.widgetType == 0)[0]
   const photos = JSON.parse(widgets.filter(item => item.widgetType == 3)[0].data)
@@ -41,37 +43,24 @@ const Detail = ({ detail }) => {
 
   const cart = useSelector(selectCart);
   const total = useSelector(totalQuantityCart);
-  const [menuPos, setMenuPos] = useState(false);
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false)
   const handleShow = () => {
     setShow(!show);
   };
-
   let mbref = useRef();
-  let mbDref = useRef();
-
-  // useEffect(() => {
-  //   let mbT = mbref.current?.offsetTop;
-  //   let mbDT = mbDref.current?.offsetTop;
-  //   const handleScroll = () => {
-  //     if (window.scrollY >= mbT) {
-  //       setMenuPos(true);
-  //     } else {
-  //       setMenuPos(false);
-  //     }
-  //     if (window.scrollY >= mbDT) {
-  //       setMenuDeskPos(true);
-  //     } else {
-  //       setMenuDeskPos(false);
-  //     }
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // });
-
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 300) {
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
   return (
     <>
       <Head>
@@ -82,10 +71,8 @@ const Detail = ({ detail }) => {
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
+        <Booking />
         <Menu productList={menuWg} menuPos={false} />
-        <div ref={mbref}>
-        </div>
-
         {/* {show ? <CartModal setShow={setShow} /> : ''} */}
         {/* {
           total >= 1 &&
@@ -119,15 +106,18 @@ const Detail = ({ detail }) => {
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
             {cart?.length > 0 &&
-              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{cart?.length || 0}</span>
+              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total|| 0}</span>
             }
           </button>
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
         </div>
+        <button ref={mbref} className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
+          <AiOutlineArrowUp />
+        </button>
       </section>
       {
-        show && <CartModal setShow={setShow} />
+        show ? <CartModal setShow={setShow} />: <></>
       }
     </>
   );

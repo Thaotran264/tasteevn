@@ -17,8 +17,34 @@
 
 .menuScrollbar {
     overflow: scroll;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 98;
+    background-color: hsla(0, 0%, 0%, 0.169);
 }
+.menuScrollbar.active {
+    position: fixed;
+    top: 48px;
+    background-color: hsl(0, 0%, 0%);
+    color: var(--text-white)
+}
+.scrollToTop {
+    background-color: var(--bg-primary-color);
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    right: -100vw;
+    border: 1px solid white;
+    outline: none;
+    bottom: 10vh;
+    transition: all .25s ease-in-out;
+}
+.scrollToTop.active {
+    right: 5vw;
 
+}
 .menuScrollbar::-webkit-scrollbar {
     display: none !important;
 }
@@ -41,7 +67,7 @@
 
 @media screen and (min-width: 769px) {
     .menuContainer {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(19%, 1fr));
     }
 
     .menuScrollbar {

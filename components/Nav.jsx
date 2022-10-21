@@ -9,15 +9,24 @@ import LoginModal from './LoginModal';
 import Login from './Modal/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectAuth } from '../features/auth/authSlice';
-import { selectCart } from '../features/cart/cartSlice';
+import { selectCart, totalQuantityCart } from '../features/cart/cartSlice';
 import CartModal from './Modal/CartModal';
 import Link from 'next/link';
+import { useEffect } from 'react';
 const Nav = () => {
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const auth = useSelector(selectAuth)
-  const cart = useSelector(selectCart)
-  const { isLogged, authData } = auth
+  const [authInfo, setAuthInfo] = useState()
+  const [isLogged, setIsLogged] = useState(false)
+  const [cart, setCart] = useState()
+  const [total, setTotal] = useState()
+  useEffect(()=>{
+    setAuthInfo(JSON.parse(sessionStorage.getItem('userInfo')) || {})
+    setIsLogged(JSON.parse(sessionStorage.getItem('isLogged')) || false)
+    setCart(JSON.parse(sessionStorage.getItem('cartItems')))
+    setTotal(JSON.parse(sessionStorage.getItem('totalQuantity')) || 0)
+  },[])
+
   const dispatch = useDispatch()
   const cities = [
     { name: 'HCM', id: 1 },
@@ -43,7 +52,7 @@ const Nav = () => {
     setShowCart(true)
   }
   return (
-    <nav className='nav container px-2 gap-2'>
+    <nav className='nav container px-2 gap-2 active'>
       {
         showCart && <CartModal setShow={setShowCart} />
       }
@@ -97,19 +106,19 @@ const Nav = () => {
         <span
         className='rounded-5 d-flex align-items-center justify-content-center'
         style={{fontSize: 13, position:'absolute', top: '-3px', right: '-5px',
-         backgroundColor: '#fff', width: 20, height: 20 }}>{cart?.length || 0}</span>
+         backgroundColor: '#fff', width: 20, height: 20 }}>{total}</span>
       </div>
       <div className='px-2 align-items-center navItem hideOnMobile' >
         {
-          isLogged ?
+        isLogged ?
             <Dropdown className='d-flex align-items-center justify-content-end ' >
-              <Image src={authData.avatar || '/image/logo512.png'} width="30" height="30" alt={authData.fullName || ''} />
+              <Image src={authInfo?.avatar || '/image/logo512.png'} width="30" height="30" alt={authInfo?.fullName || ''} />
               <Dropdown.Toggle
                 className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
                 id="dropdown-basic"
                 style={{ color: '#fff' }}
               >
-                {authData.fullName || ''}
+                {authInfo?.fullName || ''}
               </Dropdown.Toggle>
 
               <Dropdown.Menu >
