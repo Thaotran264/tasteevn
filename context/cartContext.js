@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useRef } from "react";
+import { createContext, useEffect, useReducer } from "react";
 export const ACTIONS = {
     NOTIFY: "NOTIFY",
     AUTH: "AUTH",
@@ -8,19 +8,10 @@ export const ACTIONS = {
 export const addToCart = (product, cart) => {
     const {orderToppings} = product
     const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
-    //b1: kiem tra id da ton tai hay chua
-    // neu chua ton tai thi them moi
-    //neu ton tai thi kiem ta topping
-
     const existItem = cart.filter(item => item.itemId == product.itemId)
     const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
-    // const test = existItem.map(item =>item.orderToppings.map(it => it.toppingId))
-    // const fil = test.map(item => item.map(item => item.toppingId).join(''))
-    // const tessss = fil.filter(item => item == listToppingProduct)
-    // const tps = existItem.filter(item => )
     if(existItem.length) {
         console.log('existItem',fil)
-        
         if(fil.length) {
             return {
                 type: "ADD_CART", payload: [{...fil[0], quantity:fil[0].quantity+ product.quantity}]
@@ -42,6 +33,18 @@ export const addToCart = (product, cart) => {
     }
 
 };
+export const removeFromCart = (product, cart) => {
+    const {orderToppings} = product
+    const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
+
+    const existItem = cart.filter(item => item.itemId == product.itemId)
+    console.log('first',existItem)
+    const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
+if(fil.length)
+    return {
+        type: "ADD_CART", payload: [...cart]
+    }
+}
 export const decrease = (data, id) => {
     const newData = [...data]
     data.forEach((item, i) => {
@@ -76,10 +79,7 @@ export const increase = (data, it) => {
         return ({ type: 'ADD_CART', payload: newData })
     }
 }
-export const deleteItem = (data, id) => {
-    const newData = data.filter(item => item.id !== id)
-    return ({ type: 'ADD_CART', payload: newData })
-}
+
 export const clearCart = () => {
     return ({ type: 'ADD_CART', payload: [] })
 }

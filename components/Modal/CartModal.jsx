@@ -1,18 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { memo, useContext, useMemo, useState } from "react";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import Modal from 'react-bootstrap/Modal';
 import { formatter } from "../../utils";
-import { clearCart, DataContext } from "../../context/cartContext";
+import { addToCart, clearCart, DataContext, removeFromCart } from "../../context/cartContext";
 import Button from 'react-bootstrap/Button';
-const CartModal = ({setShow}) => {
+const CartModal = ({ setShow }) => {
   const { state, dispatch } = useContext(DataContext)
   const handleClose = () => setShow(prev => !prev);
   const { cart } = state
-
+  const totalQuantity = useMemo(()=>cart.reduce((total, item) => total + item.quantity,0))
+  const totalPrice = useMemo(()=>cart.reduce((total, item) => total + item.price * item.quantity,0))
   const renderCartItem = cart?.map((cartItem) =>
     <div
       className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"
@@ -71,7 +72,7 @@ const CartModal = ({setShow}) => {
               <>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(removeFromCart(cartItem?.itemId))}
+                  onClick={() => dispatch(removeFromCart(cartItem,cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",
@@ -85,7 +86,7 @@ const CartModal = ({setShow}) => {
                 <span className="mx-2">{cartItem?.quantity || 0}</span>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(addToCart(cartItem))}
+                  onClick={() => dispatch(addToCart(cartItem,cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",
@@ -117,28 +118,28 @@ const CartModal = ({setShow}) => {
         <Modal.Body className="overflow">
           {
             cart?.length ?
-            <div>
-              {renderCartItem}
-            </div> : <h2 className="text-center text-decoration-underline">Giỏ hàng trống</h2>
+              <div>
+                {renderCartItem}
+              </div> : <h2 className="text-center text-decoration-underline">Giỏ hàng trống</h2>
           }
         </Modal.Body>
         <Modal.Footer>
           {
             cart?.length ?
-          <div className="w-100" >
-            <Link href="/cart" 
-                disabled={!cart?.length}
-            >
-              <a
-                className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1"
-                style={{ fontSize: 18, backgroundColor: "#f7a76c", color: "#fff" }}
-              >
-                <span style={{ fontSize: 16 }}>0 Món</span>
-                Trang thanh toán
-                <span>{formatter.format(0)}</span>
-              </a>
-            </Link>
-          </div> : <></>
+              <div className="w-100" >
+                <Link href="/cart"
+                  disabled={!cart?.length}
+                >
+                  <a
+                    className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1"
+                    style={{ fontSize: 18, backgroundColor: "#f7a76c", color: "#fff" }}
+                  >
+                    <span style={{ fontSize: 16 }}>{totalQuantity} Món</span>
+                    Trang thanh toán
+                    <span>{formatter.format(totalPrice)}</span>
+                  </a>
+                </Link>
+              </div> : <></>
           }
         </Modal.Footer>
       </Modal>
@@ -146,4 +147,4 @@ const CartModal = ({setShow}) => {
   )
 };
 
-export default CartModal;
+export default memo(CartModal);
