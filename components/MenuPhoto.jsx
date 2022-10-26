@@ -20,7 +20,7 @@ const MenuPhoto = ({ maps, brandView }) => {
   }
 
   return (
-    <div className="container">
+    <div className="container px-0">
       {!isDefault && (
         <div className="mb-2">
           <section className="d-flex gap-1">

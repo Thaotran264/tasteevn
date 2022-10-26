@@ -14,27 +14,27 @@ const Photos = ({ data, setShowModal }) => {
     };
     return (
         <>
-            <Modal fullscreen show={data.open} onHide={handleClose}>
+            <Modal size='lg' show={data.open} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
+                    <Modal.Title>Hình ảnh không gian quán</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Carousel activeIndex={index} onSelect={handleSelect} variant="dark">
                         {
                             data.list.map((item, id) =>
                                 <Carousel.Item key={id}>
-                                    <div style={{width: '100%', height: '80vh'}}>
-                                    <Image
-                                        className="d-block w-100"
-                                        src={item}
-                                        alt="First slide"
-                                        // width='400'
-                                        // height="100%"
-                                        layout='fill'
-                                        objectFit='cover'
-                                    />
+                                    <div style={{ width: '100%', height: '80vh' }}>
+                                        <Image
+                                            className="d-block w-100"
+                                            src={item}
+                                            alt="First slide"
+                                            // width='400'
+                                            // height="100%"
+                                            layout='fill'
+                                            objectFit='cover'
+                                        />
                                     </div>
-       
+
                                 </Carousel.Item>
                             )
                         }

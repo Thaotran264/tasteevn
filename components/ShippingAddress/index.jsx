@@ -9,8 +9,8 @@ import { Card } from "react-bootstrap";
 import ModalAddresCRU from "../modalAddresCRU";
 import { adressApi } from "../../api-client/adressApi";
 import Link from "next/link";
-import { DataContext } from "../../store/globalState";
 import Nodata from "../Nodata";
+import { DataContext } from "../../context/cartContext";
 
 
 const ShippingAddress = () => {

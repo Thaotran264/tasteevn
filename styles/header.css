@@ -1,7 +1,3 @@
-header {
-    /* gap: 5px; */
-}
-
 .cart-user .dropdown .dropdown-toggle::after {
     display: none !important;
 

@@ -10,8 +10,8 @@ import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import { accountAPI } from "../../api-client/account";
 import { BiEdit } from "react-icons/bi";
-import { DataContext } from "../../store/globalState";
 import { userApi } from "../../api-client";
+import { DataContext } from "../../context/cartContext";
 
 
 const TabInfor = ({ userDetail }) => {
@@ -21,7 +21,7 @@ const TabInfor = ({ userDetail }) => {
     setMobile(isMobile);
   }, [_isMobile]);
   const [show, setShow] = useState(false);
-  const { state, dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState({})
