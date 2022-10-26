@@ -34,9 +34,13 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const id = action.payload.itemId;
-      const existingItem = state.itemList.find((item) => item.itemId == id);
-
-      if (!existingItem) {
+      const existingItem = state.itemList.filter((item) => item.itemId == id);
+      existingItem.map(item => {
+        if(item.toppings.split(',').join('') == action.payload.toppings.split(',').join('')) {
+          console.log('first', item)
+        }
+      })
+      if (!existingItem.length) {
         state.itemList.push({
           ...action.payload,
         });

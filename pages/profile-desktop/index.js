@@ -1,40 +1,29 @@
-import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import { BsTrash } from "react-icons/bs";
-import Layout from "../../components/Layout";
-import LayoutProfile from "../../components/LayoutProfile";
-import DesktopMenu from "../../components/Menu/DesktopMenu";
-import { userApi } from "../../api-client/user";
-import Button from "react-bootstrap/Button";
-import Accordion from "react-bootstrap/Accordion";
-import { isMobile } from "react-device-detect";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
+import { isMobile } from "react-device-detect";
 import { FcAddImage } from "react-icons/fc";
-import Form from "react-bootstrap/Form";
-import { DataContext } from "../../store/globalState";
+import { userApi } from "../../api-client/user";
+import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
-import TabInfor from "../../components/Infor";
-import WishlistShop from "../../components/wishlistShop";
 import HistoryOrder from "../../components/HistoryOrder";
+import TabInfor from "../../components/Infor";
 import ShippingAddress from "../../components/ShippingAddress";
+import WishlistShop from "../../components/wishlistShop";
+import { DataContext } from "../../context/cartContext";
+import MerchantLayout from "../../components/MerchantLayout";
 
 const Cart = () => {
-  const [count, setCount] = useState(1);
   const [user, setUser] = useState({});
-  const [open, setOpen] = useState(false);
-  const [isShowContent, setIsShowContent] = useState({});
-  const { state, dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
   const router = useRouter();
 
-  const [_isMobile, setMobile] = useState(false);
-
-  useEffect(() => {
-    setMobile(isMobile);
-    isMobile ? router.push("/profile") : router.push("/profile-desktop?slug=chinh-sua-thong-tin");
-  }, [_isMobile]);
+  // useEffect(() => {
+  //   setMobile(isMobile);
+  //   isMobile ? router.push("/profile") : router.push("/profile-desktop?slug=chinh-sua-thong-tin");
+  // }, [_isMobile]);
 
   useEffect(() => {
     const getDetailUser = async () => {
@@ -53,15 +42,9 @@ const Cart = () => {
     };
     getDetailUser();
   }, []);
-  const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
-  const handleClick = (value) => {
-    setCount(value);
-  };
-  const editField = (field) => {
-    console.log("%cindex.js line:21 field", "color: #007acc;", field);
-  };
+
   return (
-    <>
+    <MerchantLayout>
       <div className="container">
         <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
           <Row>
@@ -205,12 +188,12 @@ const Cart = () => {
           </Row>
         </Tab.Container>
       </div>
-    </>
+    </MerchantLayout>
   );
 };
 
-Cart.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
+// Cart.getLayout = function getLayout(Page) {
+//   return <Layout>{Page}</Layout>;
+// };
 
 export default Cart;

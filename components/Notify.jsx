@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../store/globalState";
+import { DataContext } from "../context/cartContext";
 import Loading from "./Loading";
 import Toast from "./Toast";
 

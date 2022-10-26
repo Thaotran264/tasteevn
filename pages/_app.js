@@ -2,7 +2,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import { SWRConfig } from "swr";
-import { DataProvider } from "../store/globalState";
+// import { DataProvider } from "../store/globalState";
 import "../styles/globals.css";
 import { store } from '../store/store'
 import { Provider, useSelector } from 'react-redux'
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { selectAuth } from "../features/auth/authSlice";
 import React from "react";
 import { SSRProvider } from "react-bootstrap";
+import { DataProvider } from "../context/cartContext";
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)

@@ -10,7 +10,8 @@ import Layout from "../../components/Layout";
 
 import { useRouter } from "next/router";
 import { Button, ListGroup } from "react-bootstrap";
-import { DataContext } from "../../store/globalState";
+import { DataContext } from "../../context/cartContext";
+// import { DataContext } from "../../store/globalState";
 
 const ProfileMobile = () => {
   const [count, setCount] = useState(1);

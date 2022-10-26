@@ -8,29 +8,26 @@ import { formatter } from '../../utils';
 import Topping from '../Modal/Topping';
 
 const Menu = ({ productList }) => {
-  const isLogin = true
   const { items, menus } = productList
   const [showToppingModal, setShowToppingModal] = useState({
     open: false,
     data: null
   })
-  const cartData = useSelector(selectCart)
-  const dispatch = useDispatch()
   // console.log('cartData', cartData)
   const notify = () => toast.error("Vui lòng đăng nhập !!!", {
     pauseOnHover: false,
   });
   const handleAddTopping = (value) => {
-    if (!isLogin) {
-      notify()
-      return
-    } else {
-      console.log(value)
+    // if (!isLogin) {
+    //   notify()
+    //   return
+    // } else {
+      // console.log(value)
       setShowToppingModal({
         open: !showToppingModal.open,
         data: value
       })
-    }
+    // }
   }
   const handleRemoveCartItem = (value) => {
     dispatch(removeFromCart(value))
@@ -52,11 +49,10 @@ const Menu = ({ productList }) => {
     };
   });
   const renderMenus = menus.map(item => <div key={item.id}
-
     className=" text-dark mb-2 rounded p-2" style={items.length ? { marginTop: 0 } : { marginTop: 48 }}>
-    <div className='d-flex justify-content-between'>
+    <div className='d-flex justify-content-between align-items-center'>
     <h3 className='pb-1'>{item.name}</h3>
-    <span className='' style={{fontSize: 13}}>Xem thêm</span>
+    <span className='text-decoration-underline bg-dark bg-opacity-10 d-flex align-items-center p-2 rounded' style={{fontSize: 13, cursor: 'pointer'}}>Xem thêm</span>
     </div>
     <div className="menuContainer">
       {item.items.slice(0,5).map(it => <div key={it.id} className="rounded d-flex flex-column rounded align-items-center menuItems py-2" style={{boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
@@ -65,13 +61,15 @@ const Menu = ({ productList }) => {
         </div>
         <p>{it.name}</p>
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-        <div>
+        <button
+            className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
+        {/* <div>
           <button
             className='px-2 py-1 border-0' onClick={() => handleRemoveCartItem(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>-</button>
           <span className='mx-2'>{it.quantity}</span>
           <button
             className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>+</button>
-        </div>
+        </div> */}
         {/* {
           !cartData?.find(cartItem => cartItem.itemId == it.id)?.length &&
           <button
@@ -92,9 +90,9 @@ const Menu = ({ productList }) => {
   </div>
   )
   const renderItems = items.map(item => <div key={item.id} className="text-dark mb-2 rounded p-2" style={{ marginTop: 48 }}>
-    <div className='d-flex justify-content-between'>
+    <div className='d-flex justify-content-between align-items-center'>
       <h3 className='pb-1'>{item.name}</h3>
-      <span>Xem thêm</span>
+      <span className='text-decoration-underline bg-dark bg-opacity-10 d-flex align-items-center p-2 rounded' style={{fontSize: 13, cursor: 'pointer'}}>Xem thêm</span>
     </div>
     <div className="menuContainer">
       {items.map(it => <div key={it.id} className="rounded bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
@@ -106,10 +104,10 @@ const Menu = ({ productList }) => {
         <div className='d-flex align-items-center'>
           <button
             className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
-          {
+          {/* {
             cartData?.filter(cartItem => cartItem.itemId == it.id).length > 0 &&
             <span className='mx-2 text-danger'>{`${cartData?.filter(cartItem => cartItem.itemId == it.id).length}x`}</span>
-          }
+          } */}
         </div>
         {/* {
           !cartData?.filter(cartItem => cartItem.itemId == it.id).length &&
@@ -135,7 +133,7 @@ const Menu = ({ productList }) => {
   return (
     <section className="container px-0" ref={mbref}>
       <div className="d-flex flex-column position-relative" >
-        <ul className={`rounded d-flex ps-0 menuScrollbar ${menuPos ? 'active container px-0' : ''}`}
+        <ul className={`rounded d-flex ps-0 menuScrollbar ${menuPos ? 'active container px-0 rounded-0' : ''}`}
         >
           {items.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
           {menus.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
@@ -212,9 +210,11 @@ const Menu = ({ productList }) => {
               </div>
             </div> */}
       </div>
-      {showToppingModal.open && <Topping
+      {showToppingModal.open ? <Topping
         showToppingModal={showToppingModal}
-        setShowToppingModal={setShowToppingModal} />}
+        setShowToppingModal={setShowToppingModal} />
+      : <></>}
+
       <ToastContainer position="top-center" />
     </section>
   );

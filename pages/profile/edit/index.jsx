@@ -13,10 +13,11 @@ import Card from 'react-bootstrap/Card';
 
 
 import { useRouter } from "next/router";
-import { DataContext } from "../../../store/globalState";
+// import { DataContext } from "../../../store/globalState";
 import { userApi } from "../../../api-client/user";
 import Layout from "../../../components/Layout";
 import Image from "next/image";
+import { DataContext } from "../../../context/cartContext";
 
 const editProfile = () => {
     const [count, setCount] = useState(1);

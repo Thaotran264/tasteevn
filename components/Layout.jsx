@@ -5,6 +5,7 @@ import CarouselComponent from "./Carousel";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import Notify from "./Notify";
+import ScrollToTopButton from "./ScrollToTopButton";
 const Layout = ({ children }) => {
   return (
     <div className="position-relative">
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
       <main>{children}</main>
       {/* <TabMenu /> */}
       <Footer />
+      <ScrollToTopButton />
       <ToastContainer />
     </div>
   );

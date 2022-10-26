@@ -1,8 +1,9 @@
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart ,AiOutlineArrowUp} from "react-icons/ai";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart, AiOutlineArrowUp } from "react-icons/ai";
+import { TbBrandBooking } from 'react-icons/tb'
 import { useSelector } from "react-redux";
 import Banner from "../components/Banner";
 import Booking from "../components/Booking";
@@ -11,6 +12,7 @@ import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
 import CartModal from "../components/Modal/CartModal";
+import { DataContext } from "../context/cartContext";
 import { selectAuth } from "../features/auth/authSlice";
 import { selectCart, totalQuantityCart } from "../features/cart/cartSlice";
 export async function getStaticPaths() {
@@ -35,14 +37,17 @@ export async function getStaticProps({ params }) {
 
 const Detail = ({ detail }) => {
   const [showScrollToTop, setShowScrollToTop] = useState(false)
+  const [showBooking, setShowBooking] = useState(false)
   const { webMap, widgets } = detail
   const infoWg = widgets.filter(item => item.widgetType == 0)[0]
   const photos = JSON.parse(widgets.filter(item => item.widgetType == 3)[0].data)
   const menuWg = JSON.parse(widgets.filter(item => item.widgetType == 5)[0].data)
   const { brandImage } = infoWg.data
-
-  const cart = useSelector(selectCart);
-  const total = useSelector(totalQuantityCart);
+  const { state: { cart } } = useContext(DataContext)
+  // const {cart} = state
+  // console.log('first', cart?.length)
+  // const cart = useSelector(selectCart);
+  // const total = useSelector(totalQuantityCart);
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -68,10 +73,12 @@ const Detail = ({ detail }) => {
       </Head>
 
       <section className=''>
+        {
+          showBooking && <Booking setShowBooking={setShowBooking} />
+        }
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
-        <Booking />
         <Menu productList={menuWg} menuPos={false} />
         {/* {show ? <CartModal setShow={setShow} /> : ''} */}
         {/* {
@@ -102,13 +109,16 @@ const Detail = ({ detail }) => {
               <AiOutlineHome style={{ fontSize: 20 }} />
             </a>
           </Link>
+          <button className=" border border-bottom-0 p-2" style={{ backgroundColor: "#fff" }}
+          onClick={()=>setShowBooking(!showBooking)}><TbBrandBooking style={{ fontSize: 20 }} /></button>
           <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
           ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
             {cart?.length > 0 &&
-              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{total|| 0}</span>
+              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{cart?.length || 0}</span>
             }
           </button>
+
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
         </div>
@@ -117,7 +127,7 @@ const Detail = ({ detail }) => {
         </button>
       </section>
       {
-        show ? <CartModal setShow={setShow} />: <></>
+        show ? <CartModal setShow={setShow} /> : <></>
       }
     </>
   );
