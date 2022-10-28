@@ -6,44 +6,54 @@ export const ACTIONS = {
 };
 
 export const addToCart = (product, cart) => {
-    const {orderToppings} = product
-    const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
-    const existItem = cart.filter(item => item.itemId == product.itemId)
-    const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
-    if(existItem.length) {
-        console.log('existItem',fil)
-        if(fil.length) {
-            return {
-                type: "ADD_CART", payload: [{...fil[0], quantity:fil[0].quantity+ product.quantity}]
-            }
+    const data = [...cart]
+    const existItem = data.find(item => item.itemId == product.itemId && item.orderToppings.map(it => it.toppingId).join('') == product.orderToppings.map(item => item.toppingId).join(''))
+    if (existItem) {
+        // console.log('existItem',existItem)
+        // const newData = cart.filter(item => (item.itemId != product.itemId)
+        // &&
+        // (item.itemId == product.itemId && item.orderToppings.map(it => it.toppingId).join('') != product.orderToppings.map(item => item.toppingId).join('')        )
+        // )
+        const newCart = data.filter(item =>(item.itemId == product.itemId) && item.orderToppings.map(it => it.toppingId).join('') != product.orderToppings.map(item => item.toppingId).join('') || item.itemId != product.itemId)
+    
+        console.log('newddaata', [...newCart, {...existItem, quantity: existItem.quantity++} ])
+        return {
+                type: "ADD_CART", payload: [...newCart, {...existItem, quantity: existItem.quantity++} ]
+
         }
-        else {
+        // console.log('existItem', fil)
+        // if (fil.length) {
+        //     return {
+        //         type: "ADD_CART", payload: [{ ...fil[0], quantity: fil[0].quantity + product.quantity }]
+        //     }
+        // }
+        // else {
             return {
-                type: "ADD_CART", payload: [...cart,{ ...product}]
+                type: "ADD_CART", payload: [...cart]
             }
-        }  
- 
+        // }
+
     }
     else {
         console.log('unexistItem')
 
         return {
-            type: "ADD_CART", payload: [...cart, { ...product}]
+            type: "ADD_CART", payload: [...cart, { ...product }]
         }
     }
 
 };
 export const removeFromCart = (product, cart) => {
-    const {orderToppings} = product
+    const { orderToppings } = product
     const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
 
-    const existItem = cart.filter(item => item.itemId == product.itemId)
-    console.log('first',existItem)
-    const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
-if(fil.length)
-    return {
-        type: "ADD_CART", payload: [...cart]
-    }
+    const existItem = cart.filter(item => item.itemId == product.itemId && item.orderToppings.map(it => it.toppingId).join('') == listToppingProduct)
+    console.log('first', existItem)
+    const fil = existItem.filter(item => item.orderToppings.map(it => it.toppingId).join('') == listToppingProduct)
+    if (fil.length)
+        return {
+            type: "ADD_CART", payload: [...cart]
+        }
 }
 export const decrease = (data, id) => {
     const newData = [...data]
