@@ -12,12 +12,12 @@ import HistoryOrder from "../../components/HistoryOrder";
 import TabInfor from "../../components/Infor";
 import ShippingAddress from "../../components/ShippingAddress";
 import WishlistShop from "../../components/wishlistShop";
-import { DataContext } from "../../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 import MerchantLayout from "../../components/MerchantLayout";
 
 const Cart = () => {
   const [user, setUser] = useState({});
-  const { dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(CartContext);
   const router = useRouter();
 
   // useEffect(() => {
