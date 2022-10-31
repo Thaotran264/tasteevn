@@ -1,15 +1,14 @@
-import Link from "next/link";
 import Image from "next/image";
-import { memo, useContext, useMemo, useState } from "react";
-import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { BsCart } from "react-icons/bs";
-import { BsTrash } from "react-icons/bs";
-import Modal from 'react-bootstrap/Modal';
-import { formatter } from "../../utils";
-import { addToCart, clearCart, DataContext, removeFromCart } from "../../context/cartContext";
+import Link from "next/link";
+import { memo, useContext, useMemo } from "react";
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { clearCart, decrease, increase } from "../../context/actions";
+import { CartContext } from "../../context/cartContext";
+import { formatter } from "../../utils";
+
 const CartModal = ({ setShow }) => {
-  const { state, dispatch } = useContext(DataContext)
+  const { state, dispatch } = useContext(CartContext)
   const handleClose = () => setShow(prev => !prev);
   const { cart } = state
   const totalQuantity = useMemo(()=>cart.reduce((total, item) => total + item.quantity,0))
@@ -72,7 +71,7 @@ const CartModal = ({ setShow }) => {
               <>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(removeFromCart(cartItem,cart))}
+                  onClick={() => dispatch(decrease(cartItem,cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",
@@ -86,7 +85,7 @@ const CartModal = ({ setShow }) => {
                 <span className="mx-2">{cartItem?.quantity || 0}</span>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(addToCart(cartItem,cart))}
+                  onClick={() => dispatch(increase(cartItem,cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",

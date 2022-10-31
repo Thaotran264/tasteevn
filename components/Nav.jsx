@@ -7,30 +7,20 @@ import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
 import Login from './Modal/Login';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectAuth } from '../features/auth/authSlice';
-import { selectCart, totalQuantityCart } from '../features/cart/cartSlice';
+import { logout } from '../features/auth/authSlice';
 import CartModal from './Modal/CartModal';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { DataContext } from '../context/cartContext';
+import { CartContext } from '../context/cartContext';
+import { logOut } from '../context/actions';
 const Nav = () => {
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [authInfo, setAuthInfo] = useState()
   const [isLogged, setIsLogged] = useState(false)
-  // const [cart, setCart] = useState()
-  // const [total, setTotal] = useState()
-  // useEffect(()=>{
-  //   setAuthInfo(JSON.parse(sessionStorage.getItem('userInfo')) || {})
-  //   setIsLogged(JSON.parse(sessionStorage.getItem('isLogged')) || false)
-  //   setCart(JSON.parse(sessionStorage.getItem('cartItems')))
-  //   setTotal(JSON.parse(sessionStorage.getItem('totalQuantity')) || 0)
-  // },[])
 
-  // const dispatch = useDispatch()
-  const { state, dispatch } = useContext(DataContext)
-  const { cart } = state
+  const { state, dispatch } = useContext(CartContext)
+  const { cart, auth } = state
+  const { token, fullName, avatar } = auth
   const cities = [
     { name: 'HCM', id: 1 },
     { name: 'DN', id: 2 },
@@ -49,13 +39,13 @@ const Nav = () => {
     setShowLoginModal(!showLoginModal)
   }
   const handleLogout = () => {
-    dispatch(logout())
+    dispatch(logOut())
   }
   const handleShowCartModal = () => {
     setShowCart(true)
   }
   return (
-    <section className='d-flex justify-content-center align-items-center nav active' style={{backgroundColor: 'hsl(27, 100%, 71%)', height: 48}} >
+    <section className='d-flex justify-content-center align-items-center nav active' style={{ backgroundColor: 'hsl(27, 100%, 71%)', height: 48 }} >
       <nav className='d-flex container px-2 gap-2 '>
         {
           showCart && <CartModal setShow={setShowCart} />
@@ -116,15 +106,15 @@ const Nav = () => {
         </div>
         <div className='px-2 align-items-center navItem hideOnMobile' >
           {
-            isLogged ?
+            token ?
               <Dropdown className='d-flex align-items-center justify-content-end ' >
-                <Image src={authInfo?.avatar || '/image/logo512.png'} width="30" height="30" alt={authInfo?.fullName || ''} />
+                <Image src={avatar || '/image/logo512.png'} width="30" height="30" alt={authInfo?.fullName || ''} />
                 <Dropdown.Toggle
                   className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
                   id="dropdown-basic"
                   style={{ color: '#fff' }}
                 >
-                  {authInfo?.fullName || ''}
+                  {fullName || ''}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu >
@@ -151,13 +141,13 @@ const Nav = () => {
 
           <Dropdown.Menu >
             {
-              isLogged ?
+              token ?
                 <>
                   <Dropdown.Item className='text-center py-2 border-bottom'>Thông tin tài khoản
                   </Dropdown.Item>
                   <Dropdown.Item className='text-center py-2 border-bottom'>Giỏ hàng
                   </Dropdown.Item>
-                  <Dropdown.Item className='text-center py-2 border-bottom'>Đăng xuất
+                  <Dropdown.Item className='text-center py-2 border-bottom'  onClick={handleLogout}>Đăng xuất
                   </Dropdown.Item>
                 </>
                 : <Dropdown.Item className='text-center py-2 border-bottom'>

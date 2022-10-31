@@ -15,6 +15,7 @@
     transform: translateY(-5px);
 }
 
+
 .menuScrollbar {
     overflow: scroll;
     position: absolute;
@@ -63,6 +64,17 @@
 .menuListItem:hover {
     transform: translateY(-3px);
     color: var(--text-white)
+}
+.menuListItem a {
+    transition: all .25s ease-in-out;
+    padding-bottom: 5px;
+}
+.menuListItem a.active {
+    /* transform: translateY(-3px); */
+    border-bottom: 1px solid var(--bg-primary-color);
+   
+    color: var(--bg-primary-color);
+    
 }
 
 @media screen and (min-width: 769px) {

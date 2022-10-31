@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { accountAPI } from "../../api-client/account";
 import { BiEdit } from "react-icons/bi";
 import { userApi } from "../../api-client";
-import { DataContext } from "../../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 
 
 const TabInfor = ({ userDetail }) => {
@@ -21,7 +21,7 @@ const TabInfor = ({ userDetail }) => {
     setMobile(isMobile);
   }, [_isMobile]);
   const [show, setShow] = useState(false);
-  const { dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(CartContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState({})
