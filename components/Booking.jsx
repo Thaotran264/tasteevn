@@ -14,11 +14,11 @@ const Booking = ({ setShowBooking }) => {
   const [description, setDescription] = useState()
   const router = useRouter()
   const { query: { id } } = router
-  const [hours, setHours] = useState()
-  const [minutes, setMinutes] = useState()
+  const [hours, setHours] = useState(new Date().toLocaleTimeString().split(':')[0])
+  const [minutes, setMinutes] = useState(new Date().toLocaleTimeString().split(':')[1])
+  const [seconds, setSeconds] = useState(new Date().toLocaleTimeString().split(':')[2])
   const [dates, setDates] = useState()
   const handleClose = () => setShowBooking(prev => !prev);
-
   const handleHours = (e) => {
     setHours(e.target.value)
   }
@@ -27,40 +27,53 @@ const Booking = ({ setShowBooking }) => {
     console.log('first', minutes)
   }
   const handleSelect = (date) => {
-    console.log(date); // native Date object
-    setDates(date)
+    setDates(date.toISOString().split('T')[0])
   }
   const onSubmit = async (event) => {
     event.preventDefault()
+    if (!adult) return
+    if (!children) return
+    const hms = `${hours}:${minutes}:${seconds}`
+    const target = new Date(dates + 'T' + hms);
     const data = {
-      adultQuantity: adult,
-      childrenQuantity: children,
-      bookingTime: `${hours} ${minutes} ${dates}`,
+      adultQuantity: Number(adult),
+      childrenQuantity: Number(children),
+      bookingTime: target.getTime(),
       description,
       brandId: id
     }
     console.log('data', data)
-    try {
-      const res = await bookingApi.booking({ data })
-      if (res.data) {
-        alert('Đặt chỗ thành công')
-        setAdult('')
-        setChildren('')
-        setTime('')
-        setDescription('')
-      }
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const res = await bookingApi.booking({ data })
+    //   if (res.data) {
+    //     alert('Đặt chỗ thành công')
+    //     setAdult('')
+    //     setChildren('')
+    //     setTime('')
+    //     setDescription('')
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
 
   }
-  const hoursList = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+  const hoursList = []
   const minutesList = []
+  const secondList = []
   for (let i = 0; i < 60; i++) {
     if (i < 10) {
       minutesList.push('0' + i)
+      secondList.push('0' + i)
+
     } else
       minutesList.push(i)
+      secondList.push(i)
+  }
+  for (let i = 0; i < 24; i++) {
+    if (i < 10) {
+      hoursList.push('0' + i)
+    } else
+      hoursList.push(i)
   }
   return (
     <section className="container mb-2 rounded" style={{ backgroundColor: '#fff' }}>
@@ -75,17 +88,18 @@ const Booking = ({ setShowBooking }) => {
               <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3 d-flex justify-content-between" controlId="adultQuantity">
                   <Form.Label>Số người lớn:</Form.Label>
-                  <Form.Control type="text" value={adult} onChange={(e) => setAdult(e.target.value)} className='w-50' />
+                  <Form.Control required type="number" value={adult} onChange={(e) => setAdult(e.target.value)} className='w-50' />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex justify-content-between" controlId="childrenQuantity">
                   <Form.Label>Số trẻ em:</Form.Label>
-                  <Form.Control type="text" value={children} onChange={(e) => setChildren(e.target.value)} className='w-50' />
+                  <Form.Control required type="number" value={children} onChange={(e) => setChildren(e.target.value)} className='w-50' />
                 </Form.Group>
                 <Form.Group className="mb-3  d-flex justify-content-between" controlId="bookingTime">
                   <Form.Label>Thời gian:</Form.Label>
                   <div className="d-flex align-items-center">
                     <Form.Select aria-label="Default select example" style={{ width: 'max-content' }}
-                      onChange={handleHours}>
+                      onChange={handleHours} >
+                      <option value={hours}>{hours}</option>
                       {hoursList.map((item, index) =>
                         <option value={item} key={index}>{item}</option>
                       )}
@@ -93,8 +107,20 @@ const Booking = ({ setShowBooking }) => {
                     <span className='mx-2'>:</span>
                     <Form.Select aria-label="Default select example"
                       onChange={handleMinutes} style={{ width: 'max-content' }}>
+                      <option value={minutes}>{minutes}</option>
+
                       {
                         minutesList.map((item, index) =>
+                          <option value={item} key={index}>{item}</option>
+                        )
+                      }
+                    </Form.Select>
+                    <span className='mx-2'>:</span>
+                    <Form.Select disabled aria-label="Default select example"
+                     style={{ width: 'max-content' }}>
+                      <option value={seconds}>{seconds}</option>
+                      {
+                        secondList.map((item, index) =>
                           <option value={item} key={index}>{item}</option>
                         )
                       }
@@ -104,7 +130,7 @@ const Booking = ({ setShowBooking }) => {
                 <Form.Group className="mb-3  d-flex justify-content-between" controlId="date">
                   <Form.Label>Ngày:</Form.Label>
                   <Calendar
-                    // date={new Date()}
+                    date={new Date()}
                     onChange={handleSelect}
                   />
                 </Form.Group>

@@ -17,7 +17,7 @@ const CartModal = ({ setShow }) => {
   const renderCartItem = cart?.map((cartItem) =>
     <div
       className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"
-      key={cartItem?.id}
+      key={cartItem?.itemId}
     >
       <div className="me-2">
         <Image
