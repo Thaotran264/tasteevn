@@ -1,14 +1,9 @@
-import { format } from "date-fns";
 import Image from "next/image";
-import React, { useContext, useEffect, useRef } from "react";
-import { useState } from "react";
-import { BsShopWindow } from "react-icons/bs";
-import { addToCart, DataContext } from "../../context/cartContext";
-// import { useDispatch, useSelector } from "react-redux";
-// import { addToCart, selectCart } from "../../features/cart/cartSlice";
-import { formatter } from "../../utils";
-import Button from 'react-bootstrap/Button';
+import React, { useContext, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
+import { addToCart } from "../../context/actions";
+import { CartContext } from "../../context/cartContext";
+import { formatter } from "../../utils";
 const Topping = ({ setShowToppingModal, showToppingModal }) => {
   const { id, name, price, salePrice, discountPrice, image, groupToppings, toppings, description
     , isGroupTopping
@@ -21,7 +16,7 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
   const [listGroupTopping, setListGroupTopping] = useState([]);
   const [listTopping, setListTopping] = useState([]);
   // const dispatch = useDispatch();
-  const { state, dispatch } = useContext(DataContext)
+  const { state, dispatch } = useContext(CartContext)
   const { cart } = state
   // console.log('cart', cart)
   const handleClose = () => {

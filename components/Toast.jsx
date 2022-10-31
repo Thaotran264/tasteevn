@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-import { DataContext } from "../store/globalState";
 import { AiOutlineClose } from 'react-icons/ai'
+import { CartContext } from "../context/cartContext";
 const Toast = ({ msg, handleShow, bgColor }) => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch } = useContext(CartContext);
   useEffect(() => {
     let idTime = setTimeout(() => {
       dispatch({ type: "NOTIFY", payload: {} })

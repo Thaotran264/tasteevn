@@ -5,20 +5,18 @@
  * @modify date 2022-08-03 16:58:44
  * @desc [description]
  */
-import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useContext } from "react";
 import Modal from "react-bootstrap/Modal";
-import axiosClient from "../api-client/axios-client";
-import { DataContext } from "../store/globalState";
-import { AiOutlineClose, AiOutlineLogin, AiOutlineUser } from "react-icons/ai";
-import Countdown from "./Countdown";
+import { AiOutlineUser } from "react-icons/ai";
 import { accountAPI } from "../api-client/account";
-import { useDispatch } from "react-redux";
-import { logIn } from "../features/auth/authSlice";
+import { logIn } from "../context/actions";
+import { CartContext } from "../context/cartContext";
+import Countdown from "./Countdown";
 
 function LoginModal({ btnStyle }) {
-  const dispatch = useDispatch()
+  const {state,dispatch} = useContext(CartContext)
   const [show, setShow] = useState(false);
   const ip1 = useRef();
   const ip2 = useRef();
@@ -26,7 +24,6 @@ function LoginModal({ btnStyle }) {
   const ip4 = useRef();
   const ip5 = useRef();
   const ip6 = useRef();
-
 
   const handleShow = () => setShow(true);
   const router = useRouter();
@@ -67,7 +64,6 @@ function LoginModal({ btnStyle }) {
         email: data.PhoneNumber,
         password: data.Password,
       };
-      // dispatch({ type: "NOTIFY", payload: { loading: true } });
       login(params);
       return
     }
@@ -108,16 +104,11 @@ function LoginModal({ btnStyle }) {
   const login = async (params) => {
     try {
       const res = await accountAPI.login(params);
-      if (res.successful && res.data) {
-        console.log('daataa', res.data)
-        // localStorage.setItem("token", JSON.stringify(res.data.token));
-        // localStorage.setItem("userInfo", JSON.stringify(res.data));
-        // dispatch({ type: "NOTIFY", payload: { success: res.successful } });
-        // dispatch({ type: 'AUTH', payload: res })
+      if (res.successful && res.data) {     
         dispatch(logIn(res.data))
         handleClose();
-        router.push("/");
-        window.location.reload();
+        // router.push("/");
+        // window.location.reload();
       }
 
     } catch (error) {

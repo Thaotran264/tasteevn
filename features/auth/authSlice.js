@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 function getAuth() {
     if (typeof window !== "undefined") {
         let auth = sessionStorage.getItem('userInfo')
-        return eval(JSON.parse(auth) || '')
+        return eval(JSON.parse(auth || "") )
     }
 }
 function getToken() {
@@ -27,9 +27,9 @@ const setAuthFunc = (userInfo, isLogged, token) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    authData: getAuth(),
-    isLogged: getLogged(),
-    token: getToken()
+    authData: {},
+    isLogged: false,
+    token: ''
   },
   reducers: {
     logIn(state, action) {

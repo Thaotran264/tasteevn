@@ -2,9 +2,8 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart, AiOutlineArrowUp } from "react-icons/ai";
-import { TbBrandBooking } from 'react-icons/tb'
-import { useSelector } from "react-redux";
+import { AiOutlineArrowUp, AiOutlineFlag, AiOutlineHeart, AiOutlineHome, AiOutlineShoppingCart } from "react-icons/ai";
+import { TbBrandBooking } from 'react-icons/tb';
 import Banner from "../components/Banner";
 import Booking from "../components/Booking";
 import InfoDefault from "../components/Info/InfoDefault";
@@ -12,9 +11,7 @@ import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
 import CartModal from "../components/Modal/CartModal";
-import { DataContext } from "../context/cartContext";
-import { selectAuth } from "../features/auth/authSlice";
-import { selectCart, totalQuantityCart } from "../features/cart/cartSlice";
+import { CartContext } from "../context/cartContext";
 export async function getStaticPaths() {
   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
   const paths = res.data.data.map((item) => ({
@@ -43,7 +40,7 @@ const Detail = ({ detail }) => {
   const photos = JSON.parse(widgets.filter(item => item.widgetType == 3)[0].data)
   const menuWg = JSON.parse(widgets.filter(item => item.widgetType == 5)[0].data)
   const { brandImage } = infoWg.data
-  const { state: { cart } } = useContext(DataContext)
+  const { state: { cart } } = useContext(CartContext)
   // const {cart} = state
   // console.log('first', cart?.length)
   // const cart = useSelector(selectCart);
@@ -52,6 +49,12 @@ const Detail = ({ detail }) => {
   const handleShow = () => {
     setShow(!show);
   };
+   const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth", // for smoothly scrolling
+    });
+};
   let mbref = useRef();
   useEffect(() => {
     const handleScroll = () => {
@@ -80,28 +83,6 @@ const Detail = ({ detail }) => {
         <InfoDefault info={infoWg?.data} maps={webMap} />
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
         <Menu productList={menuWg} menuPos={false} />
-        {/* {show ? <CartModal setShow={setShow} /> : ''} */}
-        {/* {
-          total >= 1 &&
-          <div
-            className="hideOnDesktop position-fixed bottom-0 end-0 start-0"
-            style={{ backgroundColor: "#FFAE6D" }}
-          >
-            <div className="container w-100">
-              <div className="d-flex justify-content-between">
-                <button
-                  className="button  d-flex align-items-center "
-                  style={{ height: 48, minWidth: 80 }}
-                  onClick={handleShow}
-                >
-                  <BsCartCheck style={{ fontSize: 22 }} />
-                  <span style={{ fontSize: 20 }}>{total}</span>
-                </button>
-                <button className="button ">Tổng tiền: {formatter.format(0)}</button>
-              </div>
-            </div>
-          </div>
-        } */}
 
         <div className="hideOnMobile d-flex flex-column position-fixed" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
           <Link href='/'>
@@ -122,7 +103,8 @@ const Detail = ({ detail }) => {
           <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
           <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
         </div>
-        <button ref={mbref} className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
+        <button ref={mbref}
+        onClick={scrollToTop} className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
           <AiOutlineArrowUp />
         </button>
       </section>

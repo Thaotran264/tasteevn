@@ -1,16 +1,14 @@
 import Image from "next/image";
 import React, { useContext } from "react";
 import { formatter } from "../utils";
-import { decrease, deleteItem, increase } from "../store/actions/actionsType";
-import { DataContext } from "../store/globalState";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineTag } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart, selectCart } from "../features/cart/cartSlice";
+import { CartContext } from "../context/cartContext";
+import { removeFromCart } from "../context/actions";
 const CartItem = ({ item }) => {
-  const dispatch = useDispatch();
-  
+  const {state, dispatch} = useContext(CartContext)
+  const { cart} = state
   return (
     <article className="cartItem__article hideOnDeskTop">
       <div className="cartItem__image">
@@ -58,7 +56,7 @@ const CartItem = ({ item }) => {
             {formatter.format(item.price)}
           </span>
           <span className="text-danger ms-2" style={{ fontSize: 14 }}>
-            {formatter.format(item.price) || 0}
+            {formatter.format(item.price * item.quantity) || 0}
           </span>
         </div>
 
@@ -76,7 +74,7 @@ const CartItem = ({ item }) => {
       </div>
       <button
         className="button button--delete btn-danger ms-auto"
-        onClick={() => dispatch(removeFromCart(item.itemId))}
+        onClick={() => dispatch(removeFromCart(item,cart))}
       >
         <BsTrash />
       </button>
