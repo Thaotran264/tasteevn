@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { DataContext } from "../context/cartContext";
+import { CartContext } from "../context/cartContext";
 import Loading from "./Loading";
 import Toast from "./Toast";
 
 const Notify = () => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch } = useContext(CartContext);
   const { notify } = state;
 
   return (

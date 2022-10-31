@@ -6,29 +6,20 @@ import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
 import Checkout from "../../components/Modal/Checkout";
-import { selectAuth } from "../../features/auth/authSlice";
-import { clearCart, selectCart, totalQuantityCart } from "../../features/cart/cartSlice";
-import { DataContext } from "../../store/globalState";
+import { CartContext } from "../../context/cartContext";
+// import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
 const Cart = () => {
   const [check, setCheck] = useState(false);
-  const cart = useSelector(selectCart);
-  console.log(cart);
-  const auth = useSelector(selectAuth);
-  const quantity = useSelector(totalQuantityCart);
-  const { isLogged, authData } = auth;
-  // console.log('auth', authData);
+  const { state, dispatch } = useContext(CartContext)
+  const { cart } = state
   const [userAdress, setUserAdress] = useState();
   const router = useRouter();
-  const dispatch = useDispatch();
-const totalPrice = cart?.reduce((cal, item) => cal+item.price,0)
-console.log(totalPrice);
-
+  const totalPrice = cart?.reduce((cal, item) => cal + item.price * item.quantity, 0)
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log('shpiing',...res);
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -57,7 +48,7 @@ console.log(totalPrice);
     }
   };
 
-  if (cart?.length == 0) {
+  if (!cart?.length) {
     return (
       <>
         <h2 className="text-center">Empty</h2>
@@ -73,8 +64,8 @@ console.log(totalPrice);
       <div className="w-100 d-flex mb-2 gap-2">
         <article className="cart__article position-relative w-50 rounded-2 bg-light p-2">
           <h4 className="text-center border-bottom">Trang thanh toán</h4>
-          {cart?.map((cartItem) => (
-            <CartItem item={cartItem} key={cartItem.itemId} />
+          {cart?.map((cartItem,index) => (
+            <CartItem item={cartItem} key={index} />
           ))}
         </article>
         {/* Shipping Address */}

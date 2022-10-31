@@ -1,129 +1,44 @@
 import { createContext, useEffect, useReducer } from "react";
-export const ACTIONS = {
-    NOTIFY: "NOTIFY",
-    AUTH: "AUTH",
-    ADD_CART: "ADD_CART",
-};
+import { reducers } from "./reducers";
 
-export const addToCart = (product, cart) => {
-    const {orderToppings} = product
-    const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
-    const existItem = cart.filter(item => item.itemId == product.itemId)
-    const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
-    if(existItem.length) {
-        console.log('existItem',fil)
-        if(fil.length) {
-            return {
-                type: "ADD_CART", payload: [{...fil[0], quantity:fil[0].quantity+ product.quantity}]
+export const CartContext = createContext();
+export const CartProvider = ({ children }) => {
+    const initialState = {
+        cart: [],
+        auth: {},
+        notify: {}
+    };
+    const [state, dispatch] = useReducer(reducers, initialState);
+    const { cart,auth } = state;
+
+    useEffect(() => {
+        const data = sessionStorage.getItem("localCart");
+        if(data) {
+            if (Object.keys(JSON.parse(data))?.length) {
+            dispatch({ type: "ADD_CART", payload: JSON.parse(data) });
             }
         }
         else {
-            return {
-                type: "ADD_CART", payload: [...cart,{ ...product}]
-            }
-        }  
- 
-    }
-    else {
-        console.log('unexistItem')
-
-        return {
-            type: "ADD_CART", payload: [...cart, { ...product}]
+            dispatch({ type: "ADD_CART", payload: [] });
         }
-    }
-
-};
-export const removeFromCart = (product, cart) => {
-    const {orderToppings} = product
-    const listToppingProduct = orderToppings.map(item => item.toppingId).join('')
-
-    const existItem = cart.filter(item => item.itemId == product.itemId)
-    console.log('first',existItem)
-    const fil = existItem.filter(item => item.orderToppings.map(it=>it.toppingId).join('') == listToppingProduct)
-if(fil.length)
-    return {
-        type: "ADD_CART", payload: [...cart]
-    }
-}
-export const decrease = (data, id) => {
-    const newData = [...data]
-    data.forEach((item, i) => {
-        if (item.id === id) {
-            if (item.quantity == 1) {
-                item.quantity -= 1
-                newData.splice(i, 1)
-            }
-            else if (item.quantity > 1) {
-                return item.quantity -= 1
-            }
-        }
-    })
-    return ({ type: 'ADD_CART', payload: newData })
-}
-export const increase = (data, it) => {
-    const newData = [...data]
-
-    const check = newData.find((item) => {
-        return item.id == it.id;
-    });
-    if (!check) {
-        return {
-            type: "ADD_CART",
-            payload: [...data, { ...it, quantity: 1 }],
-        };
-    }
-    else {
-        newData.forEach(item => {
-            if (item.id === it.id) item.quantity += 1
-        })
-        return ({ type: 'ADD_CART', payload: newData })
-    }
-}
-
-export const clearCart = () => {
-    return ({ type: 'ADD_CART', payload: [] })
-}
-const reducers = (state, action) => {
-    switch (action.type) {
-        case ACTIONS.NOTIFY:
-            return {
-                ...state,
-                notify: action.payload,
-            };
-        case ACTIONS.AUTH:
-            return {
-                ...state,
-                auth: action.payload,
-            };
-        case ACTIONS.ADD_CART:
-            return {
-                ...state,
-                cart: action.payload,
-            };
-
-        default:
-            return state;
-    }
-};
-export const DataContext = createContext();
-export const DataProvider = ({ children }) => {
-    const initialState = {
-        cart: [],
-        notify: {},
-        auth: {}
-    };
-    const [state, dispatch] = useReducer(reducers, initialState);
-    const { cart } = state;
-
+    }, []);
     useEffect(() => {
-        const data = JSON.parse(sessionStorage.getItem("localCart")) || {};
-        if (Object.keys(data)?.length) {
-            dispatch({ type: "ADD_CART", payload: data });
+        const data = sessionStorage.getItem("user");
+        if(data) {
+            if (Object.keys(JSON.parse(data))?.length) {
+            dispatch({ type: "AUTH", payload: JSON.parse(data) });
+            }
+        }
+        else {
+            dispatch({ type: "AUTH", payload: [] });
         }
     }, []);
 
     useEffect(() => {
         sessionStorage.setItem("localCart", JSON.stringify(cart));
     }, [cart]);
-    return <DataContext.Provider value={{ state, dispatch }}>{children}</DataContext.Provider>;
+    useEffect(() => {
+        sessionStorage.setItem("user", JSON.stringify(auth));
+    }, [auth]);
+    return <CartContext.Provider value={{ state, dispatch }}>{children}</CartContext.Provider>;
 };

@@ -10,12 +10,12 @@ import ModalAddresCRU from "../modalAddresCRU";
 import { adressApi } from "../../api-client/adressApi";
 import Link from "next/link";
 import Nodata from "../Nodata";
-import { DataContext } from "../../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 
 
 const ShippingAddress = () => {
     const [_isMobile, setMobile] = useState(false);
-    const { state, dispatch } = useContext(DataContext);
+    const { state, dispatch } = useContext(CartContext);
     const [idDelete, setIdDelete] = useState(false);
     const router = useRouter();
     const [dataAddres, setDataAddres] = useState([]);
