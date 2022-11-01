@@ -174,3 +174,11 @@
 .thumb-3 .box.img3 {
     grid-area: img3;
 }
+.onMobile {
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .onMobile {
+        width: 50%;
+    }
+  }

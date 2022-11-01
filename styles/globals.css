@@ -94,20 +94,6 @@ input {
   right: 0;
 }
 
-input::placeholder {
-  /* Firefox */
-  color: var(--text-dark);
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #000;
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #000;
-}
 
 /* width */
 ::-webkit-scrollbar {
@@ -132,13 +118,7 @@ input::placeholder {
 input:focus {
   box-shadow: none
 }
-.navForm input {
-  color: var(--text-white) !important;
-  padding-left: 10px !important;
-}
-.navForm input::placeholder {
-  color: var(--text-white) !important;
-}
+
 @media screen and (min-width: 992px) {
   .hideOnDesktop {
     display: none !important;
@@ -343,12 +323,6 @@ input:focus {
 @media (min-width: 992px) {
   .menuMobile {
     display: none;
-  }
-}
-
-@media (min-width: 992px) {
-  .info__image {
-    margin: 0 60px;
   }
 }
 

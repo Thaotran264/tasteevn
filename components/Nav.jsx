@@ -45,7 +45,7 @@ const Nav = () => {
     setShowCart(true)
   }
   return (
-    <section className='d-flex justify-content-center align-items-center nav active' style={{ backgroundColor: 'hsl(27, 100%, 71%)', height: 48 }} >
+    <section className='d-flex justify-content-center align-items-center nav active shadow bg-light' style={{height: 48 }} >
       <nav className='d-flex container px-2 gap-2 '>
         {
           showCart && <CartModal setShow={setShowCart} />
@@ -67,7 +67,7 @@ const Nav = () => {
         <Dropdown className='d-flex align-items-center justify-content-center navItem' >
           <Dropdown.Toggle
             className="border-0 rounded-0 border-warning border-bottom"
-            id="dropdown-basic" style={{ color: '#fff' }}
+            id="dropdown-basic"
           >
             TP HCM
           </Dropdown.Toggle>
@@ -91,17 +91,17 @@ const Nav = () => {
             />
             <button className="d-flex align-items-center" type="submit"
               onClick={handleShowSearchBox}>
-              <BsSearch />
+              <BsSearch style={{fontSize: 13}}/>
             </button>
           </form>
         </div>
         <div className='position-relative d-flex align-items-center p-2'>
-          <AiOutlineShoppingCart onClick={handleShowCartModal} style={{ cursor: 'pointer', color: '#fff', fontSize: 22 }} />
+          <AiOutlineShoppingCart onClick={handleShowCartModal} style={{ cursor: 'pointer', fontSize: 22 }} />
           <span
             className='rounded-5 d-flex align-items-center justify-content-center'
             style={{
-              fontSize: 13, position: 'absolute', top: '-3px', right: '-5px',
-              backgroundColor: '#fff', width: 20, height: 20
+              fontSize: 13, position: 'absolute', top: '-3px', right: '-5px'
+             , width: 20, height: 20
             }}>{cart?.length}</span>
         </div>
         <div className='px-2 align-items-center navItem hideOnMobile' >
@@ -112,7 +112,6 @@ const Nav = () => {
                 <Dropdown.Toggle
                   className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
                   id="dropdown-basic"
-                  style={{ color: '#fff' }}
                 >
                   {fullName || ''}
                 </Dropdown.Toggle>
@@ -125,7 +124,7 @@ const Nav = () => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown> :
-              <div className='d-flex align-items-center gap-1 justify-content-end'>
+              <div className='d-flex align-items-center gap-1 h-100 justify-content-end'>
                 <LoginModal />
               </div>
           }
