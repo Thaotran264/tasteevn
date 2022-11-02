@@ -20,10 +20,10 @@
 } */
 
 .navItem {
-    flex: 1;
+    /* flex: 1; */
 }
-.navItem:nth-child(4) {
-    flex: 2;
+.navItem:nth-child(3) {
+    flex: 1;
 }
 .navForm {
     display: flex;
@@ -68,3 +68,9 @@
     background-color: #fff;
     color: var(--bg-primary-color);
 }
+.customHover {
+    transition: all .25s ease-in-out;
+}
+.customHover:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+transform: scale(1.05);}

@@ -5,37 +5,37 @@ import { searchApi } from "../api-client/search";
 
 const Search = ({ showSearch, setShowSearch }) => {
   const [searchText, setSearchText] = useState('')
-const [showSearchForm, setShowSearchForm] = useState(false)
-const [searchData, setSearchData] = useState([]);
+  const [showSearchForm, setShowSearchForm] = useState(false)
+  const [searchData, setSearchData] = useState([]);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  // setShowSearchForm(true)
-  if(!searchText) return
-  let formData = new FormData();
-  formData.append("Name", searchText);
-  try {
-    const res = await searchApi.searchProduct(formData);
-    console.log(res.data.data);
-    if (res.successful && res.data) {
-      setSearchData(res.data.data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setShowSearchForm(true)
+    if (!searchText) return
+    let formData = new FormData();
+    formData.append("Name", searchText);
+    try {
+      const res = await searchApi.searchProduct(formData);
+      console.log(res.data.data);
+      if (res.successful && res.data) {
+        setSearchData(res.data.data);
+      }
+      setSearchText('')
+    } catch (err) {
+      console.log(err);
     }
-    setSearchText('')
-  } catch (err) {
-    console.log(err);
+  };
+  const handleSearchChange = (value) => {
+    if (value) {
+      setSearchText(value)
+      setShowSearchForm(true)
+    }
+    else {
+      setShowSearchForm(false)
+    }
   }
-};
-const handleSearchChange = (value) => {
-  if(value) {
-    setSearchText(value)
-    setShowSearchForm(true)
-  }
-  else {
-    setShowSearchForm(false)
-  }
-}
   const handleClick = () => {
-    setShowSearch(!showSearch);
+    // setShowSearch(!showSearch);
     setSearchText('')
   };
 
@@ -82,19 +82,12 @@ const handleSearchChange = (value) => {
     },
   ]
   // const search = data.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase())).slice(0,5)
-  
+
   return (
     <section
       className="position-fixed bg-dark bg-opacity-75 start-0 top-0 bottom-0 w-100 h-100"
       style={{ zIndex: 999 }}
     >
-      {/* <button
-        className="btn btn-outline-danger position-absolute"
-        style={{ top: 15, right: 15 }}
-        onClick={handleClick}
-      >
-        x
-      </button> */}
       <div className="position-relative h-100">
         <form
           onSubmit={handleSubmit}
@@ -106,33 +99,33 @@ const handleSearchChange = (value) => {
             name="search"
             className="p-2  w-100"
             style={{ border: "none", outline: "none" }}
-            onChange={(e)=>handleSearchChange(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
           />
           <button className="border-0 px-4 py-2" htmlType='submit'>
             <BsSearch />
           </button>
         </form>
         {
-          showSearchForm && 
-        <div
-          className="bg-light w-100 mt-2 p-2 rounded mb-2"
-          style={{ zIndex: 99 }}
-        >
-          {
-          searchData.map(item=>
-          <div className="d-flex align-items-center gap-2 mb-2 border border-bottom" key={item.id}>
-            {/* <Image
+          showSearchForm &&
+          <div
+            className="bg-light w-100 mt-2 p-2 rounded mb-2"
+            style={{ zIndex: 99 }}
+          >
+            {
+              searchData.map(item =>
+                <div className="d-flex align-items-center gap-2 mb-2 border border-bottom" key={item.id}>
+                  {/* <Image
               width={80}
               height={80}
               className="rounded"
               src={item.image}
               alt=""
             /> */}
-            <p className="mb-0">{item.name}</p>
+                  <p className="mb-0">{item.name}</p>
+                </div>
+
+              )}
           </div>
-          
-)}
-           </div>
         }
         <button className="border-0 w-100 py-2 rounded bg-danger text-light " onClick={handleClick}>Đóng</button>
       </div>

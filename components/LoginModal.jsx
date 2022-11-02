@@ -15,9 +15,9 @@ import { logIn } from "../context/actions";
 import { CartContext } from "../context/cartContext";
 import Countdown from "./Countdown";
 
-function LoginModal({ btnStyle }) {
+function LoginModal({ showLoginModal,
+  setShowLoginModal }) {
   const {state,dispatch} = useContext(CartContext)
-  const [show, setShow] = useState(false);
   const ip1 = useRef();
   const ip2 = useRef();
   const ip3 = useRef();
@@ -25,8 +25,6 @@ function LoginModal({ btnStyle }) {
   const ip5 = useRef();
   const ip6 = useRef();
 
-  const handleShow = () => setShow(true);
-  const router = useRouter();
   const [data, setData] = useState({});
   const [isDisableRePass, setIsDisableRepass] = useState(true);
   const [isShowCount, setIsShowCount] = useState(true);
@@ -35,16 +33,13 @@ function LoginModal({ btnStyle }) {
     passwordMsg: false,
     nameMsg: false,
   });
-  // const { state, dispatch } = useContext(DataContext);
   const [textButton, setTextButton] = useState({ btnSubmit: "Tiếp tục" });
-  // const [toastmsg, settoastmsg] = useState('')
   const handleClose = () => {
     setStatusInput({});
     setData({});
     setTextButton({ btnSubmit: "Đăng nhập" });
 
-    setShow(false);
-  }
+    setShowLoginModal(!showLoginModal)  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (statusInput.forgotPassword && !statusInput.showFormFogotPass) {
@@ -312,24 +307,9 @@ function LoginModal({ btnStyle }) {
       setIsDisableRepass(false);
     }
   };
-
-  //  1. call (/Users/forgot-password?phoneNumber=0396296673') => authenID
-
-  //  2. call (/Users/verify-sms-code)  - truyền vào 
-  //       {
-  //           "authenId": "38362311-accd-47bf-a34f-a5a667f21691",
-  //           "verifyCode": "888888"
-  //        } 
-  //     => lấy được token login -> xác thực token(set token login )
-
-  //   3. (/Users/set-password) - truyền password kiểm tra trạng thái và bắn thông báo ( "successful": true )
-
-
-
-
   return (
     <>
-      {btnStyle == 'ICON' ?
+      {/* {btnStyle == 'ICON' ?
         <button className="btn-custom" onClick={handleShow} style={{ border: '1px solid white', borderRadius: '0.6em' }}>
           {btnStyle && btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24}} /> : 'Đăng nhập'}
         </button>
@@ -337,10 +317,9 @@ function LoginModal({ btnStyle }) {
         <button className="btn btn-warning text-light btn-sm" onClick={handleShow} >
           Đăng nhập
         </button>
-      }
+      } */}
 
-      <Modal centered show={show} onHide={handleClose} animation={false}  size="small" backdrop="static">
-        {/* <Modal.Header closeButton></Modal.Header> */}
+      <Modal centered show={showLoginModal} onHide={setShowLoginModal} animation={false}  size="small" backdrop="static">
         <Modal.Body>
           <div className="mx-auto bg-white rounded w-100">
             <h2 className="text-center formTitle mb-3">
@@ -542,7 +521,7 @@ function LoginModal({ btnStyle }) {
             )}
             <button
               type="button"
-              onClick={handleClose}
+              onClick={()=>setShowLoginModal(!showLoginModal)}
               className="btn-custom button-custom-danger-form w-100 mb-2"
             >
               Đóng
@@ -574,7 +553,6 @@ function LoginModal({ btnStyle }) {
             )}
           </div>
         </Modal.Body>
-        {/* <button onClick={handleClose} className="btn-custom btnCustom--delete position-absolute" style={{top: 5, right: 5}}><AiOutlineClose /></button> */}
       </Modal>
     </>
   );
