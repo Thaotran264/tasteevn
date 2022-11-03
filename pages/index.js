@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick/lib/slider";
 import Layout from "../components/Layout";
-import React from "react";
+import React, { useState } from "react";
+import Login from "../components/Modal/Login";
+import Register from "../components/Modal/Register";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -15,105 +17,49 @@ function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
 }
-export default function Home({ data }) {
-  let banners = [
+const settings = {
+  infinite: true,
+  dots: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  className: "center",
+  centerMode: true,
+  centerPadding: "25px",
+  responsive: [
     {
-      "id": "a7867858-2505-48f2-a3a7-f2c801cd5bd0",
-      "brandId": "68af74fa-595f-439d-882a-2ce1c236af28",
-      "brandName": "The Pizza Company - Nguyễn Thị Minh Khai",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3202-1664279830?w=393&type=o",
-      "order": 12
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
     },
     {
-      "id": "ee4e148c-e604-422b-a4e1-1b6b4f3829f5",
-      "brandId": "12d14d71-58b5-4481-9834-1299519a5813",
-      "brandName": "Pizza Hut - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3183-1664438196?w=393&type=o",
-      "order": 2
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 1
+      }
     },
     {
-      "id": "72ef381d-1442-4012-a888-a9a2439edf79",
-      "brandId": "",
-      "brandName": "",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2444-1645171670?w=393&type=o",
-      "order": 3
-    },
-    {
-      "id": "fbfc4cf0-bd59-4cbe-abaf-96bc179922ad",
-      "brandId": "a3b66785-e234-4f5a-abf1-d5ae101ef3bf",
-      "brandName": "TOUS les JOURS - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3313-1664611060?w=393&type=o",
-      "order": 4
-    },
-    {
-      "id": "a7867858-2505-48f2-a3a7-f2c801cd5bd05",
-      "brandId": "68af74fa-595f-439d-882a-2ce1c236af28",
-      "brandName": "The Pizza Company - Nguyễn Thị Minh Khai",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2733-1655805928?w=393&type=o",
-      "order": 2
-    },
-    {
-      "id": "ee4e148c-e604-422b-a4e1-1b6b4f3829f56",
-      "brandId": "12d14d71-58b5-4481-9834-1299519a5813",
-      "brandName": "Pizza Hut - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3183-1664438196?w=393&type=o",
-      "order": 2
-    },
-    {
-      "id": "72ef381d-1442-4012-a888-a9a2439edf797",
-      "brandId": "",
-      "brandName": "",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2880-1661156575?w=393&type=o",
-      "order": 3
-    },
-    {
-      "id": "fbfc4cf0-bd59-4cbe-abaf-96bc179922ad8",
-      "brandId": "a3b66785-e234-4f5a-abf1-d5ae101ef3bf",
-      "brandName": "TOUS les JOURS - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3202-1664279830?w=393&type=o",
-      "order": 4
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
     }
   ]
+};
+export default function Home({ data }) {
+const [showLoginModal, setShowLoginModal] = useState(false)
+const handleShowLoginModal = () => setShowLoginModal(true)
 
-  const settings = {
-    infinite: true,
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    className: "center",
-    centerMode: true,
-    centerPadding: "25px",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
   return (
     <>
       <Head>
@@ -142,6 +88,8 @@ export default function Home({ data }) {
         <meta name="twitter:creator" content="@tastee" />
       </Head>
       <section className="mb-5 container"  >
+        <button
+        onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button>
         <Slider {...settings} className="">
           {data?.map((it, index) => (
             <Link key={it.id} href={`/${it?.brandId}`}>
@@ -154,6 +102,11 @@ export default function Home({ data }) {
           ))}
 
         </Slider>
+        {
+          showLoginModal ?
+          <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} />:<></>
+        }
+        
       </section>
 
       {/* <section className="container px-0 d-flex flex-wrap">

@@ -1,10 +1,12 @@
 import axios from 'axios'
+import moment from 'moment/moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { orderApi, userApi } from '../../api-client'
+import Layout from '../../components/Layout'
 import MerchantLayout from '../../components/MerchantLayout'
 import { selectAuth } from '../../features/auth/authSlice'
 import { formatter } from '../../utils/common'
@@ -14,7 +16,6 @@ const Detail = () => {
     const router = useRouter()
     const { id } = router.query
     const [data, setData] = useState()
-    const [userData, setUserData] = useState()
     useEffect(() => {
         const getData = async () => {
             try {
@@ -26,19 +27,10 @@ const Detail = () => {
         }
         getData()
     }, [id])
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await userApi.getUserInfor()
-                setUserData(res.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getData()
-    }, [])
-    const { userInfo } = userData || {}
+    const { shippingAddress } = data || {}
+
     const totalPrice = data?.orderDetails?.map(order => order.price).reduce((cal, item) => cal += item)
+    
     const renderOrderDetails = data?.orderDetails?.map(order => (
         <div className='bg-dark bg-opacity-10 rounded p-2 mb-2' key={order.id}>
             <div className='d-flex justify-content-between'>
@@ -56,55 +48,57 @@ const Detail = () => {
             </div>
         </div>
     ))
-    const renderUserInfo =
-        <div className='rounded bg-dark bg-opacity-10 py-2' style={{ flex: 1 }}>
-            <h3 className='text-center border-bottom border-dark'>Thông tin người mua</h3>
-            <div className='px-2'>
-                <div className='d-flex gap-2 align-items-center mb-2'>
-                    <span className='fw-bold'>Họ và tên:</span>
-                    <p className='mb-0'>{userInfo?.fullName}</p>
-                </div>
-                <div className='d-flex gap-2 align-items-center mb-2'>
-                    <span className='fw-bold'>SĐT:</span>
-                    <p className='mb-0'>{userInfo?.phoneNumber}</p>
-                </div>
-                <div className='d-flex gap-2 align-items-center mb-2'>
-                    <span className='fw-bold'>Email:</span>
-                    <p className='mb-0'>{userInfo?.email}</p>
-                </div>
-                <div className='d-flex gap-2 align-items-center mb-2'>
-                    <span className='fw-bold'>Địa chỉ:</span>
-                    <p className='mb-0'>{userInfo?.address}</p>
-                </div>
-
+    const renderUserInfo = <div className='rounded shadow p-2 ' style={{ flex: 1 }}>
+        <h3 className='text-center border-bottom border-dark'>Thông tin người mua</h3>
+        <div className='px-2'>
+            <div className='d-flex gap-2 align-items-center mb-2'>
+                <span className='fw-bold'>Họ và tên:</span>
+                <p className='mb-0'>{shippingAddress?.name}</p>
             </div>
+            <div className='d-flex gap-2 align-items-center mb-2'>
+                <span className='fw-bold'>SĐT:</span>
+                <p className='mb-0'>{shippingAddress
+                    ?.phone}</p>
+            </div>
+            {/* <div className='d-flex gap-2 align-items-center mb-2'>
+                <span className='fw-bold'>Email:</span>
+                <p className='mb-0'>{shippingAddress
+                    ?.email}</p>
+            </div> */}
+            <div className='d-flex gap-2 align-items-center mb-2'>
+                <span className='fw-bold'>Địa chỉ:</span>
+                <p className='mb-0'>{shippingAddress
+                    ?.address}</p>
+            </div>
+
         </div>
+    </div>
 
     return (
-        <MerchantLayout>
-            <section className='container px-0'>
-                <div className='d-flex gap-2' >
-                    <div className='py-2' style={{ flex: 1 }}>
-                        <h2 className='text-center border-bottom border-dark'>Thông tin đơn hàng</h2>
-                        <div className='d-flex justify-content-between bg-dark bg-opacity-10 mb-2 align-items-center p-2 rounded    '>
-                            <span className='fw-bold '>Ngày tạo:</span>
-                            <p className='mb-0'>
-                                {data?.createdDate}
-                            </p>
-                        </div>
-                        {renderOrderDetails}
-                        <div className='d-flex justify-content-between bg-dark bg-opacity-10 mb-2 align-items-center p-2 rounded    '>
-                            <span className='fw-bold'>Tổng tiền:</span>
-                            <p className='mb-0'>  {formatter.format(totalPrice)}</p>
-                        </div>
+        <section className='container px-0 py-4'>
+            <div className='d-flex gap-2 ' >
+                <div className='p-2 shadow rounded' style={{ flex: 1 }}>
+                    <h2 className='text-center border-bottom border-dark'>Thông tin đơn hàng</h2>
+                    <div className='d-flex justify-content-between bg-dark bg-opacity-10 mb-2 align-items-center p-2 rounded    '>
+                        <span className='fw-bold '>Ngày tạo:</span>
+                        <p className='mb-0'>
+                            {moment(data?.createdDate).format('DD/MM/yyyy')}
+                        </p>
                     </div>
-                    {
-                        renderUserInfo
-                    }
+                    {renderOrderDetails}
+                    <div className='d-flex justify-content-between bg-dark bg-opacity-10 mb-2 align-items-center p-2 rounded    '>
+                        <span className='fw-bold'>Tổng tiền:</span>
+                        <p className='mb-0'>  {formatter.format(totalPrice)}</p>
+                    </div>
                 </div>
-            </section>
-        </MerchantLayout>
+                {
+                    renderUserInfo
+                }
+            </div>
+        </section>
     )
 }
-
+Detail.getLayout = function getLayout(Page) {
+    return <Layout>{Page}</Layout>;
+};
 export default Detail

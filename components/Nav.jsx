@@ -100,14 +100,14 @@ const Nav = () => {
   </Dropdown>
   const renderDropDownCities = <Dropdown className='d-flex align-items-center justify-content-center navItem bg-dark rounded bg-opacity-10 ' onSelect={handleCitiesChange} >
     <Dropdown.Toggle
-      className="border-0"
+      className="border-0 d-flex gap-2 align-items-center px-5"
       id="dropdown-basic"
-      style={{ fontSize: 12 }}
+      style={{ fontSize: 12, width: 'max-content' }}
     >
-  Hồ chí minh
+      Hồ chí minh
     </Dropdown.Toggle>
     <Dropdown.Menu
-    className='' style={{ maxHeight: 400, overflowY: 'scroll' }}>
+      className='' style={{ maxHeight: 400, overflowY: 'scroll' }}>
       {cities?.map(item => (
         <Dropdown.Item className='text-center border-bottom' key={item.id} style={{ fontSize: 12 }} eventKey={item.id} value={item.id}
         >
@@ -118,10 +118,11 @@ const Nav = () => {
   </Dropdown>
   const renderSearchForm = <div className='d-flex align-items-center navItem' >
     <form
-      className={` navForm justify-content-end`}
+      className={` navForm justify-content-end rounded-5`}
       onSubmit={handleSubmit}
     >
       <input
+      className='rounded-5'
         disabled={!searchBox}
         value={searchText}
         onChange={(e) => handleSearchChange(e.target.value)}
@@ -164,13 +165,14 @@ const Nav = () => {
       item => item.name.toLowerCase().includes(String(searchText).toLowerCase())
     ).length} onClick={handleMore}>Xem thêm</button>
   </div>)
-  const renderUserInfo = <div className='px-2 align-items-center navItem hideOnMobile' >
+  const renderUserInfo = <div className='px-2
+  d-flex  align-items-center navItem hideOnMobile'>
     {
       token ?
-        <Dropdown className='d-flex align-items-center justify-content-end ' >
-          <Image src={avatar || '/image/logo512.png'} width="30" height="30" alt={fullName || ''} />
+        <Dropdown className='d-flex align-items-center gap-2 justify-content-end px-2 rounded-5' style={{ backgroundColor: 'hsl(27, 100%, 71%)' }} >
+          <Image src={avatar || '/image/logo512.png'} className='rounded-5' width="30" height="30" alt={fullName || ''} />
           <Dropdown.Toggle
-            className="border-0 rounded-0 border-warning border-bottom d-flex align-items-center"
+            className="border-0 d-flex align-items-center gap-1 text-light px-0"
             id="dropdown-basic"
           >
             {fullName || ''}

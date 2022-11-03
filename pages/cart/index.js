@@ -5,21 +5,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
+import AddAdress from "../../components/Modal/AddAdress";
 import Checkout from "../../components/Modal/Checkout";
+import { clearCart } from "../../context/actions";
 import { CartContext } from "../../context/cartContext";
 // import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
+
 const Cart = () => {
   const [check, setCheck] = useState(false);
   const { state, dispatch } = useContext(CartContext)
   const { cart } = state
+  const [showModal, setShowModal] = useState(false)
+  const router = useRouter()
   const [userAdress, setUserAdress] = useState();
-  const router = useRouter();
+  const [addressData, setAddressData] = useState({})
   const totalPrice = cart?.reduce((cal, item) => cal + item.price * item.quantity, 0)
+  const totalQuantity= cart?.reduce((cal, item) => cal + item.quantity, 0)
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
+        console.log('res',res)
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -29,23 +36,23 @@ const Cart = () => {
   }, []);
   const handleDatHangButton = async () => {
     const params = {
-      userId: authData.id,
+      userId: userAdress?.userId,
       orderDetails: cart,
-      shippingAddressId: "50dfee76-8ce6-4e11-bf7b-937155188fe1",
-      total: quantity,
+      shippingAddressId: userAdress?.id,
+      total: totalQuantity,
+      ...addressData
     };
     console.log(params);
-    try {
-      const res = await orderApi.orders(params);
-      console.log(res);
-      if (res.data && res.successful) {
-        alert("Đặt hàng thành công");
-        router.push(`/order/${res.data}`)
-        dispatch(clearCart());
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const res = await orderApi.orders(params);
+    //   if (res.data && res.successful) {
+    //     alert("Đặt hàng thành công");
+    //     dispatch(clearCart());
+    //     router.push(`/order/${res.data}`)
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   if (!cart?.length) {
@@ -56,6 +63,8 @@ const Cart = () => {
       </>
     );
   }
+
+  console.log('addressData',addressData)
   return (
     <section className="container mx-auto d-flex flex-column">
       <Head>
@@ -94,6 +103,8 @@ const Cart = () => {
             </div>
             <div className="">
               <label>Địa chỉ:</label>
+              {
+                !Object.keys(addressData).length ?
               <div className="d-flex gap-2">
                 <input
                   readOnly
@@ -102,12 +113,23 @@ const Cart = () => {
                   placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
                   style={{ fontSize: 15 }}
                 />
-              </div>
+              </div> :
+               <div className="d-flex gap-2">
+               <input
+                 readOnly
+                 type="text"
+                 className="p-1 w-100 rounded-2"
+                 placeholder={addressData.address}
+                 style={{ fontSize: 15 }}
+               />
+             </div>
+              }
             </div>
           </form>
           <button
             className="border-0 w-100 py-2 rounded"
             style={{ backgroundColor: "#f7a76c", color: "#fff" }}
+            onClick={()=>setShowModal(true)}
           >
             Chọn địa chỉ khác
           </button>
@@ -133,6 +155,10 @@ const Cart = () => {
           </button>
         </div>
       </div>
+
+      {
+        showModal && <AddAdress setAddressData={setAddressData} showModal={showModal} setShowModal={setShowModal} />
+      }
     </section>
   );
 };
