@@ -3,65 +3,70 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { Col, Row } from 'react-bootstrap';
-import {AiOutlineGoogle} from 'react-icons/ai'
-import {BsFacebook,BsTwitter} from 'react-icons/bs'
+import { AiOutlineGoogle } from 'react-icons/ai'
+import { BsFacebook, BsTwitter } from 'react-icons/bs'
+import Image from 'next/image';
 const Login = ({ setShowLoginModal,
   showLoginModal }) => {
   const handleClose = () => setShowLoginModal(false)
-const onSubmit = (e)=>{
-  e.prevetDefault()
-  console.log('data',e)
-}
+  const onSubmit = (e) => {
+    e.prevetDefault()
+    console.log('data', e)
+  }
   return (
     <>
       <Modal show={showLoginModal} onHide={handleClose}>
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header> */}
+        <Modal.Header closeButton className='border-bottom border-warning p-2'>
+          <Modal.Title >
+            <div className='d-flex gap-2 align-items-center'>
+              <Image src='/image/logo512.png' alt='logo' width={40} height={40} />
+              <p className='mb-0'>Tastee POS</p>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body className='px-4'>
-          <h3 className='text-center fw-bold mb-3' style={{color: 'hsl(27, 100%, 71%)'}}>Đăng nhập</h3>
-          <p className='text-center mb-3'>Vui lòng nhập số điện thoại/địa chỉ email hợp lệ</p>
+          <h3 className='text-center mb-2' style={{ color: 'hsl(27, 100%, 71%)' }}>Đăng nhập</h3>
+          <p className='text-center mb-3' style={{fontSize: 13}}>Vui lòng nhập số điện thoại/địa chỉ email hợp lệ</p>
 
           <Form onSubmit={onSubmit} className='px-2'>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="text" placeholder="Enter email/Phone No" />
-
+              <Form.Control type="text"  className="rounded-0" style={{fontSize:13}}placeholder="Enter email/Phone No" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control type="password" className="rounded-0" style={{fontSize:13}}placeholder="Password" />
             </Form.Group>
-            <a href='/dieu-khoan-tastee-pos' className='mb-2 d-block' style={{fontSize: 12}}>Bạn gặp vấn đề khi đăng nhập?</a>
 
-            <button type="submit" className='btn btn-danger w-100 mb-2 text-light fw-bold' style={{backgroundColor:'hsl(27, 100%, 71%)', borderColor: 'hsl(27, 100%, 71%)', fontSize: 15, letterSpacing: 1}}>
+            <button type="submit" className='btn btn-danger w-100 mb-2 fw-bold text-light rounded-0 ' style={{ backgroundColor: 'hsl(27, 100%, 71%)', borderColor: 'hsl(27, 100%, 71%)', fontSize: 14, letterSpacing: 1 }}>
               Đăng nhập
             </button>
-            <div>
-              <p className='text-center mb-2'>-- Or Sign in with --</p>
-              <Row className='mb-2'>
-                <Col xs={12} md={4} className='mb-2'>
-                <button className='btn bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark w-100 gap-2'>
-                  <AiOutlineGoogle style={{fontSize:16}} />
-                  <span className='' style={{fontSize:13}}>Google</span></button>
-                  </Col>
-                <Col   xs={12} md={4} className='mb-2'><button className='btn bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark  w-100 gap-2'>
-                  <BsTwitter style={{fontSize:16}} />
-                  <span className='' style={{fontSize:13}}>Twitter</span>
-                  </button></Col>
-                <Col  xs={12} md={4} className='mb-2'><button className='btn bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark  w-100 gap-2'><BsFacebook style={{fontSize:16}} /><span className='' style={{fontSize:13}}>Facebook</span></button></Col>
-              </Row>
-              <p className='text-center' style={{fontSize:12}}>Chưa có tài khoản?<a className='fw-bold ms-1' href='/register'>Đăng ký ngay</a></p> </div>
 
           </Form>
+            <div className='px-2'>
+            <button className='btn btn-success w-100 mb-2 text-light rounded-0' style={{fontSize:13}} >
+              Đăng ký nhanh
+            </button>
+            </div>
+          <div className='mb-1'>
+            <p className='text-center mb-0' style={{fontSize:13}}>Hoặc đăng nhập bằng</p>
+          </div>
+          <div className='px-2 d-flex flex-column gap-1'>
+            <div className='d-flex gap-1'>
+            <button className='btn rounded-0 bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark w-100 gap-2'>
+              <AiOutlineGoogle style={{ fontSize: 16 }} />
+              <span className='' style={{ fontSize: 13 }}>Google</span>
+            </button>
+            <button className='btn rounded-0 bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark  w-100 gap-2'>
+              <BsTwitter style={{ fontSize: 16 }} />
+              <span className='' style={{ fontSize: 13 }}>Twitter</span>
+            </button>
+            <button className='btn rounded-0 bg-opacity-10 bg-dark d-flex align-items-center justify-content-center text-dark  w-100 gap-2'><BsFacebook style={{ fontSize: 16 }} /><span className='' style={{ fontSize: 13 }}>Facebook</span></button>
+            </div>
+            {/* <p className='text-center' style={{ fontSize: 12 }}>Chưa có tài khoản?<a className='fw-bold ms-1' href='/register'>Đăng ký ngay</a></p>  */}
+            </div>
+
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer> */}
+
       </Modal>
     </>
   );

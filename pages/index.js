@@ -88,8 +88,8 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         <meta name="twitter:creator" content="@tastee" />
       </Head>
       <section className="mb-5 container"  >
-        {/* <button
-        onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button> */}
+        <button
+        onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button>
         <Slider {...settings} className="">
           {data?.map((it, index) => (
             <Link key={it.id} href={`/${it?.brandId}`}>

@@ -9,7 +9,9 @@ import { BiBuilding } from 'react-icons/bi'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { Col, Row } from 'react-bootstrap'
 import DatePicker from "react-datepicker";
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import Nav from 'react-bootstrap/Nav';
 import "react-datepicker/dist/react-datepicker.css";
 import { orderApi, userApi } from '../../api-client'
 import moment from 'moment/moment'
@@ -47,7 +49,7 @@ const User = () => {
     const getData = async () => {
       try {
         const res = await userApi.getUserInfor()
-        console.log('res',res.data.userInfo)
+        console.log('res', res.data.userInfo)
         setInfo(res.data.userInfo)
       } catch (err) {
         console.log(err)
@@ -55,9 +57,9 @@ const User = () => {
     }
     getData()
   }, [])
-const handleShowModalChangePass = () => {
-  setShowMdChangePass(true)
-}
+  const handleShowModalChangePass = () => {
+    setShowMdChangePass(true)
+  }
   const handleShowDonHang = async () => {
     setShowDonHang(true)
   }
@@ -84,16 +86,16 @@ const handleShowModalChangePass = () => {
       </div>
       <div className='mb-2'>
         {/* <p>{info?.fullName || 'text'}</p> */}
-        <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.fullName} readOnly/>
+        <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.fullName} readOnly />
       </div>
       <div className='mb-2'>
-        <input className='w-100 rounded p-2 border-0 shadow' type='email' placeholder={info?.email} readOnly/>
+        <input className='w-100 rounded p-2 border-0 shadow' type='email' placeholder={info?.email} readOnly />
       </div>
       <div className='mb-2'>
-        <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.phoneNumber} readOnly/>
+        <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.phoneNumber} readOnly />
       </div>
       <button
-      onClick={handleShowModalChangePass} className='btn btn-outline-dark  mb-2 w-100'>Đổi mật khẩu</button>
+        onClick={handleShowModalChangePass} className='btn btn-outline-dark  mb-2 w-100'>Đổi mật khẩu</button>
       <button className='btn btn-outline-dark  w-100'>Xóa tài khoản</button>
     </div>
   </div>
@@ -201,11 +203,72 @@ const handleShowModalChangePass = () => {
 
       </Row>
       {showMdChangePass && <ChangePass showMdChangePass={showMdChangePass}
-      setShowMdChangePass={setShowMdChangePass} />}
+        setShowMdChangePass={setShowMdChangePass} />}
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Row>
+          <Col sm={4}>
+            <Nav className="position-relative">
+              <Nav.Item className='d-block w-100'>
+                <Nav.Link eventKey="first">Thông tin tài khoản</Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='d-block w-100'>
+                <Nav.Link eventKey="second">Lịch sử đơn hàng</Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='d-block w-100'>
+                <Nav.Link eventKey="third">Nhà hàng yêu thích</Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='d-block w-100'>
+                <Nav.Link eventKey="four">Sổ địa chỉ</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col sm={8}>
+            <Tab.Content className='bg-dark bg-opacity-10 h-100 rounded p-2 w-100'>
+              <Tab.Pane eventKey="first">
+                <h4 className='border-bottom border-danger'>Thông tin tài khoản</h4>
+              </Tab.Pane>
+              <Tab.Pane eventKey="second">
+                <h2>Đơn hàng</h2>
+              </Tab.Pane>
+              <Tab.Pane eventKey="third">
+                <h2>Quán yêu thích</h2>
+              </Tab.Pane>
+              <Tab.Pane eventKey="four">
+                <h2>Sổ địa chỉ</h2>
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
+<div className='bg-light mt-2'>
+      <Tabs
+        defaultActiveKey="first"
+        id="justify-tab-example"
+        className="mb-3 bg-light"
+        justify
+      >
+        <Tab eventKey="first" title="Home" className='rounded'>
+          <h4 className='border-bottom border-danger'>Thông tin tài khoản</h4>
+
+        </Tab>
+        <Tab eventKey="second" title="Profile">
+          <h2>Đơn hàng</h2>
+
+        </Tab>
+        <Tab eventKey="third" title="Loooonger Tab">
+          <h2>Quán yêu thích</h2>
+
+        </Tab>
+        <Tab eventKey="four" title="Contact">
+          <h2>Sổ địa chỉ</h2>
+
+        </Tab>
+      </Tabs>
+      </div>
     </section>
   )
 }
-User.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
+// User.getLayout = function getLayout(Page) {
+//   return <Layout>{Page}</Layout>;
+// };
 export default User

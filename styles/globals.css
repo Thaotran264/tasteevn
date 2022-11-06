@@ -5,6 +5,7 @@
 
 :root {
   --primary-color: hsl(27, 100%, 71%);
+  --primary-bg-color: linear-gradient(to right, #ffe259 0%, #ffa751 100%);
   --bg-primary-color: hsl(27, 100%, 71%);
   --bg-color-white: hsl(0, 0%, 100%);
   --text-white: hsla(0, 0%, 100%, 0.758);
@@ -84,7 +85,9 @@ a:hover {
 input {
   outline: none;
 }
-
+input::placeholder {
+  color: var(--bg-primary-color);
+}
 .toggleMenu {
   right: -100%;
   transition: all 1s ease;
