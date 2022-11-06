@@ -126,7 +126,7 @@ const handleShowModalChangePass = () => {
     <div className='d-flex flex-column'>
       {
         orders?.map(order =>
-          <Link href={`/order/${order.id}`}>
+          <Link href={`/order/${order.id}`} key={order.id}>
             <a className='border-bottom'>
               <span>Ngày mua: {moment(order?.createdDate).format('DD/MM/yyyy')}</span>
               <p>Tổng tiền: {order?.total}</p>
