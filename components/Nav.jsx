@@ -70,7 +70,7 @@ const Nav = () => {
   }
   const renderMobileMenu = <Dropdown className='d-flex align-items-center hideOnDesktop' >
     <Dropdown.Toggle
-      className="border-0 rounded-0  d-flex align-items-center"
+      className="border-0 rounded-0  d-flex align-items-center px-1"
       id="dropdown-basic"
     >
       <FaBars />
@@ -80,9 +80,9 @@ const Nav = () => {
       {
         token ?
           <>
-            <Dropdown.Item className='text-center py-2'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
             </Dropdown.Item>
-            <Dropdown.Item className='text-center py-2'>Giỏ hàng
+            <Dropdown.Item className='text-center py-2' href='/cart'>Giỏ hàng
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất
             </Dropdown.Item>
@@ -100,7 +100,7 @@ const Nav = () => {
   </Dropdown>
   const renderDropDownCities = <Dropdown className='d-flex align-items-center justify-content-center navItem bg-dark rounded bg-opacity-10 ' onSelect={handleCitiesChange} >
     <Dropdown.Toggle
-      className="border-0 d-flex gap-2 align-items-center px-5"
+      className="border-0 d-flex gap-1 align-items-center px-2"
       id="dropdown-basic"
       style={{ fontSize: 12, width: 'max-content' }}
     >
@@ -116,9 +116,9 @@ const Nav = () => {
       ))}
     </Dropdown.Menu>
   </Dropdown>
-  const renderSearchForm = <div className='d-flex align-items-center navItem' >
+  const renderSearchForm = <div className='d-flex align-items-center navItem justify-content-center ' >
     <form
-      className={` navForm justify-content-end rounded-5`}
+      className='navForm justify-content-end rounded-5'
       onSubmit={handleSubmit}
     >
       <input
@@ -130,7 +130,7 @@ const Nav = () => {
     </form>
   </div>
 
-  const renderCartItem = <div className='position-relative d-flex align-items-center px-2'>
+  const renderCartItem = <div className='position-relative d-flex align-items-center '>
     <AiOutlineShoppingCart onClick={handleShowCartModal} style={{ cursor: 'pointer', fontSize: 22 }} />
     <span
       className='rounded-5 bg-danger text-light d-flex align-items-center justify-content-center'
@@ -165,11 +165,11 @@ const Nav = () => {
       item => item.name.toLowerCase().includes(String(searchText).toLowerCase())
     ).length} onClick={handleMore}>Xem thêm</button>
   </div>)
-  const renderUserInfo = <div className='px-2
+  const renderUserInfo = <div className='px-1
   d-flex  align-items-center navItem hideOnMobile'>
     {
       token ?
-        <Dropdown className='d-flex align-items-center gap-2 justify-content-end px-2 rounded-5' style={{ backgroundColor: 'hsl(27, 100%, 71%)' }} >
+        <Dropdown className='d-flex align-items-center gap-2 justify-content-end px-1 rounded-5' style={{ backgroundColor: 'hsl(27, 100%, 71%)' }} >
           <Image src={avatar || '/image/logo512.png'} className='rounded-5' width="30" height="30" alt={fullName || ''} />
           <Dropdown.Toggle
             className="border-0 d-flex align-items-center gap-1 text-light px-0"
@@ -179,7 +179,7 @@ const Nav = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu >
-            <Dropdown.Item className='text-center py-2'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2'>Giỏ hàng</Dropdown.Item>
             <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất
@@ -194,7 +194,7 @@ const Nav = () => {
   </div>
   return (
     <section className='d-flex justify-content-center align-items-center nav active shadow bg-light' style={{ height: 48 }} >
-      <nav className='d-flex container px-2 gap-2 align-items-center'>
+      <nav className='d-flex container px-0 gap-2 align-items-center'>
         {
           showCart && <CartModal setShow={setShowCart} />
         }

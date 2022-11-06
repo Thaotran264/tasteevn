@@ -43,16 +43,16 @@ const Cart = () => {
       ...addressData
     };
     console.log(params);
-    // try {
-    //   const res = await orderApi.orders(params);
-    //   if (res.data && res.successful) {
-    //     alert("Đặt hàng thành công");
-    //     dispatch(clearCart());
-    //     router.push(`/order/${res.data}`)
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const res = await orderApi.orders(params);
+      if (res.data && res.successful) {
+        alert("Đặt hàng thành công");
+        dispatch(clearCart());
+        router.push(`/order/${res.data}`)
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (!cart?.length) {
@@ -151,7 +151,7 @@ const Cart = () => {
             <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
           </div>
           <button className="btn btn-success w-50" onClick={handleDatHangButton}>
-            Thanh toán
+            Đặt hàng
           </button>
         </div>
       </div>

@@ -92,18 +92,21 @@ const Menu = ({ productList }) => {
   return (
     <section className="container px-0" ref={mbref}>
       <div className="d-flex flex-column position-relative" >
-        <ul className={`rounded d-flex ps-0 menuScrollbar ${menuPos ? 'active container px-0 rounded-0' : ''}`}
+        <div className={`d-flex justify-content-center rounded menuScrollbar ${menuPos ? 'active px-0 rounded-0' : ''}`}>
+        <ul className='d-flex px-0 mb-0 container'
         >
-          {items.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >
+          {items.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
             <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
               {item.name}
             </Link>
           </li>)}
-          {menus.map(item => <li key={item.id} className="py-2 px-4 fw-bold menuListItem" >
+          {menus.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
             <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
             {item.name}
           </Link></li>)}
         </ul>
+        </div>
+       
         {
           renderItems
         }

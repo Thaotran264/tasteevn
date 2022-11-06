@@ -29,7 +29,7 @@ const Detail = () => {
     }, [id])
     const { shippingAddress } = data || {}
 
-    const totalPrice = data?.orderDetails?.map(order => order.price).reduce((cal, item) => cal += item)
+    const totalPrice = data?.orderDetails?.reduce((cal, item) => cal += item.price * item.quantity, 0)
     
     const renderOrderDetails = data?.orderDetails?.map(order => (
         <div className='bg-dark bg-opacity-10 rounded p-2 mb-2' key={order.id}>
@@ -67,8 +67,9 @@ const Detail = () => {
             </div> */}
             <div className='d-flex gap-2 align-items-center mb-2'>
                 <span className='fw-bold'>Địa chỉ:</span>
-                <p className='mb-0'>{shippingAddress
+                <p className='mb-0'>{data
                     ?.address}</p>
+                    <p></p>
             </div>
 
         </div>

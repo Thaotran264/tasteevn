@@ -4,6 +4,8 @@
 
 .bannerCss {
     height: 40vh;
+    margin-top: 48px;
+    border-radius: 6px;
 }
 @media screen and (min-width: 992px) {
     .bannerCss {

@@ -84,7 +84,7 @@ const Detail = ({ detail }) => {
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
         <Menu productList={menuWg} menuPos={false} />
 
-        <div className="hideOnMobile d-flex flex-column position-fixed" style={{ bottom: 10, right: 10, backgroundColor: "#fff" }}>
+        <div className="hideOnMobile d-flex flex-column position-fixed" style={{ bottom: 10, right: 10, backgroundColor: "#fff", width: 60 }}>
           <Link href='/'>
             <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
               <AiOutlineHome style={{ fontSize: 20 }} />
