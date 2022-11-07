@@ -6,19 +6,32 @@ import { Col, Row } from 'react-bootstrap';
 import { AiOutlineGoogle } from 'react-icons/ai'
 import { BsFacebook, BsTwitter } from 'react-icons/bs'
 import { FaFacebookF } from 'react-icons/fa'
-const Register = ({ setShowLoginModal,
-  showLoginModal }) => {
-  const handleClose = () => setShowLoginModal(false)
+import Image from 'next/image';
+const Register = ({ showRgModal,setShowRgModal }) => {
+const [name, setName] = useState('')
+const [password, setPass] = useState('')
+const [phone, setPhone] = useState('')
+  const handleClose = () => setShowRgModal(false)
   const onSubmit = (e) => {
     e.preventDefault()
+    const formData = new FormData()
+    formData.append("PhoneNumber",phone);
+    formData.append("ConfirmPassword", phone);
+    formData.append("Password",password);
+    formData.append("FullName", name);
     console.log('data', e)
   }
   return (
     <>
-      <Modal show={showLoginModal} onHide={handleClose}>
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header> */}
+      <Modal show={showRgModal} onHide={handleClose}>
+        <Modal.Header className='py-2 px-3' closeButton>
+          <Modal.Title>
+            <div className='d-flex gap-2 align-items-center'>
+              <Image src='/image/logo512.png' alt='logo' width={40} height={40} />
+              <p className='mb-0 fs-6'>Tastee POS</p>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body className='px-4'>
           <h2 className='text-center fw-bold mb-3' style={{ color: 'hsl(27, 100%, 71%)' }}>Đăng ký</h2>
           <div className='d-flex justify-content-center gap-2 mb-3'>
@@ -30,42 +43,32 @@ const Register = ({ setShowLoginModal,
 
           <Form onSubmit={onSubmit} className='px-2'>
             <Form.Group className="mb-3" controlId="formBasicFullName">
-              <Form.Control type="text" placeholder="Họ và tên" style={{ fontSize: 13 }} />
+              <Form.Control value={name} onChange={(e)=>setName(e.target.value)} type="text" placeholder="Họ và tên" style={{ fontSize: 13 }} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPhone">
-              <Form.Control type="text" placeholder="Số điện thoại" style={{ fontSize: 13 }} />
+              <Form.Control value={phone} onChange={(e)=>setPhone(e.target.value)} type="text" placeholder="Số điện thoại" style={{ fontSize: 13 }} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Mật khẩu" style={{ fontSize: 13 }} />
+              <Form.Control value={password} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Mật khẩu" style={{ fontSize: 13 }} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Tôi đồng ý với điều khoản và dịch vụ" style={{ fontSize: 13 }} />
             </Form.Group>
-            <Row>
-              <Col>
-                <button type="submit" className='btn  w-100 mb-2 text-light fw-bold' style={{ backgroundColor: 'hsl(27, 100%, 71%)', fontSize: 14 }}>
-                  Đăng ký
-                </button>
-              </Col>
-              <Col>
-                <button type="submit" className='btn w-100 mb-2  fw-bold' style={{ borderColor: 'hsl(27, 100%, 71%)', color: 'hsl(27, 100%, 71%)', fontSize: 14 }}>
-                  Đăng nhập
-                </button>
-              </Col>
-            </Row>
+            <div className='d-flex gap-1'>
+              <button type="submit" className='btn  w-100 mb-2 text-light fw-bold' style={{ backgroundColor: 'hsl(27, 100%, 71%)', fontSize: 14 }}>
+                Đăng ký
+              </button>
+              <button
+              onClick={handleClose} type="submit" className='btn w-100 mb-2  fw-bold' style={{ borderColor: 'hsl(27, 100%, 71%)', color: 'hsl(27, 100%, 71%)', fontSize: 14 }}>
+                Đăng nhập
+              </button>
+            </div>
+
 
 
           </Form>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
   );

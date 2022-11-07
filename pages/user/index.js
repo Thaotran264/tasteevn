@@ -161,7 +161,8 @@ const User = () => {
 
 
   return (
-    <section className='container py-2 px-0 position-relative'>
+    <section className='container py-2 px-0 position-relative d-flex flex-column justify-content-between'
+     style={{height: '100vh'}}>
       <h2 className='text-center'>Thông tin tài khoản</h2>
       {showUserInfo &&
         userInfor}
@@ -204,7 +205,7 @@ const User = () => {
       </Row>
       {showMdChangePass && <ChangePass showMdChangePass={showMdChangePass}
         setShowMdChangePass={setShowMdChangePass} />}
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first" className='position-relative'>
         <Row>
           <Col sm={4}>
             <Nav className="position-relative">
@@ -240,30 +241,30 @@ const User = () => {
           </Col>
         </Row>
       </Tab.Container>
-<div className='bg-light mt-2'>
-      <Tabs
-        defaultActiveKey="first"
-        id="justify-tab-example"
-        className="mb-3 bg-light"
-        justify
-      >
-        <Tab eventKey="first" title="Home" className='rounded'>
-          <h4 className='border-bottom border-danger'>Thông tin tài khoản</h4>
+      <div className='bg-light mt-auto'>
+        <Tabs
+          defaultActiveKey="first"
+          id="justify-tab-example"
+          className="mb-3 bg-light position-relative"
+          justify
+        >
+          <Tab eventKey="first" title="Home" className='rounded'>
+            <h4 className='border-bottom border-danger'>Thông tin tài khoản</h4>
 
-        </Tab>
-        <Tab eventKey="second" title="Profile">
-          <h2>Đơn hàng</h2>
+          </Tab>
+          <Tab eventKey="second" title="Profile">
+            <h2>Đơn hàng</h2>
 
-        </Tab>
-        <Tab eventKey="third" title="Loooonger Tab">
-          <h2>Quán yêu thích</h2>
+          </Tab>
+          <Tab eventKey="third" title="Loooonger Tab">
+            <h2>Quán yêu thích</h2>
 
-        </Tab>
-        <Tab eventKey="four" title="Contact">
-          <h2>Sổ địa chỉ</h2>
+          </Tab>
+          <Tab eventKey="four" title="Contact">
+            <h2>Sổ địa chỉ</h2>
 
-        </Tab>
-      </Tabs>
+          </Tab>
+        </Tabs>
       </div>
     </section>
   )
