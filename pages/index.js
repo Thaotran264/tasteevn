@@ -6,9 +6,6 @@ import Slider from "react-slick/lib/slider";
 import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Login from "../components/Modal/Login";
-import Register from "../components/Modal/Register";
-import Slider02 from "../components/Slider/Slider02";
-import Slide from "../components/Slider/Slider";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -25,7 +22,7 @@ const settings = {
   autoplay: true,
   autoplaySpeed: 5000,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 5,
   slidesToScroll: 1,
   initialSlide: 0,
   // className: "center",
@@ -35,16 +32,16 @@ const settings = {
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 3,
         infinite: true,
-        dots: true
+        // dots: true
       }
     },
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         initialSlide: 1
       }
@@ -52,7 +49,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1
       }
     }
@@ -94,11 +91,10 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button> */}
         <Slider {...settings} className="mt-4">
           {data?.map((it, index) => (
-            <Link href={`/${it?.brandId}`}>
+            <Link href={`/${it?.brandId}`}  key={index} >
               <a  key={index} className='d-flex mx-2'>
                 <div className='d-flex justify-content-center w-100'>
-                  <img src={it?.image} alt={it?.brandName} className="w-100 d-flex " 
-                  // style={{width:'96%', height: '200px !important' }}
+                  <Image src={it?.image} alt={it?.brandName} className="d-flex" width={160} height={160} 
                    />
                 </div>
               </a>
