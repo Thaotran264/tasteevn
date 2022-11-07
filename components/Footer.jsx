@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { BsFacebook, BsYoutube } from "react-icons/bs";
+import { BsFacebook, BsYoutube,BsGoogle,BsApple } from "react-icons/bs";
 import { SiZalo } from "react-icons/si";
 
 const Footer = () => {
@@ -29,10 +29,12 @@ const Footer = () => {
           </div>
           <div className="col-10 col-md-10 col-lg-3 text-dark text-center ">
             <h5 className="fw-bold">Cộng đồng người bán</h5>
-            <div className="justify-content-center d-flex gap-4 fs-1">
-              <BsFacebook style={{ color: '#3b5998' }} />
+            <div className="justify-content-center d-flex gap-4 fs-1 align-items-center">
+              <BsFacebook style={{ color: '#3b5998',fontSize: 22  }} />
               <BsYoutube style={{ color: '#c4302b' }} />
               <SiZalo style={{ color: '#3b5998' }} />
+              <BsGoogle style={{ color: '#3b5998',fontSize: 22 }} />
+              <BsApple style={{ color: '#3b5998' ,fontSize: 22}} />
             </div>
 
           </div>

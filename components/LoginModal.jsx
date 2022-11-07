@@ -359,7 +359,7 @@ function LoginModal({ showLoginModal,
                     onChange={(e) => setData({ ...data, Password: e.target.value })}
                     type="password"
                     placeholder="Mật khẩu"
-                    className="form-control inputFomCustom"
+                    className="form-control inputFomCustom rounded-0 px-2 fs-6"
                     id="exampleInputPassword1"
                   />
                 </div>

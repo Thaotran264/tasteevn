@@ -10,7 +10,7 @@ import { logOut } from '../context/actions';
 import { CartContext } from '../context/cartContext';
 import LoginModal from './LoginModal';
 import CartModal from './Modal/CartModal';
-const Nav = () => {
+const NavComponent = () => {
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [searchData, setSearchData] = useState()
@@ -179,7 +179,7 @@ const Nav = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu >
-            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2'>Giỏ hàng</Dropdown.Item>
             <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất
@@ -193,7 +193,7 @@ const Nav = () => {
     }
   </div>
   return (
-    <section className='d-flex justify-content-center align-items-center nav active shadow bg-light' style={{ height: 48 }} >
+    <section className='d-flex justify-content-center align-items-center navContainer active shadow bg-light' style={{ height: 48 }} >
       <nav className='d-flex container px-0 gap-2 align-items-center'>
         {
           showCart && <CartModal setShow={setShowCart} />
@@ -212,7 +212,7 @@ const Nav = () => {
         </div>
         {renderDropDownCities}
         {renderSearchForm}
-        {renderCartItem}
+        {token && renderCartItem}
         {/* Login desktop */}
         {renderUserInfo}
         {/* Login Mobile */}
@@ -229,4 +229,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default NavComponent

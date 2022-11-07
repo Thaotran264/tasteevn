@@ -45,21 +45,20 @@ const Booking = ({ setShowBooking }) => {
     const hms = `${hours}:${minutes}`
     const target = new Date(dates + 'T' + hms);
     const currentTime = new Date()
-   
+
     if (target.getTime() <= currentTime.getTime()) {
       alert('Thời gian không hợp lệ')
       return
     }
     const data = {
       adultQuantity: Number(adult),
-      childrenQuantity: Number(children|| 0),
+      childrenQuantity: Number(children || 0),
       bookingTime: target.getTime(),
       description,
       brandId: id
     }
-    console.log('data', data)
     try {
-      const res = await bookingApi.booking({ data })
+      const res = await bookingApi.booking(data)
       if (res.data) {
         alert('Đặt chỗ thành công')
         setAdult('')
@@ -72,7 +71,7 @@ const Booking = ({ setShowBooking }) => {
     }
 
   }
- 
+
   const hoursList = []
   const minutesList = []
   const secondList = []
@@ -102,16 +101,16 @@ const Booking = ({ setShowBooking }) => {
           <Row className='w-100'>
             <Col xs={12}>
               <Form onSubmit={onSubmit}>
-                <Form.Group className="mb-3 d-flex justify-content-between" controlId="adultQuantity">
-                  <Form.Label>Số người lớn:</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-center " controlId="adultQuantity">
+                  <Form.Label className='mb-0'>Số người lớn:</Form.Label>
                   <Form.Control required type="number" value={adult} onChange={(e) => setAdult(e.target.value)} className='w-50' />
                 </Form.Group>
-                <Form.Group className="mb-3 d-flex justify-content-between" controlId="childrenQuantity">
-                  <Form.Label>Số trẻ em:</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-center" controlId="childrenQuantity">
+                  <Form.Label className='mb-0'>Số trẻ em:</Form.Label>
                   <Form.Control required type="number" value={children} onChange={(e) => setChildren(e.target.value)} className='w-50' />
                 </Form.Group>
-                <Form.Group className="mb-3  d-flex justify-content-between" controlId="bookingTime">
-                  <Form.Label>Thời gian:</Form.Label>
+                <Form.Group className="mb-3  d-flex justify-content-between align-items-center" controlId="bookingTime">
+                  <Form.Label className='mb-0'>Thời gian:</Form.Label>
                   <div className="d-flex align-items-center">
                     <Form.Select aria-label="Default select example" style={{ width: 'max-content' }}
                       onChange={handleHours} >
@@ -131,19 +130,21 @@ const Booking = ({ setShowBooking }) => {
                         )
                       }
                     </Form.Select>
-            
+
                   </div>
                 </Form.Group>
-                <Form.Group className="mb-3  d-flex justify-content-between" controlId="date">
-                  <Form.Label>Ngày:</Form.Label>
-
-                  <DatePicker
-                    className="d-flex justify-content-end"
-                    dateFormat="dd/MM/yyyy"
-                    selected={startDate} onChange={handleDateChange} />
+                <Form.Group className="mb-3  d-flex justify-content-between align-items-center" controlId="date">
+                  <Form.Label className='mb-0'>Ngày:</Form.Label>
+                  <div>
+                    <DatePicker
+                      className="p-2"
+                      style={{ width: 'max-content', borderColor: '#ced4da' }}
+                      dateFormat="dd/MM/yyyy"
+                      selected={startDate} onChange={handleDateChange} />
+                  </div>
                 </Form.Group>
-                <Form.Group className="mb-3  d-flex justify-content-between" controlId="description">
-                  <Form.Label>Ghi chú:</Form.Label>
+                <Form.Group className="mb-3  d-flex justify-content-between align-items-center" controlId="description">
+                  <Form.Label className='mb-0'>Ghi chú:</Form.Label>
                   <Form.Control className='w-50' type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </Form.Group>
                 <Button variant="primary" type="submit" className='w-100'>
