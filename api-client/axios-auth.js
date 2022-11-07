@@ -4,6 +4,7 @@ const ISSERVER = typeof window === "undefined";
 function getToken() {
     if (!ISSERVER) {
         let token = sessionStorage.getItem('token') ? sessionStorage.getItem('token') : ''
+
         return eval(token || '')
     }
 }

@@ -35,9 +35,9 @@ const DieuKhoanDv = () => {
                 <meta name="twitter:creator" content="@tastee" />
             </Head>
             <div className="container">
-                <a href="https://www.facebook.com/groups/tasteepos/" target='_blank'>
+                {/* <a href="https://www.facebook.com/groups/tasteepos/" target='_blank'>
                     <Image className="rounded" src={'/image/Tastee-POS.jpeg'} alt="First slide" width={2000} height={1000} />
-                </a>
+                </a> */}
                 {/* {parse(DieuKhoanDichVu)} */}
                 <p><strong>Quy định sử dụng phần mềm</strong></p>
                 <p>Kh&aacute;ch h&agrave;ng cần phải đọc v&agrave; đồng &yacute; to&agrave;n bộ điều khoản sử dụng của Tastee POS.</p>

@@ -1,23 +1,27 @@
+import moment from "moment/moment";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { bookingApi } from "../api-client";
 import Modal from 'react-bootstrap/Modal';
-import { Calendar } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { bookingApi } from "../api-client/booking";
+
+
+
 const Booking = ({ setShowBooking }) => {
-  const [adult, setAdult] = useState()
-  const [children, setChildren] = useState()
-  const [description, setDescription] = useState()
+  const [adult, setAdult] = useState(0)
+  const [children, setChildren] = useState(0)
+  const [description, setDescription] = useState('')
   const router = useRouter()
+  const [startDate, setStartDate] = useState(new Date());
   const { query: { id } } = router
   const [hours, setHours] = useState(new Date().toLocaleTimeString().split(':')[0])
   const [minutes, setMinutes] = useState(new Date().toLocaleTimeString().split(':')[1])
-  const [seconds, setSeconds] = useState(new Date().toLocaleTimeString().split(':')[2])
-  const [dates, setDates] = useState()
+
+  const [dates, setDates] = useState('')
   const handleClose = () => setShowBooking(prev => !prev);
   const handleHours = (e) => {
     setHours(e.target.value)
@@ -26,37 +30,49 @@ const Booking = ({ setShowBooking }) => {
     setMinutes(e.target.value)
     console.log('first', minutes)
   }
-  const handleSelect = (date) => {
-    setDates(date.toISOString().split('T')[0])
+
+  const handleDateChange = (e) => {
+    setDates(e.toISOString().split('T')[0])
+    setStartDate(e)
   }
   const onSubmit = async (event) => {
     event.preventDefault()
-    if (!adult) return
-    if (!children) return
-    const hms = `${hours}:${minutes}:${seconds}`
+    console.log('l')
+    if (!adult) {
+      alert('Mời bạn nhập số người lớn!!!')
+      return
+    }
+    const hms = `${hours}:${minutes}`
     const target = new Date(dates + 'T' + hms);
+    const currentTime = new Date()
+   
+    if (target.getTime() <= currentTime.getTime()) {
+      alert('Thời gian không hợp lệ')
+      return
+    }
     const data = {
       adultQuantity: Number(adult),
-      childrenQuantity: Number(children),
+      childrenQuantity: Number(children|| 0),
       bookingTime: target.getTime(),
       description,
       brandId: id
     }
     console.log('data', data)
-    // try {
-    //   const res = await bookingApi.booking({ data })
-    //   if (res.data) {
-    //     alert('Đặt chỗ thành công')
-    //     setAdult('')
-    //     setChildren('')
-    //     setTime('')
-    //     setDescription('')
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      const res = await bookingApi.booking({ data })
+      if (res.data) {
+        alert('Đặt chỗ thành công')
+        setAdult('')
+        setChildren('')
+        setTime('')
+        setDescription('')
+      }
+    } catch (error) {
+      console.log(error)
+    }
 
   }
+ 
   const hoursList = []
   const minutesList = []
   const secondList = []
@@ -67,7 +83,7 @@ const Booking = ({ setShowBooking }) => {
 
     } else
       minutesList.push(i)
-      secondList.push(i)
+    secondList.push(i)
   }
   for (let i = 0; i < 24; i++) {
     if (i < 10) {
@@ -115,24 +131,16 @@ const Booking = ({ setShowBooking }) => {
                         )
                       }
                     </Form.Select>
-                    <span className='mx-2'>:</span>
-                    <Form.Select disabled aria-label="Default select example"
-                     style={{ width: 'max-content' }}>
-                      <option value={seconds}>{seconds}</option>
-                      {
-                        secondList.map((item, index) =>
-                          <option value={item} key={index}>{item}</option>
-                        )
-                      }
-                    </Form.Select>
+            
                   </div>
                 </Form.Group>
                 <Form.Group className="mb-3  d-flex justify-content-between" controlId="date">
                   <Form.Label>Ngày:</Form.Label>
-                  <Calendar
-                    date={new Date()}
-                    onChange={handleSelect}
-                  />
+
+                  <DatePicker
+                    className="d-flex justify-content-end"
+                    dateFormat="dd/MM/yyyy"
+                    selected={startDate} onChange={handleDateChange} />
                 </Form.Group>
                 <Form.Group className="mb-3  d-flex justify-content-between" controlId="description">
                   <Form.Label>Ghi chú:</Form.Label>

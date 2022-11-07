@@ -23,13 +23,13 @@ const MenuPhoto = ({ maps, brandView }) => {
     <div className="container px-0">
       {!isDefault && (
         <div className="mb-2">
-          <section className="d-flex gap-1">
+          <section className="d-flex gap-2">
             <div
-              className="hideOnMobile w-50  align-items-center"
+              className="hideOnMobile w-50  align-items-center " style={{overflow: 'hidden'}}
             >
               {parse(maps) || ''}
             </div>
-            <div className='w-100'>
+            <div className='onMobile'>
               <div className="thumb-3 rounded">
                 {brandView?.slice(0, 3).map((item, index) => (
                   <div className={`box img${index + 1}`} key={index}

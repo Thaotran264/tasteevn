@@ -10,7 +10,7 @@ import Layout from "../../components/Layout";
 
 import { useRouter } from "next/router";
 import { Button, ListGroup } from "react-bootstrap";
-import { DataContext } from "../../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 // import { DataContext } from "../../store/globalState";
 
 const ProfileMobile = () => {
@@ -20,7 +20,7 @@ const ProfileMobile = () => {
   const [open, setOpen] = useState(false);
   const [_isMobile, setMobile] = useState(false);
   const [isShowContent, setIsShowContent] = useState({});
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch } = useContext(CartContext);
   const router = useRouter();
 
   useEffect(() => {

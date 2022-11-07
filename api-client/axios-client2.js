@@ -1,9 +1,6 @@
 import axios from 'axios';
 const ISSERVER = typeof window === "undefined";
-let token
-// if (typeof window !== "undefined") {
-//     token = sessionStorage.getItem("token") || ''
-//   }
+
 function getToken (){
     if(!ISSERVER) {
         let token = JSON.parse(sessionStorage.getItem('token')) || ''

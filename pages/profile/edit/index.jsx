@@ -13,11 +13,10 @@ import Card from 'react-bootstrap/Card';
 
 
 import { useRouter } from "next/router";
-// import { DataContext } from "../../../store/globalState";
 import { userApi } from "../../../api-client/user";
 import Layout from "../../../components/Layout";
 import Image from "next/image";
-import { DataContext } from "../../../context/cartContext";
+import { CartContext } from "../../../context/cartContext";
 
 const editProfile = () => {
     const [count, setCount] = useState(1);
@@ -27,7 +26,7 @@ const editProfile = () => {
     const [open, setOpen] = useState(false);
     const [_isMobile, setMobile] = useState(false);
     const [isShowContent, setIsShowContent] = useState({});
-    const { state, dispatch } = useContext(DataContext);
+    const { state, dispatch } = useContext(CartContext);
     const router = useRouter();
 
     useEffect(() => {
