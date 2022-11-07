@@ -6,15 +6,14 @@ import { FcAddImage } from "react-icons/fc";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import React, { useContext, useEffect, useRef, useState } from "react";
-// import { DataContext } from "../../../../store/globalState";
 import { userApi } from "../../../../api-client/user";
 import Moment from "moment";
 import { accountAPI } from "../../../../api-client/account";
-import { DataContext } from "../../../../context/cartContext";
+import { CartContext } from "../../../../context/cartContext";
 
 const Infor = ({ userDetail }) => {
   const [show, setShow] = useState(false);
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch } = useContext(CartContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState({});

@@ -1,8 +1,10 @@
 import axiosClient2 from './axios-client2';
+import axiosAuth from './axios-auth'
+
 export const bookingApi = {
     booking(params) {
         const url = 'api/Booking'
-        return axiosClient2.post(url, params);
+        return axiosAuth.post(url, params);
     },
 
 

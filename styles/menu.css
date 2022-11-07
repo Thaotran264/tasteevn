@@ -24,12 +24,16 @@
     left: 0;
     z-index: 98;
     background-color: hsla(0, 0%, 0%, 0.169);
+    
+     /* background-color: #dee2e6; */
 }
 .menuScrollbar.active {
     position: fixed;
     top: 48px;
-    background-color: hsl(0, 0%, 0%);
-    color: var(--text-white)
+     background-color: #dee2e6;
+    
+    /* background-color: hsl(0, 0%, 0%); */
+    color: #000;
 }
 .scrollToTop {
     background-color: var(--bg-primary-color);

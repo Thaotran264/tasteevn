@@ -59,12 +59,14 @@ export const clearCart = () => {
 export const logIn = (data) => {
     console.log(data)
     sessionStorage.setItem("user", JSON.stringify(data));
+    sessionStorage.setItem("token", JSON.stringify(data.token));
     return {
         type: "AUTH", payload: data
     }
 }
 export const logOut = () => {
     sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     return {
         type: "AUTH", payload: {}
     }
