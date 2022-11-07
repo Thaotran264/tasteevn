@@ -14,6 +14,7 @@ import ShippingAddress from "../../components/ShippingAddress";
 import WishlistShop from "../../components/wishlistShop";
 import { CartContext } from "../../context/cartContext";
 import MerchantLayout from "../../components/MerchantLayout";
+import NavComponent from "../../components/Nav";
 
 const Cart = () => {
   const [user, setUser] = useState({});
@@ -44,8 +45,9 @@ const Cart = () => {
   }, []);
 
   return (
-    <MerchantLayout>
-      <div className="container">
+    <>
+    <NavComponent />
+      <div className="container" style={{marginTop: 54}}>
         <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
           <Row>
             <Col sm={3}>
@@ -79,7 +81,7 @@ const Cart = () => {
                       <Nav.Link
                         eventKey="infor"
                         onClick={() => {
-                          router.push("/profile-desktop?slug=chinh-sua-thong-tin");
+                          router.push("/profile-desktop");
                         }}
                       >
                         Thông tin chung
@@ -89,7 +91,7 @@ const Cart = () => {
                       <Nav.Link
                         eventKey="wishlist"
                         onClick={() => {
-                          router.push("/profile-desktop?slug=danh-sach-yeu-thich");
+                          router.push("/profile-desktop");
                         }}
                       >
                         Quán yêu thích
@@ -99,7 +101,7 @@ const Cart = () => {
                       <Nav.Link
                         eventKey="historyOrder"
                         onClick={() => {
-                          router.push("/profile-desktop?slug=lich-su-don-hang");
+                          router.push("/profile-desktop");
                         }}
                       >
                         Lịch sử đơn hàng
@@ -109,7 +111,7 @@ const Cart = () => {
                       <Nav.Link
                         eventKey="historyBooking"
                         onClick={() => {
-                          router.push("/profile-desktop?slug=lich-su-dat-ban");
+                          router.push("/profile-desktop");
                         }}
                       >
                         Lịch sử đặt bàn
@@ -119,7 +121,7 @@ const Cart = () => {
                       <Nav.Link
                         eventKey="shippingAddress"
                         onClick={() => {
-                          router.push("/profile-desktop?slug=so-dia-chi");
+                          router.push("/profile-desktop");
                         }}
                       >
                         Sổ địa chỉ
@@ -128,7 +130,7 @@ const Cart = () => {
                   </Nav>
                 </div>
 
-                <div className="portlet light bordered">
+                {/* <div className="portlet light bordered">
                   <div className="row list-separated profile-stat">
                     <div className="col-md-4 col-sm-4 col-xs-6">
                       <div className="uppercase profile-stat-title"> 37 </div>
@@ -162,7 +164,7 @@ const Cart = () => {
                       <a href="https://www.facebook.com/">JasonDavisFL</a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </Col>
 
@@ -188,7 +190,7 @@ const Cart = () => {
           </Row>
         </Tab.Container>
       </div>
-    </MerchantLayout>
+    </>
   );
 };
 

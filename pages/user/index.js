@@ -208,7 +208,21 @@ const User = () => {
       <Tab.Container id="left-tabs-example" defaultActiveKey="first" className='position-relative'>
         <Row>
           <Col sm={4}>
-            <Nav className="position-relative">
+            <ul>
+              <li>
+                <a eventKey="first"> Thông tin tài khoản</a>
+              </li>
+              <li>
+                <a eventKey="second"> Thông tin tài khoản</a>
+              </li>
+              <li>
+                <a eventKey="third"> Thông tin tài khoản</a>
+              </li>
+              <li>
+                <a eventKey="four"> Sổ địa chỉ</a>
+              </li>
+            </ul>
+            {/* <Nav className="position-relative">
               <Nav.Item className='d-block w-100'>
                 <Nav.Link eventKey="first">Thông tin tài khoản</Nav.Link>
               </Nav.Item>
@@ -221,7 +235,7 @@ const User = () => {
               <Nav.Item className='d-block w-100'>
                 <Nav.Link eventKey="four">Sổ địa chỉ</Nav.Link>
               </Nav.Item>
-            </Nav>
+            </Nav> */}
           </Col>
           <Col sm={8}>
             <Tab.Content className='bg-dark bg-opacity-10 h-100 rounded p-2 w-100'>
@@ -241,31 +255,7 @@ const User = () => {
           </Col>
         </Row>
       </Tab.Container>
-      <div className='bg-light mt-auto'>
-        <Tabs
-          defaultActiveKey="first"
-          id="justify-tab-example"
-          className="mb-3 bg-light position-relative"
-          justify
-        >
-          <Tab eventKey="first" title="Home" className='rounded'>
-            <h4 className='border-bottom border-danger'>Thông tin tài khoản</h4>
-
-          </Tab>
-          <Tab eventKey="second" title="Profile">
-            <h2>Đơn hàng</h2>
-
-          </Tab>
-          <Tab eventKey="third" title="Loooonger Tab">
-            <h2>Quán yêu thích</h2>
-
-          </Tab>
-          <Tab eventKey="four" title="Contact">
-            <h2>Sổ địa chỉ</h2>
-
-          </Tab>
-        </Tabs>
-      </div>
+      
     </section>
   )
 }

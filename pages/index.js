@@ -7,6 +7,8 @@ import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Login from "../components/Modal/Login";
 import Register from "../components/Modal/Register";
+import Slider02 from "../components/Slider/Slider02";
+import Slide from "../components/Slider/Slider";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -19,16 +21,16 @@ function SamplePrevArrow(props) {
 }
 const settings = {
   infinite: true,
-  dots: true,
+  // dots: true,
   autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 5000,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
   initialSlide: 0,
-  className: "center",
-  centerMode: true,
-  centerPadding: "25px",
+  // className: "center",
+  // centerMode: true,
+  // centerPadding: "25px",
   responsive: [
     {
       breakpoint: 1024,
@@ -87,15 +89,17 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
         <meta name="twitter:creator" content="@tastee" />
       </Head>
-      <section className="mb-5 container"  >
+      <section className="mb-5 container px-0"  >
         {/* <button
         onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button> */}
-        <Slider {...settings} className="">
+        <Slider {...settings} className="mt-4">
           {data?.map((it, index) => (
-            <Link key={it.id} href={`/${it?.brandId}`}>
-              <a>
-                <div key={index}>
-                  <img src={it?.image} alt={it?.brandName} className=" rounded" style={{width:'96%', height: '200px !important' }} />
+            <Link href={`/${it?.brandId}`}>
+              <a  key={index} className='d-flex mx-2'>
+                <div className='d-flex justify-content-center w-100'>
+                  <img src={it?.image} alt={it?.brandName} className="w-100 d-flex " 
+                  // style={{width:'96%', height: '200px !important' }}
+                   />
                 </div>
               </a>
             </Link>
@@ -106,7 +110,7 @@ const handleShowLoginModal = () => setShowLoginModal(true)
           showLoginModal ?
           <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} />:<></>
         }
-        
+      
       </section>
 
       {/* <section className="container px-0 d-flex flex-wrap">

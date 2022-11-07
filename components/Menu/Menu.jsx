@@ -7,7 +7,7 @@ import { formatter } from '../../utils';
 import { Link } from 'react-scroll'
 import 'react-toastify/dist/ReactToastify.css';
 import Topping from '../Modal/Topping';
-
+import {BsFillHandbagFill} from 'react-icons/bs'
 const Menu = ({ productList }) => {
   const { items, menus } = productList
   const { state: { auth }, dispatch } = useContext(CartContext)
@@ -52,19 +52,22 @@ const Menu = ({ productList }) => {
      
     </div>
     <div className="menuContainer mb-2">
-      {item.items.map(it => <div key={it.id} className="rounded d-flex flex-column rounded align-items-center menuItems py-2" style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
+      {item.items.map(it => <div key={it.id} className="rounded d-flex flex-column rounded-4 align-items-center menuItems py-2 position-relative" style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
         <div>
           <Image src={it.image || '/image/logo512.png'} alt={it.name} width={160} height={160} objectFit='cover' />
         </div>
         <p>{it.name}</p>
-        <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
+        <div className='position-relative w-100 text-center'>
+        <p className='fw-bold text-danger mb-0'>{formatter.format(it.price)}</p>
         <button
-          className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
-      </div>)}
+          className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30,color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)'}}>
+            <BsFillHandbagFill />
+          </button>
+          </div>
+      </div>
+      )}
     </div>
-    <div className='d-flex justify-content-center'>
-      <button className='btn btn-dark' disabled>Xem thêm</button>
-    </div>
+
   </div>
   )
   const renderItems = items.map(item => <div key={item.id} className="text-dark mb-2 rounded p-2" style={{ marginTop: 48 }} id={`${item.name}`}>
@@ -72,21 +75,23 @@ const Menu = ({ productList }) => {
       <h3 className='pb-1'>{item.name}</h3>
     </div>
     <div className="menuContainer">
-      {items.map(it => <div key={it.id} className="rounded bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
+      {items.map(it => <div key={it.id} className="rounded-3 bg-light py-2 d-flex flex-column align-items-center menuItems position-relative" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
         <div>
           <Image src={it.image || '/image/logo512.png'} alt={it.name} width="120" height={120} />
         </div>
         <p className='fw-bold'>{it.name}</p>
+        <div className='text-center position-relative'>
+
         <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-        <div className='d-flex align-items-center'>
           <button
-            className='px-2 py-1 border-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff', minWidth: 30 }}>Mua</button>
-        </div>
-      </div>)}
+            className='d-flex align-items-center justify-content-center rounded-5 position-absolute bottom-0 end-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)',width: 30, height: 30, color: '#fff' }}>
+              <BsFillHandbagFill />
+            </button>
+            </div>
+      </div>
+      )}
     </div>
-    <div>
-      <button>Xem them</button>
-    </div>
+
   </div >
   )
   return (
