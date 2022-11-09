@@ -7,24 +7,44 @@ import { BsFillFunnelFill, BsChevronLeft } from 'react-icons/bs'
 import { Card } from "react-bootstrap";
 import HandleSort from "../../pages/profile/components/handleSort";
 import { orderApi } from "../../api-client";
+import moment from "moment/moment";
 
 const HistoryOrder = ({ }) => {
-  const [_isMobile, setMobile] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
-useEffect(()=>{
-  const getData = async () => {
-    const res = await orderApi.loadData()
+  const [orderData, setOrderData] = useState([])
+  const currentTime = new Date().toISOString().split('T')[0]
+  const [startDate, setStartDate] = useState(currentTime)
+  const [endDate, setEndDate] = useState(currentTime)
+
+  const handleChangeStartDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+    setStartDate(e.target.value)
   }
-  getData()
-},[])
+  const handleChangeEndDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+
+    setEndDate(e.target.value)
+  }
+  const handleSearch = async () => {
+    const param = {
+      fromDate: startDate,
+      toDate: endDate,
+      length: '10'
+    }
+
+    try {
+      const res = await orderApi.loadData(param)
+      console.log('first', res)
+      setOrderData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
       <div className="profile-content custom-card-hover">
-      <Card className="">
+        <Card className="">
           <Card.Body>
             <div className="d-flex gap-3 text-center ">
               {/* <a href="/profile">
@@ -40,144 +60,64 @@ useEffect(()=>{
             </div>
           </Card.Body>
         </Card>
-
+        <div></div>
+        <div className="d-flex gap-1 align-items-center mb-2">
+          <div className="d-flex gap-1 align-items-center">
+            <span>Từ ngày</span>
+            <input type="date" id="start" name="trip-start"
+              value={startDate}
+              onChange={handleChangeStartDate}
+            />
+          </div>
+          <div className="d-flex gap-1 align-items-center">
+            <span>Tới ngày</span>
+            <input type="date" id="end" name="trip-end"
+              value={endDate}
+              onChange={handleChangeEndDate}
+            />
+          </div>
+          <button onClick={handleSearch}>Tìm</button>
+        </div>
         <HandleSort isOpen={open} setOpen={setOpen} />
         <div className="rounded w-100 bg-white p-2">
-          <hr className="my-1" />
+          {
+            orderData.map(item =>
+              <>
+                <hr className="my-1" />
+                <div className="p-2">
+                  <div className="d-flex gap-1 justify-content-between">
+                    <div className="">
+                      <p className="date-order">{moment(item.createdDate).format('DD/MM/yyyy')}</p>
+                      <p className=""> Tạo đơn: {item.createdBy} </p>
+                    </div>
+                    <div className="">
+                      <p className="color-primary">#123123456</p>
+                      <p className="color-success">Hoàn thành </p>
+                    </div>
+                  </div>
+                  <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
+                  <div className="d-flex justify-content-end">
+                    <button
+                      className="btn btn-outline-danger rounded mx-1"
+                      style={{ fontSize: 13 }}
+                    >
+                      Huỷ đơn
+                    </button>
 
-          <div className="p-2">
-            <div className="d-flex gap-1 justify-content-between">
-              <div className="">
-                <p className="date-order">13/08/2022 11:34</p>
-                <p className=""> Tạo đơn: Đạo Nguyễn </p>
-              </div>
-              <div className="">
-                <p className="color-primary">#123123456</p>
-                <p className="color-success">Hoàn thành </p>
-              </div>
-            </div>
-            <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-outline-danger rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Huỷ đơn
-              </button>
+                    <OrderDetail />
+                  </div>
+                </div>
+                <hr />
+              </>
+            )
+          }
 
-              <OrderDetail />
-            </div>
-          </div>
-          <hr />
-
-          <div className="p-2">
-            <div className="d-flex gap-1 justify-content-between">
-              <div className="">
-                <p className="date-order">13/08/2022 11:34</p>
-                <p className=""> Tạo đơn: Đạo Nguyễn </p>
-              </div>
-              <div className="">
-                <p className="color-primary">#123123456</p>
-                <p className="color-success">Hoàn thành </p>
-              </div>
-            </div>
-            <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-outline-danger rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Huỷ đơn
-              </button>
-              <OrderDetail />
-            </div>
-          </div>
-          <hr />
-
-          <div className="p-2">
-            <div className="d-flex gap-1 justify-content-between">
-              <div className="">
-                <p className="date-order">13/08/2022 11:34</p>
-                <p className=""> Tạo đơn: Đạo Nguyễn </p>
-              </div>
-              <div className="">
-                <p className="color-primary">#123123456</p>
-                <p className="color-success">Hoàn thành </p>
-              </div>
-            </div>
-            <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-outline-danger rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Huỷ đơn
-              </button>
-              <OrderDetail />
-            </div>
-          </div>
-          <hr />
-
-          <div className="p-2">
-            <div className="d-flex gap-1 justify-content-between">
-              <div className="">
-                <p className="date-order">13/08/2022 11:34</p>
-                <p className=""> Tạo đơn: Đạo Nguyễn </p>
-              </div>
-              <div className="">
-                <p className="color-primary">#123123456</p>
-                <p className="color-success">Hoàn thành </p>
-              </div>
-            </div>
-            <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-outline-danger rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Huỷ đơn
-              </button>
-              <OrderDetail />
-            </div>
-          </div>
-          <hr />
-
-          <div className="p-2">
-            <div className="d-flex gap-1 justify-content-between">
-              <div className="">
-                <p className="date-order">13/08/2022 11:34</p>
-                <p className=""> Tạo đơn: Đạo Nguyễn </p>
-              </div>
-              <div className="">
-                <p className="color-primary">#123123456</p>
-                <p className="color-success">Hoàn thành </p>
-              </div>
-            </div>
-            <h3 className="profile-usertitle-name m-0 text-start"> Thành tiền: 201.000đ </h3>
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-outline-danger rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Huỷ đơn
-              </button>
-              <button
-                className="btn btn-outline-primary rounded mx-1"
-                style={{ fontSize: 13 }}
-              >
-                Xem chi tiết
-              </button>
-            </div>
-          </div>
-          <hr />
-
-          <button
-            className="btn btn-outline-dark rounded mb-3"
-            style={{ fontSize: 14, opacity: 0.8 }}
-          >
-            Xem thêm 5 đơn hàng
-          </button>
-
+                <button
+                  className="btn btn-outline-dark rounded mb-3"
+                  style={{ fontSize: 14, opacity: 0.8 }}
+                >
+                  Xem thêm 5 đơn hàng
+                </button>
 
         </div>
       </div>

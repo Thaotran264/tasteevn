@@ -505,6 +505,7 @@ input:focus {
 @import url('./button.css');
 @import url('./form.css');
 @import url('./scrollItems.css');
+@import url('./profileMobile.css');
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import url('./layoutProfile.css');

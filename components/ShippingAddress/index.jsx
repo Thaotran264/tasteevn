@@ -14,14 +14,11 @@ import { CartContext } from "../../context/cartContext";
 
 
 const ShippingAddress = () => {
-    const [_isMobile, setMobile] = useState(false);
     const { state, dispatch } = useContext(CartContext);
     const [idDelete, setIdDelete] = useState(false);
     const router = useRouter();
     const [dataAddres, setDataAddres] = useState([]);
-    useEffect(() => {
-        setMobile(isMobile);
-    }, [_isMobile]);
+
 
     useEffect(() => {
         getData()
@@ -82,15 +79,6 @@ const ShippingAddress = () => {
             <Card className="">
                 <Card.Body>
                     <div className="d-flex gap-3 text-center ">
-                        {_isMobile &&
-                        <Link href="/profile">
-                            <a >
-                                <div>
-                                    <BsChevronLeft />
-                                </div>
-                            </a>
-                            </Link>
-                        }
                         <span className="w-100"><ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
                     </div>
                 </Card.Body>
@@ -116,7 +104,7 @@ const ShippingAddress = () => {
                                     </div>
 
                                 </div>
-                                <div className="w-20 d-flex gap-1" style={_isMobile ? {fontSize: 12} : {fontSize: 14}}>
+                                <div className="w-20 d-flex gap-1" style={{fontSize: 14}}>
                                     <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={item} setDefault={setDefault} setStatus={getData} />
                                      | <p type='button' onClick={() => handleDelete(item.id)} className="text-danger"> Xoá</p>
                                 </div>

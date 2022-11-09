@@ -15,17 +15,21 @@ import WishlistShop from "../../components/wishlistShop";
 import { CartContext } from "../../context/cartContext";
 import MerchantLayout from "../../components/MerchantLayout";
 import NavComponent from "../../components/Nav";
+import { current } from "@reduxjs/toolkit";
+import moment from "moment";
+import Image from "next/image";
+import { bookingApi } from "../../api-client";
+import MobileProfile from "../../components/MobileProfile";
 
 const Cart = () => {
   const [user, setUser] = useState({});
   const { dispatch } = useContext(CartContext);
+  const currentTime = new Date().toISOString().split('T')[0]
+  const [startDate, setStartDate] = useState(currentTime)
+  const [endDate, setEndDate] = useState(currentTime)
   const router = useRouter();
-
-  // useEffect(() => {
-  //   setMobile(isMobile);
-  //   isMobile ? router.push("/profile") : router.push("/profile-desktop?slug=chinh-sua-thong-tin");
-  // }, [_isMobile]);
-
+  const [bookingData, setBookingData] = useState([])
+  console.log('first,', currentTime.split('-')[2] - 7)
   useEffect(() => {
     const getDetailUser = async () => {
       try {
@@ -35,19 +39,38 @@ const Cart = () => {
         }
       } catch (error) {
         dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
-        // localStorage.removeItem("userInfo");
-        // localStorage.removeItem("token");
-        console.log('first res:', error)
-        // window.location.replace("/");
       }
     };
     getDetailUser();
   }, []);
 
+  const handleChangeStartDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+    setStartDate(e.target.value)
+  }
+  const handleChangeEndDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+
+    setEndDate(e.target.value)
+  }
+  const handleSearch = async () => {
+    const formData = new FormData()
+    formData.append('FromDate', new Date(startDate).getTime())
+    formData.append('ToDate', new Date(endDate).getTime())
+    formData.append('Start', 1)
+    formData.append('Length', 10)
+    try {
+      const res = await bookingApi.loadData(formData)
+      console.log('first', res)
+      setBookingData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
-    <NavComponent />
-      <div className="container" style={{marginTop: 54}}>
+      <NavComponent />
+      <div className="container hideOnMobile" style={{ marginTop: 54 }}>
         <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
           <Row>
             <Col sm={3}>
@@ -55,10 +78,12 @@ const Cart = () => {
                 <div className="profile-userpic">
                   <div className="">
                     {user && user["avatar"] ? (
-                      <img
+                      <Image
                         // className="w-100 h-100"
                         src={user["avatar"] || ''}
                         alt={user["fullName"]}
+                        width={120}
+                        height={120}
                         style={{ border: "1px solid #fff", borderRadius: "50%" }}
                       />
                     ) : (
@@ -181,7 +206,36 @@ const Cart = () => {
                 <Tab.Pane eventKey="historyOrder">
                   <HistoryOrder />
                 </Tab.Pane>
-                <Tab.Pane eventKey="historyBooking">Lịch sử Đặt bàn body</Tab.Pane>
+                <Tab.Pane eventKey="historyBooking">
+                  <div className='mb-2'>
+                    <h4 className="border-bottom">Lịch sử đặt hàng</h4>
+                    <div className="d-flex gap-1 align-items-center mb-2">
+                      <div className="d-flex gap-1 align-items-center">
+                        <span>Từ ngày</span>
+                        <input type="date" id="start" name="trip-start"
+                          value={startDate}
+                          onChange={handleChangeStartDate}
+                        />
+                      </div>
+                      <div className="d-flex gap-1 align-items-center">
+                        <span>Tới ngày</span>
+                        <input type="date" id="end" name="trip-end"
+                          value={endDate}
+                          onChange={handleChangeEndDate}
+                        />
+                      </div>
+                      <button onClick={handleSearch}>Tìm</button>
+                    </div>
+                    {
+                      bookingData?.map(item =>
+                        <div className="rounded bg-dark bg-opacity-10 p-2 mb-2" key={item.id}>
+                          <p>Tên quán: {item.brandId}</p>
+                        </div>
+
+                      )
+                    }
+                  </div>
+                </Tab.Pane>
                 <Tab.Pane eventKey="shippingAddress">
                   <ShippingAddress />
                 </Tab.Pane>
@@ -190,6 +244,7 @@ const Cart = () => {
           </Row>
         </Tab.Container>
       </div>
+      <MobileProfile />
     </>
   );
 };
