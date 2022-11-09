@@ -21,7 +21,7 @@ import Image from "next/image";
 import { bookingApi } from "../../api-client";
 import MobileProfile from "../../components/MobileProfile";
 
-const Cart = () => {
+const Profile = () => {
   const [user, setUser] = useState({});
   const { dispatch } = useContext(CartContext);
   const currentTime = new Date().toISOString().split('T')[0]
@@ -231,7 +231,6 @@ const Cart = () => {
                         <div className="rounded bg-dark bg-opacity-10 p-2 mb-2" key={item.id}>
                           <p>Tên quán: {item.brandId}</p>
                         </div>
-
                       )
                     }
                   </div>
@@ -253,4 +252,4 @@ const Cart = () => {
 //   return <Layout>{Page}</Layout>;
 // };
 
-export default Cart;
+export default Profile;

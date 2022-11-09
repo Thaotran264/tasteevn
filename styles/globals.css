@@ -86,7 +86,7 @@ input {
   outline: none;
 }
 input::placeholder {
-  color: var(--bg-primary-color);
+  color: #000;
 }
 .toggleMenu {
   right: -100%;
