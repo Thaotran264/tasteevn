@@ -21,12 +21,12 @@ const Cart = () => {
   const [userAdress, setUserAdress] = useState();
   const [addressData, setAddressData] = useState({})
   const totalPrice = cart?.reduce((cal, item) => cal + item.price * item.quantity, 0)
-  const totalQuantity= cart?.reduce((cal, item) => cal + item.quantity, 0)
+  const totalQuantity = cart?.reduce((cal, item) => cal + item.quantity, 0)
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log('res',res)
+        console.log('res', res)
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -64,21 +64,14 @@ const Cart = () => {
     );
   }
 
-  console.log('addressData',addressData)
+  console.log('addressData', addressData)
   return (
-    <section className="container mx-auto d-flex flex-column">
+    <section className="container mx-auto d-flex flex-column" style={{ marginTop: 54 }}>
       <Head>
         <title>Cart</title>
       </Head>
-      <div className="w-100 d-flex mb-2 gap-2">
-        <article className="cart__article position-relative w-50 rounded-2 bg-light p-2">
-          <h4 className="text-center border-bottom">Trang thanh toán</h4>
-          {cart?.map((cartItem,index) => (
-            <CartItem item={cartItem} key={index} />
-          ))}
-        </article>
-        {/* Shipping Address */}
-        <article className="w-50 rounded p-2" style={{ backgroundColor: "#fff" }}>
+      <div className="d-flex mb-2 gap-2 flex-column align-items-center">
+        <article className="w-75 rounded p-2" style={{ backgroundColor: "#fff" }}>
           <h4 className="text-center border-bottom">Thông tin người nhận</h4>
           <form className="mb-2" style={{ fontSize: 15 }}>
             <div className="d-flex flex-column mb-2">
@@ -105,57 +98,60 @@ const Cart = () => {
               <label>Địa chỉ:</label>
               {
                 !Object.keys(addressData).length ?
-              <div className="d-flex gap-2">
-                <input
-                  readOnly
-                  type="text"
-                  className="p-1 w-100 rounded-2"
-                  placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
-                  style={{ fontSize: 15 }}
-                />
-              </div> :
-               <div className="d-flex gap-2">
-               <input
-                 readOnly
-                 type="text"
-                 className="p-1 w-100 rounded-2"
-                 placeholder={addressData.address}
-                 style={{ fontSize: 15 }}
-               />
-             </div>
+                  <div className="d-flex gap-2">
+                    <input
+                      readOnly
+                      type="text"
+                      className="p-1 w-100 rounded-2"
+                      placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
+                      style={{ fontSize: 15 }}
+                    />
+                  </div> :
+                  <div className="d-flex gap-2">
+                    <input
+                      readOnly
+                      type="text"
+                      className="p-1 w-100 rounded-2"
+                      placeholder={addressData.address}
+                      style={{ fontSize: 15 }}
+                    />
+                  </div>
               }
             </div>
           </form>
           <button
             className="border-0 w-100 py-2 rounded"
             style={{ backgroundColor: "#f7a76c", color: "#fff" }}
-            onClick={()=>setShowModal(true)}
+            onClick={() => setShowModal(true)}
           >
             Chọn địa chỉ khác
           </button>
         </article>
-      </div>
-      <div className="w-100 bg-light p-2 rounded-2">
-        <div className="d-flex justify-content-between w-100 align-items-center">
-          <div className="d-flex flex-column">
-            <span
-              className="rounded py-1 px-1 text-light"
-              style={{
-                fontSize: 14,
-                backgroundColor: "hsl(0,0%,66%)",
-                textDecoration: "line-through",
-              }}
-            >
-              {formatter.format(totalPrice)}
-            </span>
-            <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
+        <article className="cart__article position-relative w-75 rounded-2 bg-light p-2">
+          <h4 className="text-center border-bottom">Trang thanh toán</h4>
+          {cart?.map((cartItem, index) => (
+            <CartItem item={cartItem} key={index} />
+          ))}
+        </article>
+        <div className="d-flex flex-column w-75 gap-2">
+            <div className="d-flex flex-column gap-2">
+              <span
+                className="rounded py-1 px-1 text-light"
+                style={{
+                  fontSize: 14,
+                  backgroundColor: "hsl(0,0%,66%)",
+                  textDecoration: "line-through",
+                }}
+              >
+                {formatter.format(totalPrice)}
+              </span>
+              <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
+            </div>
+            <button className="btn btn-success w-100" onClick={handleDatHangButton}>
+              Đặt hàng
+            </button>
           </div>
-          <button className="btn btn-success w-50" onClick={handleDatHangButton}>
-            Đặt hàng
-          </button>
-        </div>
       </div>
-
       {
         showModal && <AddAdress setAddressData={setAddressData} showModal={showModal} setShowModal={setShowModal} />
       }

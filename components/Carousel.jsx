@@ -23,7 +23,7 @@ const CarouselComponent = ({ banner }) => {
     <section className="container px-0 banner" style={{marginTop: 48}}>
       <Carousel>
         {banners?.map((item, index) => (
-          <Carousel.Item key={index} style={{height: '60vh', width:' 100%'}}>
+          <Carousel.Item key={index} style={{height: '40vh', width:' 100%'}}>
             <Image src={item?.uri || '/image/logo.jpg'} alt="First slide" 
             layout="fill" objectFit="cover"/>
           </Carousel.Item>

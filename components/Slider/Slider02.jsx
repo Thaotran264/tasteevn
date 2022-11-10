@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
 import { listBrand } from "../../db";
@@ -28,9 +29,9 @@ const settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   infinite: true,
-  autoplay: true,
-  speed: 2000,
-  autoplaySpeed: 5000,
+  // autoplay: true,
+  speed: 500,
+  // autoplaySpeed: 3000,
   responsive: [
     {
       breakpoint: 600,
@@ -48,24 +49,19 @@ const settings = {
   ],
 };
 
-const Slider02 = ({ text }) => {
+const Slider02 = ({ data }) => {
   return (
-    <div className="container px-0">
-      <div className=" p-2 bg-white rounded mb-2">
-        <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
-        <div className="mx-auto" style={{ width: '100%' }}>
-          <Slider {...settings}>
-            {listBrand.map((item, index) => (
-              <div key={index} className=''>
-                <div className="d-flex justify-content-center w-100">
-                  <img className=" border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
-                </div>
-                <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div >
+    <div className="container px-0 rounded">
+      <Slider {...settings}>
+        {data?.map((it, index) => (
+          <Link href={`/${it?.brandId}`} key={index}>
+            <a className='bg-light d-flex bg-dark bg-opacity-10 justify-content-center'>
+                <Image src={it?.image} alt={it?.brandName} width={180} height={180}
+                />
+            </a>
+          </Link>
+        ))}
+      </Slider>
     </div>
   );
 };

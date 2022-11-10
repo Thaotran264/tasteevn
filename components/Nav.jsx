@@ -73,7 +73,7 @@ const NavComponent = () => {
   const handleCitiesChange = (e) => {
     setSearchText(e)
   }
-  const renderMobileMenu = <Dropdown className='d-flex align-items-center hideOnDesktop' >
+  const renderMobileMenu = <Dropdown className='d-flex align-items-center ' >
     <Dropdown.Toggle
       className="border-0 rounded-0  d-flex align-items-center px-1"
       id="dropdown-basic"
@@ -103,6 +103,7 @@ const NavComponent = () => {
       }
     </Dropdown.Menu>
   </Dropdown>
+  
   const renderDropDownCities = <Dropdown className='d-flex align-items-center justify-content-center navItem bg-dark rounded bg-opacity-10 ' onSelect={handleCitiesChange} >
     <Dropdown.Toggle
       className="border-0 d-flex gap-1 align-items-center px-2"
@@ -219,9 +220,11 @@ const NavComponent = () => {
         {renderSearchForm}
         {token && renderCartItem}
         {/* Login desktop */}
-        {renderUserInfo}
+        {/* {renderUserInfo} */}
         {/* Login Mobile */}
-        {renderMobileMenu}
+        {
+          renderMobileMenu
+        }
       </nav >
       {
         searchText ? renderSearchResult : <></>

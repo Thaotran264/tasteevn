@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   return (
     <div className="position-relative">
       <NavComponent />
-      <CarouselComponent />
+      {/* <CarouselComponent /> */}
       <Notify />
       <main>{children}</main>
       {/* <TabMenu /> */}
