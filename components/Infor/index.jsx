@@ -122,7 +122,6 @@ const TabInfor = ({ userDetail }) => {
     reader.onload = function () {
       var output = document.getElementById('prevew-img');
       output.src = reader.result;
-
     };
   }
   return (
@@ -141,7 +140,7 @@ const TabInfor = ({ userDetail }) => {
                   <div className="w-100 h-50">
 
                     <div className="wrapper">
-                      <div className="file-upload avata-input">
+                      <div className="file-upload avata-input d-flex align-items-center" style={{width: 120, height: 120}}>
                         <input type="file" onChange={(e) => upload(e)} />
                         {user && user['avatar'] ?
                           <img
@@ -149,7 +148,7 @@ const TabInfor = ({ userDetail }) => {
                             className="w-100 h-100"
                             src={user && user['avatar'] || ''}
                             alt={user && user['fullName'] || ''}
-                            style={{ border: "1px solid #fff", borderRadius: "50%" }}
+                            style={{ border: "1px solid #fff", borderRadius: "50%"}}
                           /> :
                           <AiOutlineCloudUpload />
                         }

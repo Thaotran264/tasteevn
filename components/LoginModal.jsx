@@ -14,6 +14,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { accountAPI } from "../api-client/account";
 import { logIn } from "../context/actions";
 import { CartContext } from "../context/cartContext";
+import { setTokenCookies } from "../hooks/setTokenCookies";
 import Countdown from "./Countdown";
 
 function LoginModal({ showLoginModal,
@@ -102,6 +103,7 @@ function LoginModal({ showLoginModal,
       const res = await accountAPI.login(params);
       if (res.successful && res.data) {     
         dispatch(logIn(res.data))
+        setTokenCookies(res.data.token)
         handleClose();
         // router.push("/");
         // window.location.reload();
@@ -359,7 +361,7 @@ function LoginModal({ showLoginModal,
                     onChange={(e) => setData({ ...data, Password: e.target.value })}
                     type="password"
                     placeholder="Mật khẩu"
-                    className="form-control inputFomCustom"
+                    className="form-control inputFomCustom rounded-0 px-2 fs-6"
                     id="exampleInputPassword1"
                   />
                 </div>

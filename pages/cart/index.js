@@ -6,7 +6,7 @@ import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
 import AddAdress from "../../components/Modal/AddAdress";
-import Checkout from "../../components/Modal/Checkout";
+// import Checkout from "../../components/Modal/Checkout";
 import { clearCart } from "../../context/actions";
 import { CartContext } from "../../context/cartContext";
 // import { DataContext } from "../../store/globalState";
@@ -59,7 +59,7 @@ const Cart = () => {
     return (
       <>
         <h2 className="text-center">Empty</h2>
-        {check && <Checkout setCheck={setCheck} />}
+        {/* {check && <Checkout setCheck={setCheck} />} */}
       </>
     );
   }

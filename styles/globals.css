@@ -86,7 +86,7 @@ input {
   outline: none;
 }
 input::placeholder {
-  color: var(--bg-primary-color);
+  color: #000;
 }
 .toggleMenu {
   right: -100%;
@@ -505,6 +505,7 @@ input:focus {
 @import url('./button.css');
 @import url('./form.css');
 @import url('./scrollItems.css');
+@import url('./profileMobile.css');
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import url('./layoutProfile.css');

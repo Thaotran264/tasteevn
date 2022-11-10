@@ -1,4 +1,5 @@
 import axios from 'axios';
+import cookie from 'cookie'
 const ISSERVER = typeof window === "undefined";
 
 function getToken() {

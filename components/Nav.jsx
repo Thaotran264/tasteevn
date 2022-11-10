@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -8,9 +9,11 @@ import { cityApi } from '../api-client/city';
 import { searchApi } from '../api-client/search';
 import { logOut } from '../context/actions';
 import { CartContext } from '../context/cartContext';
+import { removeTokenCookies } from '../hooks/setTokenCookies';
 import LoginModal from './LoginModal';
 import CartModal from './Modal/CartModal';
-const Nav = () => {
+const NavComponent = () => {
+  const router = useRouter()
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [searchData, setSearchData] = useState()
@@ -50,6 +53,8 @@ const Nav = () => {
   }
   const handleLogout = () => {
     dispatch(logOut())
+    removeTokenCookies()
+    router.push('/')
   }
   const handleShowCartModal = () => {
     setShowCart(true)
@@ -80,7 +85,7 @@ const Nav = () => {
       {
         token ?
           <>
-            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2' href='/cart'>Giỏ hàng
             </Dropdown.Item>
@@ -179,7 +184,7 @@ const Nav = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu >
-            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2'>Giỏ hàng</Dropdown.Item>
             <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất
@@ -193,8 +198,8 @@ const Nav = () => {
     }
   </div>
   return (
-    <section className='d-flex justify-content-center align-items-center nav active shadow bg-light' style={{ height: 48 }} >
-      <nav className='d-flex container px-0 gap-2 align-items-center'>
+    <section className='d-flex justify-content-center align-items-center navContainer active shadow bg-light' style={{ height: 48 }} >
+      <nav className='d-flex container gap-2 align-items-center'>
         {
           showCart && <CartModal setShow={setShowCart} />
         }
@@ -212,7 +217,7 @@ const Nav = () => {
         </div>
         {renderDropDownCities}
         {renderSearchForm}
-        {renderCartItem}
+        {token && renderCartItem}
         {/* Login desktop */}
         {renderUserInfo}
         {/* Login Mobile */}
@@ -229,4 +234,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default NavComponent
