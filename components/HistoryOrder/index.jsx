@@ -30,7 +30,7 @@ const HistoryOrder = ({ }) => {
     const param = {
       fromDate: startDate,
       toDate: endDate,
-      length: '10'
+      length: '5'
     }
 
     try {
@@ -60,23 +60,22 @@ const HistoryOrder = ({ }) => {
             </div>
           </Card.Body>
         </Card>
-        <div></div>
-        <div className="d-flex gap-1 align-items-center mb-2">
+        <div className="d-flex gap-2 align-items-center mb-2">
           <div className="d-flex gap-1 align-items-center">
-            <span>Từ ngày</span>
-            <input type="date" id="start" name="trip-start"
+            <span>Từ ngày:</span>
+            <input type="date" id="start" name="trip-start" className="px-2"
               value={startDate}
               onChange={handleChangeStartDate}
             />
           </div>
           <div className="d-flex gap-1 align-items-center">
-            <span>Tới ngày</span>
-            <input type="date" id="end" name="trip-end"
+            <span>Đến ngày:</span>
+            <input type="date" id="end" name="trip-end" className="px-2"
               value={endDate}
               onChange={handleChangeEndDate}
             />
           </div>
-          <button onClick={handleSearch}>Tìm</button>
+          <button onClick={handleSearch} className='btn btn-primary'>Tìm</button>
         </div>
         <HandleSort isOpen={open} setOpen={setOpen} />
         <div className="rounded w-100 bg-white p-2">

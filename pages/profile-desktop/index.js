@@ -21,6 +21,12 @@ import Image from "next/image";
 import { bookingApi } from "../../api-client";
 import MobileProfile from "../../components/MobileProfile";
 
+const JsxComponent = ()=> (
+  <div>
+    <h2>Thí í tét</h2>
+  </div>
+)
+
 const Profile = () => {
   const [user, setUser] = useState({});
   const { dispatch } = useContext(CartContext);
@@ -29,7 +35,6 @@ const Profile = () => {
   const [endDate, setEndDate] = useState(currentTime)
   const router = useRouter();
   const [bookingData, setBookingData] = useState([])
-  console.log('first,', currentTime.split('-')[2] - 7)
   useEffect(() => {
     const getDetailUser = async () => {
       try {
@@ -207,28 +212,28 @@ const Profile = () => {
                   <HistoryOrder />
                 </Tab.Pane>
                 <Tab.Pane eventKey="historyBooking">
-                  <div className='mb-2'>
-                    <h4 className="border-bottom">Lịch sử đặt hàng</h4>
-                    <div className="d-flex gap-1 align-items-center mb-2">
-                      <div className="d-flex gap-1 align-items-center">
-                        <span>Từ ngày</span>
-                        <input type="date" id="start" name="trip-start"
+                  <div className='d-flex flex-column gap-2'>
+                    <h4 className="border-bottom text-center">Lịch sử đặt hàng</h4>
+                    <div className="d-flex gap-1 align-items-center">
+                      <div className="d-flex gap-2 align-items-center">
+                        <span>Từ ngày:</span>
+                        <input type="date" id="start" name="trip-start" className="px-2"
                           value={startDate}
                           onChange={handleChangeStartDate}
                         />
                       </div>
                       <div className="d-flex gap-1 align-items-center">
-                        <span>Tới ngày</span>
-                        <input type="date" id="end" name="trip-end"
+                        <span>Đến ngày:</span>
+                        <input type="date" id="end" name="trip-end" className="px-2"
                           value={endDate}
                           onChange={handleChangeEndDate}
                         />
                       </div>
-                      <button onClick={handleSearch}>Tìm</button>
+                      <button onClick={handleSearch} className='btn btn-primary'>Tìm</button>
                     </div>
                     {
                       bookingData?.map(item =>
-                        <div className="rounded bg-dark bg-opacity-10 p-2 mb-2" key={item.id}>
+                        <div className="rounded bg-dark bg-opacity-10 p-2" key={item.id}>
                           <p>Tên quán: {item.brandId}</p>
                         </div>
                       )

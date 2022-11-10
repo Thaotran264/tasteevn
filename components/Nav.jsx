@@ -9,6 +9,7 @@ import { cityApi } from '../api-client/city';
 import { searchApi } from '../api-client/search';
 import { logOut } from '../context/actions';
 import { CartContext } from '../context/cartContext';
+import { removeTokenCookies } from '../hooks/setTokenCookies';
 import LoginModal from './LoginModal';
 import CartModal from './Modal/CartModal';
 const NavComponent = () => {
@@ -52,6 +53,7 @@ const NavComponent = () => {
   }
   const handleLogout = () => {
     dispatch(logOut())
+    removeTokenCookies()
     router.push('/')
   }
   const handleShowCartModal = () => {

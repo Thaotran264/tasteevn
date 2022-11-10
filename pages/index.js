@@ -6,7 +6,7 @@ import Slider from "react-slick/lib/slider";
 import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Login from "../components/Modal/Login";
-
+import cookie from 'cookie'
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
@@ -58,7 +58,8 @@ const settings = {
 export default function Home({ data }) {
 const [showLoginModal, setShowLoginModal] = useState(false)
 const handleShowLoginModal = () => setShowLoginModal(true)
-
+const token = cookie.parse("token")
+console.log('first', token)
   return (
     <>
       <Head>
