@@ -14,6 +14,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { accountAPI } from "../api-client/account";
 import { logIn } from "../context/actions";
 import { CartContext } from "../context/cartContext";
+import { setTokenCookies } from "../hooks/setTokenCookies";
 import Countdown from "./Countdown";
 
 function LoginModal({ showLoginModal,
@@ -102,6 +103,7 @@ function LoginModal({ showLoginModal,
       const res = await accountAPI.login(params);
       if (res.successful && res.data) {     
         dispatch(logIn(res.data))
+        setTokenCookies(res.data.token)
         handleClose();
         // router.push("/");
         // window.location.reload();

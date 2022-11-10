@@ -57,7 +57,6 @@ export const clearCart = () => {
 }
 // Auth
 export const logIn = (data) => {
-    console.log(data)
     sessionStorage.setItem("user", JSON.stringify(data));
     sessionStorage.setItem("token", JSON.stringify(data.token));
     return {

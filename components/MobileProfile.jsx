@@ -6,12 +6,12 @@ import { Col, Row } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { AiOutlineArrowLeft, AiOutlineHeart, AiOutlineHome, AiOutlineSetting, AiOutlinePlusCircle } from 'react-icons/ai'
-import { BiBuilding, BiNotepad } from 'react-icons/bi'
+import { AiOutlineArrowLeft, AiOutlineHeart, AiOutlineHome, AiOutlineSetting, AiOutlinePlusCircle, AiOutlineEdit } from 'react-icons/ai'
+import { BiBuilding, BiEditAlt, BiNotepad } from 'react-icons/bi'
 import { MdOutlineChair } from 'react-icons/md'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { GrNotes } from 'react-icons/gr'
-import { orderApi, userApi } from '../api-client'
+import { bookingApi, orderApi, userApi } from '../api-client'
 import { CartContext } from '../context/cartContext'
 import ChangePass from './Modal/ChangePass'
 
@@ -21,6 +21,7 @@ const MobileProfile = () => {
     const [endDate, setEndDate] = useState(new Date());
     const { state, dispatch } = useContext(CartContext)
     const [orders, setOrders] = useState([])
+    const [bookings, setBookings] = useState([])
     const [address, setAddress] = useState()
     const [info, setInfo] = useState()
     const { auth } = state
@@ -30,11 +31,21 @@ const MobileProfile = () => {
     const [showQuanYeuThich, setShowQuanYeuThich] = useState(false)
     const [showSoDiaChi, setShowSoDiaChi] = useState(false)
     const [showMdChangePass, setShowMdChangePass] = useState(false)
+    const [birthday, setBirthday] = useState('')
+    const [shippingAddress, setShippingAddress] = useState()
+    const [change, setChange] = useState(true)
+    const [nameEdit, setNameEdit] = useState(false)
+    const [gender, setGender] = useState(1)
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [fullName, setFullName] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [emailEdit, setEmailEdit] = useState(true)
     useEffect(() => {
         const getData = async () => {
             try {
                 const res = await userApi.getShippingAddress()
-                setAddress(...res)
+                setShippingAddress(...res)
             } catch (err) {
                 console.log(err)
             }
@@ -45,8 +56,13 @@ const MobileProfile = () => {
         const getData = async () => {
             try {
                 const res = await userApi.getUserInfor()
-                console.log('res', res.data.userInfo)
                 setInfo(res.data.userInfo)
+                setPhone(res.data.userInfo.phoneNumber)
+                setAddress(res.data.userInfo.address)
+                setAvatar(res.data.userInfo.avatar)
+                setEmail(res.data.userInfo.email)
+                setFullName(res.data.userInfo.fullName)
+                setBirthday(new Date(res.data.userInfo.birthday).toISOString().split('T')[0])
             } catch (err) {
                 console.log(err)
             }
@@ -54,7 +70,7 @@ const MobileProfile = () => {
         getData()
     }, [])
     const handleShowModalChangePass = () => {
-        setShowMdChangePass(!showMd)
+        setShowMdChangePass(!showMdChangePass)
     }
     const handleShowDonHang = async () => {
         setShowDonHang(!showDonHang)
@@ -62,9 +78,10 @@ const MobileProfile = () => {
     const handleShowDatCho = async () => {
         setShowDatCho(!showDatCho)
     }
-    const handleSearchDate = async () => {
+    const handleSearchOrderDate = async () => {
         const params = {
             start: "1",
+            length: '5',
             fromDate: startDate.toISOString().split('T')[0],
             toDate: endDate.toISOString().split('T')[0]
         }
@@ -76,54 +93,146 @@ const MobileProfile = () => {
             console.log(error)
         }
     }
+    const handleSearchBookingDate = async () => {
+        const formData = new FormData()
+        formData.append('FromDate', new Date(startDate.toISOString().split('T')[0]).getTime())
+        formData.append('ToDate ', new Date(endDate.toISOString().split('T')[0]).getTime())
+        formData.append('Length ', 5)
+        try {
+            const res = await bookingApi.loadData(formData)
+            setBookings(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const handlePhotoChange = (e) => {
+        console.log(e.target.value)
+        setInfo({ ...info, avatar: e.target.files[0] })
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = function () {
+            var output = document.getElementById('prevew-imgMobile');
+            output.src = reader.result;
+        };
+    }
+    const handleGenderChange = (e) => {
+        setChange(false)
+        setGender(e.target.value)
+    }
+    const handleDateChange = (e) => {
+        setBirthday(e.target.value)
+    }
+    const handleEditChange = () => {
+        setChange(false)
+        setNameEdit(!nameEdit)
+    }
+    const handleEmailChange = (e) => {
+        setEmail(e)
+        setEmailEdit(false)
+        setChange(false)
+    }
+    const handleCapNhatBtn = async () => {
+        const params = {
+            phoneNumber: phone,
+            fullName,
+            birthday: new Date(birthday).getTime(),
+            gender: String(gender),
+            address,
+            email,
+            avatar
+        }
+        try {
+            const res = await userApi.updateUser(params)
+            console.log('data', res)
+        } catch (error) {
+            console.log(error)
+        }
+        console.log('data', params)
+    }
     const userInfor = <div className='profileMobile__Component'>
-        <div className='w-100 p-2'>
-            <div className='position-relative mb-4 border-bottom'>
-                <button className='position-absolute top-0 start-0'
-                    onClick={() => setShowUserInfo(false)}><AiOutlineArrowLeft /></button>
-                <h2 className='text-center'>Thông tin tài khoản</h2>
-            </div>
-            <div className='mb-2'>
-                {/* <p>{info?.fullName || 'text'}</p> */}
-                <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.fullName} readOnly />
-            </div>
-            <div className='mb-2'>
-                <input className='w-100 rounded p-2 border-0 shadow' type='email' placeholder={info?.email} readOnly />
-            </div>
-            <div className='mb-2'>
-                <input className='w-100 rounded p-2 border-0 shadow' type='text' placeholder={info?.phoneNumber} readOnly />
-            </div>
-            <button
-                onClick={handleShowModalChangePass} className='btn btn-outline-dark  mb-2 w-100'>Đổi mật khẩu</button>
-            <button className='btn btn-outline-dark  w-100'>Xóa tài khoản</button>
-        </div>
-    </div>
-    const DonHang = <div className='profileMobile__Component'>
-        <h2 className='text-center'>Đơn hàng của tôi</h2>
-        <div className='position-relative'>
-        </div>
+        <h4>Thông tin tài khoản</h4>
         <div className='d-flex gap-2 flex-column'>
-            <DatePicker
-                className='rounded p-1'
-                style={{ width: 'max-content' }}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-            />
-            <DatePicker
-                className='rounded p-1' style={{ width: 'max-content' }}
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-            />
-            <button onClick={handleSearchDate} className='btn btn-primary'>Tìm</button>
+            <div className='profileMobile__Component__formImage'>
+                <input type='file' hidden id='photo' onChange={handlePhotoChange} />
+                <label htmlFor='photo'>
+                    <img
+                        id="prevew-imgMobile"
+                        className='rounded'
+                        style={{ width: 80, height: 80 }}
+                        src={info?.avatar}
+                        alt={info?.fullName}
+                    />
+                </label>
+            </div>
+            <div className='profileMobile__Component__formContent'>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='name'>Họ tên:</label>
+                    <div className='d-flex align-items-center bg-light position-relative'>
+                        <input id='name' type='text' placeholder={info?.fullName} disabled={!nameEdit} className='w-100 ' />
+                        <AiOutlineEdit onClick={handleEditChange} className='position-absolute end-0' style={{ zIndex: 1 }} />
+                    </div>
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='name'>Ngày sinh:</label>
+                    <input id='birthday' type='date' value={birthday} onChange={handleDateChange} />
+                </div>
+                <div onChange={handleGenderChange}>
+                    <input type='radio' name='gender' value='1' defaultChecked={info?.gender == 1} />Nam
+                    <input type='radio' name='gender' value='2' defaultChecked={info?.gender == 2} /> Nữ
+                    <input type='radio' name='gender' value='3' defaultChecked={info?.gender == 3} /> Khác
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='phone'>Số điện thoại:</label>
+                    <input id='phone' value={phone} onChange={e => setPhone(e.target.value)} readOnly type='number' />
+                </div>
+                <div className='d-flex flex-column'>
+                    <label htmlFor='email'>Email:</label>
+                    <div className='w-100 d-flex position-relative align-items-center bg-light'>
+                        <input id='email' className='w-100'
+                            type='email' value={email} readOnly={emailEdit} onChange={e => handleEmailChange(e.target.value)} />
+                        <AiOutlineEdit onClick={() => setEmailEdit(!emailEdit)} className='position-absolute end-0' />
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <button className='btn btn-success' onClick={handleShowModalChangePass}>Đổi mật khẩu</button>
+        <button disabled={change}
+            onClick={handleCapNhatBtn} >Cập nhật</button>
+        <button onClick={() => setShowUserInfo(false)}>Đóng</button>
+    </div>
+    const DonHang = <div className='profileMobile__Component'>
+        <h4 className='text-center'>Đơn hàng của tôi</h4>
+        <div className='d-flex gap-2 p-2 align-items-end bg-dark bg-opacity-10 rounded'>
+            <div className='d-flex flex-column'>
+                <span>Từ ngày:</span>
+                <div className=''>
+                    <DatePicker
+                        className='rounded p-1 w-100'
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                    />
+                </div>
+            </div>
+            <div>
+                <span>Đến ngày:</span>
+                <div>
+                    <DatePicker
+                        className='rounded p-1 w-100'
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                    />
+                </div>
+            </div>
+            <button onClick={handleSearchOrderDate} className='btn btn-primary'>Tìm</button>
+        </div>
         <div className='d-flex flex-column'>
             {
                 orders?.map(order =>
@@ -134,50 +243,54 @@ const MobileProfile = () => {
                         </a></Link>)
             }
         </div>
-        <button onClick={() => setShowDonHang(false)}><AiOutlineArrowLeft /></button>
-
+        <button onClick={() => setShowDonHang(false)}>Đóng</button>
     </div>
     const DatCho = <div className='profileMobile__Component'>
         <h4>Lịch sử đặt chỗ</h4>
-
-        <div className='d-flex gap-2 flex-column px-2'>
-            <div className='d-flex align-items-center justify-content-between'>
-                <span className='w-25'>Từ ngày:</span>
-                <DatePicker
-                    className='rounded p-1 w-100'
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                />
+        <div className='d-flex gap-1 align-items-end p-2 bg-dark bg-opacity-10 rounded'>
+            <div className='d-flex flex-column'>
+                <span className=''>Từ ngày:</span>
+                <div className='w-100'>
+                    <DatePicker
+                        className='rounded p-1 w-100'
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                    />
+                </div>
             </div>
-            <div className='d-flex align-items-center justify-content-between'>
-                <span className='w-25'>Đến ngày:</span>
-                <DatePicker
-                    className='rounded p-1 w-100'
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate}
-                />
+            <div className='d-flex flex-column'>
+                <span className=''>Đến ngày:</span>
+                <div className='w-100'>
+                    <DatePicker
+                        className='rounded p-1 w-100'
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                    />
+                </div>
             </div>
-
-            <button onClick={handleSearchDate} className='btn btn-primary' style={{letterSpacing: 1, fontSize: 14}}>Tìm</button>
+            <button onClick={handleSearchBookingDate} className='btn btn-primary flex-1' style={{ letterSpacing: 1, fontSize: 14 }}>Tìm</button>
         </div>
-
-        <div className='d-flex flex-column gap-2 rounded mx-2'>
-            {
-                orders?.map(order =>
-                    <Link href={`/order/${order.id}`} key={order.id}>
-                        <a className='border-bottom bg-dark bg-opacity-10 p-2 rounded'>
-                            <span>Ngày mua: {moment(order?.createdDate).format('DD/MM/yyyy')}</span>
-                            <p className='mb-0'>Tổng tiền: {order?.total}</p>
-                        </a></Link>)
-            }
-        </div>
+        {
+            bookings?.length ?
+                <div className='d-flex flex-column gap-2 rounded bg-dark bg-opacity-10'>
+                    {
+                        bookings?.map(order =>
+                            <Link href={`/order/${order.id}`} key={order.id}>
+                                <a className='border-bottom bg-dark bg-opacity-10 p-2 rounded'>
+                                    <span>Ngày mua: {moment(order?.createdDate).format('DD/MM/yyyy')}</span>
+                                    <p className='mb-0'>Tổng tiền: {order?.total}</p>
+                                </a></Link>)
+                    }
+                </div>
+                : <></>
+        }
         <button onClick={() => setShowDatCho(false)}>Đóng</button>
 
     </div>
@@ -192,11 +305,11 @@ const MobileProfile = () => {
         <div className='px-2 d-flex flex-column gap-2'>
             <div className='profileMobile__Component__items'>
                 <AiOutlineHome />
-                <span>{address?.address}-{address?.wardName} - {address?.districtName} - {address?.cityName}</span>
+                <span>{shippingAddress?.address}-{shippingAddress?.wardName} - {shippingAddress?.districtName} - {shippingAddress?.cityName}</span>
             </div>
             <div className='profileMobile__Component__items'>
                 <BiBuilding />
-                <span>{address?.address}-{address?.wardName} - {address?.districtName} - {address?.cityName}</span>
+                <span>{shippingAddress?.address}-{shippingAddress?.wardName} - {shippingAddress?.districtName} - {shippingAddress?.cityName}</span>
             </div>
         </div>
         <button onClick={() => setShowSoDiaChi(false)}>Đóng</button>

@@ -122,7 +122,6 @@ const TabInfor = ({ userDetail }) => {
     reader.onload = function () {
       var output = document.getElementById('prevew-img');
       output.src = reader.result;
-
     };
   }
   return (

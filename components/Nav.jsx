@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -8,9 +9,11 @@ import { cityApi } from '../api-client/city';
 import { searchApi } from '../api-client/search';
 import { logOut } from '../context/actions';
 import { CartContext } from '../context/cartContext';
+import { removeTokenCookies } from '../hooks/setTokenCookies';
 import LoginModal from './LoginModal';
 import CartModal from './Modal/CartModal';
 const NavComponent = () => {
+  const router = useRouter()
   const [searchBox, setShowSearchBox] = useState(true)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [searchData, setSearchData] = useState()
@@ -50,6 +53,8 @@ const NavComponent = () => {
   }
   const handleLogout = () => {
     dispatch(logOut())
+    removeTokenCookies()
+    router.push('/')
   }
   const handleShowCartModal = () => {
     setShowCart(true)
@@ -80,7 +85,7 @@ const NavComponent = () => {
       {
         token ?
           <>
-            <Dropdown.Item className='text-center py-2' href='/user'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2' href='/cart'>Giỏ hàng
             </Dropdown.Item>
