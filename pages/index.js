@@ -40,7 +40,7 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
         <meta name="twitter:creator" content="@tastee" />
       </Head>
-      <section className="mb-5 container px-0 d-flex flex-column gap-2"  >
+      <section className="container px-0 d-flex flex-column gap-2"  >
         <CarouselComponent />
       
         <Slider02 data={data}/>

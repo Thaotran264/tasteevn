@@ -15,11 +15,13 @@ import { formatter } from '../../utils/common'
 const Detail = () => {
     const router = useRouter()
     const { id } = router.query
+    console.log('id',id)
     const [data, setData] = useState()
     useEffect(() => {
         const getData = async () => {
             try {
                 const res = await orderApi.detail(id)
+                console.log(res.data)
                 setData(res.data)
             } catch (error) {
                 console.log(error)
@@ -48,7 +50,7 @@ const Detail = () => {
             </div>
         </div>
     ))
-    const renderUserInfo = <div className='rounded shadow p-2 ' style={{ flex: 1 }}>
+    const renderUserInfo = <div className='rounded shadow p-2 '>
         <h3 className='text-center border-bottom border-dark'>Thông tin người mua</h3>
         <div className='px-2'>
             <div className='d-flex gap-2 align-items-center mb-2'>
@@ -76,8 +78,8 @@ const Detail = () => {
     </div>
 
     return (
-        <section className='container px-0 py-4'>
-            <div className='d-flex gap-2 ' >
+        <section className='container px-0 py-4' style={{marginTop: 54}}>
+            <div className='d-flex gap-2 flex-column w-75 mx-auto ' >
                 <div className='p-2 shadow rounded' style={{ flex: 1 }}>
                     <h2 className='text-center border-bottom border-dark'>Thông tin đơn hàng</h2>
                     <div className='d-flex justify-content-between bg-dark bg-opacity-10 mb-2 align-items-center p-2 rounded    '>

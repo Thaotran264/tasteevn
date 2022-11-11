@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart ,AiOutlineUser} from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
+import { CiLogout } from 'react-icons/cg';
 import { cityApi } from '../api-client/city';
 import { searchApi } from '../api-client/search';
 import { logOut } from '../context/actions';
@@ -85,11 +86,16 @@ const NavComponent = () => {
       {
         token ?
           <>
-            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2 d-flex align-items-center gap-2 justify-content-center ' href='/profile-desktop'>
+              <AiOutlineUser /> 
+              <span>Thông tin tài khoản</span>
             </Dropdown.Item>
-            <Dropdown.Item className='text-center py-2' href='/cart'>Giỏ hàng
+            <Dropdown.Item className='text-center py-2  d-flex align-items-center gap-2 justify-content-center ' href='/cart'>
+              <AiOutlineShoppingCart /> 
+              <span>Giỏ hàng</span>
             </Dropdown.Item>
-            <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất
+            <Dropdown.Item className='text-center py-2 d-flex justify-content-center align-items-center gap-2' onClick={handleLogout}>
+            <span>Đăng xuất</span>
             </Dropdown.Item>
           </>
           : <>
@@ -198,6 +204,7 @@ const NavComponent = () => {
         </div>
     }
   </div>
+
   return (
     <section className='d-flex justify-content-center align-items-center navContainer active shadow bg-light' style={{ height: 48 }} >
       <nav className='d-flex container gap-2 align-items-center'>

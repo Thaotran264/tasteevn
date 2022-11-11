@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
+import {AiOutlineStar} from 'react-icons/ai'
 import { listBrand } from "../../db";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -37,9 +38,9 @@ const settings = {
       breakpoint: 600,
       settings: {
         infinite: true,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 5000,
+        autoplay: false,
+        speed: 500,
+        autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
@@ -50,14 +51,25 @@ const settings = {
 };
 
 const Slider02 = ({ data }) => {
+  console.log('first', data)
   return (
-    <div className="container px-0 rounded">
+    <div className="container px-0 py-2 rounded">
       <Slider {...settings}>
         {data?.map((it, index) => (
           <Link href={`/${it?.brandId}`} key={index}>
-            <a className='bg-light d-flex bg-dark bg-opacity-10 justify-content-center'>
-                <Image src={it?.image} alt={it?.brandName} width={180} height={180}
-                />
+            <a className='d-flex mx-2'>
+              <div className="w-100 h-100">
+                <div className="d-flex justify-content-center">
+                  <img src={it?.image} alt={it?.brandName}
+                 
+                  className="rounded w-100 h-100"
+                  />
+                </div>
+                <div>
+                  <p className="mb-0 fw-bold" style={{fontSize: 14}}>{it.brandName.substring(0, 14)}</p>
+                  <p className="mb-0 d-flex align-items-center gap-1" style={{fontSize:13}}><AiOutlineStar />5.0/10 rating</p>
+                </div>
+              </div>
             </a>
           </Link>
         ))}

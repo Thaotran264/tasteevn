@@ -6,8 +6,8 @@ import { SiZalo } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="bg-light pt-1">
-      <div className="container py-4">
+    <footer className="py-4">
+      <div className="container">
         <div className="row">
           <div className="col-10 col-md-10 col-lg-5 text-dark">
             <h5 className="fw-bold">Thông tin</h5>
@@ -40,10 +40,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="border-top py-2 text-center fw-light " style={{ fontSize: '12px' , color: '#252525' }}>© Copyright 2022 by Tastee team. All Rights Reserved</p>
+      <p className="fw-light text-center mb-0 ">© Copyright 2022 by Tastee team. All Rights Reserved</p>
     </footer>
-
-    
   );
 };
 
