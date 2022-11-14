@@ -1,23 +1,17 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import CarouselComponent from "./Carousel";
 import Footer from "./Footer";
 import NavComponent from "./Nav";
-import Nav from "./Nav";
-import Notify from "./Notify";
 import ScrollToTopButton from "./ScrollToTopButton";
 const Layout = ({ children }) => {
   return (
-    <div className="position-relative">
+    <div className="position-relative d-flex flex-column gap-2 " style={{backgroundColor: '#EAEAEA'}}>
       <NavComponent />
-      <CarouselComponent />
-      <Notify />
-      <main>{children}</main>
-      {/* <TabMenu /> */}
-      <Footer />
+      <main style={{marginTop: 48}}>{children}</main>
       <ScrollToTopButton />
       <ToastContainer />
+      <Footer />
     </div>
   );
 };

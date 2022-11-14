@@ -7,59 +7,12 @@ import Layout from "../components/Layout";
 import React, { useState } from "react";
 import Login from "../components/Modal/Login";
 import cookie from 'cookie'
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
-}
+import CarouselComponent from "../components/Carousel";
+import Slider02 from "../components/Slider/Slider02";
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
-}
-const settings = {
-  infinite: true,
-  // dots: true,
-  autoplay: true,
-  autoplaySpeed: 5000,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  initialSlide: 0,
-  // className: "center",
-  // centerMode: true,
-  // centerPadding: "25px",
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 3,
-        infinite: true,
-        // dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        initialSlide: 1
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    }
-  ]
-};
 export default function Home({ data }) {
 const [showLoginModal, setShowLoginModal] = useState(false)
 const handleShowLoginModal = () => setShowLoginModal(true)
-const token = cookie.parse("token")
-console.log('first', token)
   return (
     <>
       <Head>
@@ -87,22 +40,10 @@ console.log('first', token)
         <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
         <meta name="twitter:creator" content="@tastee" />
       </Head>
-      <section className="mb-5 container px-0"  >
-        {/* <button
-        onClick={handleShowLoginModal} className="me-5 btn btn-dark position-absolute top-0 end-50">Login</button> */}
-        <Slider {...settings} className="mt-4">
-          {data?.map((it, index) => (
-            <Link href={`/${it?.brandId}`}  key={index} >
-              <a  key={index} className='d-flex mx-2'>
-                <div className='d-flex justify-content-center w-100'>
-                  <Image src={it?.image} alt={it?.brandName} className="d-flex" width={160} height={160} 
-                   />
-                </div>
-              </a>
-            </Link>
-          ))}
-
-        </Slider>
+      <section className="container px-0 d-flex flex-column gap-2"  >
+        <CarouselComponent />
+      
+        <Slider02 data={data}/>
         {
           showLoginModal ?
           <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} />:<></>

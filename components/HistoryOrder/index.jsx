@@ -8,6 +8,7 @@ import { Card } from "react-bootstrap";
 import HandleSort from "../../pages/profile/components/handleSort";
 import { orderApi } from "../../api-client";
 import moment from "moment/moment";
+import Link from "next/link";
 
 const HistoryOrder = ({ }) => {
   const [open, setOpen] = useState(false);
@@ -47,12 +48,7 @@ const HistoryOrder = ({ }) => {
         <Card className="">
           <Card.Body>
             <div className="d-flex gap-3 text-center ">
-              {/* <a href="/profile">
-                <div>
-                  <BsChevronLeft />
-                </div>
-              </a> */}
-              <span className="w-100">Quản lý đơn hàng</span>
+              <h2 className="w-100">Quản lý đơn hàng</h2>
 
               <a onClick={() => setOpen(!open)}>
                 <BsFillFunnelFill />
@@ -102,8 +98,10 @@ const HistoryOrder = ({ }) => {
                     >
                       Huỷ đơn
                     </button>
-
-                    <OrderDetail />
+                    <Link href={`/order/${item.id}`}>
+                      <a>
+                        Xem chi tiet</a></Link>
+                    {/* <OrderDetail /> */}
                   </div>
                 </div>
                 <hr />
@@ -111,12 +109,12 @@ const HistoryOrder = ({ }) => {
             )
           }
 
-                <button
-                  className="btn btn-outline-dark rounded mb-3"
-                  style={{ fontSize: 14, opacity: 0.8 }}
-                >
-                  Xem thêm 5 đơn hàng
-                </button>
+          <button
+            className="btn btn-outline-dark rounded mb-3"
+            style={{ fontSize: 14, opacity: 0.8 }}
+          >
+            Xem thêm 5 đơn hàng
+          </button>
 
         </div>
       </div>

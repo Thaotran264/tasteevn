@@ -5,7 +5,7 @@
 
 :root {
   --primary-color: hsl(27, 100%, 71%);
-  --primary-bg-color: linear-gradient(to right, #ffe259 0%, #ffa751 100%);
+  --primary-bg-color: linear-gradient(toright, #ffe259 0%, #ffa751 100%);
   --bg-primary-color: hsl(27, 100%, 71%);
   --bg-color-white: hsl(0, 0%, 100%);
   --text-white: hsla(0, 0%, 100%, 0.758);

@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
+import {AiOutlineStar} from 'react-icons/ai'
 import { listBrand } from "../../db";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -28,17 +30,17 @@ const settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   infinite: true,
-  autoplay: true,
-  speed: 2000,
-  autoplaySpeed: 5000,
+  // autoplay: true,
+  speed: 500,
+  // autoplaySpeed: 3000,
   responsive: [
     {
       breakpoint: 600,
       settings: {
         infinite: true,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 5000,
+        autoplay: false,
+        speed: 500,
+        autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
@@ -48,24 +50,30 @@ const settings = {
   ],
 };
 
-const Slider02 = ({ text }) => {
+const Slider02 = ({ data }) => {
+  console.log('first', data)
   return (
-    <div className="container px-0">
-      <div className=" p-2 bg-white rounded mb-2">
-        <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
-        <div className="mx-auto" style={{ width: '100%' }}>
-          <Slider {...settings}>
-            {listBrand.map((item, index) => (
-              <div key={index} className=''>
-                <div className="d-flex justify-content-center w-100">
-                  <img className=" border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
+    <div className="container px-0 py-2 rounded">
+      <Slider {...settings}>
+        {data?.map((it, index) => (
+          <Link href={`/${it?.brandId}`} key={index}>
+            <a className='d-flex mx-2'>
+              <div className="w-100 h-100">
+                <div className="d-flex justify-content-center">
+                  <img src={it?.image} alt={it?.brandName}
+                 
+                  className="rounded w-100 h-100"
+                  />
                 </div>
-                <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
+                <div>
+                  <p className="mb-0 fw-bold" style={{fontSize: 14}}>{it.brandName.substring(0, 14)}</p>
+                  <p className="mb-0 d-flex align-items-center gap-1" style={{fontSize:13}}><AiOutlineStar />5.0/10 rating</p>
+                </div>
               </div>
-            ))}
-          </Slider>
-        </div>
-      </div >
+            </a>
+          </Link>
+        ))}
+      </Slider>
     </div>
   );
 };

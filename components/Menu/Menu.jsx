@@ -7,7 +7,7 @@ import { formatter } from '../../utils';
 import { Link } from 'react-scroll'
 import 'react-toastify/dist/ReactToastify.css';
 import Topping from '../Modal/Topping';
-import {BsFillHandbagFill} from 'react-icons/bs'
+import { BsFillHandbagFill } from 'react-icons/bs'
 const Menu = ({ productList }) => {
   const { items, menus } = productList
   const { state: { auth }, dispatch } = useContext(CartContext)
@@ -45,11 +45,11 @@ const Menu = ({ productList }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  const renderMenus = menus.map(item => <div  id={`${item.name}`} key={item.id}
+  const renderMenus = menus.map(item => <div id={`${item.name}`} key={item.id}
     className=" text-dark mb-2 rounded p-2" style={items.length ? { marginTop: 0 } : { marginTop: 48 }}>
     <div className='d-flex justify-content-between align-items-center'>
       <h3 className='pb-1'>{item.name}</h3>
-     
+
     </div>
     <div className="menuContainer mb-2">
       {item.items.map(it => <div key={it.id} className="rounded d-flex flex-column rounded-4 align-items-center menuItems py-2 position-relative" style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
@@ -58,12 +58,12 @@ const Menu = ({ productList }) => {
         </div>
         <p>{it.name}</p>
         <div className='position-relative w-100 text-center'>
-        <p className='fw-bold text-danger mb-0'>{formatter.format(it.price)}</p>
-        <button
-          className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30,color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)'}}>
+          <p className='fw-bold text-danger mb-0'>{formatter.format(it.price)}</p>
+          <button
+            className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30, color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
             <BsFillHandbagFill />
           </button>
-          </div>
+        </div>
       </div>
       )}
     </div>
@@ -80,14 +80,13 @@ const Menu = ({ productList }) => {
           <Image src={it.image || '/image/logo512.png'} alt={it.name} width="120" height={120} />
         </div>
         <p className='fw-bold'>{it.name}</p>
-        <div className='text-center position-relative'>
-
-        <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
+        <div className='position-relative w-100 text-center'>
+          <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
           <button
-            className='d-flex align-items-center justify-content-center rounded-5 position-absolute bottom-0 end-0' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)',width: 30, height: 30, color: '#fff' }}>
-              <BsFillHandbagFill />
-            </button>
-            </div>
+            className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', width: 30, height: 30, color: '#fff' }}>
+            <BsFillHandbagFill />
+          </button>
+        </div>
       </div>
       )}
     </div>
@@ -98,20 +97,20 @@ const Menu = ({ productList }) => {
     <section className="container px-0" ref={mbref}>
       <div className="d-flex flex-column position-relative" >
         <div className={`d-flex justify-content-center rounded menuScrollbar ${menuPos ? 'active px-0 rounded-0' : ''}`}>
-        <ul className='d-flex px-0 mb-0 container'
-        >
-          {items.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
-            <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
-              {item.name}
-            </Link>
-          </li>)}
-          {menus.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
-            <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
-            {item.name}
-          </Link></li>)}
-        </ul>
+          <ul className='d-flex px-0 mb-0 container'
+          >
+            {items.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
+              <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
+                {item.name}
+              </Link>
+            </li>)}
+            {menus.map(item => <li key={item.id} className="py-2 px-4 fw-semibold menuListItem" >
+              <Link activeClass="active" to={`${item.name}`} spy={true} offset={-100} smooth={true}>
+                {item.name}
+              </Link></li>)}
+          </ul>
         </div>
-       
+
         {
           renderItems
         }
