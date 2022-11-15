@@ -26,7 +26,6 @@ const Cart = () => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log('res', res)
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -64,9 +63,8 @@ const Cart = () => {
     );
   }
 
-  console.log('addressData', addressData)
   return (
-    <section className="container mx-auto d-flex flex-column" style={{ marginTop: 54 }}>
+    <section className="container mx-auto d-flex flex-column mt-2">
       <Head>
         <title>Cart</title>
       </Head>
@@ -88,7 +86,7 @@ const Cart = () => {
               <label>Số điện thoại:</label>
               <input
                 readOnly
-                placeholder={userAdress?.phone || '123456'}
+                placeholder={userAdress?.phone || ''}
                 type="text"
                 className="p-1 w-100 rounded-2"
                 style={{ fontSize: 15 }}

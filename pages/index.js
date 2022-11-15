@@ -9,6 +9,7 @@ import Login from "../components/Modal/Login";
 import cookie from 'cookie'
 import CarouselComponent from "../components/Carousel";
 import Slider02 from "../components/Slider/Slider02";
+import { searchApi } from "../api-client/search";
 
 export default function Home({ data }) {
 const [showLoginModal, setShowLoginModal] = useState(false)
@@ -73,7 +74,8 @@ Home.getLayout = function getLayout(Page) {
 };
 
 export async function getStaticProps(context) {
-  const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
+  // const res = await searchApi.getProductSlider()
+  const res = await axios.get('https://pro.tastee.vn/api/Home/get_product_slider')
   const data = res.data.data;
 
   return {

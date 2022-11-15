@@ -103,7 +103,7 @@ function LoginModal({ showLoginModal,
       const res = await accountAPI.login(params);
       if (res.successful && res.data) {     
         dispatch(logIn(res.data))
-        setTokenCookies(res.data.token)
+        // setTokenCookies(res.data.token)
         handleClose();
         // router.push("/");
         // window.location.reload();

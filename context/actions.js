@@ -1,3 +1,6 @@
+import RemoveCookie from "../hooks/removeCookies";
+import SetCookie from "../hooks/setCookies";
+
 export const ACTIONS = {
     NOTIFY: "NOTIFY",
     AUTH: "AUTH",
@@ -57,15 +60,18 @@ export const clearCart = () => {
 }
 // Auth
 export const logIn = (data) => {
-    sessionStorage.setItem("user", JSON.stringify(data));
-    sessionStorage.setItem("token", JSON.stringify(data.token));
+    // RemoveCookie('user')
+    // SetCookie('user',  JSON.stringify(data))
+    localStorage.setItem("user", JSON.stringify(data));
+    // sessionStorage.setItem("token", JSON.stringify(data.token));
     return {
         type: "AUTH", payload: data
     }
 }
 export const logOut = () => {
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("token");
+    // RemoveCookie('user')
+    // sessionStorage.removeItem("user");
+    localStorage.removeItem("token");
     return {
         type: "AUTH", payload: {}
     }

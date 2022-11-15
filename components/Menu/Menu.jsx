@@ -49,15 +49,14 @@ const Menu = ({ productList }) => {
     className=" text-dark mb-2 rounded p-2" style={items.length ? { marginTop: 0 } : { marginTop: 48 }}>
     <div className='d-flex justify-content-between align-items-center'>
       <h3 className='pb-1'>{item.name}</h3>
-
     </div>
     <div className="menuContainer mb-2">
-      {item.items.map(it => <div key={it.id} className="rounded d-flex flex-column rounded-4 align-items-center menuItems py-2 position-relative" style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
-        <div>
-          <Image src={it.image || '/image/logo512.png'} alt={it.name} width={160} height={160} objectFit='cover' />
+      {item.items.map(it => <div key={it.id} className="d-flex flex-column menuItems position-relative p-2 rounded" style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
+        <div className='w-100 d-flex justify-content-center'>
+          <Image src={it.image || '/image/logo512.png'} alt={it.name} className='rounded' width={160} height={160}/>
         </div>
-        <p>{it.name}</p>
-        <div className='position-relative w-100 text-center'>
+        <p className='fw-bold mb-1 px-2'>{it.name}</p>
+        <div className='position-relative w-100 px-2'>
           <p className='fw-bold text-danger mb-0'>{formatter.format(it.price)}</p>
           <button
             className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30, color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
@@ -75,22 +74,23 @@ const Menu = ({ productList }) => {
       <h3 className='pb-1'>{item.name}</h3>
     </div>
     <div className="menuContainer">
-      {items.map(it => <div key={it.id} className="rounded-3 bg-light py-2 d-flex flex-column align-items-center menuItems position-relative" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
-        <div>
-          <Image src={it.image || '/image/logo512.png'} alt={it.name} width="120" height={120} />
+      {
+        items.map(it => <div key={it.id} className="rounded-3 bg-light py-2 d-flex flex-column align-items-center menuItems position-relative" style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
+          <div>
+            <Image src={it.image || '/image/logo512.png'} alt={it.name} className=' rounded'  width={160} height={160}/>
+          </div>
+          <p className='fw-bold'>{it.name}</p>
+          <div className='position-relative w-100 text-center'>
+            <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
+            <button
+              className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', width: 30, height: 30, color: '#fff' }}>
+              <BsFillHandbagFill />
+            </button>
+          </div>
         </div>
-        <p className='fw-bold'>{it.name}</p>
-        <div className='position-relative w-100 text-center'>
-          <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-          <button
-            className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2' onClick={() => handleAddTopping(it)} style={{ backgroundColor: 'hsl(27, 100%, 71%)', width: 30, height: 30, color: '#fff' }}>
-            <BsFillHandbagFill />
-          </button>
-        </div>
-      </div>
-      )}
+        )
+      }
     </div>
-
   </div >
   )
   return (
