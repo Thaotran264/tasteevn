@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineClose, AiOutlineSave } from 'react-icons/ai'
+import { cityApi } from "../api-client";
 import { adressApi } from "../api-client/adressApi";
 import { CartContext } from "../context/cartContext";
 // import { DataContext } from "../store/globalState";
@@ -54,16 +55,16 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
 
     const getCities = async () => {
         try {
-            const res = await adressApi.getCities()
+            const res = await cityApi.getCity()
             setCities(res)
         } catch (error) {
-            console.log('%cmodalAddresCRU.jsx line:15 error', 'color: #007acc;', error);
+            console.log(error)
         }
     }
 
     const getAreas = async (id) => {
         try {
-            const res = await adressApi.getAreasByCity(id)
+            const res = await cityApi.getWard(id)
             setAreas(res)
         } catch (error) {
             console.log('%c error getAreas', 'color: #007acc;', error);
@@ -113,7 +114,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <input
                                     required
                                     className="w-100 rounded px-2 py-1"
-                                    style={{borderWidth: 1}}
+                                    style={{ borderWidth: 1 }}
                                     onChange={(e) => setAddressData({ ...addressData, name: e.target.value })}
                                     value={addressData && addressData['name'] || ''} type="text"
                                     placeholder="Họ và tên" />
@@ -127,7 +128,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <input
                                     required
                                     className="w-100 rounded px-2 py-1"
-                                    style={{borderWidth: 1}} onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData && addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
+                                    style={{ borderWidth: 1 }} onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData && addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
                             </Col>
                         </Row>
                         <Row className="d-flex align-items-center">
@@ -177,7 +178,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                                 <input
                                     required
                                     className="w-100 rounded px-2 py-1"
-                                    style={{borderWidth: 1}} onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData && addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
+                                    style={{ borderWidth: 1 }} onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData && addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
                             </Col>
                         </Row>
                         <div>

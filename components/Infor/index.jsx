@@ -17,11 +17,6 @@ import { Col, Row } from "react-bootstrap";
 
 
 const TabInfor = ({ userDetail }) => {
-  const [_isMobile, setMobile] = useState(false);
-  const router = useRouter();
-  useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
   const [show, setShow] = useState(false);
   const { dispatch } = useContext(CartContext);
   const handleClose = () => setShow(false);
@@ -29,8 +24,6 @@ const TabInfor = ({ userDetail }) => {
   const [user, setUser] = useState({})
   const [changePass, setchangePass] = useState({})
   const [birthday, setBirthday] = useState({})
-  const refPass = useRef();
-  const refNewPass = useRef();
   const [showPass, setShowPass] = useState(false)
   const [showNewPass, setShowNewPass] = useState(false)
   const [showConfPassword, setShowConfPassword] = useState(false)
@@ -129,7 +122,7 @@ const TabInfor = ({ userDetail }) => {
   return (
     <div className="profile-content">
       {/* <h5 className="title-section">Thông tin tài khoản</h5> */}
-      <div className="rounded w-100 p-3 d-flex flex-column gap-2">
+      <div className="rounded w-100 p-3 d-flex flex-column gap-2" style={{backgroundColor: '#fff'}}>
         <h4 className="border-bottom pb-2">
           Thông tin cá nhân
         </h4>
@@ -165,7 +158,7 @@ const TabInfor = ({ userDetail }) => {
           </Row>
           <Row className="d-flex align-items-center">
             <Col md={3}><span>Ngày sinh:</span></Col>
-            <Col md={6} className='d-flex justify-content-between'>
+            <Col md={9} className='d-flex gap-2'>
               <select value={birthday.d} name="day" id="dayBirthday"
                 className="rounded py-1 px-2"
                 style={{ fontSize: 14, width: 'max-content' }} onChange={changeDay}>
@@ -430,15 +423,25 @@ const TabInfor = ({ userDetail }) => {
               />
             </Col>
           </Row>
-          <div className="pt-2">
-            <Button type="submit" className="w-100 d-flex gap-2 align-items-center justify-content-center">
+          <Row>
+            <Col md={3}></Col>
+            <Col md={9}>
+            <Button type="submit" className="d-flex gap-2 align-items-center justify-content-center">
               <AiOutlineSave />Lưu thay đổi</Button>
-          </div>
+            </Col>
+          </Row>
         </form>
-        <div className="w-75 mx-auto">
-          <Button variant="outline-success" className="w-100 d-flex align-items-center justify-content-center gap-2"
-            onClick={handleShow}><RiLockPasswordFill />Đổi mật khẩu</Button>
-        </div>
+        <div  className="w-75 mx-auto">
+        <Row>
+            <Col md={3}></Col>
+            <Col md={9}>
+            <Button variant="outline-success" 
+            className="d-flex align-items-center justify-content-center gap-2"
+            onClick={handleShow}>
+              <RiLockPasswordFill />Đổi mật khẩu</Button>
+            </Col>
+          </Row>
+          </div>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

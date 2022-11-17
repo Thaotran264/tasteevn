@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
             >
               <>
                 <Head>
-                  <title>Tastee POS - Cộng đồng người bán</title>
+                  <title>Tastee - Cộng đồng người bán</title>
                   <meta property="og:type" content="article" />
                   <meta property="og:title" content="Tastee POS - Cộng đồng người bán" />
                   <meta property="og:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />

@@ -15,7 +15,7 @@ const CartItem = ({ item }) => {
         <Image
           src={
             item.image ||
-            "https://images.pexels.com/photos/13096525/pexels-photo-13096525.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            "/image/logo512.png"
           }
           alt=""
           width={80}
@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
             style={{ fontSize: 13, color: "hsl(0,0%,51%)" }}
           >
             <FiEdit className="me-2" />
-            {item.note || "không có gì"}
+            {item.note || ""}
           </p>
         </div>
         <div>

@@ -5,7 +5,7 @@ const ISSERVER = typeof window === "undefined";
 function getToken (){
     if(!ISSERVER) {
         let data = JSON.parse(localStorage.getItem('user'))
-        return data.token || ''
+        return data?.token || ''
     }
 }
 const axiosClient2 = axios.create({

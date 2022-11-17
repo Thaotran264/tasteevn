@@ -23,5 +23,8 @@ export const userApi = {
     },
     getShippingAddress() {
         return axiosAuth.get(`/Users/shipping_address`);
+    },
+    setShippingAddress(params) {
+        return axiosAuth.post(`/Users/shipping_address/set`,params);
     }
 }

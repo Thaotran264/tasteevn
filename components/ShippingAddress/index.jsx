@@ -19,7 +19,6 @@ const ShippingAddress = () => {
     const router = useRouter();
     const [dataAddres, setDataAddres] = useState([]);
 
-
     useEffect(() => {
         getData()
     }, []);
@@ -27,6 +26,7 @@ const ShippingAddress = () => {
     const getData = async () => {
         try {
             const res = await adressApi.getAddress()
+            console.log(res)
             setDataAddres(res)
         } catch (error) {
             console.log(error)
@@ -79,7 +79,8 @@ const ShippingAddress = () => {
             <Card className="">
                 <Card.Body>
                     <div className="d-flex gap-3 text-center ">
-                        <span className="w-100"><ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
+                        <span className="w-100">
+                            <ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
                     </div>
                 </Card.Body>
             </Card>

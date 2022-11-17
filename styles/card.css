@@ -7,7 +7,7 @@
 
 .card:hover {
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .12);
-    transform: translate3d(1px, -5px, 5px);
+    /* transform: translate3d(1px, -5px, 5px); */
 }
 
 .card-title {
