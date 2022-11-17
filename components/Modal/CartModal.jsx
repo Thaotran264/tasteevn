@@ -132,6 +132,7 @@ const CartModal = ({ setShow }) => {
                   <a
                     className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1"
                     style={{ fontSize: 18, backgroundColor: "#f7a76c", color: "#fff" }}
+                    onClick={handleClose}
                   >
                     <span style={{ fontSize: 16 }}>{totalQuantity} Món</span>
                     Trang thanh toán

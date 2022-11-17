@@ -6,8 +6,11 @@
  * @desc [description]
  */
 import React, { useContext, useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { AiOutlineClose, AiOutlineSave } from 'react-icons/ai'
+import { cityApi } from "../api-client";
 import { adressApi } from "../api-client/adressApi";
 import { CartContext } from "../context/cartContext";
 // import { DataContext } from "../store/globalState";
@@ -16,8 +19,8 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
     const [addressData, setAddressData] = useState(item ? item : {})
     const { dispatch } = useContext(CartContext);
     const [show, setShow] = useState(false);
-    const handleClose = () => { 
-        setShow(false) 
+    const handleClose = () => {
+        setShow(false)
         setStatus()
         setAddressData({})
     }
@@ -25,7 +28,7 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
     const [cities, setCities] = useState([])
     const [areas, setAreas] = useState([])
 
-    
+
     useEffect(() => {
         if (show) {
             setAddressData(item)
@@ -52,16 +55,16 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
 
     const getCities = async () => {
         try {
-            const res = await adressApi.getCities()
+            const res = await cityApi.getCity()
             setCities(res)
         } catch (error) {
-            console.log('%cmodalAddresCRU.jsx line:15 error', 'color: #007acc;', error);
+            console.log(error)
         }
     }
 
     const getAreas = async (id) => {
         try {
-            const res = await adressApi.getAreasByCity(id)
+            const res = await cityApi.getWard(id)
             setAreas(res)
         } catch (error) {
             console.log('%c error getAreas', 'color: #007acc;', error);
@@ -102,75 +105,96 @@ function ModalAddresCRU({ text, clasNameCustom, item, setDefault, setStatus }) {
                     <Modal.Title>Tạo sổ địa chỉ</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                    <form onSubmit={onSubmit} >
-                        <div className="row">
-                            <div className="col-4">
-                                <label htmlFor="">Họ và tên</label>
-                            </div>
-                            <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, name: e.target.value })} value={addressData && addressData['name'] || ''} type="text" placeholder="Họ và tên" />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-4">
-                                <label htmlFor="Số điện thoại">Số điện thoại</label>
-                            </div>
-                            <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData && addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-4">
-                                <label htmlFor="Tỉnh/ Thành phố">Tỉnh/ Thành phố</label>
-                            </div>
-                            <div className="col-8 input-form-profile">
+                    <form onSubmit={onSubmit} className='d-flex flex-column gap-3 mb-2'>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Họ và tên:</span>
+                            </Col>
+                            <Col md={8}>
+                                <input
+                                    required
+                                    className="w-100 rounded px-2 py-1"
+                                    style={{ borderWidth: 1 }}
+                                    onChange={(e) => setAddressData({ ...addressData, name: e.target.value })}
+                                    value={addressData && addressData['name'] || ''} type="text"
+                                    placeholder="Họ và tên" />
+                            </Col>
+                        </Row>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Số điện thoại:</span>
+                            </Col>
+                            <Col md={8}>
+                                <input
+                                    required
+                                    className="w-100 rounded px-2 py-1"
+                                    style={{ borderWidth: 1 }} onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })} value={addressData && addressData['phone'] || ''} type="text" placeholder="Số điện thoại" />
+                            </Col>
+                        </Row>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Tỉnh/Thành phố:</span>
+                            </Col>
+                            <Col md={8}>
                                 <select value={addressData && addressData.cityId || 0} name="day" id="cities-select" className="w-100 rounded p-1" onChange={changeCities}>
                                     <option value={0}>Tỉnh/ Thành phố</option>
                                     {cities?.map((item, index) =>
                                         <option key={item.id} value={Number(item.id)}>{item.name}</option>
                                     )}
                                 </select>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-4">
-                                <label htmlFor="Quận huyện">Quận huyện </label>
-                            </div>
-                            <div className="col-8 input-form-profile">
+                            </Col>
+                        </Row>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Quận/Huyện:</span>
+                            </Col>
+                            <Col md={8}>
                                 <select value={addressData && addressData.areaId || 0} name="day" id="area-select" className="w-100 rounded p-1" onChange={changeArea}>
-                                    <option value={0}>Quận/ Huyện</option>
+                                    <option value={0}>Quận/Huyện</option>
                                     {areas?.map((item, index) =>
                                         <option key={item.id} value={Number(item.id)} >{item.name}</option>
                                     )}
                                 </select>
-                            </div>
+                            </Col>
+                        </Row>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Phường xã:</span>
+                            </Col>
+                            <Col md={8}>
+                                <select value={addressData && addressData.areaId || 0} name="day" id="area-select" className="w-100 rounded p-1" onChange={changeArea}>
+                                    <option value={0}>Phường/xã</option>
+                                    {areas?.map((item, index) =>
+                                        <option key={item.id} value={Number(item.id)} >{item.name}</option>
+                                    )}
+                                </select>
+                            </Col>
+                        </Row>
+                        <Row className="d-flex align-items-center">
+                            <Col md={4}>
+                                <span>Địa chỉ:</span>
+                            </Col>
+                            <Col md={8}>
+                                <input
+                                    required
+                                    className="w-100 rounded px-2 py-1"
+                                    style={{ borderWidth: 1 }} onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData && addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
+                            </Col>
+                        </Row>
+                        <div>
+                            <Button
+                                variant="primary"
+                                type='submit'
+                                className='w-75 mx-auto d-flex align-items-center gap-2 justify-content-center'> <AiOutlineSave />Lưu</Button>
                         </div>
-
-                        <div className="row">
-                            <div className="col-4">
-                                <label htmlFor="Địa chỉ:">Địa chỉ:</label>
-                            </div>
-                            <div className="col-8 input-form-profile">
-                                <input required className="inputFomCustom w-100 rounded" onChange={(e) => setAddressData({ ...addressData, address: e.target.value })} value={addressData && addressData['address'] || ''} type="text" placeholder="Địa chỉ" />
-                            </div>
-                        </div>
-
-                        {/* {item && 
-                            <div className="text-center">
-                                <div className="form-check form-switch text-center">
-                                    <input defaultChecked={item['isDefault']} name="groundGender" onClick={() => setDefault(item.id)} value={item['isDefault'] || ''} className="form-check-input" type="radio" role="switch" id="flexSwitchCheckDefault" />
-                                    <label className="form-check-label color-success" htmlFor="flexSwitchCheckDefault">Đặt làm địa chỉ mặc định</label>
-                                </div>
-                            </div>
-                        } */}
-
-                        <div className="text-center">
-                            <button type='submit' className='btn btn-outline-primary rounded mx-1'> Lưu</button>
-                            <button type='button' onClick={handleClose} className="btn btn-outline-danger rounded mx-1"> Đóng</button>
-                        </div>
-
                     </form>
+                    <div>
+                        <Button
+                            onClick={handleClose}
+                            variant='danger'
+                            className="w-75 mx-auto d-flex align-items-center gap-2 justify-content-center">
+                            <AiOutlineClose /> Đóng</Button>
+                    </div>
 
                 </Modal.Body>
             </Modal>

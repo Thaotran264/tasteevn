@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
@@ -26,7 +27,6 @@ const Cart = () => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log('res', res)
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -64,9 +64,8 @@ const Cart = () => {
     );
   }
 
-  console.log('addressData', addressData)
   return (
-    <section className="container mx-auto d-flex flex-column" style={{ marginTop: 54 }}>
+    <section className="container mx-auto d-flex flex-column mt-2">
       <Head>
         <title>Cart</title>
       </Head>
@@ -81,17 +80,17 @@ const Cart = () => {
                 placeholder={userAdress?.name || ""}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15, borderColor: "lightgray" }}
+                style={{ fontSize: 15,borderWidth: 1, borderColor: "lightgray" }}
               />
             </div>
             <div className="d-flex flex-column mb-2">
               <label>Số điện thoại:</label>
               <input
                 readOnly
-                placeholder={userAdress?.phone || '123456'}
+                placeholder={userAdress?.phone || ''}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15 }}
+                style={{ fontSize: 15,borderWidth: 1 }}
               />
             </div>
             <div className="">
@@ -104,7 +103,7 @@ const Cart = () => {
                       type="text"
                       className="p-1 w-100 rounded-2"
                       placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: 15 ,borderWidth: 1}}
                     />
                   </div> :
                   <div className="d-flex gap-2">
@@ -113,19 +112,22 @@ const Cart = () => {
                       type="text"
                       className="p-1 w-100 rounded-2"
                       placeholder={addressData.address}
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: 15,borderWidth: 1 }}
                     />
                   </div>
               }
             </div>
           </form>
-          <button
-            className="border-0 w-100 py-2 rounded"
-            style={{ backgroundColor: "#f7a76c", color: "#fff" }}
+          <div className="d-flex">
+
+          <Button 
+            className="border-0 w-50 py-2 mx-auto text-light"
+            style={{ backgroundColor: "#f7a76c"}}
             onClick={() => setShowModal(true)}
-          >
+            >
             Chọn địa chỉ khác
-          </button>
+          </Button>
+            </div>
         </article>
         <article className="cart__article position-relative w-75 rounded-2 bg-light p-2">
           <h4 className="text-center border-bottom">Trang thanh toán</h4>
@@ -134,8 +136,8 @@ const Cart = () => {
           ))}
         </article>
         <div className="d-flex flex-column w-75 gap-2">
-            <div className="d-flex flex-column gap-2">
-              <span
+            <div className="d-flex justify-content-end mx-2">
+              {/* <span
                 className="rounded py-1 px-1 text-light"
                 style={{
                   fontSize: 14,
@@ -144,12 +146,15 @@ const Cart = () => {
                 }}
               >
                 {formatter.format(totalPrice)}
-              </span>
-              <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
+              </span> */}
+              <span className="text-dark fw-bold">Tổng tiền: {formatter.format(totalPrice)}</span>
             </div>
-            <button className="btn btn-success w-100" onClick={handleDatHangButton}>
+            <div className="d-flex">
+
+            <Button variant='success' className=" w-50 mx-auto" onClick={handleDatHangButton}>
               Đặt hàng
-            </button>
+            </Button>
+            </div>
           </div>
       </div>
       {

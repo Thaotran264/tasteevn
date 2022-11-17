@@ -34,7 +34,7 @@ export default function ScrollToTopButton() {
                 <button
                     onClick={scrollToTop}
                     aria-label="Scroll To Top"
-                    className="position-fixed bottom-0 end-0"
+                    className="position-fixed bottom-0 end-0 btn btn-danger"
                 >
                     <IoIosArrowUp />
                 </button>

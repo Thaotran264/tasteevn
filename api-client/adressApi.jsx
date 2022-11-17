@@ -1,5 +1,5 @@
-import axiosAPI2 from "./axios-client-2";
 import axiosAuth from './axios-auth';
+import axiosClient2 from "./axios-client2";
 
 
 export const adressApi = {
@@ -13,11 +13,11 @@ export const adressApi = {
     },
 
     getCities() {
-        return axiosAPI2.get(`/Cities`);
+        return axiosClient2.get(`/Cities`);
     },
 
     getAreasByCity(id) {
-        return axiosAPI2.get(`/Areas/by-city/${id}`);
+        return axiosClient2.get(`/Areas/by-city/${id}`);
     },
 
     setDefault(id) {

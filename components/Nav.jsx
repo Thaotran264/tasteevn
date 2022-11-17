@@ -207,7 +207,7 @@ const NavComponent = () => {
 
   return (
     <section className='d-flex justify-content-center align-items-center navContainer active shadow bg-light' style={{ height: 48 }} >
-      <nav className='d-flex container gap-2 align-items-center'>
+      <nav className='d-flex container-md gap-2 align-items-center'>
         {
           showCart && <CartModal setShow={setShowCart} />
         }
