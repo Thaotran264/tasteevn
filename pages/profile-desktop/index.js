@@ -21,7 +21,7 @@ import Image from "next/image";
 import { bookingApi } from "../../api-client";
 import MobileProfile from "../../components/MobileProfile";
 
-const JsxComponent = ()=> (
+const JsxComponent = () => (
   <div>
     <h2>Thí í tét</h2>
   </div>
@@ -29,7 +29,8 @@ const JsxComponent = ()=> (
 
 const Profile = () => {
   const [user, setUser] = useState({});
-  const { dispatch } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
+  const { auth } = state
   const currentTime = new Date().toISOString().split('T')[0]
   const [startDate, setStartDate] = useState(currentTime)
   const [endDate, setEndDate] = useState(currentTime)
@@ -48,7 +49,10 @@ const Profile = () => {
     };
     getDetailUser();
   }, []);
-
+  useEffect(() => {
+    if (!auth)
+      router.push('/')
+  }, [auth])
   const handleChangeStartDate = (e) => {
     console.log('date', new Date(e.target.value).getTime())
     setStartDate(e.target.value)
@@ -144,7 +148,7 @@ const Profile = () => {
                           router.push("/profile-desktop");
                         }}
                       >
-                        Lịch sử đặt bàn
+                        Lịch sử đặt hẹn
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
@@ -213,7 +217,7 @@ const Profile = () => {
                 </Tab.Pane>
                 <Tab.Pane eventKey="historyBooking">
                   <div className='d-flex flex-column gap-2'>
-                    <h4 className="border-bottom text-center">Lịch sử đặt hàng</h4>
+                    <h4 className="border-bottom text-center">Lịch sử đặt hẹn</h4>
                     <div className="d-flex gap-1 align-items-center">
                       <div className="d-flex gap-2 align-items-center">
                         <span>Từ ngày:</span>

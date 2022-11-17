@@ -12,7 +12,34 @@ function HandleSort({ isOpen, setOpen }) {
       key: "selection",
     },
   ]);
+  const currentTime = new Date().toISOString().split('T')[0]
+  const [startDate, setStartDate] = useState(currentTime)
+  const [endDate, setEndDate] = useState(currentTime)
 
+  const handleChangeStartDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+    setStartDate(e.target.value)
+  }
+  const handleChangeEndDate = (e) => {
+    console.log('date', new Date(e.target.value).getTime())
+
+    setEndDate(e.target.value)
+  }
+  const handleSearch = async () => {
+    const param = {
+      fromDate: startDate,
+      toDate: endDate,
+      length: '5'
+    }
+
+    try {
+      const res = await orderApi.loadData(param)
+      console.log('first', res)
+      setOrderData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const [stateDefined, setStateDefined] = useState([
     {
       startDate: new Date(),
@@ -35,19 +62,7 @@ function HandleSort({ isOpen, setOpen }) {
         <div id="example-collapse-text" className="">
           <div className="d-flex gap-2 justify-content-center m-2">
             <div className="w-50">
-              <select
-                onChange={(e) => changeSelectDate(e)}
-                name="date"
-                id=""
-                className="border-0 border-bottom rounded p-1 w-100"
-                style={{ height: "5vh", outline: "none", background: "#dee2e6" }}
-              >
-                <option value="">Thời gian </option>
-                <option value="to-day">Hôm nay </option>
-                <option value="in-week">Trong tuần này</option>
-                <option value="in-month">Trong tháng này</option>
-                <option value="range">Tuỳ chỉnh</option>
-              </select>
+          
             </div>
 
             <div className="w-50">
