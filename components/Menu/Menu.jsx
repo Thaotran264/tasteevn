@@ -286,11 +286,11 @@ const Menu = ({ productList }) => {
           )
         })
       }
-      {
+      {/* {
         items.map(item => {
           const { items } = items
           if (items.length) {
-            return (<ItemsContainerComponent data={menu}>
+            return (<ItemsContainerComponent data={item}>
               {
                 items.map(item =>
                   (<ItemComponent key={item.id} it={item} />)
@@ -300,19 +300,10 @@ const Menu = ({ productList }) => {
           }
           return (
             <></>
-            // <div key={menu.id} className='d-flex flex-column gap-2 p-2 bg-light rounded'>
-            //   <h5 id={menu.name}>{menu.name}</h5>
-            //   <div className={`menuContainer menuContainer-${menuStyle} mb-2`}>
-            //     {
-            //       items.map(item => (
-            //         <ItemComponent key={item.id} it={item} />
-            //       ))
-            //     }
-            //   </div>
-            // </div>
-          )
-        })
-      }
+            )
+          })
+        } */}
+      
 
       {showToppingModal.open ? <Topping
         showToppingModal={showToppingModal}
