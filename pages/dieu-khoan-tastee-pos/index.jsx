@@ -4,11 +4,12 @@ import parse from "html-react-parser";
 import { DieuKhoanDichVu } from '../../db';
 import Image from "next/image";
 import Head from 'next/head';
+import NavComponent from '../../components/Nav';
 
 const DieuKhoanDv = () => {
     return (
-        <>
-            <Head>
+        <Layout title='Điều khoản và dịch vụ của Tastee'>
+            {/* <Head>
                 <title>Điều khoản và dịch vụ của Tastee</title>
                 <meta property="og:type" content="article" />
                 <meta property="og:title" content="Điều khoản và dịch vụ của Tastee" />
@@ -26,14 +27,13 @@ const DieuKhoanDv = () => {
                 <meta property="article:section" content="Điều khoản dịch vụ Tastee" />
                 <meta property="article:tag" content="Điều khoản dịch vụ Tastee" />
 
-                {/* -- End Open Graph Metadata -- */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:description" content="Điều khoản và dịch vụ của Tastee. Chúng tôi mong rằng bạn sẽ thường xuyên xem lại điều khoản sử dụng để đảm bảo về quyền lợi của bạn trong quá trình sử dụng ứng dụng cũng như các quy định sử dụng và các quy định về thông tin đăng tải." />
                 <meta name="twitter:title" content="Điều khoản và dịch vụ của Tastee" />
                 <meta name="twitter:site" content="@tastee" />
                 <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
                 <meta name="twitter:creator" content="@tastee" />
-            </Head>
+            </Head> */}
             <div className="container">
                 {/* <a href="https://www.facebook.com/groups/tasteepos/" target='_blank'>
                     <Image className="rounded" src={'/image/Tastee-POS.jpeg'} alt="First slide" width={2000} height={1000} />
@@ -61,10 +61,8 @@ const DieuKhoanDv = () => {
                 </ul>
                 <p>Trong mọi trường hợp, Tastee POS sẽ kh&ocirc;ng phải chịu tr&aacute;ch nhiệm về những thiệt hại ph&aacute;t sinh từ việc kh&aacute;ch h&agrave;ng sử dụng dịch vụ của b&ecirc;n đối t&aacute;c thứ ba.</p>
             </div>
-        </>
+        </Layout>
     )
 }
-DieuKhoanDv.getLayout = function getLayout(Page) {
-    return <Layout>{Page}</Layout>;
-};
+
 export default DieuKhoanDv

@@ -76,9 +76,9 @@ const Detail = () => {
     </div>
 
     return (
-        <section className='container px-0 mt-2' >
+        <section className='container mt-2 d-flex flex-column gap-2' >
             <h4 className='text-center border-bottom fw-bold'>Chi tiết đơn hàng</h4>
-            <div className='d-flex gap-2 flex-column w-50 mx-auto ' >
+            <div className='d-flex gap-2 flex-column w-100 ' >
                 {
                     renderUserInfo
                 }
