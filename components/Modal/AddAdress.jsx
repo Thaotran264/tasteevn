@@ -72,7 +72,6 @@ const AddAdress = ({ showModal, setShowModal,setAddressData }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={onSubmit}>
-
                     <Form.Group className="mb-3" controlId="tinhThanhPho">
                         <Form.Select aria-label="Default select example"
                             onChange={handleCitiesChange}>

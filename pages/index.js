@@ -1,13 +1,9 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick/lib/slider";
-import Layout from "../components/Layout";
 import React, { useState } from "react";
-import Login from "../components/Modal/Login";
-import cookie from 'cookie'
 import CarouselComponent from "../components/Carousel";
+import Layout from "../components/Layout";
+import Login from "../components/Modal/Login";
 import Slider02 from "../components/Slider/Slider02";
 
 export default function Home({ data }) {
@@ -16,7 +12,7 @@ const handleShowLoginModal = () => setShowLoginModal(true)
   return (
     <>
       <Head>
-        <title>Tastee POS - Cộng đồng người bán</title>
+        <title>Tastee - Cộng đồng người bán</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content="Tastee POS - Cộng đồng người bán" />
         <meta property="og:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
@@ -50,20 +46,6 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         }
       
       </section>
-
-      {/* <section className="container px-0 d-flex flex-wrap">
-        {
-          data.map(item => (
-            <Link key={item.id} href={`/${item?.brandId}`}>
-              <a className="mb-2 d-block indexItems">
-                <div className=" d-flex text-center flex-column ">
-                  <Image src={item?.image || ''} alt={item?.name} width="200" height="250" />
-                  <p>{item?.brandName}</p>
-                </div>
-              </a></Link>
-          ))
-        }
-      </section> */}
     </>
   );
 }
@@ -73,7 +55,8 @@ Home.getLayout = function getLayout(Page) {
 };
 
 export async function getStaticProps(context) {
-  const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
+  // const res = await searchApi.getProductSlider()
+  const res = await axios.get('https://pro.tastee.vn/api/Home/get_product_slider')
   const data = res.data.data;
 
   return {

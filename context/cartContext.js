@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import GetCookie from "../hooks/getCookies";
 import { reducers } from "./reducers";
 
 export const CartContext = createContext();
@@ -23,7 +24,7 @@ export const CartProvider = ({ children }) => {
         }
     }, []);
     useEffect(() => {
-        const data = sessionStorage.getItem("user");
+        const data = localStorage.getItem("user");
         if(data) {
             if (Object.keys(JSON.parse(data))?.length) {
             dispatch({ type: "AUTH", payload: JSON.parse(data) });
@@ -38,7 +39,7 @@ export const CartProvider = ({ children }) => {
         sessionStorage.setItem("localCart", JSON.stringify(cart));
     }, [cart]);
     useEffect(() => {
-        sessionStorage.setItem("user", JSON.stringify(auth));
+        localStorage.setItem("user", JSON.stringify(auth));
     }, [auth]);
     return <CartContext.Provider value={{ state, dispatch }}>{children}</CartContext.Provider>;
 };

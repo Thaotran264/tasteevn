@@ -19,7 +19,6 @@ const ShippingAddress = () => {
     const router = useRouter();
     const [dataAddres, setDataAddres] = useState([]);
 
-
     useEffect(() => {
         getData()
     }, []);
@@ -27,6 +26,7 @@ const ShippingAddress = () => {
     const getData = async () => {
         try {
             const res = await adressApi.getAddress()
+            console.log(res)
             setDataAddres(res)
         } catch (error) {
             console.log(error)
@@ -36,15 +36,15 @@ const ShippingAddress = () => {
     const setDefault = async (id) => {
         try {
             const res = await adressApi.setDefault(id)
-            if(res?.successful ){
+            if (res?.successful) {
                 dispatch({ type: "NOTIFY", payload: { success: res.message ? res.message : "Đã tạo thành công" } });
                 getData()
             }
-            else{
+            else {
                 dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại" } });
             }
         } catch (error) {
-            console.log('%cindex.jsx line:39 error', 'color: #007acc;', error);
+            console.log(error);
         }
     }
     const handleDelete = (id) => {
@@ -57,12 +57,12 @@ const ShippingAddress = () => {
     const deleteAddressF = async (id) => {
         try {
             const res = await adressApi.deleteAddress(idDelete)
-            if(res?.successful ){
+            if (res?.successful) {
                 dispatch({ type: "NOTIFY", payload: { success: res.message ? res.message : "Đã tạo thành công" } });
                 getData()
                 setIdDelete(false)
             }
-            else{
+            else {
                 dispatch({ type: "NOTIFY", payload: { error: res.message ? res.message : "Đã xảy ra lỗi vui lòng kiểm tra lại" } });
             }
         } catch (error) {
@@ -79,15 +79,16 @@ const ShippingAddress = () => {
             <Card className="">
                 <Card.Body>
                     <div className="d-flex gap-3 text-center ">
-                        <span className="w-100"><ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
+                        <span className="w-100">
+                            <ModalAddresCRU clasNameCustom="text-primary pe-2" text={'Thêm mới địa chỉ'} setStatus={getData} /> <BsPlusLg /></span>
                     </div>
                 </Card.Body>
             </Card>
 
             <div className="rounded w-100 bg-white p-2">
                 <hr className="my-1" />
-                {dataAddres.length <= 0 && <Nodata /> }
-                { dataAddres && dataAddres.map((item =>
+                {dataAddres.length <= 0 && <Nodata />}
+                {dataAddres && dataAddres.map((item =>
                     <div key={item.id}>
                         <div className="p-2" >
                             <div className="d-flex gap-1 justify-content-between">
@@ -104,26 +105,34 @@ const ShippingAddress = () => {
                                     </div>
 
                                 </div>
-                                <div className="w-20 d-flex gap-1" style={{fontSize: 14}}>
-                                    <ModalAddresCRU clasNameCustom="text-primary" text={'Chỉnh sửa'} item={item} setDefault={setDefault} setStatus={getData} />
-                                     | <p type='button' onClick={() => handleDelete(item.id)} className="text-danger"> Xoá</p>
+                                <div
+                                    className="w-20 d-flex gap-1"
+                                    style={{ fontSize: 14 }}>
+                                    <ModalAddresCRU
+                                        clasNameCustom="text-primary"
+                                        text={'Chỉnh sửa'}
+                                        item={item}
+                                        setDefault={setDefault}
+                                        setStatus={getData} />
+                                    | <button
+                                        onClick={() => handleDelete(item.id)} className="text-danger"> Xoá</button>
                                 </div>
                             </div>
                         </div>
                         <hr />
                     </div>
-                ))} 
+                ))}
             </div>
 
-            <Modal show={idDelete ? true : false}  onHide={handleCloseModalConfim}>
+            <Modal show={idDelete ? true : false} onHide={handleCloseModalConfim}>
                 <Modal.Body>Bạn có muốn xoá địa chỉ</Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModalConfim}>
-                    Đóng
-                </Button>
-                <Button variant="danger" onClick={deleteAddressF}>
-                    Xoá
-                </Button>
+                    <Button variant="secondary" onClick={handleCloseModalConfim}>
+                        Đóng
+                    </Button>
+                    <Button variant="danger" onClick={deleteAddressF}>
+                        Xoá
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>
