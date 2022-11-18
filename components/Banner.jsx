@@ -4,12 +4,12 @@ import React, { useEffect } from "react";
 const Banner = ({ banner }) => {
 
   return (
-    <div className="container px-0 mb-3 d-flex justify-content-center position-relative bannerCss">
+    <div className="container px-0 d-flex justify-content-center position-relative bannerCss">
       <Image
         src={banner || '/image/logo.jpg'}
         alt="banner"
-        layout="fill"
-        objectFit='cover'
+        width={1080}
+        height={660}
       />
     </div>
   );

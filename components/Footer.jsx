@@ -40,7 +40,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="fw-light text-center mb-0 ">© Copyright 2022 by Tastee team. All Rights Reserved</p>
+      <p className="text-center mb-0 text-dark" style={{fontSize: 14}}>© Copyright 2022 by Tastee team. </p>
+      <p className="text-center mb-0 text-dark" style={{fontSize: 14}}>All Rights Reserved</p>
     </footer>
   );
 };

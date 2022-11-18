@@ -9,6 +9,7 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import { AiFillFilter, AiOutlineHome, AiOutlinePlus } from 'react-icons/ai';
+import { FcAddImage } from 'react-icons/fc';
 import { bookingApi, cityApi, distApi, wardsApi } from "../../api-client";
 import { userApi } from "../../api-client/user";
 import HistoryOrder from "../../components/HistoryOrder";
