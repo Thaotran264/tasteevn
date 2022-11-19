@@ -4,102 +4,70 @@ import Card from 'react-bootstrap/Card';
 import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import { BsFillFunnelFill, BsChevronLeft } from "react-icons/bs";
+import Link from 'next/link';
+import { Col, Row } from 'react-bootstrap';
 
+const dataList = [
+    {
+        name: "Bún Bò Bắp Hương Xưa",
+        slug: "bun-bo-bap-huong-xua",
+        image: "https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/mtzolk4d.eah180220226048.jpg",
+        address: '233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.'
+    },
+    {
+        name: "Bún Bò Bắp Hương Xưa",
+        slug: "bun-bo-bap-huong-xua",
+        image: "https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/1zo0abcr.xuh091220216016.jpg",
+        address: '233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.'
+    },
+    {
+        name: "Bún Bò Bắp Hương Xưa",
+        slug: "bun-bo-bap-huong-xua",
+        image: "https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/1zo0abcr.xuh091220216016.jpg",
+        address: '233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.'
+    },
+    {
+        name: "Bún Bò Bắp Hương Xưa",
+        slug: "bun-bo-bap-huong-xua",
+        image: "https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/uahjxkhg.ci108112021105221.jpg",
+        address: '233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.'
+    },
+]
 function WishlistShop() {
-    const [_isMobile, setMobile] = useState(false);
-    const router = useRouter();
-  useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
     return (
-        <div className="profile-mobile custom-card-hover">
-        { _isMobile && 
-            <Card className="">
-                <Card.Body>
-                    <div className="d-flex gap-3 text-center ">
-                        <a href="/profile">
-                            <div>
-                                <BsChevronLeft />
-                            </div>
-                        </a>
-                        <span className="w-100">
-                            Danh sách quán yêu thích
-                        </span>
-                        {/* <a href=''>
-                        <BsFillFunnelFill />
-                        </a> */}
-                    </div>
-                </Card.Body>
-            </Card>
-        }
-
-        <div className={ _isMobile ?  'row m-2' : 'row'   }>
-            <div className="col-6 col-md-3 p-1">
-                <Card className="w-100 rounded">
-                    <Card.Img variant="top" src="https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/mtzolk4d.eah180220226048.jpg" />
-                    <Card.Body>
-                        <Card.Title>Bún Bò Bắp Hương Xưa</Card.Title>
-                        <Card.Text>
-                            233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.
-                        </Card.Text>
-                        
-                    </Card.Body>
-                </Card>
+        <div className="d-flex flex-column gap-2">
+            <div className='d-flex align-items-center p-2 gap-3 bg-success bg-opacity-25'>
+                <Link href="/profile">
+                    <a className='p-2 hideOnDesktop'>
+                        <BsChevronLeft />
+                    </a>
+                </Link>
+                <h6 className="mb-0 w-100 text-center">
+                    Danh sách quán yêu thích
+                </h6>
+                {/* <button className='d-flex justify-content-center align-items-center border-0 bg-light bg-opacity-10'>
+                    <BsFillFunnelFill />
+                </button> */}
             </div>
 
-            <div className="col-6 col-md-3 p-1">
-                <Card className="w-100 rounded">
-                    <Card.Img variant="top" src="https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/k0fkwps0.3lb02122021912.jpg" />
-                    <Card.Body>
-                        <Card.Title>Bún Bò Bắp Hương Xưa</Card.Title>
-                        <Card.Text>
-                            233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.
-                        </Card.Text>
-                        
-                    </Card.Body>
-                </Card>
-            </div>
-
-            <div className="col-6 col-md-3 p-1">
-                <Card className="w-100 rounded">
-                    <Card.Img variant="top" src="https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/1zo0abcr.xuh091220216016.jpg" />
-                    <Card.Body>
-                        <Card.Title>Bún Bò Bắp Hương Xưa</Card.Title>
-                        <Card.Text>
-                            233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.
-                        </Card.Text>
-                        
-                    </Card.Body>
-                </Card>
-            </div>
-
-            <div className="col-6 col-md-3 p-1">
-                <Card className="w-100 rounded">
-                    <Card.Img variant="top" src="https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/uahjxkhg.ci108112021105221.jpg" />
-                    <Card.Body>
-                        <Card.Title>Bún Bò Bắp Hương Xưa</Card.Title>
-                        <Card.Text>
-                            233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.
-                        </Card.Text>
-                        
-                    </Card.Body>
-                </Card>
-            </div>
-
-            <div className="col-6 col-md-3 p-1">
-                <Card className="w-100 rounded">
-                    <Card.Img variant="top" src="https://tastee-pro.s3.ap-southeast-1.amazonaws.com/images/mtzolk4d.eah180220226048.jpg" />
-                    <Card.Body>
-                        <Card.Title>Bún Bò Bắp Hương Xưa</Card.Title>
-                        <Card.Text>
-                            233 Nguyễn Văn Luông, P11, Quận 6, Tp Hồ Chí Minh.
-                        </Card.Text>
-                        
-                    </Card.Body>
-                </Card>
-            </div>
-           
-        </div>
+            <Row className='mx-0'>
+                {
+                    dataList.map(data => (
+                        <Col xs={6} md={4} className='mb-2'>
+                            <Card >
+                                <Card.Img variant="top" src={data.image} className='w-100 h-100' />
+                                <Card.Body>
+                                    <Card.Title className='fs-6 fw-bold'>{data.name}</Card.Title>
+                                    <Card.Text style={{fontSize: 13}}>
+                                        {data.address}
+                                    </Card.Text>
+                                    {/* <Button variant="primary">Go somewhere</Button> */}
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))
+                }
+            </Row>
         </div>
 
     );

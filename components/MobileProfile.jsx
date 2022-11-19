@@ -14,9 +14,11 @@ import { GrNotes } from 'react-icons/gr'
 import { bookingApi, orderApi, userApi } from '../api-client'
 import { CartContext } from '../context/cartContext'
 import ChangePass from './Modal/ChangePass'
+import { useRouter } from 'next/router'
 
 
 const MobileProfile = () => {
+    const router = useRouter()
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const { state, dispatch } = useContext(CartContext)
@@ -321,7 +323,7 @@ const MobileProfile = () => {
             <div className='d-flex flex-column gap-2'>
                 <div className='profileMobile__buttonContainer'>
                     <button className='profileMobile__button'
-                        onClick={() => setShowUserInfo(!showUserInfo)}>
+                        onClick={() => router.push('/profile/thong-tin-tai-khoan')}>
                         <Image src={auth?.avatar || '/image/logo512.png'} className='rounded' alt='' width={80} height={80} />
                         <span>{auth?.fullName}</span>
                         <AiOutlineSetting />
@@ -329,45 +331,40 @@ const MobileProfile = () => {
                     {showUserInfo &&
                         userInfor}
                 </div>
+          
                 <div className='profileMobile__buttonContainer'>
                     <button className='profileMobile__button'
-                        onClick={handleShowDonHang}>
+                        onClick={()=>router.push('/profile/lich-su-don-hang')}>
                         <BiNotepad />
                         <span>Đơn hàng</span>
                         <AiOutlinePlusCircle />
                     </button>
-                    {showDonHang &&
-                        DonHang}
                 </div>
                 <div className='profileMobile__buttonContainer'>
                     <button className='profileMobile__button'
-                        onClick={handleShowDatCho}>
+                        onClick={()=>router.push('/profile/lich-su-dat-hen')}>
                         <MdOutlineChair />
                         <span>Booking</span>
                         <AiOutlinePlusCircle />
                     </button>
-                    {showDatCho &&
-                        DatCho}
+                 
                 </div>
                 <div className='profileMobile__buttonContainer'>
                     <button className='profileMobile__button'
-                        onClick={() => setShowQuanYeuThich(!showQuanYeuThich)}>
+                        onClick={()=>router.push('/profile/quan-yeu-thich')}>
                         <AiOutlineHeart />
                         <span>Quán yêu thích</span>
                         <AiOutlinePlusCircle />
                     </button>
-                    {showQuanYeuThich &&
-                        QuanYeuThich}
                 </div>
                 <div className='profileMobile__buttonContainer'>
                     <button className='profileMobile__button'
-                        onClick={() => setShowSoDiaChi(!showSoDiaChi)}>
+                        onClick={()=>router.push('/profile/so-dia-chi')}>
                         <HiOutlineLocationMarker />
                         <span>Sổ địa chỉ</span>
                         <AiOutlinePlusCircle />
                     </button>
-                    {showSoDiaChi &&
-                        SoDiaChi}
+                    
                 </div>
             </div>
             {showMdChangePass && <ChangePass showMdChangePass={showMdChangePass}
@@ -375,7 +372,5 @@ const MobileProfile = () => {
         </section>
     )
 }
-// User.getLayout = function getLayout(Page) {
-//   return <Layout>{Page}</Layout>;
-// };
+
 export default MobileProfile
