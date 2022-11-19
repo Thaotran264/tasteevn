@@ -14,6 +14,8 @@ import { AiOutlineSave } from "react-icons/ai";
 import { userApi } from "../../api-client";
 import { CartContext } from "../../context/cartContext";
 import { Col, Row } from "react-bootstrap";
+import { BsChevronLeft } from "react-icons/bs";
+import Link from "next/link";
 
 
 const TabInfor = ({ userDetail }) => {
@@ -120,12 +122,18 @@ const TabInfor = ({ userDetail }) => {
     };
   }
   return (
-    <div className="profile-content">
-      {/* <h5 className="title-section">Thông tin tài khoản</h5> */}
-      <div className="rounded w-100 p-3 d-flex flex-column gap-2" style={{backgroundColor: '#fff'}}>
-        <h4 className="border-bottom pb-2">
-          Thông tin cá nhân
-        </h4>
+    <div className="d-flex flex-column gap-2">
+      <div className='d-flex align-items-center p-2 gap-3 bg-success bg-opacity-25'>
+        <Link href="/profile">
+          <a className='p-2 hideOnDesktop'>
+            <BsChevronLeft />
+          </a>
+        </Link>
+        <h6 className="mb-0 w-100 text-center">
+          Thông tin tài khoản
+        </h6>
+      </div>
+      <div className="bg-light d-flex flex-column gap-2">
         <form
           onSubmit={submitUpdate}
           className='d-flex flex-column gap-2 w-75 mx-auto'>
@@ -344,7 +352,7 @@ const TabInfor = ({ userDetail }) => {
           </Row>
           <Row className="d-flex align-items-center">
             <Col md={3}>
-              <span>Giới tính</span>
+              <span>Giới tính:</span>
             </Col>
             <Col md={9} className='d-flex gap-2'>
               <input
@@ -426,23 +434,25 @@ const TabInfor = ({ userDetail }) => {
           <Row>
             <Col md={3}></Col>
             <Col md={9}>
-            <Button type="submit" className="d-flex gap-2 align-items-center justify-content-center">
-              <AiOutlineSave />Lưu thay đổi</Button>
+              <Button type="submit" 
+              className="d-flex gap-2 align-items-center justify-content-center w-100">
+                <AiOutlineSave />Lưu thay đổi</Button>
             </Col>
           </Row>
         </form>
-        <div  className="w-75 mx-auto">
-        <Row>
+        <div className="w-75 mx-auto">
+          <Row>
             <Col md={3}></Col>
             <Col md={9}>
-            <Button variant="outline-success" 
-            className="d-flex align-items-center justify-content-center gap-2"
-            onClick={handleShow}>
-              <RiLockPasswordFill />Đổi mật khẩu</Button>
+              <Button variant="outline-success"
+                className="d-flex align-items-center w-100 justify-content-center gap-2"
+                onClick={handleShow}>
+                <RiLockPasswordFill />Đổi mật khẩu</Button>
             </Col>
           </Row>
-          </div>
+        </div>
       </div>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Đổi mật khẩu</Modal.Title>
@@ -461,12 +471,12 @@ const TabInfor = ({ userDetail }) => {
                 type={showPass ? "text" : "password"}
                 className="px-2 py-2 w-100 rounded"
                 id="exampleInputPassword1"
-                style={{borderWidth: 1}}
+                style={{ borderWidth: 1 }}
               />
-              <button 
-                className="position-absolute end-0 p-0 border-0" 
+              <button
+                className="position-absolute end-0 p-0 border-0"
                 onClick={() => setShowPass(!showPass)}
-                style={{marginRight: 8, marginTop: 6, backgroundColor: 'transparent'}}>
+                style={{ marginRight: 8, marginTop: 6, backgroundColor: 'transparent' }}>
                 {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
               </button>
             </div>
@@ -483,13 +493,13 @@ const TabInfor = ({ userDetail }) => {
                 type={showNewPass ? "text" : "password"}
                 className="px-2 py-2 rounded w-100 "
                 id="exampleInputPassword1"
-                style={{borderWidth: 1}}
+                style={{ borderWidth: 1 }}
 
               />
               <button
                 className="btn position-absolute  end-0 p-0 border-0"
                 onClick={() => setShowNewPass(!showNewPass)}
-                style={{marginRight: 8, marginTop: 6, backgroundColor: 'transparent'}}
+                style={{ marginRight: 8, marginTop: 6, backgroundColor: 'transparent' }}
               >
                 {showNewPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
               </button>
@@ -507,13 +517,13 @@ const TabInfor = ({ userDetail }) => {
                 type={showConfPassword ? "text" : "password"}
                 className="px-2 py-2 w-100 rounded"
                 id="exampleInputPassword1"
-                style={{borderWidth: 1}}
+                style={{ borderWidth: 1 }}
 
               />
               <button
                 className="btn position-absolute end-0 p-0 border-0"
                 onClick={() => setShowConfPassword(!showConfPassword)}
-                style={{marginRight: 8, marginTop: 6, backgroundColor: 'transparent'}}
+                style={{ marginRight: 8, marginTop: 6, backgroundColor: 'transparent' }}
               >
                 {" "}
                 {showConfPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
