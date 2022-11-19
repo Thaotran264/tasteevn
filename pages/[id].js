@@ -7,6 +7,7 @@ import { TbBrandBooking } from 'react-icons/tb';
 import Banner from "../components/Banner";
 import Booking from "../components/Booking";
 import InfoDefault from "../components/Info/InfoDefault";
+import Layout from "../components/Layout";
 import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import MerchantLayout from "../components/MerchantLayout";
@@ -49,13 +50,16 @@ const Detail = ({ detail }) => {
   const handleShow = () => {
     setShow(!show);
   };
-   const scrollToTop = () => {
+
+  const scrollToTop = () => {
     window.scrollTo({
-        top: 0,
-        behavior: "smooth", // for smoothly scrolling
+      top: 0,
+      behavior: "smooth", // for smoothly scrolling
     });
-};
+  };
+
   let mbref = useRef();
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 300) {
@@ -70,53 +74,78 @@ const Detail = ({ detail }) => {
     };
   });
   return (
-    <>
+    <Layout>
       <Head>
         <title>Brand Detail</title>
       </Head>
 
-      <section className=''>
+      <section className='d-flex flex-column gap-2'>
         {
           showBooking && <Booking setShowBooking={setShowBooking} />
         }
         <Banner banner={brandImage} />
         <InfoDefault info={infoWg?.data} maps={webMap} />
         <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
-        <Menu productList={menuWg} menuPos={false} />
+        <Menu productList={menuWg} />
 
-        <div className="hideOnMobile d-flex flex-column position-fixed" style={{ bottom: 10, right: 10, backgroundColor: "#fff", width: 60 }}>
+        <div
+          className="hideOnMobile d-flex flex-column position-fixed"
+          style={{ bottom: 10, right: 10, backgroundColor: "#fff", width: 60 }}>
           <Link href='/'>
-            <a className="border border-bottom-0  p-2 d-flex justify-content-center" style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
+            <a
+              className="border border-bottom-0  p-2 d-flex justify-content-center"
+              style={{ borderTopLeftRadius: 6, borderTopRightRadius: 6, backgroundColor: "#fff" }}>
               <AiOutlineHome style={{ fontSize: 20 }} />
             </a>
           </Link>
-          <button className=" border border-bottom-0 p-2" style={{ backgroundColor: "#fff" }}
-          onClick={()=>setShowBooking(!showBooking)}><TbBrandBooking style={{ fontSize: 20 }} /></button>
-          <button className="border border-bottom-0  p-2 position-relative" style={{ backgroundColor: "#fff" }}
+
+          <button
+            className=" border border-bottom-0 p-2"
+            style={{ backgroundColor: "#fff" }}
+            onClick={() => setShowBooking(!showBooking)}>
+            <TbBrandBooking style={{ fontSize: 20 }} />
+          </button>
+
+          <button
+            className="border border-bottom-0  p-2 position-relative"
+            style={{ backgroundColor: "#fff" }}
             onClick={handleShow}
-          ><AiOutlineShoppingCart style={{ fontSize: 20 }} />
-            {cart?.length > 0 &&
-              <span className="position-absolute d-flex justify-content-center align-items-center rounded-circle" style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>{cart?.length || 0}</span>
+          >
+            <AiOutlineShoppingCart style={{ fontSize: 20 }} />
+            {
+              cart?.length > 0 &&
+              (<span
+                className="position-absolute d-flex justify-content-center align-items-center rounded-circle"
+                style={{ fontSize: 11, width: 16, height: 16, backgroundColor: 'red', color: 'white', top: 4, right: 1 }}>
+                  {cart?.length || 0}
+                  </span>)
             }
           </button>
 
-          <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button>
-          <button className="  border p-2" style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}><AiOutlineHeart style={{ fontSize: 20 }} /></button>
+          {/* <button className=" border  border-bottom-0   p-2" style={{ backgroundColor: "#fff" }}><AiOutlineFlag style={{ fontSize: 20 }} /></button> */}
+          <button
+            className="border p-2"
+            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, backgroundColor: "#fff" }}>
+            <AiOutlineHeart style={{ fontSize: 20 }} />
+          </button>
         </div>
-        <button ref={mbref}
-        onClick={scrollToTop} className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
+        
+        <button
+          ref={mbref}
+          onClick={scrollToTop}
+          className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
           <AiOutlineArrowUp />
         </button>
       </section>
       {
         show ? <CartModal setShow={setShow} /> : <></>
       }
-    </>
+    </Layout>
   );
 };
 
-Detail.getLayout = function getLayout(Page) {
-  return <MerchantLayout>{Page}</MerchantLayout>;
-};
+// Detail.getLayout = function getLayout(Page) {
+//   return <MerchantLayout>{Page}</MerchantLayout>;
+// };
 
 export default Detail;

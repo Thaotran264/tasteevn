@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { AiOutlineShoppingCart ,AiOutlineUser} from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
-import { CiLogout } from 'react-icons/cg';
+import { BiLogOut } from 'react-icons/bi';
 import { cityApi } from '../api-client/city';
 import { searchApi } from '../api-client/search';
 import { logOut } from '../context/actions';
@@ -86,15 +86,16 @@ const NavComponent = () => {
       {
         token ?
           <>
-            <Dropdown.Item className='text-center py-2 d-flex align-items-center gap-2 justify-content-center ' href='/profile-desktop'>
+            <Dropdown.Item className='text-center py-2 d-flex align-items-center gap-2  ' href='/profile'>
               <AiOutlineUser /> 
               <span>Thông tin tài khoản</span>
             </Dropdown.Item>
-            <Dropdown.Item className='text-center py-2  d-flex align-items-center gap-2 justify-content-center ' href='/cart'>
+            <Dropdown.Item className='text-center py-2  d-flex align-items-center gap-2  ' href='/cart'>
               <AiOutlineShoppingCart /> 
               <span>Giỏ hàng</span>
             </Dropdown.Item>
-            <Dropdown.Item className='text-center py-2 d-flex justify-content-center align-items-center gap-2' onClick={handleLogout}>
+            <Dropdown.Item className='text-center py-2 d-flex align-items-center gap-2' onClick={handleLogout}>
+            <BiLogOut />
             <span>Đăng xuất</span>
             </Dropdown.Item>
           </>
@@ -191,7 +192,7 @@ const NavComponent = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu >
-            <Dropdown.Item className='text-center py-2' href='/profile-desktop'>Thông tin tài khoản
+            <Dropdown.Item className='text-center py-2' href='/profile'>Thông tin tài khoản
             </Dropdown.Item>
             <Dropdown.Item className='text-center py-2'>Giỏ hàng</Dropdown.Item>
             <Dropdown.Item className='text-center py-2' onClick={handleLogout}>Đăng xuất

@@ -10,7 +10,7 @@ export default function Home({ data }) {
 const [showLoginModal, setShowLoginModal] = useState(false)
 const handleShowLoginModal = () => setShowLoginModal(true)
   return (
-    <>
+    <Layout>
       <Head>
         <title>Tastee - Cộng đồng người bán</title>
         <meta property="og:type" content="article" />
@@ -46,13 +46,13 @@ const handleShowLoginModal = () => setShowLoginModal(true)
         }
       
       </section>
-    </>
+    </Layout>
   );
 }
 
-Home.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
+// Home.getLayout = function getLayout(Page) {
+//   return <Layout>{Page}</Layout>;
+// };
 
 export async function getStaticProps(context) {
   // const res = await searchApi.getProductSlider()
