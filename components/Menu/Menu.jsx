@@ -7,7 +7,7 @@ import { formatter } from '../../utils';
 import { Link } from 'react-scroll'
 import Topping from '../Modal/Topping';
 import { BsFillHandbagFill } from 'react-icons/bs'
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 
 const LinkItemComponent = ({ children, it }) => (
@@ -65,7 +65,7 @@ const Menu = ({ productList }) => {
     </div>
   )
   const ItemsContainerComponent = ({ data, children }) => (
-    <div className='d-flex flex-column gap-2 p-2 bg-success bg-opacity-10'>
+    <div className='d-flex flex-column gap-2 p-2'>
       <h5 className='border-bottom pb-2 fw-bold' id={data.name}>{data.name}</h5>
       <div className={`menuContainer menuContainer-${menuStyle}`}>
         {
@@ -91,30 +91,23 @@ const Menu = ({ productList }) => {
     };
   });
   const ItemComponent = ({ it }) => (
-    <div className="d-flex flex-column align-items-center">
-      <div
-        className='d-flex flex-column rounded gap-2  py-2 shadow-sm'>
-        <div className='d-flex justify-content-center bg-light rounded w-75 mx-auto p-2'>
-          <Image
-            src={it.image || '/image/logo512.png'}
-            alt={it.name} className='rounded'
-            width={160}
-            height={160} />
-        </div>
-        <p
-          className='fw-bold mb-0 text-start px-2'>{it.name}</p>
-        <div className='d-flex px-2 align-items-center'>
-          <p className='fw-bold text-danger mb-0'>{
-            formatter.format(it.price)}
-          </p>
-          <button
-            className='d-flex align-items-center justify-content-center rounded-5 border-0 ms-auto'
-            onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30, color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
-            <BsFillHandbagFill />
-          </button>
-        </div>
-      </div>
-    </div>
+      <Card style={{backgroundColor:'hsl(27, 100%, 71%)'}} className='rounded'>
+        <Card.Img variant="top" src={it.image || '/image/logo512.png'} className='p-3'/>
+        <Card.Body>
+          <Card.Title className='text-light'>{it.name}</Card.Title>
+          <div className='d-flex px-2 align-items-center'>
+            <p className='text-light mb-0'>{
+              formatter.format(it.price)}
+            </p>
+            <button
+              className='d-flex align-items-center justify-content-center rounded-5 border-0 ms-auto bg-light'
+              onClick={() => handleAddTopping(it)}
+               style={{ width: 30, height: 30, color: 'hsl(27, 100%, 71%)' }}>
+              <BsFillHandbagFill />
+            </button>
+          </div>
+        </Card.Body>
+      </Card>   
   )
 
 
@@ -260,7 +253,7 @@ const Menu = ({ productList }) => {
       </div>
 
       {
-        menus.map(menu => {
+        menus.length && menus.map(menu => {
           const { items } = menu
           if (items.length) {
             return (<ItemsContainerComponent data={menu}>
@@ -273,37 +266,15 @@ const Menu = ({ productList }) => {
           }
           return (
             <></>
-            // <div key={menu.id} className='d-flex flex-column gap-2 p-2 bg-light rounded'>
-            //   <h5 id={menu.name}>{menu.name}</h5>
-            //   <div className={`menuContainer menuContainer-${menuStyle} mb-2`}>
-            //     {
-            //       items.map(item => (
-            //         <ItemComponent key={item.id} it={item} />
-            //       ))
-            //     }
-            //   </div>
-            // </div>
           )
         })
       }
-      {/* {
-        items.map(item => {
-          const { items } = items
-          if (items.length) {
-            return (<ItemsContainerComponent data={item}>
-              {
-                items.map(item =>
-                  (<ItemComponent key={item.id} it={item} />)
-                )
-              }
-            </ItemsContainerComponent>)
-          }
-          return (
-            <></>
-            )
-          })
-        } */}
-      
+      {
+        items?.length 
+        ? items.map(item =>
+          <ItemComponent key={item.id} it={item} />)
+          : <></>
+      }
 
       {showToppingModal.open ? <Topping
         showToppingModal={showToppingModal}
