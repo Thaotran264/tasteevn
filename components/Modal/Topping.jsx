@@ -135,7 +135,6 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
   });
 
   return (
-    <>
       <Modal
         size="lg"
         centered
@@ -212,7 +211,6 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
           </div>
         </Modal.Footer>
       </Modal>
-    </>
   );
 };
 

@@ -30,7 +30,6 @@ const Menu = ({ productList }) => {
     open: false,
     data: null
   })
-  console.log('product', productList)
   const [menuStyle, setMenuStyle] = useState(5)
 
 
@@ -65,8 +64,8 @@ const Menu = ({ productList }) => {
     </div>
   )
   const ItemsContainerComponent = ({ data, children }) => (
-    <div className='d-flex flex-column gap-2 p-2'>
-      <h5 className='border-bottom pb-2 fw-bold' id={data.name}>{data.name}</h5>
+    <div className='d-flex flex-column gap-2 py-2' style={{backgroundColor: "#fff"}}>
+      <h5 className='border-bottom pb-2 px-2' id={data.name}>{data.name}</h5>
       <div className={`menuContainer menuContainer-${menuStyle}`}>
         {
           children
@@ -89,20 +88,20 @@ const Menu = ({ productList }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
   const ItemComponent = ({ it }) => (
-      <Card style={{backgroundColor:'hsl(27, 100%, 71%)'}} className='rounded'>
-        <Card.Img variant="top" src={it.image || '/image/logo512.png'} className='p-3'/>
+      <Card className='rounded shadow d-flex flex-column menuCard'>
+        <Card.Img variant="bottom" src={it.image || '/image/logo512.png'} className='p-3 d-flex justify-content-center'/>
         <Card.Body>
-          <Card.Title className='text-light'>{it.name}</Card.Title>
-          <div className='d-flex px-2 align-items-center'>
-            <p className='text-light mb-0'>{
+          <Card.Title className='text-dark'>{it.name}</Card.Title>
+          <div className='d-flex align-items-center'>
+            <p className='text-dark mb-0'>{
               formatter.format(it.price)}
             </p>
             <button
-              className='d-flex align-items-center justify-content-center rounded-5 border-0 ms-auto bg-light'
+              className='d-flex align-items-center justify-content-center rounded-5 border-0 ms-auto'
               onClick={() => handleAddTopping(it)}
-               style={{ width: 30, height: 30, color: 'hsl(27, 100%, 71%)' }}>
+               style={{ width: 30, height: 30,color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
               <BsFillHandbagFill />
             </button>
           </div>
@@ -110,105 +109,14 @@ const Menu = ({ productList }) => {
       </Card>   
   )
 
-
-  const renderMenus = menus.map(item =>
-  (<div
-    id={`${item.name}`}
-    key={item.id}
-    className=" text-dark mb-2 rounded p-2"
-    style={items.length ? { marginTop: 0 } : { marginTop: 48 }}>
-    {/* <div className='d-flex justify-content-between align-items-center'>
-    </div> */}
-    <h3 className='pb-1'>{item.name}</h3>
-    <div
-      className={`menuContainer menuContainer-${menuStyle} mb-2`}>
-      {
-        item.items.map(it => (
-          <ItemComponent key={it.id} it={it} />
-        ))
-      }
-      {/* {
-        item.items.map(it =>
-        (<div
-          key={it.id}
-          className="d-flex flex-column menuItems position-relative p-2 rounded"
-          style={{ boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
-          <div
-            className='w-100 d-flex justify-content-center'>
-            <Image
-              src={it.image || '/image/logo512.png'}
-              alt={it.name} className='rounded'
-              width={160}
-              height={160} />
-          </div>
-          <p
-            className='fw-bold mb-1 px-2'>{it.name}</p>
-          <div className='position-relative w-100 px-2'>
-            <p className='fw-bold text-danger mb-0'>{
-              formatter.format(it.price)}
-            </p>
-            <button
-              className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2'
-              onClick={() => handleAddTopping(it)} style={{ width: 30, height: 30, color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
-              <BsFillHandbagFill />
-            </button>
-          </div>
-        </div>)
-        )} */}
-    </div>
-
-  </div>)
-  )
-  const renderItems = items.map(item =>
-  (<div
-    key={item.id}
-    className="text-dark mb-2 rounded p-2"
-    style={{ marginTop: 48 }}
-    id={`${item.name}`}>
-    <div className='d-flex justify-content-between align-items-center'>
-      <h3 className='pb-1'>{item.name}</h3>
-    </div>
-    <div className={`menuContainer menuContainer-${menuStyle} mb-2`}>
-      {
-        items.map(it => (
-          <ItemComponent it={it} key={it.id} />
-        ))
-        // items.map(it => <div key={it.id}
-        //   className="rounded-3 bg-light py-2 d-flex flex-column align-items-center menuItems position-relative"
-        //   style={{ minWidth: '15%', boxShadow: '0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%)' }}>
-        //   <div>
-        //     <Image
-        //       src={it.image || '/image/logo512.png'}
-        //       alt={it.name}
-        //       className=' rounded'
-        //       width={160}
-        //       height={160} />
-        //   </div>
-        //   <p className='fw-bold'>{it.name}</p>
-        //   <div className='position-relative w-100 text-center'>
-        //     <p className='fw-bold text-danger'>{formatter.format(it.price)}</p>
-        //     <button
-        //       className='d-flex align-items-center justify-content-center rounded-5 border-0 position-absolute bottom-0 end-0 me-2'
-        //       onClick={() => handleAddTopping(it)}
-        //       style={{ backgroundColor: 'hsl(27, 100%, 71%)', width: 30, height: 30, color: '#fff' }}>
-        //       <BsFillHandbagFill />
-        //     </button>
-        //   </div>
-        // </div>
-        // )
-      }
-    </div>
-  </div >)
-  )
-
   return (
-    <section className="container d-flex flex-column gap-2 bg-light py-3" ref={mbref}>
+    <section className="container d-flex flex-column gap-2 py-3" ref={mbref} style={{backgroundColor: '#fff'}}>
       <MenuStyleComponenet />
 
       <div className="d-flex flex-column gap-2 position-relative" >
         {
-          menuPos &&
-          <div className={`d-none container rounded menuScrollbar active`}>
+          menuPos ?
+          <div className={` container rounded menuScrollbar active`}>
             <ul className='d-flex px-0 mb-0 container'>
               {
                 items.map(item => (
@@ -229,6 +137,7 @@ const Menu = ({ productList }) => {
                 )}
             </ul>
           </div>
+          : <></>
         }
         <div className={`d-flex justify-content-center rounded`}>
           <ul className='d-flex px-0 mb-0 container bg-success bg-opacity-10'>
@@ -236,7 +145,8 @@ const Menu = ({ productList }) => {
               items.map(item => (
                 <li
                   key={item.id}
-                  className="p-2 fw-semibold menuListItem" >
+                  className="p-2 menuListItem" >
+                <LinkItemComponent it={item}><h5 className='fw-bold'>{item.name}</h5></LinkItemComponent>
                 </li>
               ))
             }
@@ -244,8 +154,8 @@ const Menu = ({ productList }) => {
               menus.map(item =>
               (<li
                 key={item.id}
-                className="p-2 fw-semibold menuListItem" >
-                <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
+                className="p-2 menuListItem" >
+                <LinkItemComponent it={item}><h5 className='fw-bold'>{item.name}</h5></LinkItemComponent>
               </li>)
               )}
           </ul>

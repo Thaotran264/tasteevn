@@ -3,8 +3,8 @@ import HistoryOrder from '../../components/HistoryOrder'
 
 export default function lichSuDonHang() {
   return (
-    <div>
+    <>
       <HistoryOrder />
-    </div>
+    </>
   )
 }

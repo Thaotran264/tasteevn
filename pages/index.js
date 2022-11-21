@@ -38,7 +38,11 @@ const handleShowLoginModal = () => setShowLoginModal(true)
       </Head>
       <section className="container px-0 d-flex flex-column gap-2"  >
         <CarouselComponent />
-      
+      <h2>Quán yêu thích</h2>
+        <Slider02 data={data}/>
+      <h2>Món yêu thích</h2>
+        <Slider02 data={data}/>
+      <h2>Cửa hàng yêu thích</h2>
         <Slider02 data={data}/>
         {
           showLoginModal ?

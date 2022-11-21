@@ -327,7 +327,7 @@ function LoginModal({ showLoginModal,
           <Modal.Title>
             <div className='d-flex gap-2 align-items-center'>
               <Image src='/image/logo512.png' alt='logo' width={40} height={40} />
-              <p className='mb-0 fs-6'>Tastee POS</p>
+              <p className='mb-0 fs-6'>Tastee</p>
             </div>
           </Modal.Title>
         </Modal.Header>

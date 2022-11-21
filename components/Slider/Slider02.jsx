@@ -7,7 +7,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "red" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e" }}
       onClick={onClick}
     />
   );
@@ -18,7 +18,8 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "green" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e",
+    right: "-10px" }}
       onClick={onClick}
     />
   );
@@ -31,6 +32,8 @@ const settings = {
   // autoplay: true,
   speed: 500,
   // autoplaySpeed: 3000,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   responsive: [
     {
       breakpoint: 600,
@@ -41,8 +44,8 @@ const settings = {
         autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
+        // nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />
       },
     },
   ],
@@ -65,7 +68,7 @@ const Slider02 = ({ data }) => {
                   <p className="mb-0 fw-bold" style={{ fontSize: 14 }}>
                     {it.brandName.substring(0, 14)}
                   </p>
-                  <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p>
+                  {/* <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p> */}
                 </div>
               </div>
             </a>

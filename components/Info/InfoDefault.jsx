@@ -29,12 +29,12 @@ const InfoDefault = ({ info, maps }) => {
       <Style />
       {
         infoStyle == 1 && <Row className="mx-0">
-          <Col xs={4} md={3} className='d-flex align-items-center'>
+          <Col xs={4} md={2} className='d-flex align-items-center justify-content-center'>
             <Image
               alt={info?.name}
               src={info?.logo || '/image/logo512.png'}
               className='rounded'
-              width={380} height={380} />
+              width={240} height={240} />
           </Col>
           <Col xs={8} md={9} className='py-2'>
             <h4 className="fw-bold">{info?.name}</h4>

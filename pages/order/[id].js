@@ -32,17 +32,22 @@ const Detail = () => {
     const totalPrice = data?.orderDetails?.reduce((cal, item) => cal += item.price * item.quantity, 0)
 
     const renderOrderDetails = data?.orderDetails?.map(order => (
-        <div className=' rounded p-2 d-flex shadow-sm flex-column gap-2 mb-2' key={order.id} style={{ backgroundColor: '#fff' }}>
-            <div className='d-flex justify-content-between' >
+        <div className=' rounded p-2 d-flex shadow-sm flex-column gap-2' key={order.id} style={{ backgroundColor: '#fff' }}>
+            <div className='d-flex gap-2 align-items-center bg-success bg-opacity-10 rounded'  >
                 <Image src={order.itemImage || '/image/logo512.png'} width="80" height="80" />
-                <p className='fw-bold'>{order.itemName}</p>
-                <p className='text-success'>x{order.quantity}</p>
-                <p className='text-danger'>{formatter.format(order.price)}</p>
+                {/* <p className='text-success'></p> */}
+                <div className='d-flex flex-column p-2'>
+                    <div className='d-flex px-2'>
+                        <p className='mb-0'><span className='font-bold'>{order.quantity}</span>x {order.itemName} </p>
+                        <p className='mb-0 text-danger'>{formatter.format(order.price * order.quantity)}</p>
+                    </div>
+                    <button style={{ fontSize: 11 }} className='border-0 text-decoration-underline ms-auto mb-0'>Xem chi tiết</button>
+                </div>
             </div>
-            <div className='d-flex gap-1'>
+            <div className='d-flex flex-column gap-1 d-none'>
                 {
                     order.orderToppings?.map(orderTopping =>
-                        <p key={orderTopping.id}>{orderTopping.toppingName}</p>
+                        <p key={orderTopping.id} className='bg-dark bg-opacity-10 mb-0 rounded p-2'>{orderTopping.toppingName}</p>
                     )
                 }
             </div>
@@ -76,22 +81,23 @@ const Detail = () => {
     </div>
 
     return (
+        <Layout>
         <section className='container mt-2 d-flex flex-column gap-2' >
             <h4 className='text-center border-bottom fw-bold'>Chi tiết đơn hàng</h4>
             <div className='d-flex gap-2 flex-column w-100 ' >
                 {
                     renderUserInfo
                 }
-                <div className='p-2 rounded d-flex flex-column gap-2' style={{ backgroundColor: '#fff' }}>
+                <div className='p-2 rounded d-flex flex-column gap-1' style={{ backgroundColor: '#fff' }}>
                     <h5 className='text-center border-bottom border-dark'>Thông tin đơn hàng</h5>
-                    <div className='d-flex justify-content-between mb-2 align-items-center p-2 rounded    ' >
+                    <div className='d-flex justify-content-between align-items-center px-2 rounded    ' >
                         <span className='fw-bold '>Ngày tạo:</span>
                         <p className='mb-0'>
-                            {moment(data?.createdDate).format('DD/MM/yyyy')}
+                            {moment(data?.createdDate).format('DD/MM/yyyy hh:mm')}
                         </p>
                     </div>
                     {renderOrderDetails}
-                    <div className='d-flex justify-content-between mb-2 align-items-center p-2 rounded    ' style={{ backgroundColor: '#fff' }}>
+                    <div className='d-flex justify-content-between align-items-center p-2 rounded    ' style={{ backgroundColor: '#fff' }}>
                         <span className='fw-bold'>Tổng tiền:</span>
                         <p className='mb-0'>  {formatter.format(totalPrice)}</p>
                     </div>
@@ -99,9 +105,8 @@ const Detail = () => {
 
             </div>
         </section>
+        </Layout>
     )
 }
-Detail.getLayout = function getLayout(Page) {
-    return <Layout>{Page}</Layout>;
-};
+
 export default Detail
