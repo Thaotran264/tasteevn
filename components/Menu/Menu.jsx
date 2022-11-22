@@ -30,8 +30,13 @@ const Menu = ({ productList }) => {
     open: false,
     data: null
   })
-  const [menuStyle, setMenuStyle] = useState(5)
+  const [menuStyle, setMenuStyle] = useState(2)
 
+  useEffect(()=>{
+    if(window.innerWidth >= 992 ) {
+      setMenuStyle(5)
+    }
+  },[])
 
   const handleAddTopping = (value) => {
     if (!token) {
@@ -110,8 +115,8 @@ const Menu = ({ productList }) => {
   )
 
   return (
-    <section className="container d-flex flex-column gap-2 py-3" ref={mbref} style={{backgroundColor: '#fff'}}>
-      <MenuStyleComponenet />
+    <section className="container d-flex flex-column gap-2" ref={mbref} style={{backgroundColor: '#fff'}}>
+      {/* <MenuStyleComponenet /> */}
 
       <div className="d-flex flex-column gap-2 position-relative" >
         {
@@ -146,7 +151,7 @@ const Menu = ({ productList }) => {
                 <li
                   key={item.id}
                   className="p-2 menuListItem" >
-                <LinkItemComponent it={item}><h5 className='fw-bold'>{item.name}</h5></LinkItemComponent>
+                <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
                 </li>
               ))
             }
@@ -155,7 +160,7 @@ const Menu = ({ productList }) => {
               (<li
                 key={item.id}
                 className="p-2 menuListItem" >
-                <LinkItemComponent it={item}><h5 className='fw-bold'>{item.name}</h5></LinkItemComponent>
+                <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
               </li>)
               )}
           </ul>

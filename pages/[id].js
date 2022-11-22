@@ -133,8 +133,8 @@ const Detail = ({ detail }) => {
         <button
           ref={mbref}
           onClick={scrollToTop}
-          className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''}`}>
-          <AiOutlineArrowUp />
+          className={`hideOnDesktop position-fixed scrollToTop ${showScrollToTop ? 'active' : ''} rounded-5`}>
+          <AiOutlineArrowUp style={{width: 24, height: 24}}/>
         </button>
       </section>
       {

@@ -48,7 +48,7 @@
  
 }
 .scrollToTop {
-    background-color: var(--bg-primary-color);
+    background-color: rgba(204, 204, 204, 0.612);
     color: #fff;
     padding: 10px;
     position: fixed;

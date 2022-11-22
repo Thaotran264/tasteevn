@@ -1,14 +1,9 @@
-import axios from 'axios'
 import moment from 'moment/moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { orderApi, userApi } from '../../api-client'
+import React, { useEffect, useState } from 'react'
+import { orderApi } from '../../api-client'
 import Layout from '../../components/Layout'
-import MerchantLayout from '../../components/MerchantLayout'
-import { selectAuth } from '../../features/auth/authSlice'
 import { formatter } from '../../utils/common'
 
 
@@ -33,18 +28,22 @@ const Detail = () => {
 
     const renderOrderDetails = data?.orderDetails?.map(order => (
         <div className=' rounded p-2 d-flex shadow-sm flex-column gap-2' key={order.id} style={{ backgroundColor: '#fff' }}>
-            <div className='d-flex gap-2 align-items-center bg-success bg-opacity-10 rounded'  >
+            <div className='d-flex gap-2 rounded'  >
                 <Image src={order.itemImage || '/image/logo512.png'} width="80" height="80" />
                 {/* <p className='text-success'></p> */}
-                <div className='d-flex flex-column p-2'>
-                    <div className='d-flex px-2'>
+                <div className='d-flex flex-column p-2 w-100'>
+                    <div className='d-flex px-2 gap-2'>
                         <p className='mb-0'><span className='font-bold'>{order.quantity}</span>x {order.itemName} </p>
-                        <p className='mb-0 text-danger'>{formatter.format(order.price * order.quantity)}</p>
+                        <p className='mb-0 text-danger fw-bold'>{formatter.format(order.price * order.quantity)}</p>
                     </div>
-                    <button style={{ fontSize: 11 }} className='border-0 text-decoration-underline ms-auto mb-0'>Xem chi tiết</button>
+                    {
+                        order.orderToppings.length ?
+                        <button style={{ fontSize: 11 }} className='border-0 text-decoration-underline ms-auto mb-0'>Xem chi tiết</button>
+                        : <></>
+                    }
                 </div>
             </div>
-            <div className='d-flex flex-column gap-1 d-none'>
+            <div className='d-flex flex-column gap-1'>
                 {
                     order.orderToppings?.map(orderTopping =>
                         <p key={orderTopping.id} className='bg-dark bg-opacity-10 mb-0 rounded p-2'>{orderTopping.toppingName}</p>
@@ -65,11 +64,6 @@ const Detail = () => {
                 <p className='mb-0'>{shippingAddress
                     ?.phone}</p>
             </div>
-            {/* <div className='d-flex gap-2 align-items-center mb-2'>
-                <span className='fw-bold'>Email:</span>
-                <p className='mb-0'>{shippingAddress
-                    ?.email}</p>
-            </div> */}
             <div className='d-flex gap-2 align-items-center mb-2'>
                 <span className='fw-bold'>Địa chỉ:</span>
                 <p className='mb-0'>{data
@@ -81,7 +75,7 @@ const Detail = () => {
     </div>
 
     return (
-        <Layout>
+        <Layout title='Tastee'>
         <section className='container mt-2 d-flex flex-column gap-2' >
             <h4 className='text-center border-bottom fw-bold'>Chi tiết đơn hàng</h4>
             <div className='d-flex gap-2 flex-column w-100 ' >
@@ -99,7 +93,7 @@ const Detail = () => {
                     {renderOrderDetails}
                     <div className='d-flex justify-content-between align-items-center p-2 rounded    ' style={{ backgroundColor: '#fff' }}>
                         <span className='fw-bold'>Tổng tiền:</span>
-                        <p className='mb-0'>  {formatter.format(totalPrice)}</p>
+                        <h5 className='mb-0 fw-bold'>  {formatter.format(totalPrice)}</h5>
                     </div>
                 </div>
 

@@ -7,12 +7,12 @@ import { SiZalo } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="py-4 d-flex flex-column gap-2 shadow">
+    <footer className="py-4 d-flex flex-column gap-2">
       <div className="container">
-        <Row>
+        <Row className="mx-0">
           <Col xs={12} md={4}>
             <h5 className="fw-bold text-dark">Thông tin</h5>
-            <ul className="text-footer ps-0">
+            <ul className="text-footer ps-0 customFontSize">
               <li><span className="fw-bolder">Email: </span><a href="#">cskh@tastee.com</a></li>
               <li><span className="fw-bolder">Điện thoại:</span><a href="#">028 xxxx xxxx</a> </li>
               <li><span className="fw-bolder">ĐKKD:</span><a href="#">37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a></li>
@@ -20,7 +20,7 @@ const Footer = () => {
             </ul></Col>
           <Col xs={12} md={4}>
             <h5 className="fw-bold text-dark">Sản phẩm</h5>
-            <ul className="text-footer ps-0">
+            <ul className="text-footer ps-0 customFontSize">
               <li><a href="#">Giới thiệu về Tastee</a></li>
               <li><a href="#">Tuyển dụng nhân sự</a> </li>
               <li><a href="#">Chính sách bảo mật</a></li>
@@ -37,7 +37,7 @@ const Footer = () => {
             </div>
           </Col>
         </Row>
-      <Row>
+      <Row className="mx-0">
         <Col xs={12}>
       <p className="text-center mb-0 text-dark" style={{ fontSize: 14 }}>© Copyright 2022 by Tastee team. </p>
         </Col>

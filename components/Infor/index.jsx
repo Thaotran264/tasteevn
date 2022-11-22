@@ -122,8 +122,8 @@ const TabInfor = ({ userDetail }) => {
     };
   }
   return (
-    <div className="d-flex flex-column gap-2">
-      <div className='d-flex align-items-center p-2 gap-3 bg-success bg-opacity-25'>
+    <div className="d-flex flex-column gap-2" style={{backgroundColor: '#fff'}}>
+      <div className='d-flex align-items-center p-2 gap-2' style={{backgroundColor: 'linear-gradient(toright, #ffe259 0%, #ffa751 100%)', color: '#fff'}}>
         <Link href="/profile">
           <a className='p-2 hideOnDesktop'>
             <BsChevronLeft />
@@ -133,10 +133,10 @@ const TabInfor = ({ userDetail }) => {
           Thông tin tài khoản
         </h6>
       </div>
-      <div className="bg-light d-flex flex-column gap-2">
+      <div className="d-flex flex-column gap-2">
         <form
           onSubmit={submitUpdate}
-          className='d-flex flex-column gap-2 w-75 mx-auto'>
+          className='d-flex flex-column gap-2 w-75 mx-auto py-2'>
           <div className="wrapper py-2">
             <div className="file-upload avata-input d-flex align-items-center" style={{ width: 120, height: 120 }}>
               <input type="file" onChange={(e) => upload(e)} />

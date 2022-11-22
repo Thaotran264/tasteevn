@@ -3,6 +3,7 @@ import { MdAttachMoney, MdOutlineChair } from "react-icons/md";
 import { BsClock } from "react-icons/bs";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { MdOutlineKeyboardArrowRight} from "react-icons/md";
 import parse from "html-react-parser";
 import Image from "next/image";
 import { isMobile } from "react-device-detect";
@@ -25,11 +26,11 @@ const InfoDefault = ({ info, maps }) => {
     </div>
   )
   return (
-    <section className="container bg-success bg-opacity-10 d-flex flex-column gap-2 py-2 ">
-      <Style />
+    <section className="container d-flex flex-column gap-2 py-2 " style={{backgroundColor: "#fff"}}>
+      {/* <Style /> */}
       {
         infoStyle == 1 && <Row className="mx-0">
-          <Col xs={4} md={2} className='d-flex align-items-center justify-content-center'>
+          <Col xs={4} md={2} className='d-flex align-items-center justify-content-center px-0'>
             <Image
               alt={info?.name}
               src={info?.logo || '/image/logo512.png'}
@@ -38,11 +39,11 @@ const InfoDefault = ({ info, maps }) => {
           </Col>
           <Col xs={8} md={9} className='py-2'>
             <h4 className="fw-bold">{info?.name}</h4>
-            <div className='bg-dark bg-opacity-10 rounded p-2' >
-              <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
+            <div>
+              <p className="mb-0 customFontSize" ><span className="fw-bold me-2">Địa chỉ:</span>
                 {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
               </p>
-              <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
+              <p className="mb-0 customFontSize"><span className="fw-bold me-2" >Mở cửa:</span>
                 {info?.openTimeA}-{info?.closeTimeA}
               </p>
             </div>
@@ -95,10 +96,10 @@ const InfoDefault = ({ info, maps }) => {
 
       <div className="d-flex justify-content-center">
         <button
-          className="btn btn-outline-dark hideOnDesktop"
+          className="btn btn-outline-dark hideOnDesktop border-top border-bottom border-0 rounded-0 w-100"
           onClick={() => setShow(!show)}
         >
-          Xem bản đồ
+          Xem thông tin <MdOutlineKeyboardArrowRight />
         </button>
       </div>
         {show && (

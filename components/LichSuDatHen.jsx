@@ -57,48 +57,51 @@ const LichSuDatHen = () => {
     }
     return (
         <div className='d-flex flex-column gap-2'>
-            <div className='d-flex align-items-center p-2 bg-success bg-opacity-25' style={{height: 40}}>
+            <div className='d-flex align-items-center p-2' style={{ height: 40, backgroundColor: 'hsl(27, 100%, 71%)', color: "#fff" }}>
                 <Link href="/profile">
                     <a className='p-2 position-absolute top-0 hideOnDesktop'>
                         <BsChevronLeft />
                     </a>
                 </Link>
-                <h6 className="mb-0 w-100 text-center fw-bold">
+                <h6 className="mb-0 w-100 text-center">
                     Lịch sử đặt hẹn
                 </h6>
             </div>
-            <div className="rounded p-2 shadow px-2" style={{ backgroundColor: '#fff' }}>
-                <div className='d-flex flex-column gap-2 '>
-                    <Row className='mx-auto'>
-                        <Col xs={6} md={6} className='d-flex flex-column gap-1'>
+            <div className="rounded p-2 shadow p-2" style={{ backgroundColor: '#fff' }}>
+                <div className='d-flex  flex-column gap-3 '>
+                    <Row className='d-flex align-items-center mx-0'>
+                        <Col xs={12} md={3}>
                             <span>Từ ngày:</span>
-                            <input type="date" id="start" name="trip-start"
-                                className="px-2 py-1 rounded border-dark border-2 w-100"
-                                value={startDate}
-                                onChange={handleChangeStartDate}
-                                style={{ borderWidth: 1 }}
-
-                            />
                         </Col>
-                        <Col xs={6} md={6} className='d-flex flex-column gap-1'>
-                            <span>Đến ngày:</span>
-                            <input type="date" id="end" name="trip-end"
-                                className="px-2 py-1 rounded border-dark border-2 w-100"
-                                value={endDate}
-                                onChange={handleChangeEndDate}
-                                style={{ borderWidth: 1 }}
-
-                            />
+                        <Col xs={12} md={9}> <input type="date" id="start" name="trip-start"
+                            className="px-2 py-1 rounded border-dark border-2 w-100"
+                            value={startDate}
+                            onChange={handleChangeStartDate}
+                            style={{ borderWidth: 1 }}
+                        />
                         </Col>
                     </Row>
-                    <Button onClick={handleSearch} variant='primary' className='w-100'>Tìm</Button>
+                    <Row className='d-flex align-items-center mx-0'>
+                        <Col xs={12} md={3}><span>Đến ngày:</span></Col>
+                        <Col xs={12} md={9}><input type="date" id="end" name="trip-end"
+                            className="px-2 py-1 rounded border-dark border-2 w-100"
+                            value={endDate}
+                            onChange={handleChangeEndDate}
+                            style={{ borderWidth: 1 }}
+
+                        /></Col>
+                    </Row>
+                    <Row className='mx-0'>
+                        <Col xs={12} md={3}></Col>
+                        <Col xs={12} md={9}><Button onClick={handleSearch} variant='primary' className='w-100'>Tìm</Button></Col>
+                    </Row>
                 </div>
             </div>
 
-            <div className='d-flex flex-column gap-2 px-2'>
+            <div className='d-flex flex-column gap-2'>
                 {
                     bookingData?.map(item =>
-                        <div className="rounded bg-light shadow p-2" key={item.id}>
+                        <div className="rounded bg-light shadow p-4" key={item.id}>
                             <p className="mb-1"><span className='fw-bold'>Cửa hàng:</span> {item.brandName}</p>
                             <p className="mb-1"><span className='fw-bold'>Thời gian:</span> {moment(item.bookingTime).format('DD/MM/yyyy HH:mm')}</p>
                             <div>

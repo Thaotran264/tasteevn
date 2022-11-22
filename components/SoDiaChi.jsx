@@ -135,11 +135,10 @@ const SoDiaChi = () => {
             </Button>
         </Form>)
     return (
-        <>
             <div className="d-flex flex-column gap-2">
-                <div className='d-flex align-items-center py-2 gap-3 bg-success bg-opacity-25'>
+                <div className='d-flex align-items-center py-2 gap-3 mobileHeader position-relative'>
                     <Link href="/profile">
-                        <a className='p-2 hideOnDesktop'>
+                        <a className=' p-2 hideOnDesktop position-absolute'>
                             <BsChevronLeft />
                         </a>
                     </Link>
@@ -186,7 +185,7 @@ const SoDiaChi = () => {
                         </Col>
                     </Row>
                 </div>
-            </div></>
+            </div>
     )
 }
 

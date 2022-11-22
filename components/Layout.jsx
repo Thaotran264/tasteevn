@@ -7,7 +7,7 @@ import NavComponent from "./Nav";
 import ScrollToTopButton from "./ScrollToTopButton";
 const Layout = ({ children,title }) => {
   return (
-    <>
+    <div className="overflow-hidden">
       <Head>
         <title>{title ? title : 'Tastee POS - Cộng đồng người bán'}</title>
         <meta property="og:type" content="article" />
@@ -38,11 +38,11 @@ const Layout = ({ children,title }) => {
       <div 
       className="position-relative d-flex flex-column gap-2 ">
         <NavComponent />
-        <main style={{marginTop: 48}}>{children}</main>
-        <ScrollToTopButton />
+        <main style={{marginTop: 48, backgroundColor:' #fff'}}>{children}</main>
+        {/* <ScrollToTopButton /> */}
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
 
