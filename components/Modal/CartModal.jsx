@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { memo, useContext, useMemo } from "react";
+import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { clearCart, decrease, increase } from "../../context/actions";
@@ -11,14 +12,12 @@ const CartModal = ({ setShow }) => {
   const { state, dispatch } = useContext(CartContext)
   const handleClose = () => setShow(prev => !prev);
   const { cart } = state
-  const totalQuantity = useMemo(()=>cart.reduce((total, item) => total + item.quantity,0))
-  const totalPrice = useMemo(()=>cart.reduce((total, item) => total + item.price * item.quantity,0))
+  const totalQuantity = useMemo(() => cart.reduce((total, item) => total + item.quantity, 0))
+  const totalPrice = useMemo(() => cart.reduce((total, item) => total + item.price * item.quantity, 0))
+
   const renderCartItem = cart?.map((cartItem) =>
-    <div
-      className="d-flex w-100 border-bottom mb-2 py-2 bg-white rounded p-2 position-relative"
-      key={cartItem?.itemId}
-    >
-      <div className="me-2">
+    <Row className="mx-0 py-2" key={cartItem?.itemId}>
+      <Col xs={3} md={2}>
         <Image
           className="rounded"
           src={
@@ -29,21 +28,12 @@ const CartModal = ({ setShow }) => {
           width={110}
           height={110}
         />
-      </div>
-      <article className="w-100">
+      </Col>
+      <Col xs={9} md={10}>
         <div>
           <h6 className="mb-0">{cartItem?.name || ""}</h6>
-          {/* {cartItem?.toppings.map((it) => (
-                        <span
-                          className=""
-                          style={{ fontSize: 13, color: "hsl(0,0%,40%)" }}
-                          key={it.id}
-                        >
-                          {it.name}
-                        </span>
-                      ))} */}
           {
-            cartItem?.orderToppings.map(topping => (
+            cartItem?.orderToppings?.map(topping => (
               <span
                 className="me-1"
                 style={{ fontSize: 13, color: "hsl(0,0%,40%)" }}
@@ -71,7 +61,7 @@ const CartModal = ({ setShow }) => {
               <>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(decrease(cartItem,cart))}
+                  onClick={() => dispatch(decrease(cartItem, cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",
@@ -85,7 +75,7 @@ const CartModal = ({ setShow }) => {
                 <span className="mx-2">{cartItem?.quantity || 0}</span>
                 <button
                   className="border-0 rounded d-flex align-items-center justify-content-center"
-                  onClick={() => dispatch(increase(cartItem,cart))}
+                  onClick={() => dispatch(increase(cartItem, cart))}
                   style={{
                     backgroundColor: "#f7a76c",
                     color: "#fff",
@@ -99,30 +89,30 @@ const CartModal = ({ setShow }) => {
               </>
             }
           </div>
-        </div>
-      </article>
-    </div>
+        </div></Col>
+    </Row>
   );
+
   const handleClearCart = () => {
     dispatch(clearCart())
   }
   return (
     <>
       <Modal show onHide={handleClose} size='xl'>
-        <Modal.Header className="d-flex justify-content-center align-items-center" closeButton>
-          <Modal.Title className="d-flex align-items-center justify-content-between w-100">Giỏ hàng
+        <Modal.Header className="d-flex justify-content-center align-items-center p-2" closeButton>
+          <Modal.Title className="d-flex align-items-center justify-content-between w-100 text-center">Giỏ hàng
             <Button variant="danger" size='sm' className="me-2" onClick={handleClearCart} disabled={!cart?.length}>Xóa</Button>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="overflow">
+        <Modal.Body className="overflow p-2">
           {
             cart?.length ?
-              <div>
+              <div className="d-flex flex-column gap-2">
                 {renderCartItem}
               </div> : <h2 className="text-center text-decoration-underline">Giỏ hàng trống</h2>
           }
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="p-2">
           {
             cart?.length ?
               <div className="w-100" >
@@ -131,12 +121,14 @@ const CartModal = ({ setShow }) => {
                 >
                   <a
                     className="btn mx-auto w-100 justify-content-between d-flex align-items-center gap-1"
-                    style={{ fontSize: 18, backgroundColor: "#f7a76c", color: "#fff" }}
+                    style={{ backgroundColor: "#f7a76c", color: "#fff" }}
                     onClick={handleClose}
                   >
-                    <span style={{ fontSize: 16 }}>{totalQuantity} Món</span>
-                    Trang thanh toán
-                    <span>{formatter.format(totalPrice)}</span>
+                    <span className="customFontSize" style={{ color: '#fff' }}>{totalQuantity} Món</span>
+                    <span className="customFontSize" style={{ color: '#fff' }}>
+                      Trang thanh toán
+                    </span>
+                    <span style={{ color: '#fff' }}>{formatter.format(totalPrice)}</span>
                   </a>
                 </Link>
               </div> : <></>

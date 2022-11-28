@@ -10,6 +10,7 @@ export const ACTIONS = {
 export const addToCart = (product, cart) => {
     const data = [...cart]
     const existItem = data.find(item => item.itemId == product.itemId && item.orderToppings.map(it => it.toppingId).join('') == product.orderToppings.map(item => item.toppingId).join(''))
+  
     if (existItem) {
         const newCart = data.filter(item => (item.itemId == product.itemId) && item.orderToppings.map(it => it.toppingId).join('') != product.orderToppings.map(item => item.toppingId).join('') || item.itemId != product.itemId)
 
@@ -35,8 +36,7 @@ export const decrease = (product, cart) => {
     const data = [...cart]
     const existItem = data.find(item => item.itemId == product.itemId && item.orderToppings.map(it => it.toppingId).join('') == product.orderToppings.map(item => item.toppingId).join(''))
     const newCart = data.filter(item => (item.itemId == product.itemId) && item.orderToppings.map(it => it.toppingId).join('') != product.orderToppings.map(item => item.toppingId).join('') || item.itemId != product.itemId)
-    if (product.quantity > 1)
-    {
+    if (product.quantity > 1) {
         return {
             type: "ADD_CART", payload: [...newCart, { ...existItem, quantity: existItem.quantity - 1 }]
         }

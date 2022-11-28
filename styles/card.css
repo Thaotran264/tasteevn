@@ -32,3 +32,19 @@
         width: 19% !important;
     }
 }
+
+.cardTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis
+
+}
+
+.customText {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}

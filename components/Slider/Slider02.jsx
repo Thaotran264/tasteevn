@@ -7,7 +7,17 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#8d8d8d5e" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SampleNextArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
@@ -18,20 +28,26 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#8d8d8d5e",
-    right: "-10px" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SamplePrevArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
 }
 const settings = {
-  // centerMode: false,
   slidesToShow: 5,
   slidesToScroll: 1,
   infinite: true,
-  // autoplay: true,
   speed: 500,
-  // autoplaySpeed: 3000,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
   responsive: [
@@ -44,8 +60,8 @@ const settings = {
         autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
-        // nextArrow: <SampleNextArrow />,
-        // prevArrow: <SamplePrevArrow />
+        nextArrow: <SampleNextArrowMB />,
+        prevArrow: <SamplePrevArrowMB />
       },
     },
   ],
@@ -65,8 +81,8 @@ const Slider02 = ({ data }) => {
                   />
                 </div>
                 <div>
-                  <p className="mb-0 fw-bold" style={{ fontSize: 14 }}>
-                    {it.brandName.substring(0, 14)}
+                  <p className="mb-0 fw-bold customFontSize customText py-2" >
+                    {it.brandName}
                   </p>
                   {/* <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p> */}
                 </div>

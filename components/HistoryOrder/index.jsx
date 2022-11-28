@@ -75,9 +75,6 @@ const HistoryOrder = ({ }) => {
         <h6 className="mb-0 w-100 text-center">
           Lịch sử đặt hàng
         </h6>
-        {/* <button className='d-flex justify-content-center align-items-center border-0 bg-light bg-opacity-10'>
-                    <BsFillFunnelFill />
-                </button> */}
       </div>
       <div className="p-2">
         <div className="d-flex flex-column gap-2">

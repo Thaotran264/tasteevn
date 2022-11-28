@@ -7,7 +7,7 @@ import { SiZalo } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="py-4 d-flex flex-column gap-2">
+    <footer className="py-4 d-flex flex-column gap-2 mt-auto">
       <div className="container">
         <Row className="mx-0">
           <Col xs={12} md={4}>

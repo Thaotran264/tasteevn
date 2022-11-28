@@ -38,8 +38,6 @@ export default function Home({ data }) {
       </Head>
       <section className="container px-0 d-flex flex-column gap-2"  >
         <CarouselComponent />
-        {/* <Slider02 data={data}/> */}
-        {/* <Slider02 data={data}/> */}
         <div className="px-2 overflow-hidden">
           <h2>Cửa hàng yêu thích</h2>
           <Slider02 data={data} />

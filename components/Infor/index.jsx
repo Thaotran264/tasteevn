@@ -16,23 +16,29 @@ import { CartContext } from "../../context/cartContext";
 import { Col, Row } from "react-bootstrap";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import Image from "next/image";
 
 
 const TabInfor = ({ userDetail }) => {
+  console.log('first', userDetail)
   const [show, setShow] = useState(false);
   const { dispatch } = useContext(CartContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [user, setUser] = useState({})
   const [changePass, setchangePass] = useState({})
+  const [day, setDay] = useState()
+  const [month, setMonth] = useState()
+  const [year, setYear] = useState()
   const [birthday, setBirthday] = useState({})
   const [showPass, setShowPass] = useState(false)
   const [showNewPass, setShowNewPass] = useState(false)
   const [showConfPassword, setShowConfPassword] = useState(false)
-
+  const [bgImage, setBgImage] = useState('')
   useEffect(() => {
     setUser(userDetail)
-    let birthdayFormat = Moment(user.birthday).format('DD-MM-YYYY')
+    let birthdayFormat = Moment(user.birthday * 1000).format('DD-MM-YYYY')
     let [d, m, y] = birthdayFormat.split('-')
     setBirthday({ d: d, m: m, y: y })
   }, [userDetail])
@@ -77,43 +83,13 @@ const TabInfor = ({ userDetail }) => {
     console.log('change yearBirthday', yearBirthday);
     setBirthday({ ...birthday, y: yearBirthday })
   }
-  const changeNewPass = (e) => {
-    setchangePass({ ...changePass, newPassword: e.target.value })
-    console.log('change changePass.newPassword', changePass.newPassword);
 
-  }
-  const [fieldEdit, setFieldEdit] = useState({
-    editFullName: false,
-  });
-  const submitUpdate = async (e) => {
-    const formData = new FormData();
-    e.preventDefault();
-    let birthdays = ''
-    if (birthday.y) {
-      birthdays = birthday.d + "/" + birthday.m + '/' + birthday.y
-    }
-    user.birthday = birthdays
-    console.log('%cTabInfor.jsx line:61 birthdays', 'color: #007acc;', birthdays);
-    formData.append("PhoneNumber", user.phoneNumber);
-    formData.append("Address", user.address);
-    formData.append("Email", user.email);
-    formData.append("FullName", user.fullName);
-    formData.append("Gender", user.gender);
-    formData.append("Avatar", user.avatar);
-    formData.append("Birthday", user.birthday);
-    try {
-      const res = await userApi.updateUser(formData)
-      if (res && res.status == 200) {
-        dispatch({ type: "NOTIFY", payload: { success: 'Bạn đã thay đổi thông tin thành công' } });
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
 
-  }
 
   const upload = (e) => {
     setUser({ ...user, avatar: e.target.files[0] })
+    setBgImage(e.target.files[0])
+
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = function () {
@@ -121,9 +97,55 @@ const TabInfor = ({ userDetail }) => {
       output.src = reader.result;
     };
   }
+  const submitUpdate = async (e) => {
+    e.preventDefault();
+    let birthdays = ''
+    if (birthday.y) {
+      birthdays = `${birthday.m} / ${birthday.d} / ${birthday.y}`
+    }
+    const formData = new FormData()
+    formData.append("File", bgImage);
+    formData.append("IsImage ", true);
+    console.log('bg', bgImage)
+    user.birthday = birthdays
+    try {
+      const res = await userApi.uploadAvatar(formData)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+    const params = {
+      phoneNumber: user.phoneNumber,
+      fullName: user.fullName,
+      birthday: new Date(birthdays).getTime(),
+      gender: user.gender,
+      address: user.address,
+      email: user.email,
+    }
+    // formData.append("PhoneNumber", user.phoneNumber);
+    // formData.append("Address", user.address);
+    // formData.append("Email", user.email);
+    // formData.append("FullName", user.fullName);
+    // formData.append("Gender", user.gender);
+    // formData.append("Avatar", user.avatar);
+    // formData.append("Birthday", user.birthday);
+    try {
+      console.log('data', params)
+      const res = await userApi.updateUser(params)
+      if (res && res.status == 200) {
+        toast.success('Cập nhật thông tin thành công')
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+
+  }
+
+
   return (
-    <div className="d-flex flex-column gap-2" style={{backgroundColor: '#fff'}}>
-      <div className='d-flex align-items-center p-2 gap-2' style={{backgroundColor: 'linear-gradient(toright, #ffe259 0%, #ffa751 100%)', color: '#fff'}}>
+    <div className="d-flex flex-column gap-2 py-2" style={{ backgroundColor: '#fff' }}>
+      <div className='d-flex align-items-center p-2 gap-3'
+        style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>
         <Link href="/profile">
           <a className='p-2 hideOnDesktop'>
             <BsChevronLeft />
@@ -381,7 +403,7 @@ const TabInfor = ({ userDetail }) => {
               /> Khác
             </Col>
           </Row>
-          <Row className="d-flex align-items-center">
+          <Row className="d-flex align-items-start">
             <Col md={3}><span>Địa chỉ:</span></Col>
             <Col md={9}>
               <textarea
@@ -434,8 +456,8 @@ const TabInfor = ({ userDetail }) => {
           <Row>
             <Col md={3}></Col>
             <Col md={9}>
-              <Button type="submit" 
-              className="d-flex gap-2 align-items-center justify-content-center w-100">
+              <Button type="submit"
+                className="d-flex gap-2 align-items-center justify-content-center w-100">
                 <AiOutlineSave />Lưu thay đổi</Button>
             </Col>
           </Row>

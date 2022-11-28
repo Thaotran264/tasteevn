@@ -135,57 +135,58 @@ const SoDiaChi = () => {
             </Button>
         </Form>)
     return (
-            <div className="d-flex flex-column gap-2">
-                <div className='d-flex align-items-center py-2 gap-3 mobileHeader position-relative'>
-                    <Link href="/profile">
-                        <a className=' p-2 hideOnDesktop position-absolute'>
-                            <BsChevronLeft />
-                        </a>
-                    </Link>
-                    <h6 className="mb-0 w-100 text-center">
-                        Địa chỉ của tôi
-                    </h6>
-                </div>
-                <Accordion >
-                    <Card className='bg-light'>
-                        <Card.Header className='d-flex justify-content-center'>
-                            <CustomToggle eventKey="0"><AiOutlinePlus />Thêm địa chỉ</CustomToggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>
-                    <RenderForm />
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
+        <div className="d-flex flex-column gap-2">
+            <div className='d-flex align-items-center p-2 gap-3'
+        style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>
+        <Link href="/profile">
+          <a className='p-2 hideOnDesktop'>
+            <BsChevronLeft />
+          </a>
+        </Link>
+        <h6 className="mb-0 w-100 text-center">
+         Địa chỉ của tôi
+        </h6>
+      </div>
+            <Accordion >
+                <Card className='bg-light'>
+                    <Card.Header className='d-flex justify-content-center'>
+                        <CustomToggle eventKey="0"><AiOutlinePlus />Thêm địa chỉ</CustomToggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                            <RenderForm />
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
 
-                </Accordion>
-                <div className="d-flex flex-column gap-2 p-2">
-                    <Row className="shadow-sm mx-0 p-2 rounded align-items-center">
-                        <Col xs={2} className='d-flex justify-content-center'><AiOutlineHome style={{ fontSize: 22 }} /></Col>
-                        <Col xs={9}>
-                            <div className="d-flex flex-column">
-                                <h6>{user?.fullName} - {user?.phoneNumber} </h6>
-                                <span>{user?.address}</span>
-                            </div>
-                        </Col>
-                        <Col xs={1}>
-                            <input type='radio' />
-                        </Col>
-                    </Row>
-                    <Row className="shadow-sm mx-0 p-2 rounded d-flex align-items-center">
-                        <Col xs={2} className='d-flex justify-content-center'><AiOutlineHome style={{ fontSize: 22 }} /></Col>
-                        <Col xs={9}>
-                            <div className="d-flex flex-column">
-                                <h6>{user?.fullName} - {user?.phoneNumber} </h6>
-                                <span>{user?.address}</span>
-                            </div>
-                        </Col>
-                        <Col xs={1}>
-                            <input type='radio' />
-                        </Col>
-                    </Row>
-                </div>
+            </Accordion>
+            <div className="d-flex flex-column gap-2 p-2">
+                <Row className="shadow-sm mx-0 p-2 rounded align-items-center">
+                    <Col xs={2} className='d-flex justify-content-center'><AiOutlineHome style={{ fontSize: 22 }} /></Col>
+                    <Col xs={9}>
+                        <div className="d-flex flex-column">
+                            <h6>{user?.fullName} - {user?.phoneNumber} </h6>
+                            <span>{user?.address}</span>
+                        </div>
+                    </Col>
+                    <Col xs={1}>
+                        <input type='radio' />
+                    </Col>
+                </Row>
+                <Row className="shadow-sm mx-0 p-2 rounded d-flex align-items-center">
+                    <Col xs={2} className='d-flex justify-content-center'><AiOutlineHome style={{ fontSize: 22 }} /></Col>
+                    <Col xs={9}>
+                        <div className="d-flex flex-column">
+                            <h6>{user?.fullName} - {user?.phoneNumber} </h6>
+                            <span>{user?.address}</span>
+                        </div>
+                    </Col>
+                    <Col xs={1}>
+                        <input type='radio' />
+                    </Col>
+                </Row>
             </div>
+        </div>
     )
 }
 

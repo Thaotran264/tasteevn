@@ -5,9 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from "./Footer";
 import NavComponent from "./Nav";
 import ScrollToTopButton from "./ScrollToTopButton";
-const Layout = ({ children,title }) => {
+const Layout = ({ children, title }) => {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden d-flex flex-column bg-light" style={{ minHeight: '100vh' }}>
       <Head>
         <title>{title ? title : 'Tastee POS - Cộng đồng người bán'}</title>
         <meta property="og:type" content="article" />
@@ -35,13 +35,10 @@ const Layout = ({ children,title }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <ToastContainer position="bottom-center" pauseOnFocusLoss={false} />
-      <div 
-      className="position-relative d-flex flex-column gap-2 ">
-        <NavComponent />
-        <main style={{marginTop: 48, backgroundColor:' #fff'}}>{children}</main>
-        {/* <ScrollToTopButton /> */}
-        <Footer />
-      </div>
+      <NavComponent />
+      <main style={{marginTop: 50}}>{children}</main>
+      <ScrollToTopButton />
+      <Footer />
     </div>
   );
 };

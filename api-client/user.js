@@ -1,5 +1,6 @@
 import axiosAuth from './axios-auth';
 import axiosClient from './axios-client';
+import axiosFormData2 from './axiosFormData2';
 
 export const userApi = {
     getDetail() {
@@ -10,12 +11,16 @@ export const userApi = {
     },
 
     updateUser(params) {
-        const url = "/Users/Update";
+        const url = "/Users/update";
         return axiosAuth.post(url, params)
     },
-    changePassword(params) {
+    uploadAvatar(params) {
+        const url = "/Users/upload_avatar";
+        return axiosFormData2.post(url, params)
+    },
+    changePassword() {
         const url = "/Users/change-password";
-        return axiosAuth.post(url, params)
+        return axiosAuth.post(url)
     },
     login(params) {
         const url = `/Users/Login`
