@@ -7,8 +7,8 @@ import Login from "../components/Modal/Login";
 import Slider02 from "../components/Slider/Slider02";
 
 export default function Home({ data }) {
-const [showLoginModal, setShowLoginModal] = useState(false)
-const handleShowLoginModal = () => setShowLoginModal(true)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const handleShowLoginModal = () => setShowLoginModal(true)
   return (
     <Layout>
       <Head>
@@ -38,13 +38,14 @@ const handleShowLoginModal = () => setShowLoginModal(true)
       </Head>
       <section className="container px-0 d-flex flex-column gap-2"  >
         <CarouselComponent />
-      
-        <Slider02 data={data}/>
-        {
-          showLoginModal ?
-          <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} />:<></>
-        }
-      
+        <div className="px-2 overflow-hidden">
+          <h2>Cửa hàng yêu thích</h2>
+          <Slider02 data={data} />
+          {
+            showLoginModal ?
+              <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} /> : <></>
+          }
+        </div>
       </section>
     </Layout>
   );

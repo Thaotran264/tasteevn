@@ -2,7 +2,7 @@
 @import url('../node_modules/react-date-range/dist/styles.css');
 @import url('../node_modules/react-date-range/dist/theme/default.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 :root {
   --primary-color: hsl(27, 100%, 71%);
   --primary-bg-color: linear-gradient(toright, #ffe259 0%, #ffa751 100%);
@@ -32,7 +32,7 @@ li {
 
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-  font-family:  'Poppins', sans-serif;
+  font-family:  'Inter', sans-serif;
 }
 
 h1,
@@ -54,7 +54,7 @@ img {
 
 a {
   text-decoration: none ;
-  color: black ;
+  color: inherit !important ;
 }
 .indexItems {
   transition: all .25s ease-in-out;
@@ -80,7 +80,8 @@ a {
 }
 
 a:hover {
-  color: none;
+  border-color: transparent !important;
+  box-shadow: none;
 }
 
 input {
@@ -98,7 +99,16 @@ input::placeholder {
   right: 0;
 }
 
+.mobileHeader {
+  background-color: #f7a76c;
+  color:hsl(0, 0%, 100%);
+  height: 3.5rem;
+}
+.mobileHeader a {
+  top: 0.5rem;
+  color:hsl(0, 0%, 100%);
 
+}
 /* width */
 ::-webkit-scrollbar {
   width: 0px;
@@ -122,12 +132,16 @@ input::placeholder {
 input:focus {
   box-shadow: none
 }
-
+.customFontSize {
+  font-size: .8125rem;
+}
 @media screen and (min-width: 992px) {
   .hideOnDesktop {
     display: none !important;
   }
-
+  .customFontSize {
+    font-size: 1rem;
+  }
 }
 @media screen and (max-width: 991px) {
   .hideOnMobile {
@@ -209,16 +223,6 @@ input:focus {
   }
 }
 
-/* .banner {
-  height: 25vh;
-}
-
-@media (min-width: 992px) {
-  .banner {
-    height: 50vh;
-  }
-} */
-
 @media (min-width: 992px) {
   .carouselconfig {
     /* height: 50vh !important;
@@ -256,42 +260,6 @@ input:focus {
 
 }
 
-/* Info */
-/* .info__article {
-  margin-bottom: 15px;
-  border-radius: 10px;
-  background-color: white;
-  font-family: 'Poppins', sans-serif;
-  ;
-}
-
-.info__section {
-  display: flex;
-}
-
-.info__image {
-  position: relative;
-  flex: 1;
-}
-
-
-.info__content {
-  font-family: 'Poppins', sans-serif;
-  margin-left: 5px;
-  flex: 3;
-}
-
-.info__content h2 {
-  font-family: 'Raleway', sans-serif;
-  ;
-}
-
-.info__content p {
-  font-size: 13px;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-} */
 
 /* Menu */
 .menu__article {

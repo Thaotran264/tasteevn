@@ -148,7 +148,7 @@ const NavComponent = () => {
     <span
       className='rounded-5 bg-danger text-light d-flex align-items-center justify-content-center'
       style={{
-        fontSize: 11, position: 'absolute', top: '-10px', right: '-2px'
+        fontSize: 11, position: 'absolute', top: '-10px', right: '-10px'
         , width: 20, height: 20
       }}>{cart?.length}</span>
   </div>
@@ -174,7 +174,7 @@ const NavComponent = () => {
         )
         : <h2>Không có dữ liệu</h2>
     }
-    <button className='btn btn-outline-dark' disabled={itemsDefault >= searchData?.filter(
+    <button className='border-0 text-primary ' disabled={itemsDefault >= searchData?.filter(
       item => item.name.toLowerCase().includes(String(searchText).toLowerCase())
     ).length} onClick={handleMore}>Xem thêm</button>
   </div>)

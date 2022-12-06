@@ -68,7 +68,6 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
       toppings: listTopping,
       orderToppings: listGroupTopping,
     };
-    console.log('first')
     dispatch(addToCart(data, cart));
     handleClose()
     // setShowToppingModal({ ...showToppingModal, open: false });
@@ -135,7 +134,6 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
   });
 
   return (
-    <>
       <Modal
         size="lg"
         centered
@@ -212,7 +210,6 @@ const Topping = ({ setShowToppingModal, showToppingModal }) => {
           </div>
         </Modal.Footer>
       </Modal>
-    </>
   );
 };
 

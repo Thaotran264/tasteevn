@@ -36,8 +36,8 @@ const Style = () => (
 )
   return (
     <section className="container bg-light py-2 d-flex flex-column gap-2">
-      <Style />
-      <Row>
+      {/* <Style /> */}
+      <Row className="d-flex align-items-strecht">
         <Col xs={12}  md={6} className='overflow-hidden hideOnMobile'>
           {parse(maps) || ''}</Col>
         <Col md={6} xs={12}>

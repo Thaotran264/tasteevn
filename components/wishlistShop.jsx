@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { BsFillFunnelFill, BsChevronLeft } from "react-icons/bs";
 import Link from 'next/link';
 import { Col, Row } from 'react-bootstrap';
+import { collectionApi } from '../api-client/collection';
 
 const dataList = [
     {
@@ -34,30 +35,41 @@ const dataList = [
     },
 ]
 function WishlistShop() {
+    const [data, setData] = useState([])
+    useEffect(()=>{
+        const getData = async () => {
+          try {
+            const res = await collectionApi.userCollection()
+            setData(res)
+            console.log('res',res)
+          } catch (error) {
+            console.log(error)
+          }
+        }
+        getData()
+      },[])
     return (
         <div className="d-flex flex-column gap-2">
-            <div className='d-flex align-items-center p-2 gap-3 bg-success bg-opacity-25'>
-                <Link href="/profile">
-                    <a className='p-2 hideOnDesktop'>
-                        <BsChevronLeft />
-                    </a>
-                </Link>
-                <h6 className="mb-0 w-100 text-center">
-                    Danh sách quán yêu thích
-                </h6>
-                {/* <button className='d-flex justify-content-center align-items-center border-0 bg-light bg-opacity-10'>
-                    <BsFillFunnelFill />
-                </button> */}
-            </div>
+            <div className='d-flex align-items-center p-2 gap-3'
+        style={{ backgroundColor: 'hsl(27, 100%, 71%)', color: '#fff' }}>
+        <Link href="/profile">
+          <a className='p-2 hideOnDesktop'>
+            <BsChevronLeft />
+          </a>
+        </Link>
+        <h6 className="mb-0 w-100 text-center">
+          Quán yêu thích
+        </h6>
+      </div>
 
             <Row className='mx-0'>
                 {
-                    dataList.map(data => (
-                        <Col xs={6} md={4} className='mb-2'>
+                    data?.map(data => (
+                        <Col xs={6} md={6} className='mb-2'>
                             <Card >
-                                <Card.Img variant="top" src={data.image} className='w-100 h-100' />
+                                <Card.Img variant="top" src={data.image || '/image/logo512.png'} className='w-100 h-100 p-2' />
                                 <Card.Body>
-                                    <Card.Title className='fs-6 fw-bold'>{data.name}</Card.Title>
+                                    <Card.Title className='fs-6 fw-bold'>{data.name || 'Tên quán'}</Card.Title>
                                     <Card.Text style={{fontSize: 13}}>
                                         {data.address}
                                     </Card.Text>

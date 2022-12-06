@@ -8,8 +8,9 @@ const Banner = ({ banner }) => {
       <Image
         src={banner || '/image/logo.jpg'}
         alt="banner"
-        width={1080}
-        height={660}
+        width={1600}
+        objectFit='cover'
+        height={900}
       />
     </div>
   );

@@ -46,7 +46,7 @@ const Profile = () => {
   return (
     <>
       <NavComponent />
-      <div className="container hideOnMobile" style={{ marginTop: 54 }}>
+      <div className="container hideOnMobile" style={{ marginTop: 54}}>
         <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
           <Row style={{ minHeight: 'calc(100vh - 54px)' }}>
             <Col sm={3} style={{ backgroundColor: "#fff" }}>

@@ -3,6 +3,8 @@ footer {
     color: var(--text-white);
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to top,  #ffe259, #ffa751); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .footerContainer {
     display: flex;
