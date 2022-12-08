@@ -1,123 +1,38 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick/lib/slider";
+import React, { useState } from "react";
+import CarouselComponent from "../components/Carousel";
 import Layout from "../components/Layout";
-import React from "react";
+import Login from "../components/Modal/Login";
+import Slider02 from "../components/Slider/Slider02";
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: ' none' }} onClick={onClick} />;
-}
-export default function Home({ data }) {
-  let banners = [
+export default function Home() {
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const data = [
     {
-      "id": "a7867858-2505-48f2-a3a7-f2c801cd5bd0",
-      "brandId": "68af74fa-595f-439d-882a-2ce1c236af28",
-      "brandName": "The Pizza Company - Nguyễn Thị Minh Khai",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3202-1664279830?w=393&type=o",
-      "order": 12
+      id: 'tasteePOS',
+      brandId: 'tasteePOS',
+      brandName: 'tasteePOS',
+      image: 'https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/b44ee411-7214-4914-a040-9d63250fc4de/u2qmimif.t5319102022163049.png'
     },
     {
-      "id": "ee4e148c-e604-422b-a4e1-1b6b4f3829f5",
-      "brandId": "12d14d71-58b5-4481-9834-1299519a5813",
-      "brandName": "Pizza Hut - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3183-1664438196?w=393&type=o",
-      "order": 2
+      id: 'Thaotv1',
+      brandId: 'Thaotv1',
+      brandName: 'Thaotv1',
+      image: 'https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/brand/89f2ecba-fb87-424e-a543-8f1e76bc1d9f/q2g1yyr2.btl03122022201655.png'
     },
     {
-      "id": "72ef381d-1442-4012-a888-a9a2439edf79",
-      "brandId": "",
-      "brandName": "",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2444-1645171670?w=393&type=o",
-      "order": 3
+      id: '0909000008',
+      brandId: '0909000008',
+      brandName: '0909000008',
+      image: 'https://tastee-test.s3.ap-southeast-1.amazonaws.com/images/decoration/2fe88620-8ce9-4bfb-b3e0-2791fc14aeb5/dztz2cvv.kmf08102022143912.file'
     },
-    {
-      "id": "fbfc4cf0-bd59-4cbe-abaf-96bc179922ad",
-      "brandId": "a3b66785-e234-4f5a-abf1-d5ae101ef3bf",
-      "brandName": "TOUS les JOURS - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3313-1664611060?w=393&type=o",
-      "order": 4
-    },
-    {
-      "id": "a7867858-2505-48f2-a3a7-f2c801cd5bd05",
-      "brandId": "68af74fa-595f-439d-882a-2ce1c236af28",
-      "brandName": "The Pizza Company - Nguyễn Thị Minh Khai",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2733-1655805928?w=393&type=o",
-      "order": 2
-    },
-    {
-      "id": "ee4e148c-e604-422b-a4e1-1b6b4f3829f56",
-      "brandId": "12d14d71-58b5-4481-9834-1299519a5813",
-      "brandName": "Pizza Hut - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3183-1664438196?w=393&type=o",
-      "order": 2
-    },
-    {
-      "id": "72ef381d-1442-4012-a888-a9a2439edf797",
-      "brandId": "",
-      "brandName": "",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-2880-1661156575?w=393&type=o",
-      "order": 3
-    },
-    {
-      "id": "fbfc4cf0-bd59-4cbe-abaf-96bc179922ad8",
-      "brandId": "a3b66785-e234-4f5a-abf1-d5ae101ef3bf",
-      "brandName": "TOUS les JOURS - Hậu Giang",
-      "image": "https://tea-3.lozi.vn/v1/images/resized/banner-mobile-3202-1664279830?w=393&type=o",
-      "order": 4
-    }
+   
   ]
-
-  const settings = {
-    infinite: true,
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    className: "center",
-    centerMode: true,
-    centerPadding: "25px",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
   return (
-    <>
+    <Layout>
       <Head>
-        <title>Tastee POS - Cộng đồng người bán</title>
+        <title>Tastee - Cộng đồng người bán</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content="Tastee POS - Cộng đồng người bán" />
         <meta property="og:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
@@ -141,47 +56,26 @@ export default function Home({ data }) {
         <meta name="twitter:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
         <meta name="twitter:creator" content="@tastee" />
       </Head>
-      <section className="mb-5 container"  >
-        <Slider {...settings} className="">
-          {data?.map((it, index) => (
-            <Link key={it.id} href={`/${it?.brandId}`}>
-              <a>
-                <div key={index}>
-                  <img src={it?.image} alt={it?.brandName} className=" rounded" style={{width:'96%', height: '200px !important' }} />
-                </div>
-              </a>
-            </Link>
-          ))}
-
-        </Slider>
+      <section className="container px-0 d-flex flex-column gap-2"  >
+        <CarouselComponent />
+        <div className="px-2 overflow-hidden">
+          <h2>Cửa hàng yêu thích</h2>
+          <Slider02 data={data} />
+          {
+            showLoginModal ?
+              <Login setShowLoginModal={setShowLoginModal} showLoginModal={showLoginModal} /> : <></>
+          }
+        </div>
       </section>
-
-      {/* <section className="container px-0 d-flex flex-wrap">
-        {
-          data.map(item => (
-            <Link key={item.id} href={`/${item?.brandId}`}>
-              <a className="mb-2 d-block" style={{ border: '1px solid #ccc', width: '20%' }}>
-                <div className=" d-flex text-center flex-column ">
-                  <Image src={item?.image || ''} alt={item?.name} width="100%" height="100%" />
-                  <p>{item?.brandName}</p>
-                </div>
-              </a></Link>
-          ))
-        }
-      </section> */}
-    </>
+    </Layout>
   );
 }
 
-Home.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
 
-export async function getStaticProps(context) {
-  const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
-  const data = res.data.data;
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
+// export async function getStaticProps(context) {
+//   const res = await axios.get('https://pro.tastee.vn/api/Home/get_product_slider')
+//   const data = res.data.data;
+//   return {
+//     props: { data },
+//   };
+// }

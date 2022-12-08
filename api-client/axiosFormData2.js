@@ -3,8 +3,8 @@ const ISSERVER = typeof window === "undefined";
 
 function getToken (){
     if(!ISSERVER) {
-        let token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
-        return eval(token || '')
+        let data = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')): ""
+        return data?.token
     }
 }
 const axiosFormData2 = axios.create({

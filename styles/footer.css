@@ -1,12 +1,14 @@
 footer {
-    background-color: var(--bg-primary-color);
+    /* background-color: var(--primary-color); */
+    color: var(--text-white);
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to top,  #ffe259, #ffa751); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .footerContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 .footerItem {
     flex: 1;
@@ -33,12 +35,12 @@ footer {
     justify-content: center;
     gap: 10px;
 }
-.copyright {
+/* .copyright {
     text-align: center;
     font-size: 13px;
     color: var(--text-white);
     padding: 14px 0 !important;
-}
+} */
 @media screen and (min-width: 992px) {
     .footerContainer {
         display: flex;

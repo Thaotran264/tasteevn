@@ -1,203 +1,185 @@
-import React, { useContext, useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import { isMobile } from "react-device-detect";
-import { BsChevronRight, BsHeartFill } from "react-icons/bs";
-import { FaAddressCard, FaClipboardList } from "react-icons/fa";
-import { FcAddImage } from "react-icons/fc";
-import { GoChecklist } from "react-icons/go";
-import { userApi } from "../../api-client/user";
-import Layout from "../../components/Layout";
-
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button, ListGroup } from "react-bootstrap";
-import { DataContext } from "../../store/globalState";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Accordion, Button, Card } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Form from 'react-bootstrap/Form';
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Tab from "react-bootstrap/Tab";
+import { AiFillFilter, AiOutlineHome, AiOutlinePlus } from 'react-icons/ai';
+import { BsChevronLeft } from "react-icons/bs";
+import { FcAddImage } from 'react-icons/fc';
+import { bookingApi, cityApi, distApi, wardsApi } from "../../api-client";
+import { userApi } from "../../api-client/user";
+import HistoryOrder from "../../components/HistoryOrder";
+import TabInfor from "../../components/Infor";
+import LichSuDatHen from "../../components/LichSuDatHen";
+import MobileProfile from "../../components/MobileProfile";
+import NavComponent from "../../components/Nav";
+import SoDiaChi from "../../components/SoDiaChi";
+import WishlistShop from "../../components/wishlistShop";
+import { CartContext } from "../../context/cartContext";
 
-const ProfileMobile = () => {
-  const [count, setCount] = useState(1);
+
+const Profile = () => {
   const [user, setUser] = useState({});
-
-  const [open, setOpen] = useState(false);
-  const [_isMobile, setMobile] = useState(false);
-  const [isShowContent, setIsShowContent] = useState({});
-  const { state, dispatch } = useContext(DataContext);
-  const router = useRouter();
+  const { state, dispatch } = useContext(CartContext);
+  const { auth } = state
+  console.log('au', auth)
 
   useEffect(() => {
-    setMobile(isMobile);
-  }, [_isMobile]);
-
-  // useEffect(() => {
-  //   getDetailUser();
-  // }, []);
-
-  const getDetailUser = async () => {
-    try {
-      const res = await userApi.getUserInfor();
-      if (res['successful']) {
-        setUser(res['userInfo']);
+    const getDetailUser = async () => {
+      try {
+        const res = await userApi.getUserInfor();
+        console.log('data', res)
+        if (res['successful']) {
+          setUser(res['data'].userInfo);
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-      dispatch({ type: "NOTIFY", payload: { error: "Đã xảy ra lỗi vui lòng đăng nhập lại" } });
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("token");
-      window.location.replace("/");
-    }
-  };
-
-  const [username, setusername] = useState('');
-  useEffect(() => {
-    let user = localStorage.getItem("userInfo") ?  JSON.parse(localStorage.getItem("userInfo") || '' ) : null
-    console.log('%cindex.js line:51 user', 'color: #007acc;', user);
-    let userInfor = user
-    console.log('%cindex.js line:50 userInfor', 'color: #007acc;', userInfor);
-    if (userInfor) {
-      setusername(userInfor);
-    }
-    else{
-      router.push('/')
-      handleLogOut('Đã xảy ra lỗi vui lòng đăng nhập')
-    }
+    };
+    getDetailUser();
   }, []);
-
-
-  const handleLogOut = (mess) => {
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("token");
-    dispatch({ type: "NOTIFY", payload: { success: mess } });
-    window.location.replace("/");
-  };
-  
-
-
-
-  const menu = ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5", "Menu 6"];
-  const handleClick = (value) => {
-    setCount(value);
-  };
-  const editField = (field) => {
-    console.log("%cindex.js line:21 field", "color: #007acc;", field);
-  };
   return (
     <>
-      <div className="container profile-mobile custom-card-hover" style={{ height: "100vh" }}>
-        <Card>
-          <a href="/profile/edit">
-            <Card.Body className="p-3">
-              <div className="d-flex gap-1">
-                <div className="w-25">
-                  {username && username["avatar"] ? (
-                    <img
-                      className=""
-                      src={username["avatar"]}
-                      alt={username["fullName"]}
-                      style={{ border: "1px solid #fff", borderRadius: "50%", height: 80, width: 80 }}
+      <NavComponent />
+      <div className="container hideOnMobile" style={{ marginTop: 54}}>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="infor">
+          <Row style={{ minHeight: 'calc(100vh - 54px)' }}>
+            <Col sm={3} style={{ backgroundColor: "#fff" }}>
+              <div className="profile-userpic py-2">
+                <div className="">
+                  {user && user["avatar"] ? (
+                    <Image
+                      src={user["avatar"] || ''}
+                      alt={user["fullName"]}
+                      width={120}
+                      height={120}
+                      style={{ border: "1px solid #fff", borderRadius: "50%" }}
                     />
                   ) : (
                     <FcAddImage
-                      className="w-75 h-100 rounded-circle border"
+                      className="w-75 h-75 rounded-circle border"
                       style={{ border: "1px solid #fff", borderRadius: "50%" }}
                     />
                   )}
                 </div>
-
-                <div className="w-75 pt-2 pb-2">
-                  <h3 className="profile-usertitle-name m-0"> {username && username["fullName"] || ""} </h3>
-                  {/* <span className="profile-stat-text"> {username && username["status"] ? 'Đã kích hoạt' : "Chưa kích hoạt"} </span> */}
-                </div>
-
-                <div>
-                  <BsChevronRight />
-                </div>
               </div>
-            </Card.Body>
-          </a>
-        </Card>
-
-        <Card className="m-1">
-          <a href="/profile/order?slug=lich-su-don-hang">
-            <Card.Body>
-              <div className="d-flex gap-3">
-                <div>
-                  <FaClipboardList />
+              <div className="profile-usertitle text-center">
+                <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+                  <h2 className="profile-usertitle-name"> {user["fullName"] || ""} </h2>
                 </div>
-
-                <span className="w-100">Quản lý đơn hàng</span>
-
-                <div>
-                  <BsChevronRight />
-                </div>
+                <p className="profile-usertitle-job">{user["phoneNumber"] || ""}</p>
               </div>
-            </Card.Body>
-          </a>
-        </Card>
-
-        <Card className="m-1">
-          <a href="/profile/wishlist?slug=san-pham-yeu-thich">
-            <Card.Body>
-              <div className="d-flex gap-3">
-                <div>
-                  <BsHeartFill />
-                </div>
-
-                <span className="w-100"> Quán yêu thích </span>
-
-                <div>
-                  <BsChevronRight />
-                </div>
+              <div className="">
+                <Nav variant="pills" className="flex-column">
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="infor"
+                    >
+                      Thông tin chung
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="wishlist"
+                    >
+                      Quán yêu thích
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="historyOrder"
+                    >
+                      Lịch sử đơn hàng
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="historyBooking"
+                    >
+                      Lịch sử đặt hẹn
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="shippingAddress"
+                    >
+                      Sổ địa chỉ
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
               </div>
-            </Card.Body>
-          </a>
-        </Card>
 
-        <Card className="m-1">
-          <a href="/profile/edit">
-            <Card.Body>
-              <div className="d-flex gap-3">
-                <div>
-                  <GoChecklist />
-                </div>
+              {/* <div className="portlet light bordered">
+                  <div className="row list-separated profile-stat">
+                    <div className="col-md-4 col-sm-4 col-xs-6">
+                      <div className="uppercase profile-stat-title"> 37 </div>
+                      <div className="uppercase profile-stat-text"> Projects </div>
+                    </div>
+                    <div className="col-md-4 col-sm-4 col-xs-6">
+                      <div className="uppercase profile-stat-title"> 51 </div>
+                      <div className="uppercase profile-stat-text"> Tasks </div>
+                    </div>
+                    <div className="col-md-4 col-sm-4 col-xs-6">
+                      <div className="uppercase profile-stat-title"> 61 </div>
+                      <div className="uppercase profile-stat-text"> Uploads </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="profile-desc-title">About Jason Davis</h4>
+                    <span className="profile-desc-text">
+                      {" "}
+                      Lorem ipsum dolor sit amet diam nonummy nibh dolore.{" "}
+                    </span>
+                    <div className="margin-top-20 profile-desc-link">
+                      <i className="fa fa-globe"></i>
+                      <a href="https://www.apollowebstudio.com">apollowebstudio.com</a>
+                    </div>
+                    <div className="margin-top-20 profile-desc-link">
+                      <i className="fa fa-twitter"></i>
+                      <a href="https://www.twitter.com/jasondavisfl/">@jasondavisfl</a>
+                    </div>
+                    <div className="margin-top-20 profile-desc-link">
+                      <i className="fa fa-facebook"></i>
+                      <a href="https://www.facebook.com/">JasonDavisFL</a>
+                    </div>
+                  </div>
+                </div> */}
+            </Col>
 
-                <span className="w-100"> Quản lý đặt chỗ</span>
+            <Col sm={9}>
+              <Tab.Content>
+                <Tab.Pane eventKey="infor">
+                  <TabInfor userDetail={user} />
+                </Tab.Pane>
 
-                <div>
-                  <BsChevronRight />
-                </div>
-              </div>
-            </Card.Body>
-          </a>
-        </Card>
+                <Tab.Pane eventKey="wishlist">
+                  <WishlistShop />
+                </Tab.Pane>
 
-        <Card className="m-1">
-          <a href="/profile/adress?slug=so-dia-chi">
-            <Card.Body>
-              <div className="d-flex gap-3">
-                <div>
-                  <FaAddressCard />
-                </div>
+                <Tab.Pane eventKey="historyOrder">
+                  <HistoryOrder />
+                </Tab.Pane>
 
-                <span className="w-100">Sổ địa chỉ </span>
+                <Tab.Pane eventKey="historyBooking">
+                  <LichSuDatHen />
+                </Tab.Pane>
 
-                <div>
-                  <BsChevronRight />
-                </div>
-              </div>
-            </Card.Body>
-          </a>
-        </Card>
-
-        <div className="m-3">
-          <Button variant="outline-danger" className="w-100 rounded" onClick={() => handleLogOut('Đăng xuất thành công')}>
-            Đăng xuất
-          </Button>
-        </div>
+                <Tab.Pane eventKey="shippingAddress">
+                  <SoDiaChi/>
+                </Tab.Pane>
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
       </div>
+      <MobileProfile />
     </>
   );
 };
 
-ProfileMobile.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
-
-export default ProfileMobile;
+export default Profile;

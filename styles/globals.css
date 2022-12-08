@@ -2,9 +2,10 @@
 @import url('../node_modules/react-date-range/dist/styles.css');
 @import url('../node_modules/react-date-range/dist/theme/default.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 :root {
   --primary-color: hsl(27, 100%, 71%);
+  --primary-bg-color: linear-gradient(toright, #ffe259 0%, #ffa751 100%);
   --bg-primary-color: hsl(27, 100%, 71%);
   --bg-color-white: hsl(0, 0%, 100%);
   --text-white: hsla(0, 0%, 100%, 0.758);
@@ -19,7 +20,7 @@
 }
 
 li {
-  list-style: none !important;
+  list-style: none;
 }
 
 *,
@@ -29,8 +30,9 @@ li {
   margin: 0;
   box-sizing: border-box;
 
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family:  'Inter', sans-serif;
 }
 
 h1,
@@ -51,23 +53,47 @@ img {
 }
 
 a {
-  text-decoration: none;
-  color: black;
+  text-decoration: none ;
+  color: inherit !important ;
+}
+.indexItems {
+  transition: all .25s ease-in-out;
+  width: 20%;
+  background-color: var(--text-white);
+}
+.indexItems:hover {
+  transform: translateY(-5px);
+  box-shadow: 3px 3px 3px 3px rgba(0,0,0,.1);
+}
+ul::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+  .indexItems {
+    width: 96%;
+    margin: auto;
+    background-color: hsla(0, 0%, 0%, 0.048);
+    border-radius: 10px;
+  }
+  .indexItems img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+  }
 }
 
-button:active,
-button:hover {
-  outline: none;
-  border: none
-}
 a:hover {
-  color: none;
+  border-color: transparent !important;
+  box-shadow: none;
 }
 
 input {
-  outline: none !important;
+  outline: none;
 }
-
+input::placeholder {
+  color: #000;
+}
 .toggleMenu {
   right: -100%;
   transition: all 1s ease;
@@ -77,21 +103,16 @@ input {
   right: 0;
 }
 
-input::placeholder {
-  /* Firefox */
-  color: var(--text-dark);
+.mobileHeader {
+  background-color: #f7a76c;
+  color:hsl(0, 0%, 100%);
+  height: 3.5rem;
 }
+.mobileHeader a {
+  top: 0.5rem;
+  color:hsl(0, 0%, 100%);
 
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #000;
 }
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: #000;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 0px;
@@ -115,12 +136,16 @@ input::placeholder {
 input:focus {
   box-shadow: none
 }
-
+.customFontSize {
+  font-size: .8125rem;
+}
 @media screen and (min-width: 992px) {
   .hideOnDesktop {
     display: none !important;
   }
-
+  .customFontSize {
+    font-size: 1rem;
+  }
 }
 @media screen and (max-width: 991px) {
   .hideOnMobile {
@@ -202,16 +227,6 @@ input:focus {
   }
 }
 
-/* .banner {
-  height: 25vh;
-}
-
-@media (min-width: 992px) {
-  .banner {
-    height: 50vh;
-  }
-} */
-
 @media (min-width: 992px) {
   .carouselconfig {
     /* height: 50vh !important;
@@ -249,42 +264,6 @@ input:focus {
 
 }
 
-/* Info */
-/* .info__article {
-  margin-bottom: 15px;
-  border-radius: 10px;
-  background-color: white;
-  font-family: 'Poppins', sans-serif;
-  ;
-}
-
-.info__section {
-  display: flex;
-}
-
-.info__image {
-  position: relative;
-  flex: 1;
-}
-
-
-.info__content {
-  font-family: 'Poppins', sans-serif;
-  margin-left: 5px;
-  flex: 3;
-}
-
-.info__content h2 {
-  font-family: 'Raleway', sans-serif;
-  ;
-}
-
-.info__content p {
-  font-size: 13px;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-} */
 
 /* Menu */
 .menu__article {
@@ -320,12 +299,6 @@ input:focus {
 @media (min-width: 992px) {
   .menuMobile {
     display: none;
-  }
-}
-
-@media (min-width: 992px) {
-  .info__image {
-    margin: 0 60px;
   }
 }
 
@@ -505,7 +478,7 @@ input:focus {
 @import url('./button.css');
 @import url('./form.css');
 @import url('./scrollItems.css');
-@import url('./media.css');
+@import url('./profileMobile.css');
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import url('./layoutProfile.css');

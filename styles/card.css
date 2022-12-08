@@ -7,7 +7,7 @@
 
 .card:hover {
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .12);
-    transform: translate3d(1px, -5px, 5px);
+    /* transform: translate3d(1px, -5px, 5px); */
 }
 
 .card-title {
@@ -31,4 +31,20 @@
     .card-config {
         width: 19% !important;
     }
+}
+
+.cardTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis
+
+}
+
+.customText {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }

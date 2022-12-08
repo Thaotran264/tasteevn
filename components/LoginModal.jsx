@@ -5,21 +5,21 @@
  * @modify date 2022-08-03 16:58:44
  * @desc [description]
  */
-import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useContext } from "react";
 import Modal from "react-bootstrap/Modal";
-import axiosClient from "../api-client/axios-client";
-import { DataContext } from "../store/globalState";
-import { AiOutlineClose, AiOutlineLogin, AiOutlineUser } from "react-icons/ai";
-import Countdown from "./Countdown";
+import { AiOutlineUser } from "react-icons/ai";
 import { accountAPI } from "../api-client/account";
-import { useDispatch } from "react-redux";
-import { logIn } from "../features/auth/authSlice";
+import { logIn } from "../context/actions";
+import { CartContext } from "../context/cartContext";
+import { setTokenCookies } from "../hooks/setTokenCookies";
+import Countdown from "./Countdown";
 
-function LoginModal({ btnStyle }) {
-  const dispatch = useDispatch()
-  const [show, setShow] = useState(false);
+function LoginModal({ showLoginModal,
+  setShowLoginModal }) {
+  const {state,dispatch} = useContext(CartContext)
   const ip1 = useRef();
   const ip2 = useRef();
   const ip3 = useRef();
@@ -27,9 +27,6 @@ function LoginModal({ btnStyle }) {
   const ip5 = useRef();
   const ip6 = useRef();
 
-
-  const handleShow = () => setShow(true);
-  const router = useRouter();
   const [data, setData] = useState({});
   const [isDisableRePass, setIsDisableRepass] = useState(true);
   const [isShowCount, setIsShowCount] = useState(true);
@@ -38,16 +35,13 @@ function LoginModal({ btnStyle }) {
     passwordMsg: false,
     nameMsg: false,
   });
-  // const { state, dispatch } = useContext(DataContext);
   const [textButton, setTextButton] = useState({ btnSubmit: "Tiếp tục" });
-  // const [toastmsg, settoastmsg] = useState('')
   const handleClose = () => {
     setStatusInput({});
     setData({});
     setTextButton({ btnSubmit: "Đăng nhập" });
 
-    setShow(false);
-  }
+    setShowLoginModal(!showLoginModal)  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (statusInput.forgotPassword && !statusInput.showFormFogotPass) {
@@ -67,7 +61,6 @@ function LoginModal({ btnStyle }) {
         email: data.PhoneNumber,
         password: data.Password,
       };
-      // dispatch({ type: "NOTIFY", payload: { loading: true } });
       login(params);
       return
     }
@@ -108,16 +101,12 @@ function LoginModal({ btnStyle }) {
   const login = async (params) => {
     try {
       const res = await accountAPI.login(params);
-      if (res.successful && res.data) {
-        console.log('daataa', res.data)
-        // localStorage.setItem("token", JSON.stringify(res.data.token));
-        // localStorage.setItem("userInfo", JSON.stringify(res.data));
-        // dispatch({ type: "NOTIFY", payload: { success: res.successful } });
-        // dispatch({ type: 'AUTH', payload: res })
+      if (res.successful && res.data) {     
         dispatch(logIn(res.data))
+        // setTokenCookies(res.data.token)
         handleClose();
-        router.push("/");
-        window.location.reload();
+        // router.push("/");
+        // window.location.reload();
       }
 
     } catch (error) {
@@ -321,54 +310,44 @@ function LoginModal({ btnStyle }) {
       setIsDisableRepass(false);
     }
   };
-
-  //  1. call (/Users/forgot-password?phoneNumber=0396296673') => authenID
-
-  //  2. call (/Users/verify-sms-code)  - truyền vào 
-  //       {
-  //           "authenId": "38362311-accd-47bf-a34f-a5a667f21691",
-  //           "verifyCode": "888888"
-  //        } 
-  //     => lấy được token login -> xác thực token(set token login )
-
-  //   3. (/Users/set-password) - truyền password kiểm tra trạng thái và bắn thông báo ( "successful": true )
-
-
-
-
   return (
     <>
-      {btnStyle == 'ICON' ?
+      {/* {btnStyle == 'ICON' ?
         <button className="btn-custom" onClick={handleShow} style={{ border: '1px solid white', borderRadius: '0.6em' }}>
-          {btnStyle && btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24, color: 'white' }} /> : 'Đăng nhập'}
+          {btnStyle && btnStyle == 'ICON' ? <AiOutlineUser style={{ fontSize: 24}} /> : 'Đăng nhập'}
         </button>
         :
-        <button className="btn-custom button-custom-primary" onClick={handleShow} >
+        <button className="btn btn-warning text-light btn-sm" onClick={handleShow} >
           Đăng nhập
         </button>
-      }
+      } */}
 
-      <Modal centered show={show} onHide={handleClose} animation={false}  size="small" backdrop="static">
-        {/* <Modal.Header closeButton></Modal.Header> */}
+      <Modal centered show={showLoginModal} onHide={()=>setShowLoginModal(false)} animation={false}  size="small" backdrop="static">
+      <Modal.Header className='py-2 px-3' closeButton>
+          <Modal.Title>
+            <div className='d-flex gap-2 align-items-center'>
+              <Image src='/image/logo512.png' alt='logo' width={40} height={40} />
+              <p className='mb-0 fs-6'>Tastee</p>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body>
           <div className="mx-auto bg-white rounded w-100">
-            <h2 className="text-center formTitle mb-3">
+            <p className="text-center formTitle fs-4 mb-2">
               {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit}
-            </h2>
+            </p>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
-                  Số điện thoại đăng nhập
-                  {/* (0396296673) */}
-                </label>
                 <input
                   value={data.PhoneNumber || ""}
                   onChange={setPhone}
                   type="text"
                   maxLength={10}
+                  placeholder='Số điện thoại đăng nhập'
                   required
+                  style={{fontSize: 14}}
                   pattern="(\+84|0)\d{9,10}"
-                  className="form-control inputFomCustom"
+                  className="form-control inputFomCustom rounded-0 p-2"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -376,14 +355,13 @@ function LoginModal({ btnStyle }) {
 
               {statusInput.isEmptyPhone && (
                 <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className="form-label lable-custom">
-                    Mật khẩu
-                  </label>
+            
                   <input
                     value={data.Password || ""}
                     onChange={(e) => setData({ ...data, Password: e.target.value })}
                     type="password"
-                    className="form-control inputFomCustom"
+                    placeholder="Mật khẩu"
+                    className="form-control inputFomCustom rounded-0 px-2 fs-6"
                     id="exampleInputPassword1"
                   />
                 </div>
@@ -432,15 +410,16 @@ function LoginModal({ btnStyle }) {
               {statusInput.showFormRegister && (
                 <>
                   <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
+                    {/* <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
                       Họ và tên <i className="text-danger">(*)</i>
-                    </label>
+                    </label> */}
                     <input
                       value={data.FullName || ""}
                       onChange={handleName}
+                      placeholder='Họ và tên'
                       type="text"
                       required
-                      className="form-control inputFomCustom"
+                      className="form-control inputFomCustom rounded-0 p-2 fs-6"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                     />
@@ -449,14 +428,13 @@ function LoginModal({ btnStyle }) {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label  lable-custom">
-                      Mật khẩu<i className="text-danger">(*)</i>
-                    </label>
+               
                     <input
                       value={data.Password || ""}
                       onChange={handlePassWord}
                       type="password"
-                      className="form-control inputFomCustom"
+                      placeholder="Mật khẩu"
+                      className="form-control inputFomCustom rounded-0 p-2 fs-6"
                       id="exampleInputPassword1"
                     />
                     {validatorForm.passwordMsg && (
@@ -464,15 +442,16 @@ function LoginModal({ btnStyle }) {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label  lable-custom">
-                      Nhập lại mật khẩu<i className="text-danger">(*)</i>
-                    </label>
+                    {/* <label htmlFor="exampleInputPassword1" className="form-label  lable-custom">
+                     <i className="text-danger">(*)</i>
+                    </label> */}
                     <input
                       // readOnly={isDisableRePass}
                       value={data.ConfirmPassword || ""}
                       onChange={(e) => setData({ ...data, ConfirmPassword: e.target.value })}
+                      placeholder=' Nhập lại mật khẩu'
                       type="password"
-                      className="form-control inputFomCustom"
+                      className="form-control inputFomCustom p-2 fs-6 rounded-0"
                       id="exampleInputPassword1"
                     />
                     {validatorForm.passwordMsg && (
@@ -484,55 +463,52 @@ function LoginModal({ btnStyle }) {
                   </div>
                 </>
               )}
-
-
-
               {statusInput.showFormOTP && (
                 <div className="mb-2">
                   <div className="verification-code">
-                    <label htmlFor="exampleInputEmail1" className="form-label lable-custom">
-                      {" "}
-                      Nhập mã xác thực (OTP){" "}
+                    <label htmlFor="exampleInputEmail1" className="form-label lable-custom mb-0" style={{fontSize: 13}}>
+                      Nhập mã xác thực (OTP)
                     </label>
-                    <div className="verification-code--inputs mb-3">
-                      <input type="number" ref={ip1} onChange={(e) => setOTP(e, ip2)} />
-                      <input type="number" ref={ip2} onChange={(e) => setOTP(e, ip3)} />
-                      <input type="number" ref={ip3} onChange={(e) => setOTP(e, ip4)} />
-                      <input type="number" ref={ip4} onChange={(e) => setOTP(e, ip5)} />
-                      <input type="number" ref={ip5} onChange={(e) => setOTP(e, ip6)} />
-                      <input type="number" ref={ip6} onChange={(e) => setOTP(e, ip6)} />
+                    <div className="verification-code--inputs mb-2">
+                      <input style={{fontSize:13}} type="number" ref={ip1} onChange={(e) => setOTP(e, ip2)} />
+                      <input style={{fontSize:13}} type="number" ref={ip2} onChange={(e) => setOTP(e, ip3)} />
+                      <input style={{fontSize:13}} type="number" ref={ip3} onChange={(e) => setOTP(e, ip4)} />
+                      <input style={{fontSize:13}} type="number" ref={ip4} onChange={(e) => setOTP(e, ip5)} />
+                      <input style={{fontSize:13}} type="number" ref={ip5} onChange={(e) => setOTP(e, ip6)} />
+                      <input style={{fontSize:13}} type="number" ref={ip6} onChange={(e) => setOTP(e, ip6)} />
                     </div>
                     <input type="hidden" id="verificationCode" />
                     {statusInput.isShowMsgErrOTP ? (<i className="text-center text-danger me-2 mb-2">OTP không chính xác</i>) : ("")}
-                    <span className="d-flex justify-content-center">
+                    <p className="d-flex justify-content-center align-items-center mb-0"> 
                       {isShowCount ?
                         <div className="d-flex">
-                          <a className="text-dark me-2">
+                          <button className="btn btn-primary text-dark me-2">
                             Gửi lại mã sau:
-                          </a>
+                          </button>
                           <Countdown
                             initialMinute={0}
                             initialSeconds={60}
                             setIsShowCount={setIsShowCount}
                           />
                         </div>
-                        : "Bạn không nhận được OTP?"
+                        : <span style={{fontSize: 13}}>Bạn không nhận được OTP?</span>
                       }
                       {!isShowCount && (
                         <a
                           onClick={reSendOTP}
-                          className="text-primary ms-2 mb-2 text-decoration-underline"
+                          style={{fontSize: 13}}
+                          className="ms-2 text-decoration-underline text-primary d-flex align-items-center"
                         >
                           Gửi lại
                         </a>
                       )}
-                    </span>
+                    </p>
                   </div>
                 </div>
               )}
 
               {!statusInput.showSendOTP && (
-                <button type="submit" className="btn-custom button-custom-primary-form w-100 mb-2 ">
+                <button type="submit" className="btn-custom button-custom-primary-form w-100 mb-2 rounded-0 py-2" style={{fontSize: 14}}>
                   {textButton.btnSubmit == "Tiếp tục" ? "Đăng nhập" : textButton.btnSubmit == "Quên mật khẩu" ? "Lấy lại mật khẩu" : textButton.btnSubmit}
                 </button>
               )}
@@ -543,47 +519,48 @@ function LoginModal({ btnStyle }) {
                 disabled={data.ConfirmPassword && data.ConfirmPassword != data.Password}
                 type="button"
                 onClick={sendOTP}
-                className="btn-custom button-custom-primary-form w-100 mb-2 "
+                style={{fontSize:14}}
+                className="btn-custom button-custom-primary-form w-100 mb-2 rounded-0 "
               >
-                {" "}
-                Nhấn để lấy OTP{" "}
+                
+               Lấy OTP
               </button>
             )}
-            <button
+            {/* <button
               type="button"
-              onClick={handleClose}
+              onClick={()=>setShowLoginModal(!showLoginModal)}
               className="btn-custom button-custom-danger-form w-100 mb-2"
             >
               Đóng
-            </button>
+            </button> */}
             {!statusInput.showFormRegister ? (
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between text-dark">
                 <button
                   onClick={() => handleRegister("forgotPassword")}
-                  className="button button__link"
-                  style={{ cursor: "pointer" }}
+                  className="button button__link text-dark text-decoration-underline"
+                  style={{ cursor: "pointer", fontSize: 13 }}
                 >
                   Quên mật khẩu?
                 </button>
                 <button
                   onClick={() => handleRegister('')}
-                  className="button button__link"
-                  style={{ cursor: "pointer" }}
+                  className="button button__link text-danger text-decoration-underline"
+                  style={{ cursor: "pointer", fontSize: 13 }}
                 >
                   Đăng ký
                 </button>
               </div>
             ) : (
-              <button
+              <a
                 onClick={() => handleRegister("haveAccount")}
-                className="button button__link"
+                className=" text-dark text-decoration-underline"
+                style={{fontSize: 13,cursor: "pointer" }}
               >
                 Bạn đã có tài khoản?
-              </button>
+              </a>
             )}
           </div>
         </Modal.Body>
-        {/* <button onClick={handleClose} className="btn-custom btnCustom--delete position-absolute" style={{top: 5, right: 5}}><AiOutlineClose /></button> */}
       </Modal>
     </>
   );

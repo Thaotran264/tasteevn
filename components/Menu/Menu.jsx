@@ -1,120 +1,194 @@
 import Image from 'next/image';
-import React from 'react'
-import { toast, ToastContainer } from 'react-toastify';
+import React, { useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
+import { CartContext } from '../../context/cartContext';
 import { formatter } from '../../utils';
-import DesktopMenu from './DesktopMenu';
-import MobileMenu from './MobileMenu';
+import { Link } from 'react-scroll'
+import Topping from '../Modal/Topping';
+import { BsFillHandbagFill } from 'react-icons/bs'
+import { Button, Card } from 'react-bootstrap';
 
-const Menu = ({ menuPos, productList }) => {
-    const {items, menus} = productList
-    const notify = () => toast.error("Vui lòng đăng nhập !!!", {
-        pauseOnHover: false,
-    });
-    return (
-        <section className="container px-0">
-            <div className="d-flex flex-column">
-                <ul className="d-flex bg-dark text-dark bg-opacity-25 ps-0 menuScrollbar">
-                    {items.map(item => <li className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
-                    {menus.map(item => <li className="py-2 px-4 fw-bold menuListItem" >{item.name}</li>)}
-                </ul>
-                {
-                    items.map(item => <div className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
-                    <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
-                    <div className="menuContainer">
-                        {items.map(it => <div className="bg-light py-2 d-flex flex-column align-items-center menuItems" style={{ minWidth: '19%' }}>
-                            <div>
-                                <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
-                            </div>
-                            <p>{it.name}</p>
-                            <p>{formatter.format(it.price)}</p>
-                        </div>)}
-                    </div>
 
-                </div>)
-                }
-                {
-                    menus.map(item => <div className="bg-dark bg-opacity-10 text-dark mb-2 rounded p-2">
-                        <h2 className='pb-1 border-bottom border-dark'>{item.name}</h2>
-                        <div className="menuContainer">
-                            {item.items.map(it => <div className="bg-light d-flex flex-column align-items-center menuItems py-2" style={{ minWidth: '19%' }}>
-                                <div>
-                                    <Image src={it.image || '/image/logo512.png'} alt={it.name} width="80" height={80} />
-                                </div>
-                                <p>{it.name}</p>
-                                <p>{formatter.format(it.price)}</p>
-                            </div>)}
-                        </div>
+const LinkItemComponent = ({ children, it }) => (
+  <Link
+    activeClass="active"
+    to={`${it.name}`}
+    spy={true}
+    offset={-100}
+    smooth={false}>
+    {children}
+  </Link>
+)
 
-                    </div>)
-                }
-            </div>
-            <div
-            // className={`${menuPos ? "position-fixed w-100 top-0 start-0" : "d-none"} `}
-            // style={menuPos ? { marginTop: 0, zIndex: 1 } : {}}
-            >
-                {/* <div className="container">
-              <div className="row">
-                <div className="col-md-4 col-lg-4">
-                  <ul className="ps-0 bg-opacity-10 d-flex gap-1 flex-wrap mb-0 justify-content-center">
-                    {menus.map((item, index) => (
-                      <li
-                        key={item.id}
-                        className="border rounded-5 border-dark px-2 text-center bg-white "
-                        style={{ listStyle: "none" }}
-                      >
-                        <Link href={`#menuRC${index}`} scroll={true}>
-                          <a className="py-1 px-4 d-block text-decoration-none text-dark" >{item.name}</a>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div> */}
-            </div>
-            {/* <div className="container">
-            <div className="row">
-              <div className={`col-md-4 col-lg-4 py-2 `}>
-                <ul className="ps-0 bg-light bg-opacity-10 d-flex flex-wrap gap-1 justify-content-center">
-                  {menus?.map((item, index) => (
-                    <li
-                      key={item.id}
-                      className="border rounded-5 border-dark px-2 text-center bg-white "
-                      style={{ listStyle: "none" }}
-                    >
-                      <Link href={`#menuRC${index}`} scroll={true}>
-                        <a className="py-1 px-4 d-block text-decoration-none text-dark" >{item.name}</a>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div
-                className={`col-md-8 col-lg-8 rounded px-0 ${menuPos && "offset-4"}`}
-                style={menuPos ? { zIndex: 2 } : {}}
-              >
-                
-                {menus.map((menu, index) => 
-                  menu.items?.length > 0 && (<article key={menu.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
-                      <h4 id={`menuRC${index}`} className="border-bottom border-dark p-2">
-                        {menu.name}
-                      </h4>
-                      {menu.items.map((menuItem) => (
-                        <MenuItem data={menuItem} key={menuItem.id} notify={notify} />
-                      ))}
-                    </article>)
+
+const Menu = ({ productList }) => {
+  const { menus } = productList?.data && JSON.parse(productList?.data) || {}
+  const { items } = productList?.data && JSON.parse(productList?.data) || {}
+  console.log('items', items)
+  console.log('menus', menus)
+  const { state: { auth }, dispatch } = useContext(CartContext)
+  const { token } = auth
+  const [showToppingModal, setShowToppingModal] = useState({
+    open: false,
+    data: null
+  })
+  const [menuStyle, setMenuStyle] = useState(2)
+
+  useEffect(() => {
+    if (window.innerWidth >= 992) {
+      setMenuStyle(5)
+    }
+  }, [])
+
+  const handleAddTopping = (value) => {
+    if (!token) {
+      // console.log('first')
+      // notify("Vui lòng đăng nhập để thực hiện chức năng này!!!")
+      toast.error("Vui lòng đăng nhập để thực hiện chức năng này!!!", {
+        pauseOnHover: true,
+      })
+      return
+    } else {
+      setShowToppingModal({
+        open: !showToppingModal.open,
+        data: value
+      })
+    }
+  }
+
+  const ItemsContainerComponent = ({ data, children }) => (
+    <div className='d-flex flex-column gap-2 py-2' style={{ backgroundColor: "#fff" }}>
+      <h5 className='border-bottom pb-2 px-2' id={data.name}>{data.name}</h5>
+      <div className={`menuContainer menuContainer-${menuStyle}`}>
+        {
+          children
+        }
+      </div>
+    </div>
+  )
+  const MenuBar = () => (
+    <div className="d-flex flex-column gap-2 position-relative" >
+      {
+        menuPos ?
+          <div className={` container rounded menuScrollbar active`}>
+            <ul className='d-flex px-0 mb-0 container'>
+              {
+                items.map(item => (
+                  <li
+                    key={item.id}
+                    className="p-2 fw-semibold menuListItem" >
+                    <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
+                  </li>
+                ))
+              }
+              {
+                menus.map(item =>
+                  <li
+                    key={item.id}
+                    className="p-2 fw-semibold menuListItem" >
+                    <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
+                  </li>
                 )}
-                {items.map((item, index) =>
-                  <article key={item.id} className='mb-2' style={{ backgroundColor: '#fff', borderRadius: 6 }}>
-                    <MenuItem data={item} key={item.id} notify={notify} />
-                  </article>
-                )}
-              </div>
-            </div>
-          </div> */}
-            <ToastContainer position="top-center" />
-        </section>
-    );
+            </ul>
+          </div>
+          : <></>
+      }
+      <div className={`d-flex justify-content-center rounded`} style={{overflow: 'hidden'}}>
+        <ul className='d-flex px-0 mb-0 container bg-success bg-opacity-10 ' style={{overflow: 'scroll'}}>
+          {
+            items?.map(item => (
+              <li
+                key={item.id}
+                className="p-2 menuListItem" >
+                <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
+              </li>
+            ))
+          }
+          {
+            menus?.map(item =>
+            (<li
+              key={item.id}
+              className="p-2 menuListItem" >
+              <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
+            </li>)
+            )}
+        </ul>
+      </div>
+    </div>
+  )
+  let mbref = useRef();
+  const [menuPos, setMenuPos] = useState(false)
+  useEffect(() => {
+    let mbT = mbref.current?.offsetTop;
+    const handleScroll = () => {
+      if (window.scrollY >= mbT + 66) {
+        setMenuPos(true);
+      } else {
+        setMenuPos(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const ItemComponent = ({ it }) => (
+    <Card className='rounded shadow d-flex flex-column menuCard'>
+      <Card.Img variant="bottom" src={it.image || '/image/logo512.png'} className='p-3 d-flex justify-content-center' />
+      <Card.Body>
+        <Card.Title className='text-dark customText customFontSize fw-bold'>{it.name}</Card.Title>
+        <div className='d-flex align-items-center'>
+          <p className='text-dark mb-0 customFontSize'>{
+            formatter.format(it.price)}
+          </p>
+          <button
+            className='d-flex align-items-center justify-content-center rounded-5 border-0 ms-auto'
+            onClick={() => handleAddTopping(it)}
+            style={{ width: 30, height: 30, color: '#fff', backgroundColor: 'hsl(27, 100%, 71%)' }}>
+            <BsFillHandbagFill />
+          </button>
+        </div>
+      </Card.Body>
+    </Card>
+  )
+
+  return (
+    <section className="container d-flex flex-column gap-2" ref={mbref} style={{}}>
+  
+      <MenuBar />
+      {
+        menus?.length && menus.map(menu => {
+          const { items } = menu
+          if (items.length) {
+            return (<ItemsContainerComponent data={menu}>
+              {
+                items.map(item =>
+                  (<ItemComponent key={item.id} it={item} />)
+                )
+              }
+            </ItemsContainerComponent>)
+          }
+          return (
+            <></>
+          )
+        })
+      }
+      {
+        items?.length
+          ? items.map(item =>
+            <ItemsContainerComponent data={item}>
+              <ItemComponent key={item.id} it={item} />
+            </ItemsContainerComponent>)
+          : <></>
+      }
+
+      {showToppingModal.open ? <Topping
+        showToppingModal={showToppingModal}
+        setShowToppingModal={setShowToppingModal} />
+        : <></>}
+    </section>
+  );
 }
 
 export default Menu

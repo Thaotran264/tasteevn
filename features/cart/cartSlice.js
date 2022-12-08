@@ -1,60 +1,72 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-let totalAmount;
-let totalQuantity;
-let items;
-if (typeof window !== "undefined") {
-  // Perform localStorage action
-  // const item = localStorage.getItem('key')
-  totalAmount = localStorage.getItem("totalAmount")
-    ? JSON.parse(localStorage.getItem("totalAmount"))
-    : 0;
-  totalQuantity = localStorage.getItem("totalQuantity")
-    ? JSON.parse(localStorage.getItem("totalQuantity"))
-    : 0;
-  items = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
+
+function getTotalAmount() {
+  if (typeof window !== "undefined") {
+    let totalAmount = sessionStorage.getItem('totalAmount')
+    return eval(JSON.parse(totalAmount) || 0)
+  }
 }
+function getTotalQuantity() {
+  if (typeof window !== "undefined") {
+    let totalQuantity = sessionStorage.getItem('totalQuantity')
+    return eval(JSON.parse(totalQuantity) || 0)
+  }
+}
+function getItems() {
+  if (typeof window !== "undefined") {
+    let items = sessionStorage.getItem('cartItems')
+    return eval(JSON.parse(items) || [])
+  }
+}
+
 const setItemFunc = (itemsList, totalQuantity, totalAmount) => {
-  localStorage.setItem("cartItems", JSON.stringify(itemsList));
-  localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
-  localStorage.setItem("totalAmount", JSON.stringify(totalAmount));
+  sessionStorage.setItem("cartItems", JSON.stringify(itemsList));
+  sessionStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+  sessionStorage.setItem("totalAmount", JSON.stringify(totalAmount));
 };
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    itemList: items,
-    totalQuantity: totalQuantity,
-    totalAmount: totalAmount,
+    itemList: getItems(),
+    totalQuantity: getTotalQuantity(),
+    totalAmount: getTotalAmount(),
   },
   reducers: {
     addToCart(state, action) {
       const id = action.payload.itemId;
-      const existingItem = state.itemList.find((item) => item.itemId == id);
-
-      if(!existingItem) {
+      const existingItem = state.itemList.filter((item) => item.itemId == id);
+      existingItem.map(item => {
+        if(item.toppings.split(',').join('') == action.payload.toppings.split(',').join('')) {
+          console.log('first', item)
+        }
+      })
+      if (!existingItem.length) {
         state.itemList.push({
-              ...action.payload,
-            });
+          ...action.payload,
+        });
       } else {
-        existingItem.quantity += action.payload.quantity
-        if(existingItem.note != action.payload.note) {
+        //
+        // th1: đã tồn tại 1 sp và chưa có note
+        //th2: đã tồn tại sp và có note trùng với sp mới
+        //th3: chưa có note và có topppings
+        //th4: có note và có topping
+        //cà phê: 
+        //cà phê 1: có topping 100% đường, đá 30%
+        // cà phê 2: topping 50% đường, đá 50%
+        //  ==> thêm cà phê 3: toppong 70% đường, đá 30%
+
+        // thêm cà phê mới: kiểm tra cà phê đã tồn tại trong list chưa => [cà phê 1, cà phê 2]
+        // thêm vào list và tăng số lượng sản phẩm
+        // if (existingItem.note != action.payload.note) {
           state.itemList.push({
             ...action.payload,
           });
-        }
+        // }
+        // else {
+        //   existingItem.quantity += action.payload.quantity
+        // }
       }
-      // else {
-      //   if(existingItem.)
-      // }
-      // if (existingItem) {
-      //   existingItem.quantity++;
-      //   existingItem.totalPrice += newItem.price;
-      // } else {
-      //   state.itemList.push({
-      //     ...newItem,
-      //   });
-      // }
-      state.totalQuantity+= action.payload.quantity;
+      state.totalQuantity += action.payload.quantity;
       setItemFunc(state.itemList, state.totalQuantity, state.totalAmount);
     },
     removeFromCart(state, action) {

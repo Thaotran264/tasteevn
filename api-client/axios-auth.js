@@ -1,10 +1,11 @@
 import axios from 'axios';
+import GetCookie from '../hooks/getCookies';
 const ISSERVER = typeof window === "undefined";
 
 function getToken() {
     if (!ISSERVER) {
-        let token = sessionStorage.getItem('token') ? sessionStorage.getItem('token') : ''
-        return eval(token || '')
+        let data = JSON.parse(localStorage.getItem('user'))
+        return data?.token || ''
     }
 }
 const axiosAuth = axios.create({

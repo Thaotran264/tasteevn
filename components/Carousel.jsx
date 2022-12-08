@@ -20,12 +20,12 @@ const CarouselComponent = ({ banner }) => {
     getData()
   }, [])
   return (
-    <section className="container px-0 banner">
+    <section className="container px-0 banner h-100 w-100 position-relative" >
       <Carousel>
         {banners?.map((item, index) => (
-          <Carousel.Item key={index} style={{height: '60vh', width:' 100%'}}>
-            <Image src={item?.uri || '/image/logo.jpg'} alt="First slide" 
-            layout="fill" objectFit="cover"/>
+          <Carousel.Item key={index}>
+            <img src={item?.uri || '/image/logo.jpg'} alt="First slide" 
+            className="w-100 h-100" style={{objectFit: 'cover'}}/>
           </Carousel.Item>
         ))}
       </Carousel>

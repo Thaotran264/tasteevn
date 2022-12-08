@@ -1,34 +1,32 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
 import Layout from "../../components/Layout";
-import Checkout from "../../components/Modal/Checkout";
-import { selectAuth } from "../../features/auth/authSlice";
-import { clearCart, selectCart, totalQuantityCart } from "../../features/cart/cartSlice";
-import { DataContext } from "../../store/globalState";
+import AddAdress from "../../components/Modal/AddAdress";
+// import Checkout from "../../components/Modal/Checkout";
+import { clearCart } from "../../context/actions";
+import { CartContext } from "../../context/cartContext";
+// import { DataContext } from "../../store/globalState";
 import { formatter } from "../../utils";
+
 const Cart = () => {
   const [check, setCheck] = useState(false);
-  const cart = useSelector(selectCart);
-  console.log(cart);
-  const auth = useSelector(selectAuth);
-  const quantity = useSelector(totalQuantityCart);
-  const { isLogged, authData } = auth;
-  // console.log('auth', authData);
+  const { state, dispatch } = useContext(CartContext)
+  const { cart } = state
+  const [showModal, setShowModal] = useState(false)
+  const router = useRouter()
   const [userAdress, setUserAdress] = useState();
-  const router = useRouter();
-  const dispatch = useDispatch();
-const totalPrice = cart?.reduce((cal, item) => cal+item.price,0)
-console.log(totalPrice);
-
+  const [addressData, setAddressData] = useState({})
+  const totalPrice = cart?.reduce((cal, item) => cal + item.price * item.quantity, 0)
+  const totalQuantity = cart?.reduce((cal, item) => cal + item.quantity, 0)
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await userApi.getShippingAddress();
-        console.log('shpiing',...res);
         setUserAdress(...res);
       } catch (err) {
         console.log(err);
@@ -38,113 +36,137 @@ console.log(totalPrice);
   }, []);
   const handleDatHangButton = async () => {
     const params = {
-      userId: authData.id,
+      userId: userAdress?.userId,
       orderDetails: cart,
-      shippingAddressId: "50dfee76-8ce6-4e11-bf7b-937155188fe1",
-      total: quantity,
+      shippingAddressId: userAdress?.id,
+      total: totalQuantity,
+      ...addressData
     };
     console.log(params);
     try {
       const res = await orderApi.orders(params);
-      console.log(res);
       if (res.data && res.successful) {
         alert("Đặt hàng thành công");
         dispatch(clearCart());
+        router.push(`/order/${res.data}`)
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  if (cart?.length == 0) {
+  if (!cart?.length) {
     return (
       <>
         <h2 className="text-center">Empty</h2>
-        {check && <Checkout setCheck={setCheck} />}
+        {/* {check && <Checkout setCheck={setCheck} />} */}
       </>
     );
   }
-  return (
-    <section className="container mx-auto d-flex flex-column">
-      <Head>
-        <title>Cart</title>
-      </Head>
-      <div className="w-100 d-flex mb-2 gap-2">
-        <article className="cart__article position-relative w-50 rounded-2 bg-light p-2">
-          <h4 className="text-center border-bottom">Trang thanh toán</h4>
-          {cart?.map((cartItem) => (
-            <CartItem item={cartItem} key={cartItem.itemId} />
-          ))}
-        </article>
-        {/* Shipping Address */}
-        <article className="w-50 rounded p-2" style={{ backgroundColor: "#fff" }}>
-          <h4 className="text-center border-bottom">Thông tin người nhận</h4>
+  const ThongTinUser = () => (
+    <article className="w-100 rounded p-2" style={{ backgroundColor: "#fff" }}>
+      <h4 className="text-center border-bottom border-dark pb-1">Thông tin người nhận</h4>
+      <Row className="mx-0 justify-content-center">
+        <Col xs={12} md={6} className='px-0'>
           <form className="mb-2" style={{ fontSize: 15 }}>
             <div className="d-flex flex-column mb-2">
               <label>Tên:</label>
               <input
                 readOnly
-                placeholder={userAdress?.name}
+                placeholder={userAdress?.name || ""}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15, borderColor: "lightgray" }}
+                style={{ fontSize: 15, borderWidth: 1, borderColor: "lightgray" }}
               />
             </div>
             <div className="d-flex flex-column mb-2">
               <label>Số điện thoại:</label>
               <input
                 readOnly
-                placeholder={userAdress?.phone || '123456'}
+                placeholder={userAdress?.phone || ''}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15 }}
+                style={{ fontSize: 15, borderWidth: 1 }}
               />
             </div>
             <div className="">
               <label>Địa chỉ:</label>
-              <div className="d-flex gap-2">
-                <input
-                  readOnly
-                  type="text"
-                  className="p-1 w-100 rounded-2"
-                  placeholder={`${userAdress?.wardName}-${userAdress?.districtName}-${userAdress?.cityName }`}
-                  style={{ fontSize: 15 }}
-                />
-              </div>
+              {
+                !Object.keys(addressData).length ?
+                  <div className="d-flex gap-2">
+                    <input
+                      readOnly
+                      type="text"
+                      className="p-1 w-100 rounded-2"
+                      placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
+                      style={{ fontSize: 15, borderWidth: 1 }}
+                    />
+                  </div> :
+                  <div className="d-flex gap-2">
+                    <input
+                      readOnly
+                      type="text"
+                      className="p-1 w-100 rounded-2"
+                      placeholder={addressData.address}
+                      style={{ fontSize: 15, borderWidth: 1 }}
+                    />
+                  </div>
+              }
             </div>
           </form>
-          <button
-            className="border-0 w-100 py-2 rounded"
-            style={{ backgroundColor: "#f7a76c", color: "#fff" }}
+        </Col>
+      </Row>
+
+      <Row xs={12} className='mx-0 justify-content-center'>
+        <Col xs={12} md={6} className='px-0 d-flex justify-content-center'>
+          <Button
+            className="w-100 border-0 text-light customFontSize"
+            style={{ backgroundColor: "#f7a76c" }}
+            onClick={() => setShowModal(true)}
           >
             Chọn địa chỉ khác
-          </button>
-        </article>
+          </Button>
+        </Col>
+      </Row>
+    </article>
+  )
+  const ThongTinDonHang = () => (
+    <article className="d-flex flex-column gap-2 py-2 rounded">
+      <h4 className="text-center border-bottom border-dark mb-0 pb-1">Trang thanh toán</h4>
+      <Row className="mx-0 justify-content-center">
+        <Col xs={12} md={6} className='d-flex flex-column gap-2 px-0'>
+          {cart?.map((cartItem, index) => (
+            <CartItem item={cartItem} key={index} />
+          ))}
+        </Col>
+      </Row>
+    </article>
+  )
+  const CartFooter = () => (
+    <Row className="mx-0 rounded gap-2 py-2 justify-content-center">
+      <Col xs={12} md={6} className='d-flex flex-column gap-2'>
+        <span className="text-dark customFontSize fw-bold ms-auto">Tổng tiền: {formatter.format(totalPrice)}</span>
+
+        <Button className="w-100 mx-auto border-0 customFontSize" onClick={handleDatHangButton}>
+          Đặt hàng
+        </Button>
+      </Col>
+    </Row>
+  )
+  return (
+    <Layout title="Cart">
+      <div className="d-flex gap-2 flex-column container p-2">
+        <ThongTinUser />
+
+        <ThongTinDonHang />
+
+        <CartFooter />
       </div>
-      <div className="w-100 bg-light p-2 rounded-2">
-        <div className="d-flex justify-content-between w-100 align-items-center">
-          <div className="d-flex flex-column">
-            <span
-              className="rounded py-1 px-1 text-light"
-              style={{
-                fontSize: 14,
-                backgroundColor: "hsl(0,0%,66%)",
-                textDecoration: "line-through",
-              }}
-            >
-              {formatter.format(totalPrice)}
-            </span>
-            <span className="text-danger">Tổng tiền: {formatter.format(totalPrice)}</span>
-          </div>
-          <button className="btn btn-success w-50" onClick={handleDatHangButton}>
-            Thanh toán
-          </button>
-        </div>
-      </div>
-    </section>
+      {
+        showModal && <AddAdress setAddressData={setAddressData} showModal={showModal} setShowModal={setShowModal} />
+      }
+    </Layout>
   );
 };
-Cart.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
+
 export default Cart;

@@ -1,13 +1,22 @@
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
-import { listBrand } from "../../db";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "red" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SampleNextArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
@@ -18,47 +27,69 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "green" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SamplePrevArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
 }
 const settings = {
-  // centerMode: false,
   slidesToShow: 5,
-  slidesToScroll: 2,
+  slidesToScroll: 1,
+  infinite: true,
+  speed: 500,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   responsive: [
     {
       breakpoint: 600,
       settings: {
-        infinite: false,
+        infinite: true,
+        autoplay: false,
+        speed: 500,
+        autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
+        nextArrow: <SampleNextArrowMB />,
+        prevArrow: <SamplePrevArrowMB />
       },
     },
   ],
 };
 
-const Slider02 = ({ text }) => {
+const Slider02 = ({ data }) => {
   return (
-    <div className="container px-0">
-      <div className=" p-2 bg-white rounded mb-2">
-        <h2 className="text-center pb-1 border-bottom mb-2">{text}</h2>
-        <div className="mx-auto" style={{ width: '100%' }}>
-          <Slider {...settings}>
-            {listBrand.map((item, index) => (
-              <div key={index} className=''>
-                <div className="d-flex justify-content-center w-100">
-                  <img className="rounded-circle border border-dark" src={item} alt={item} style={{ width: 130, height: 130 }} />
+    <div className="container-md px-0 py-2 rounded">
+      <Slider {...settings}>
+        {data?.map((it, index) => (
+          <Link href={`/${it?.brandId}`} key={it?.brandId}>
+            <a className='d-flex mx-2'>
+              <div className="w-100 h-100">
+                <div className="d-flex justify-content-center">
+                  <img src={it?.image} alt={it?.brandName}
+                    className="rounded w-100 h-100"
+                  />
                 </div>
-                <p className="d-block text-center" style={{ fontSize: 16 }}>Bùi Văn Ngọ Coffee Coffee</p>
+                <div>
+                  <p className="mb-0 fw-bold customFontSize customText py-2" >
+                    {it.brandName}
+                  </p>
+                  {/* <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p> */}
+                </div>
               </div>
-            ))}
-          </Slider>
-        </div>
-      </div >
+            </a>
+          </Link>
+        ))}
+      </Slider>
     </div>
   );
 };

@@ -1,63 +1,95 @@
-import React, { useEffect, useState } from "react";
-import { MdAttachMoney, MdOutlineChair } from "react-icons/md";
-import { BsClock } from "react-icons/bs";
-import { BsFillJournalBookmarkFill } from "react-icons/bs";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import parse from "html-react-parser";
 import Image from "next/image";
-import { isMobile } from "react-device-detect";
-import { formatter } from "../../utils";
+import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const InfoDefault = ({ info ,maps}) => {
+const InfoDefault = ({ info, maps }) => {
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
   return (
-    <section className="container bg-light px-0">
-      <div className="d-flex p-2">
-          <div className="info__image">
-            <Image alt={info?.name} className='rounded' src={info?.logo || '/image/logo512.png'} layout='fill' />
-          </div>
-          <div className="info__content">
-            <h2 className="fw-bold">{info?.name}</h2>
+    <section className="container d-flex flex-column gap-2 py-2 " style={{backgroundColor: "#fff"}}>
+      {
+        info?.style == 1 && <Row className="mx-0">
+          <Col xs={4} md={2} className='d-flex align-items-center justify-content-center px-0'>
+            <Image
+              alt={info?.data?.name}
+              src={info?.data?.logo || '/image/logo512.png'}
+              className='rounded'
+              width={240} height={240} />
+          </Col>
+          <Col xs={8} md={9} className='py-2'>
+            <h4 className="fw-bold customText">{info?.data?.name}</h4>
+            <div>
+              <p className="mb-0 customFontSize" ><span className="fw-bold me-2">Địa chỉ:</span>
+                {info?.data?.address}, {info?.data?.wardName}, {info?.data?.districtName}, {info?.data?.cityName}
+              </p>
+              <p className="mb-0 customFontSize"><span className="fw-bold me-2" >Mở cửa:</span>
+                {info?.data?.openTimeA}-{info?.data?.closeTimeA}
+              </p>
+            </div>
+          </Col>
+        </Row>
+      }
+      {
+        info?.style == 2 && <Row>
+          <Col xs={12} className="d-flex justify-content-center">
+            <Image
+              alt={info?.name}
+              src={info?.logo || '/image/logo512.png'}
+              className='rounded'
+              width={180} height={180} />
+          </Col>
+          <Col xs={12} className="d-flex justify-content-center flex-column gap-2">
+            <h4 className="fw-bold text-center mb-0 customText">{info?.name}</h4>
             <div className='bg-dark bg-opacity-10 rounded p-2' >
-            <p className=""><span className="fw-bold me-2">Địa chỉ:</span>
-              {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
-            </p>
-            <p className=""><span className="fw-bold me-2">Thời gian mở cửa:</span>
-              {info?.openTimeA}-{info?.closeTimeA}
-            </p>
-            {/* <p><span className="fw-bold me-2 mb-0">Mức giá:</span>
-              {formatter.format(info?.minPrice)  || 0}-{formatter.format(info?.maxPrice) || 0}/món
-            </p> */}
-            {/* <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
-              {info?.address}
-            </p> */}
+              <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
+                {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
+              </p>
+              <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
+                {info?.openTimeA}-{info?.closeTimeA}
+              </p>
             </div>
-            {/* <div className="d-flex gap-1">
-              <button className="border-0" href="#menu">
-                <BsFillJournalBookmarkFill style={{ fontSize: 24 }} className="" />
-              </button>
-              <button className="border-0 ">
-                <MdOutlineChair style={{ fontSize: 24 }} className="" />
-              </button>
-          </div> */}
-          </div>
+          </Col></Row>
+      }
+      {
+        info?.style == 3 && <Row>
+          <Col xs={12} className="d-flex justify-content-center">
+            {/* <Image
+              alt={info?.name}
+              src={info?.logo || '/image/logo512.png'}
+              className='rounded'
+              width={180} height={180} /> */}
+          </Col>
+          <Col xs={12} className="d-flex justify-content-center flex-column gap-2">
+            <h4 className="fw-bold text-center mb-0 customText">{info?.name}</h4>
+            <div className='bg-dark bg-opacity-10 rounded p-2' >
+              <p className="mb-0"><span className="fw-bold me-2">Địa chỉ:</span>
+                {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
+              </p>
+              <p className="mb-0"><span className="fw-bold me-2">Thời gian mở cửa:</span>
+                {info?.openTimeA}-{info?.closeTimeA}
+              </p>
+            </div>
+          </Col>
+          </Row>
+      }
+
+      <div className="d-flex justify-content-center">
+        <button
+          className="btn btn-outline-dark hideOnDesktop border-top border-bottom border-0 rounded-0 w-100"
+          onClick={() => setShow(!show)}
+        >
+          Xem thông tin <MdOutlineKeyboardArrowRight />
+        </button>
       </div>
-        <div className="info__section__map d-flex flex-column mb-1">
-          <button
-            className="btn border w-100 border-end-0 border-start-0 rounded-0 text-dark mb-2 hideOnDesktop"
-            onClick={() => setShow(!show)}
-          >
-            Xem bản đồ
-          </button>
-          {show && (
-            <div className="col-12 col-md-6 hideOnDeskTop mb-2">
-              <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
-                {maps ? parse(maps) : '' }
-              </div>
+        {show && (
+          <div className="col-12 col-md-6 hideOnDeskTop">
+            <div className="overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
+              {maps ? parse(maps) : ''}
             </div>
-          )}
-        </div>
+          </div>
+        )}
     </section>
   );
 };
