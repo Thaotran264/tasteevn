@@ -1,56 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { MdAttachMoney, MdOutlineChair } from "react-icons/md";
-import { BsClock } from "react-icons/bs";
-import { BsFillJournalBookmarkFill } from "react-icons/bs";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { MdOutlineKeyboardArrowRight} from "react-icons/md";
 import parse from "html-react-parser";
 import Image from "next/image";
-import { isMobile } from "react-device-detect";
-import { formatter } from "../../utils";
-import { Button, Col, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const InfoDefault = ({ info, maps }) => {
   const [show, setShow] = useState(false);
   const [isLike, setIsLike] = useState(false)
-  const [infoStyle, setInfoStyle] = useState(1)
-  const Style = () => (
-    <div className='rounded bg-dark bg-opacity-10 d-flex gap-2 align-items-center p-2'>
-      <span>Select style of menu:</span>
-      <select onChange={(e)=>setInfoStyle(e.target.value)}
-      className='p-2 rounded'>
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
-      </select>
-    </div>
-  )
   return (
     <section className="container d-flex flex-column gap-2 py-2 " style={{backgroundColor: "#fff"}}>
       {
-        infoStyle == 1 && <Row className="mx-0">
+        info?.style == 1 && <Row className="mx-0">
           <Col xs={4} md={2} className='d-flex align-items-center justify-content-center px-0'>
             <Image
-              alt={info?.name}
-              src={info?.logo || '/image/logo512.png'}
+              alt={info?.data?.name}
+              src={info?.data?.logo || '/image/logo512.png'}
               className='rounded'
               width={240} height={240} />
           </Col>
           <Col xs={8} md={9} className='py-2'>
-            <h4 className="fw-bold customText">{info?.name}</h4>
+            <h4 className="fw-bold customText">{info?.data?.name}</h4>
             <div>
               <p className="mb-0 customFontSize" ><span className="fw-bold me-2">Địa chỉ:</span>
-                {info?.address}, {info?.wardName}, {info?.districtName}, {info?.cityName}
+                {info?.data?.address}, {info?.data?.wardName}, {info?.data?.districtName}, {info?.data?.cityName}
               </p>
               <p className="mb-0 customFontSize"><span className="fw-bold me-2" >Mở cửa:</span>
-                {info?.openTimeA}-{info?.closeTimeA}
+                {info?.data?.openTimeA}-{info?.data?.closeTimeA}
               </p>
             </div>
           </Col>
         </Row>
       }
       {
-        infoStyle == 2 && <Row>
+        info?.style == 2 && <Row>
           <Col xs={12} className="d-flex justify-content-center">
             <Image
               alt={info?.name}
@@ -71,7 +53,7 @@ const InfoDefault = ({ info, maps }) => {
           </Col></Row>
       }
       {
-        infoStyle == 3 && <Row>
+        info?.style == 3 && <Row>
           <Col xs={12} className="d-flex justify-content-center">
             {/* <Image
               alt={info?.name}

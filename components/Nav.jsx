@@ -121,8 +121,8 @@ const NavComponent = () => {
     </Dropdown.Toggle>
     <Dropdown.Menu
       className='' style={{ maxHeight: 400, overflowY: 'scroll' }}>
-      {cities?.map(item => (
-        <Dropdown.Item className='text-center border-bottom' key={item.id} style={{ fontSize: 12 }} eventKey={item.id} value={item.id}
+      {cities?.map((item, id) => (
+        <Dropdown.Item className='text-center border-bottom' key={id} style={{ fontSize: 12 }} eventKey={item.id} value={item.id}
         >
           {item.name}
         </Dropdown.Item>

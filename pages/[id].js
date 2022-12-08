@@ -14,37 +14,50 @@ import Menu from "../components/Menu/Menu";
 import MenuPhoto from "../components/MenuPhoto";
 import CartModal from "../components/Modal/CartModal";
 import { CartContext } from "../context/cartContext";
-export async function getStaticPaths() {
-  const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
-  const paths = res.data.data.map((item) => ({
-    params: { id: item.brandId },
-  }));
-  return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  };
-}
+// export async function getStaticPaths() {
+//   const res = await axios.get("https://pro.tastee.vn/api/Home/get_product_slider");
+//   const paths = res.data.data.map((item) => ({
+//     params: { id: item.brandId },
+//   }));
+//   return {
+//     paths,
+//     fallback: false, // can also be true or 'blocking'
+//   };
+// }
 
-export async function getStaticProps({ params }) {
-  const res = await axios.get(`https://pro.tastee.vn/Merchant/${params.id}`);
-  const post = res.data.data;
-  return {
-    // Passed to the page component as props
-    props: { detail: post },
-  };
-}
+// export async function getStaticProps({ params }) {
+//   const res = await axios.get(`https://pro.tastee.vn/Merchant/${params.id}`);
+//   const post = res.data.data;
+//   return {
+//     // Passed to the page component as props
+//     props: { detail: post },
+//   };
+// }
 
 
-const Detail = ({ detail }) => {
+const Detail = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false)
   const router = useRouter()
-  const { query } = router
+  const { id } = router.query
+  const [detail, setDetail] = useState({})
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await merchantApi.merChantInfo(id)
+        if(res.data && res.successful) {
+          setDetail(res.data)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData()
+  }, [id])
   const [showBooking, setShowBooking] = useState(false)
   const { webMap, widgets } = detail
-  const infoWg = widgets.filter(item => item.widgetType == 0)[0]
-  const photos = JSON.parse(widgets.filter(item => item.widgetType == 3)[0].data)
-  const menuWg = JSON.parse(widgets.filter(item => item.widgetType == 5)[0].data)
-  const { brandImage } = infoWg.data
+  const infoWg = widgets?.filter(item => item.widgetType == 0)[0]
+  const photos = widgets?.filter(item => item.widgetType == 3)[0]
+  const menus = widgets?.filter(item => item.widgetType == 5)[0]
   const { state: { cart } } = useContext(CartContext)
   const [show, setShow] = useState(false);
   const [like, setLike] = useState(false)
@@ -146,14 +159,13 @@ const Detail = ({ detail }) => {
   return (
     <Layout title='Brand Detail'>
       <section className='d-flex flex-column gap-2'>
-        <Banner banner={brandImage} />
-        <InfoDefault info={infoWg?.data} maps={webMap} />
-        <MenuPhoto isDefault={false} maps={webMap} brandView={photos} />
-        <Menu productList={menuWg} />
+   
+        <Banner infoWg={infoWg} />
+        <InfoDefault info={infoWg} maps={webMap} />
+        <MenuPhoto maps={webMap} photos={photos} />
+        <Menu productList={menus} />
 
         <MenuButton />
-        {/* <ScrollToTopButton /> */}
-
       </section>
       {
         showBooking && <Booking setShowBooking={setShowBooking} />
