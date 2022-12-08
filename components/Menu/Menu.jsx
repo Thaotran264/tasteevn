@@ -23,7 +23,10 @@ const LinkItemComponent = ({ children, it }) => (
 
 
 const Menu = ({ productList }) => {
-  const { items, menus } = productList
+  const { menus } = productList?.data && JSON.parse(productList?.data) || {}
+  const { items } = productList?.data && JSON.parse(productList?.data) || {}
+  console.log('items', items)
+  console.log('menus', menus)
   const { state: { auth }, dispatch } = useContext(CartContext)
   const { token } = auth
   const [showToppingModal, setShowToppingModal] = useState({
@@ -53,21 +56,7 @@ const Menu = ({ productList }) => {
       })
     }
   }
-  const MenuStyleComponenet = () => (
-    <div className='bg-dark bg-opacity-10 d-flex gap-2 align-items-center p-2'>
-      <span>Select style of menu:</span>
-      <select
-        value={menuStyle}
-        onChange={(e) => setMenuStyle(e.target.value)}
-        className='p-2 rounded'>
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
-        <option value={4}>4</option>
-        <option value={5}>5</option>
-      </select>
-    </div>
-  )
+
   const ItemsContainerComponent = ({ data, children }) => (
     <div className='d-flex flex-column gap-2 py-2' style={{ backgroundColor: "#fff" }}>
       <h5 className='border-bottom pb-2 px-2' id={data.name}>{data.name}</h5>
@@ -75,6 +64,56 @@ const Menu = ({ productList }) => {
         {
           children
         }
+      </div>
+    </div>
+  )
+  const MenuBar = () => (
+    <div className="d-flex flex-column gap-2 position-relative" >
+      {
+        menuPos ?
+          <div className={` container rounded menuScrollbar active`}>
+            <ul className='d-flex px-0 mb-0 container'>
+              {
+                items.map(item => (
+                  <li
+                    key={item.id}
+                    className="p-2 fw-semibold menuListItem" >
+                    <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
+                  </li>
+                ))
+              }
+              {
+                menus.map(item =>
+                  <li
+                    key={item.id}
+                    className="p-2 fw-semibold menuListItem" >
+                    <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
+                  </li>
+                )}
+            </ul>
+          </div>
+          : <></>
+      }
+      <div className={`d-flex justify-content-center rounded`} style={{overflow: 'hidden'}}>
+        <ul className='d-flex px-0 mb-0 container bg-success bg-opacity-10 ' style={{overflow: 'scroll'}}>
+          {
+            items?.map(item => (
+              <li
+                key={item.id}
+                className="p-2 menuListItem" >
+                <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
+              </li>
+            ))
+          }
+          {
+            menus?.map(item =>
+            (<li
+              key={item.id}
+              className="p-2 menuListItem" >
+              <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
+            </li>)
+            )}
+        </ul>
       </div>
     </div>
   )
@@ -116,57 +155,10 @@ const Menu = ({ productList }) => {
 
   return (
     <section className="container d-flex flex-column gap-2" ref={mbref} style={{}}>
-      <div className="d-flex flex-column gap-2 position-relative" >
-        {
-          menuPos ?
-            <div className={` container rounded menuScrollbar active`}>
-              <ul className='d-flex px-0 mb-0 container'>
-                {
-                  items.map(item => (
-                    <li
-                      key={item.id}
-                      className="p-2 fw-semibold menuListItem" >
-                      <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
-                    </li>
-                  ))
-                }
-                {
-                  menus.map(item =>
-                    <li
-                      key={item.id}
-                      className="p-2 fw-semibold menuListItem" >
-                      <LinkItemComponent it={item}>{item.name}</LinkItemComponent>
-                    </li>
-                  )}
-              </ul>
-            </div>
-            : <></>
-        }
-        <div className={`d-flex justify-content-center rounded`}>
-          <ul className='d-flex px-0 mb-0 container bg-success bg-opacity-10'>
-            {
-              items.map(item => (
-                <li
-                  key={item.id}
-                  className="p-2 menuListItem" >
-                  <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
-                </li>
-              ))
-            }
-            {
-              menus.map(item =>
-              (<li
-                key={item.id}
-                className="p-2 menuListItem" >
-                <LinkItemComponent it={item}><h5 className='fw-bold mb-0'>{item.name}</h5></LinkItemComponent>
-              </li>)
-              )}
-          </ul>
-        </div>
-      </div>
-
+  
+      <MenuBar />
       {
-        menus.length && menus.map(menu => {
+        menus?.length && menus.map(menu => {
           const { items } = menu
           if (items.length) {
             return (<ItemsContainerComponent data={menu}>

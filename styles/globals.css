@@ -65,6 +65,10 @@ a {
   transform: translateY(-5px);
   box-shadow: 3px 3px 3px 3px rgba(0,0,0,.1);
 }
+ul::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
 @media screen and (max-width: 991px) {
   .indexItems {
     width: 96%;

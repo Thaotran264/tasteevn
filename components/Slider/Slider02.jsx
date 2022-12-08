@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
-import { AiOutlineStar } from 'react-icons/ai'
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -72,7 +71,7 @@ const Slider02 = ({ data }) => {
     <div className="container-md px-0 py-2 rounded">
       <Slider {...settings}>
         {data?.map((it, index) => (
-          <Link href={`/${it?.brandId}`} key={index}>
+          <Link href={`/${it?.brandId}`} key={it?.brandId}>
             <a className='d-flex mx-2'>
               <div className="w-100 h-100">
                 <div className="d-flex justify-content-center">
