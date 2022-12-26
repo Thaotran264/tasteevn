@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { orderApi, userApi } from "../../api-client";
 import CartItem from "../../components/CartItem";
@@ -63,15 +63,11 @@ const Cart = () => {
       </>
     );
   }
-
-  return (
-    <section className="container mx-auto d-flex flex-column mt-2">
-      <Head>
-        <title>Cart</title>
-      </Head>
-      <div className="d-flex mb-2 gap-2 flex-column align-items-center">
-        <article className="w-75 rounded p-2" style={{ backgroundColor: "#fff" }}>
-          <h4 className="text-center border-bottom">Thông tin người nhận</h4>
+  const ThongTinUser = () => (
+    <article className="w-100 rounded p-2" style={{ backgroundColor: "#fff" }}>
+      <h4 className="text-center border-bottom border-dark pb-1">Thông tin người nhận</h4>
+      <Row className="mx-0 justify-content-center">
+        <Col xs={12} md={6} className='px-0'>
           <form className="mb-2" style={{ fontSize: 15 }}>
             <div className="d-flex flex-column mb-2">
               <label>Tên:</label>
@@ -80,7 +76,7 @@ const Cart = () => {
                 placeholder={userAdress?.name || ""}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15,borderWidth: 1, borderColor: "lightgray" }}
+                style={{ fontSize: 15, borderWidth: 1, borderColor: "lightgray" }}
               />
             </div>
             <div className="d-flex flex-column mb-2">
@@ -90,7 +86,7 @@ const Cart = () => {
                 placeholder={userAdress?.phone || ''}
                 type="text"
                 className="p-1 w-100 rounded-2"
-                style={{ fontSize: 15,borderWidth: 1 }}
+                style={{ fontSize: 15, borderWidth: 1 }}
               />
             </div>
             <div className="">
@@ -103,7 +99,7 @@ const Cart = () => {
                       type="text"
                       className="p-1 w-100 rounded-2"
                       placeholder={`${userAdress?.wardName || ""}-${userAdress?.districtName || ""}-${userAdress?.cityName || ""}`}
-                      style={{ fontSize: 15 ,borderWidth: 1}}
+                      style={{ fontSize: 15, borderWidth: 1 }}
                     />
                   </div> :
                   <div className="d-flex gap-2">
@@ -112,58 +108,65 @@ const Cart = () => {
                       type="text"
                       className="p-1 w-100 rounded-2"
                       placeholder={addressData.address}
-                      style={{ fontSize: 15,borderWidth: 1 }}
+                      style={{ fontSize: 15, borderWidth: 1 }}
                     />
                   </div>
               }
             </div>
           </form>
-          <div className="d-flex">
+        </Col>
+      </Row>
 
-          <Button 
-            className="border-0 w-50 py-2 mx-auto text-light"
-            style={{ backgroundColor: "#f7a76c"}}
+      <Row xs={12} className='mx-0 justify-content-center'>
+        <Col xs={12} md={6} className='px-0 d-flex justify-content-center'>
+          <Button
+            className="w-100 border-0 text-light customFontSize"
+            style={{ backgroundColor: "#f7a76c" }}
             onClick={() => setShowModal(true)}
-            >
+          >
             Chọn địa chỉ khác
           </Button>
-            </div>
-        </article>
-        <article className="cart__article position-relative w-75 rounded-2 bg-light p-2">
-          <h4 className="text-center border-bottom">Trang thanh toán</h4>
+        </Col>
+      </Row>
+    </article>
+  )
+  const ThongTinDonHang = () => (
+    <article className="d-flex flex-column gap-2 py-2 rounded">
+      <h4 className="text-center border-bottom border-dark mb-0 pb-1">Trang thanh toán</h4>
+      <Row className="mx-0 justify-content-center">
+        <Col xs={12} md={6} className='d-flex flex-column gap-2 px-0'>
           {cart?.map((cartItem, index) => (
             <CartItem item={cartItem} key={index} />
           ))}
-        </article>
-        <div className="d-flex flex-column w-75 gap-2">
-            <div className="d-flex justify-content-end mx-2">
-              {/* <span
-                className="rounded py-1 px-1 text-light"
-                style={{
-                  fontSize: 14,
-                  backgroundColor: "hsl(0,0%,66%)",
-                  textDecoration: "line-through",
-                }}
-              >
-                {formatter.format(totalPrice)}
-              </span> */}
-              <span className="text-dark fw-bold">Tổng tiền: {formatter.format(totalPrice)}</span>
-            </div>
-            <div className="d-flex">
+        </Col>
+      </Row>
+    </article>
+  )
+  const CartFooter = () => (
+    <Row className="mx-0 rounded gap-2 py-2 justify-content-center">
+      <Col xs={12} md={6} className='d-flex flex-column gap-2'>
+        <span className="text-dark customFontSize fw-bold ms-auto">Tổng tiền: {formatter.format(totalPrice)}</span>
 
-            <Button variant='success' className=" w-50 mx-auto" onClick={handleDatHangButton}>
-              Đặt hàng
-            </Button>
-            </div>
-          </div>
+        <Button className="w-100 mx-auto border-0 customFontSize" onClick={handleDatHangButton}>
+          Đặt hàng
+        </Button>
+      </Col>
+    </Row>
+  )
+  return (
+    <Layout title="Cart">
+      <div className="d-flex gap-2 flex-column container p-2">
+        <ThongTinUser />
+
+        <ThongTinDonHang />
+
+        <CartFooter />
       </div>
       {
         showModal && <AddAdress setAddressData={setAddressData} showModal={showModal} setShowModal={setShowModal} />
       }
-    </section>
+    </Layout>
   );
 };
-Cart.getLayout = function getLayout(Page) {
-  return <Layout>{Page}</Layout>;
-};
+
 export default Cart;

@@ -1,13 +1,22 @@
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
-import { AiOutlineStar } from 'react-icons/ai'
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "red" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SampleNextArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
@@ -18,19 +27,28 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "none", background: "green" }}
+      style={{ ...style, display: "block", background: "#8d8d8d5e"}}
+      onClick={onClick}
+    />
+  );
+}
+function SamplePrevArrowMB(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "none"}}
       onClick={onClick}
     />
   );
 }
 const settings = {
-  // centerMode: false,
   slidesToShow: 5,
   slidesToScroll: 1,
   infinite: true,
-  // autoplay: true,
   speed: 500,
-  // autoplaySpeed: 3000,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   responsive: [
     {
       breakpoint: 600,
@@ -41,8 +59,8 @@ const settings = {
         autoplaySpeed: 3000,
         slidesToShow: 2.5,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
+        nextArrow: <SampleNextArrowMB />,
+        prevArrow: <SamplePrevArrowMB />
       },
     },
   ],
@@ -53,7 +71,7 @@ const Slider02 = ({ data }) => {
     <div className="container-md px-0 py-2 rounded">
       <Slider {...settings}>
         {data?.map((it, index) => (
-          <Link href={`/${it?.brandId}`} key={index}>
+          <Link href={`/${it?.brandId}`} key={it?.brandId}>
             <a className='d-flex mx-2'>
               <div className="w-100 h-100">
                 <div className="d-flex justify-content-center">
@@ -62,10 +80,10 @@ const Slider02 = ({ data }) => {
                   />
                 </div>
                 <div>
-                  <p className="mb-0 fw-bold" style={{ fontSize: 14 }}>
-                    {it.brandName.substring(0, 14)}
+                  <p className="mb-0 fw-bold customFontSize customText py-2" >
+                    {it.brandName}
                   </p>
-                  <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p>
+                  {/* <p className="mb-0 d-flex align-items-center gap-1" style={{ fontSize: 13 }}><AiOutlineStar />5.0/10 rating</p> */}
                 </div>
               </div>
             </a>

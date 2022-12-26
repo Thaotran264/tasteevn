@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "react-toastify";
 import { bookingApi } from "../api-client/booking";
 
 
@@ -60,12 +61,14 @@ const Booking = ({ setShowBooking }) => {
     try {
       const res = await bookingApi.booking(data)
       if (res.data) {
-        alert('Đặt chỗ thành công')
+        toast.success('Đặt chỗ thành công')
         setAdult('')
         setChildren('')
         setTime('')
         setDescription('')
       }
+      toast.error('Có lỗi đã xảy ra trong quá trình đặt')
+
     } catch (error) {
       console.log(error)
     }
