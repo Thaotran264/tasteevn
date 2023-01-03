@@ -3,13 +3,14 @@ import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "./Footer";
+import Header from "./Header";
 import NavComponent from "./Nav";
 import ScrollToTopButton from "./ScrollToTopButton";
 const Layout = ({ children, title }) => {
   return (
-    <div className="overflow-hidden d-flex flex-column bg-light" style={{ minHeight: '100vh' }}>
+    <div className="overflow-hidden d-flex flex-column" style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
       <Head>
-        <title>{title ? title : 'Tastee POS - Cộng đồng người bán'}</title>
+        <title>{title ? title : 'Tastee - Cộng đồng người bán'}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content="Tastee POS - Cộng đồng người bán" />
         <meta property="og:image" content="https://tastee.vn/_next/image?url=%2Fimage%2FTastee-POS.jpeg&w=3840&q=75" />
@@ -35,8 +36,10 @@ const Layout = ({ children, title }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <ToastContainer position="bottom-center" pauseOnFocusLoss={false} />
-      <NavComponent />
-      <main style={{marginTop: 50}}>{children}</main>
+      {/* <NavComponent />
+       */}
+       <Header />
+      <main>{children}</main>
       <ScrollToTopButton />
       <Footer />
     </div>

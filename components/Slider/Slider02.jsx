@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
@@ -75,7 +76,7 @@ const Slider02 = ({ data }) => {
             <a className='d-flex mx-2'>
               <div className="w-100 h-100">
                 <div className="d-flex justify-content-center">
-                  <img src={it?.image} alt={it?.brandName}
+                  <Image width={1024} height={800} src={it?.image} alt={it?.brandName}
                     className="rounded w-100 h-100"
                   />
                 </div>

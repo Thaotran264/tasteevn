@@ -13,6 +13,9 @@ import { CartContext } from '../context/cartContext';
 import { removeTokenCookies } from '../hooks/setTokenCookies';
 import LoginModal from './LoginModal';
 import CartModal from './Modal/CartModal';
+import HeaderCities from './Header/HeaderCities';
+import HeaderCTA from './Header/HeaderCTA';
+import HeaderSearchForm from './Header/HeaderSearchForm';
 const NavComponent = () => {
   const router = useRouter()
   const [searchBox, setShowSearchBox] = useState(true)
@@ -224,8 +227,11 @@ const NavComponent = () => {
             </a>
           </Link>
         </div>
-        {renderDropDownCities}
-        {renderSearchForm}
+        <HeaderCities />
+        <HeaderSearchForm />
+        <HeaderCTA />
+        {/* {renderDropDownCities} */}
+        {/* {renderSearchForm} */}
         {token && renderCartItem}
         {/* Login desktop */}
         {/* {renderUserInfo} */}

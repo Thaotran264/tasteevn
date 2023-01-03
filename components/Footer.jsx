@@ -7,44 +7,41 @@ import { SiZalo } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="py-4 d-flex flex-column gap-2 mt-auto">
-      <div className="container">
-        <Row className="mx-0">
-          <Col xs={12} md={4}>
-            <h5 className="fw-bold text-dark">Thông tin</h5>
-            <ul className="text-footer ps-0 customFontSize">
-              <li><span className="fw-bolder">Email: </span><a href="#">cskh@tastee.com</a></li>
-              <li><span className="fw-bolder">Điện thoại:</span><a href="#">028 xxxx xxxx</a> </li>
-              <li><span className="fw-bolder">ĐKKD:</span><a href="#">37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a></li>
-              <li><span className="fw-bolder">Văn phòng:</span> <a href="#">Tầng 14 Tòa nhà Halo Tower, 37 Hoàn Văn Thụ, P.x, Q.Phú Nhuận, HCM </a> </li>
-            </ul></Col>
-          <Col xs={12} md={4}>
-            <h5 className="fw-bold text-dark">Sản phẩm</h5>
-            <ul className="text-footer ps-0 customFontSize">
+    <footer>
+      <div className="footer-top">
+        <div className="container footer-top-container">
+          <div className="footer-top-items">
+            <h5 >Thông tin chung</h5>
+            <ul>
+              <li><span>Email: </span> cskh@tastee.com</li>
+              <li><span>Điện thoại:</span> 028 xxxx xxxx</li>
+              <li><span>ĐKKD:</span> 37 Hoàng Văn Thụ, P.x, Q.Phú Nhuận, HCM</li>
+              <li><span>Văn phòng:</span> Tầng 8 Tòa nhà Halo Tower, 37 Hoàng Văn Thụ, P15, Q.Phú Nhuận, HCM </li>
+            </ul>
+          </div>
+          <div className="footer-top-items">
+            <h5 >Tastee</h5>
+            <ul >
               <li><a href="#">Giới thiệu về Tastee</a></li>
               <li><a href="#">Tuyển dụng nhân sự</a> </li>
               <li><a href="#">Chính sách bảo mật</a></li>
               <li><a href="/dieu-khoan-tastee-pos">Điều khoản sử dụng</a></li>
-            </ul></Col>
-          <Col xs={12} md={4}>
-            <h5 className="fw-bold text-dark">Cộng đồng người bán</h5>
-            <div className=" d-flex gap-4 fs-1 align-items-center">
-              <BsFacebook style={{ color: '#3b5998', fontSize: 22 }} />
-              <BsYoutube style={{ color: '#c4302b' }} />
-              <SiZalo style={{ color: '#3b5998' }} />
-              <BsGoogle style={{ color: '#3b5998', fontSize: 22 }} />
-              <BsApple style={{ color: '#3b5998', fontSize: 22 }} />
+            </ul>
+          </div>
+          <div className="footer-top-items">
+            <h5 >Cộng đồng người bán</h5>
+            <div className="footer-top-socials">
+              <BsFacebook />
+              <BsYoutube  />
+              <SiZalo />
+              <BsGoogle />
+              <BsApple />
             </div>
-          </Col>
-        </Row>
-      <Row className="mx-0">
-        <Col xs={12}>
-      <p className="text-center mb-0 text-dark" style={{ fontSize: 14 }}>© Copyright 2022 by Tastee team. </p>
-        </Col>
-        <Col xs={12}>
-      <p className="text-center mb-0 text-dark" style={{ fontSize: 14 }}>All Rights Reserved</p>
-        </Col>
-        </Row>
+          </div>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p className="policy">© Tastee Team 2021 | all right reserved</p>
       </div>
     </footer>
   );
